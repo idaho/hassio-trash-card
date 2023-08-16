@@ -1,6 +1,6 @@
 {
   "name": "trash-card",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Home Assistant Trash card - based on Mushroom for Hassio",
   "main": "index.js",
   "scripts": {
