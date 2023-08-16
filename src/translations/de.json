@@ -1,0 +1,62 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Standard-Farbe"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Standard-Layout",
+                    "vertical": "Vertikales Layout",
+                    "horizontal": "Horizontales Layout"
+                }
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Icon-Farbe",
+                "layout": "Layout",
+                "fill_container": "Container ausfüllen"
+            },
+            "trash": {
+                "organic": {
+                    "label": "Bio Bezeichnung",
+                    "color": "Bio Farbe",
+                    "icon": "Bio Symbol",
+                    "pattern": "Bio erkennen an pattern"
+                },
+                "paper": {
+                    "label": "Papier Bezeichnung",
+                    "color": "Papier Farbe",
+                    "icon": "Papier Symbol",
+                    "pattern": "Papier erkennen an pattern"
+                },
+                "recycle": {
+                    "label": "Verpackung Bezeichnung",
+                    "color": "Verpackung Farbe",
+                    "icon": "Verpackung Symbol",
+                    "pattern": "Verpackung erkennen an pattern"
+                },
+                "waste": {
+                    "label": "Restmüll Bezeichnung",
+                    "color": "Restmüll Farbe",
+                    "icon": "Restmüll Symbol",
+                    "pattern": "Restmüll erkennen an pattern"
+                },
+                "others": {
+                    "color": "Andere Farbe",
+                    "icon": "Andere Symbol"
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Entität nicht gefunden",
+        "trash": {
+            "today": "Heute",
+            "tomorrow": "Morgen"
+        }
+    }
+}
