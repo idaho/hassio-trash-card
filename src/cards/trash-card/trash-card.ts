@@ -19,8 +19,8 @@ import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME, type TrashData, type TrashData
 
 registerCustomCard({
   type: TRASH_CARD_NAME,
-  name: 'Trash Card',
-  description: 'A card which shows the next trash entry in your calendar'
+  name: 'TrashCard',
+  description: 'TrashCard - indicates what type of trash will be picked up next based on your calendar entries 🗑️'
 });
 
 @customElement(TRASH_CARD_NAME)
