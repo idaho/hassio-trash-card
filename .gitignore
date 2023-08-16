@@ -1,0 +1,19 @@
+node_modules
+dist
+.hass_dev/*
+!.hass_dev/configuration.yaml
+!.hass_dev/lovelace.yaml
+!.hass_dev/lovelace-mushroom-showcase.yaml
+!.hass_dev/lovelace.yaml
+!.hass_dev/automations.yaml
+!.hass_dev/scripts.yaml
+!.hass_dev/scenes.yaml
+!.hass_dev/views
+!.hass_dev/www
+!.hass_dev/packages
+.hass_dev/www/community/*
+
+# Mac OS
+.DS_Store
+.vscode/settings.json
+.idea

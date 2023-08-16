@@ -1,0 +1,58 @@
+{
+  "extends": "@fltri/eslint-config/web",
+  "env": {
+    "es6": true,
+    "node": false
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "settings": {},
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": [
+      "off"
+    ],
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true,
+          "kebabCase": true
+        }
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "./rollup-plugins/*.js",
+        "./rollup.config.mjs"
+      ],
+      "parserOptions": {
+        "sourceType": "module"
+      },
+      "env": {
+        "node": true
+      }
+    },
+    {
+      "files": [
+        "./src/*.test.ts",
+        "./src/*.*.test.ts",
+        "./dist/*.test.js",
+        "./dist/*.*.test.js"
+      ],
+      "plugins": [
+        "jest"
+      ],
+      "excludedFiles": [
+        "node_modules/"
+      ],
+      "env": {
+        "es6": true,
+        "node": true,
+        "jest/globals": true
+      }
+    }
+  ]
+}

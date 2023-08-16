@@ -1,0 +1,62 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Default color"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Default layout",
+                    "vertical": "Vertical layout",
+                    "horizontal": "Horizontal layout"
+                }
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Icon color",
+                "layout": "Layout",
+                "fill_container": "Fill container"
+            },
+            "trash": {
+                "organic": {
+                    "label": "Organic label",
+                    "color": "Organic color",
+                    "icon": "Organic icon",
+                    "pattern": "Organic detection pattern"
+                },
+                "paper": {
+                    "label": "Paper label",
+                    "color": "Paper color",
+                    "icon": "Paper icon",
+                    "pattern": "Paper detection pattern"
+                },
+                "recycle": {
+                    "label": "Recycle label",
+                    "color": "Recycle color",
+                    "icon": "Recycle icon",
+                    "pattern": "Recycle detection pattern"
+                },
+                "waste": {
+                    "label": "Waste label",
+                    "color": "Waste color",
+                    "icon": "Waste icon",
+                    "pattern": "Waste detection pattern"
+                },
+                "others": {
+                    "color": "Others color",
+                    "icon": "Others icon"
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Entity not found",
+        "trash": {
+            "today": "today",
+            "tomorrow": "tomorrow"
+        }
+    }
+}
