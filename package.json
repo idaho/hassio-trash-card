@@ -1,8 +1,23 @@
 {
   "name": "trash-card",
   "version": "1.0.0",
-  "description": "Home Assistant Trash card - based on Mushroom for Hassio",
-  "main": "index.js",
+  "description": "TrashCard - indicates what type of trash will be picked up next based on your calendar entries 🗑️",
+  "keywords": [
+    "paper",
+    "card",
+    "trash",
+    "waste",
+    "home-assistant",
+    "hacs",
+    "mushroom",
+    "lovelace",
+    "lovelace-custom-card",
+    "hassio",
+    "frontend",
+    "calendar"
+  ],
+  "private": true,
+  "main": "dist/trashcard.js",
   "scripts": {
     "start": "rollup -c --watch --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs",
