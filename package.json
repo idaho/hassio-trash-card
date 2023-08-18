@@ -66,7 +66,7 @@
     "@types/color": "3.0.3",
     "@types/hammerjs": "2.0.41",
     "@types/jest": "29.5.3",
-    "@typescript-eslint/parser": "5.37.0",
+    "@typescript-eslint/parser": "5.62.0",
     "eslint": "8.44.0",
     "eslint-plugin-import": "2.28.0",
     "eslint-plugin-jest": "27.2.3",
