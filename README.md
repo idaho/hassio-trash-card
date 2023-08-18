@@ -11,6 +11,16 @@
 
 ![Organic](./docs/img/organic.png)![Other Trash](./docs/img/others.png)![Paper](./docs/img/paper.png)![Recycle](./docs/img/recycle.png)![Waste](./docs/img/waste.png)
 
+TrashCard - is a custom Home Assistant card that shows you the next upcoming or current trash removal appointment. 
+For this purpose a calendar entity is used, in which you have entered all appointments.
+
+**Features**
+- Extra color, icon and text for residual, organic, paper waste and recycling
+- Color and icon for all other appointments
+
+**Restrictions**
+Currently only full day appointments are supported
+
 ## Installation
 
 ### Pre-Requirements
