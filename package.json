@@ -47,7 +47,7 @@
     "superstruct": "0.15.2"
   },
   "devDependencies": {
-    "@babel/core": "7.22.8",
+    "@babel/core": "7.22.10",
     "@fltri/eslint-config": "1.2.0",
     "@material/mwc-ripple": "0.27.0",
     "@material/tab-bar": "14.0.0",
