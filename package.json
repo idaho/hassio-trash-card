@@ -61,7 +61,7 @@
     "@semantic-release/commit-analyzer": "10.0.1",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "9.0.4",
-    "@semantic-release/npm": "10.0.4",
+    "@semantic-release/npm": "10.0.5",
     "@semantic-release/release-notes-generator": "11.0.4",
     "@types/color": "3.0.3",
     "@types/hammerjs": "2.0.41",
@@ -76,7 +76,7 @@
     "rimraf": "5.0.1",
     "rollup": "3.28.0",
     "rollup-plugin-serve": "2.0.2",
-    "semantic-release": "21.0.7",
+    "semantic-release": "21.0.9",
     "ts-jest": "29.1.1",
     "typescript": "5.1.6"
   }
