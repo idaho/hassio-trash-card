@@ -27,7 +27,7 @@ Currently only full day appointments are supported
 
 TrashCard requires [Mushroom][mushroom-url] for Home Assistant to be installed. Please follow the installation instructions of Mushroom. Once you have installed Mushroom you can continue install TrashCard using HACS (prefered) or manually.
 
-<!-- ### HACS
+### HACS
 
 TrashCard is available in [HACS][hacs] (Home Assistant Community Store).
 
@@ -35,7 +35,7 @@ TrashCard is available in [HACS][hacs] (Home Assistant Community Store).
 2. Open HACS in Home Assistant
 3. Go to "Frontend" section
 4. Click button with "+" icon
-5. Search for "TrashCard" -->
+5. Search for "TrashCard"
 
 ### Manual
 
@@ -50,9 +50,6 @@ TrashCard is available in [HACS][hacs] (Home Assistant Community Store).
             - url: /local/trashcard.js
               type: module
         ```
-### Plans
-
-It is planned that TrashCard will be available via HACS in the future.
 
 ## Usage
 
