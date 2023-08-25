@@ -7,9 +7,9 @@
 
 <a href="https://www.buymeacoffee.com/idaho" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-![Cover](./docs/img/overview.png)
+![Cover](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/overview.png)
 
-![Organic](./docs/img/organic.png)![Other Trash](./docs/img/others.png)![Paper](./docs/img/paper.png)![Recycle](./docs/img/recycle.png)![Waste](./docs/img/waste.png)
+![Organic](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/organic.png)![Other Trash](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/others.png)![Paper](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/paper.png)![Recycle](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/recycle.png)![Waste](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/waste.png)
 
 TrashCard - is a custom Home Assistant card that shows you the next upcoming or current trash removal appointment. 
 For this purpose a calendar entity is used, in which you have entered all appointments.
