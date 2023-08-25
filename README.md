@@ -3,7 +3,7 @@
 [![hacs][hacs-badge]][hacs-url]
 [![release][release-badge]][release-url]
 ![downloads][downloads-badge]
-![Quality assurance][build-badge]
+![Build][build-badge]
 
 <a href="https://www.buymeacoffee.com/idaho" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
@@ -148,7 +148,7 @@ Thanks go to the team at [Mushroom][mushroom-url] for creating many beautiful ca
 [hacs-badge]: https://img.shields.io/badge/hacs-default-orange.svg?style=flat-square
 [release-badge]: https://img.shields.io/github/v/release/idaho/hassio-trash-card?style=flat-square
 [downloads-badge]: https://img.shields.io/github/downloads/idaho/hassio-trash-card/total?style=flat-square
-[build-badge]: https://img.shields.io/github/actions/workflow/status/idaho/hassio-trash-card/qa.yml?label=Quality%20assurance&style=flat-square
+[build-badge]: https://img.shields.io/github/actions/workflow/status/idaho/hassio-trash-card/build.yml?label=Build&style=flat-square
 
 <!-- References -->
 [mushroom-url]: https://github.com/piitaya/lovelace-mushroom
