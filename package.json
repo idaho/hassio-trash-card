@@ -78,6 +78,6 @@
     "rollup-plugin-serve": "2.0.2",
     "semantic-release": "21.0.9",
     "ts-jest": "29.1.1",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   }
 }
