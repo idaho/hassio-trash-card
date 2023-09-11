@@ -41,7 +41,7 @@
     "hammerjs": "2.0.8",
     "home-assistant-js-websocket": "8.2.0",
     "lit": "2.8.0",
-    "lovelace-mushroom": "git+https://github.com/piitaya/lovelace-mushroom.git#v3.0.5",
+    "lovelace-mushroom": "git+https://github.com/piitaya/lovelace-mushroom.git#v3.1.0",
     "memoize-one": "6.0.0",
     "sortablejs": "1.15.0",
     "superstruct": "1.0.3"
