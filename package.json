@@ -61,7 +61,7 @@
     "@semantic-release/commit-analyzer": "10.0.4",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "9.0.5",
-    "@semantic-release/npm": "10.0.5",
+    "@semantic-release/npm": "11.0.0",
     "@semantic-release/release-notes-generator": "11.0.7",
     "@types/color": "3.0.4",
     "@types/hammerjs": "2.0.41",
