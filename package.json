@@ -64,7 +64,7 @@
     "@semantic-release/npm": "10.0.5",
     "@semantic-release/release-notes-generator": "11.0.7",
     "@types/color": "3.0.4",
-    "@types/hammerjs": "2.0.41",
+    "@types/hammerjs": "2.0.43",
     "@types/jest": "29.5.4",
     "@typescript-eslint/parser": "5.62.0",
     "eslint": "8.49.0",
