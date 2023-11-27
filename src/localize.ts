@@ -2,9 +2,11 @@ import type { HomeAssistant } from 'lovelace-mushroom/src/ha';
 
 import * as de from './translations/de.json';
 import * as en from './translations/en.json';
+import * as sk from './translations/sk.json';
 
 const languages: Record<string, unknown> = {
   de,
+  sk,
   en
 };
 
