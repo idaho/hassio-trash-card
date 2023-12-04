@@ -21,6 +21,8 @@ EntityWithOutIcon & {
     waste?: TrashItem;
     others?: TrashItem;
   };
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  full_size?: boolean;
 };
 
 export const entityCardConfigStruct = assign(
@@ -31,6 +33,8 @@ export const entityCardConfigStruct = assign(
     layout: optional(layoutStruct),
     // eslint-disable-next-line @typescript-eslint/naming-convention
     fill_container: optional(boolean()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    full_size: optional(boolean()),
     settings: optional(
       object({
         organic: optional(
