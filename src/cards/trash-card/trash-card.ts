@@ -258,7 +258,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
     /* eslint-disable @typescript-eslint/naming-convention */
     return html`
             <ha-card
-                class=${classMap({ 'fill-container': appearance.fill_container })}
+                class=${classMap({ 'fill-container': appearance.fill_container, fullsize: this.config.full_size === true })}
                 style=${styleMap(backgroundStyle)}
             >
                 <mushroom-card .appearance=${appearance} ?rtl=${rtl}>
@@ -401,7 +401,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
             `,
       cardStyle,
       css`
-                ha-card {
+                ha-card.fullsize {
                     margin-left: -17px;
                     margin-right: -17px;
                     margin-top: -4px;
