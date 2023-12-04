@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/idaho/hassio-trash-card/compare/1.0.1...1.1.0) (2023-12-04)
+
+
+### Features
+
+* add configuration value to set full size card ([#88](https://github.com/idaho/hassio-trash-card/issues/88)) ([35fd092](https://github.com/idaho/hassio-trash-card/commit/35fd092373dc90c97020e41a16b7001d371c1f5b))
+* add language slovak ([1755fd4](https://github.com/idaho/hassio-trash-card/commit/1755fd4396e0b1f5213de76ccb2984e5e69864b6))
+
 ## [1.0.1](https://github.com/idaho/hassio-trash-card/compare/1.0.0...1.0.1) (2023-08-25)
 
 
