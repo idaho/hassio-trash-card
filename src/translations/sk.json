@@ -1,0 +1,62 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Predvolená farba"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Predvolené rozloženie",
+                    "vertical": "Vertikálne rozloženie",
+                    "horizontal": "Horizontálne rozloženie"
+                }
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Farba ikony",
+                "layout": "Rozloženie",
+                "fill_container": "Naplňte nádobu"
+            },
+            "trash": {
+                "organic": {
+                    "label": "Organický štítok",
+                    "color": "Organická farba",
+                    "icon": "Organická ikona",
+                    "pattern": "Vzorec organickej detekcie"
+                },
+                "paper": {
+                    "label": "Papierový štítok",
+                    "color": "Farba papiera",
+                    "icon": "Ikona papiera",
+                    "pattern": "Vzor detekcie papiera"
+                },
+                "recycle": {
+                    "label": "Recyklačný štítok",
+                    "color": "Recyklovaný farba",
+                    "icon": "Recycklované ikona",
+                    "pattern": "Vzor detekcie recyklácie"
+                },
+                "waste": {
+                    "label": "Štítok odpadu",
+                    "color": "Farba odpadu",
+                    "icon": "Opdad ikona",
+                    "pattern": "Vzor detekcie odpadu"
+                },
+                "others": {
+                    "color": "Iné farby",
+                    "icon": "Iné ikony"
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Entita sa nenašla",
+        "trash": {
+            "today": "dnes",
+            "tomorrow": "zajtra"
+        }
+    }
+}
