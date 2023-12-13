@@ -69,6 +69,7 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `entity`            | string                                              | Required    | Entity                                                                              |
 | `layout`            | string                                              | Optional    | Layout of the card. Vertical, horizontal and default layout are supported           |
 | `fill_container`    | boolean                                             | `false`     | Fill container or not. Useful when card is in a grid, vertical or horizontal layout |
+| `next_days`    | number                                                   | 2     | How many times the card will look into the future to find the next event |
 | `settings`    | [Settings](#settings)                                            | Required | Settings to detect the kind of trash and how to display |
 
 

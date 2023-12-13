@@ -38,6 +38,11 @@ const TRASH_LABELS = new Set([
 ]);
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
+const OTHER_LABELS = new Set([
+  'next_days'
+]);
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const SCHEMA: HaFormSchema[] = [
   { name: 'entity', selector: { entity: { domain: 'calendar' }}},
   {
@@ -136,7 +141,14 @@ const SCHEMA: HaFormSchema[] = [
     schema: [
       // eslint-disable-next-line @typescript-eslint/naming-convention
       { name: 'layout', selector: { mush_layout: {}}},
-      { name: 'fill_container', selector: { boolean: {}}}
+      { name: 'fill_container', selector: { boolean: {}}},
+      { name: 'next_days',
+        selector: { number: {
+          min: 1,
+          max: 365,
+          step: 1,
+          mode: 'box'
+        }}}
     ]
   }
 ];
@@ -191,6 +203,9 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     }
     if (schema.label && TRASH_LABELS.has(schema.label)) {
       return customLocalize(`editor.card.trash.${schema.label}`);
+    }
+    if (schema.label && OTHER_LABELS.has(schema.label)) {
+      return customLocalize(`editor.card.generic.${schema.label}`);
     }
 
     return this.hass.localize(`ui.panel.lovelace.editor.card.generic.${schema.name}`);

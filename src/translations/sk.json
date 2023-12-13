@@ -18,7 +18,8 @@
             "generic": {
                 "icon_color": "Farba ikony",
                 "layout": "Rozloženie",
-                "fill_container": "Naplňte nádobu"
+                "fill_container": "Naplňte nádobu",
+                "next_days": "Dni v budúcnosti"
             },
             "trash": {
                 "organic": {
