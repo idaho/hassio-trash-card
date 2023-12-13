@@ -19,7 +19,8 @@
                 "icon_color": "Icon-Farbe",
                 "layout": "Layout",
                 "fill_container": "Container ausfüllen",
-                "next_days": "Tage in der Zukunft"
+                "next_days": "Tage in der Zukunft",
+                "full_size": "Karte ohne Seitenrand"
             },
             "trash": {
                 "organic": {
