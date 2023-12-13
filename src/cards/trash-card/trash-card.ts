@@ -128,7 +128,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const today = new Date();
     const endDate = new Date();
 
-    endDate.setDate(endDate.getDate() + 2);
+    endDate.setDate(endDate.getDate() + (this.config?.next_days ?? 2));
 
     const start = this.getDayFromDate(today);
     const end = this.getDayFromDate(endDate);

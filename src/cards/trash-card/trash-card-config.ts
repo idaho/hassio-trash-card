@@ -2,7 +2,7 @@ import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/ent
 import { layoutStruct } from 'lovelace-mushroom/src/utils/layout';
 import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 import { lovelaceCardConfigStruct } from 'lovelace-mushroom/src/shared/config/lovelace-card-config';
-import { assign, boolean, object, optional, string } from 'superstruct';
+import { assign, boolean, integer, object, optional, string } from 'superstruct';
 
 export interface TrashItem {
   label?: string;
@@ -22,6 +22,8 @@ EntityWithOutIcon & {
     others?: TrashItem;
   };
   // eslint-disable-next-line @typescript-eslint/naming-convention
+  next_days?: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   full_size?: boolean;
 };
 
@@ -35,6 +37,8 @@ export const entityCardConfigStruct = assign(
     fill_container: optional(boolean()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
     full_size: optional(boolean()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    next_days: optional(integer()),
     settings: optional(
       object({
         organic: optional(
