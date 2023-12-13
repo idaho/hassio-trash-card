@@ -206,8 +206,8 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     if (schema.label && TRASH_LABELS.has(schema.label)) {
       return customLocalize(`editor.card.trash.${schema.label}`);
     }
-    if (schema.label && OTHER_LABELS.has(schema.label)) {
-      return customLocalize(`editor.card.generic.${schema.label}`);
+    if (OTHER_LABELS.has(schema.name)) {
+      return customLocalize(`editor.card.generic.${schema.name}`);
     }
 
     return this.hass.localize(`ui.panel.lovelace.editor.card.generic.${schema.name}`);
