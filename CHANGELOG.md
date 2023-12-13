@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/idaho/hassio-trash-card/compare/1.2.0...1.2.1) (2023-12-13)
+
+
+### Bug Fixes
+
+* editor labels ([#108](https://github.com/idaho/hassio-trash-card/issues/108)) ([3a0b57f](https://github.com/idaho/hassio-trash-card/commit/3a0b57fc772f6207980c198a925480299278662c))
+
 # [1.2.0](https://github.com/idaho/hassio-trash-card/compare/1.1.0...1.2.0) (2023-12-13)
 
 
