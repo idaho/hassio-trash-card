@@ -1,0 +1,62 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Couleur par défaut"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Disposition par défaut",
+                    "vertical": "Disposition Verticale",
+                    "horizontal": "Disposition Horizontale"
+                }
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Couleur de l'icône",
+                "layout": "Disposition",
+                "fill_container": "Remplir le conteneur"
+            },
+            "trash": {
+                "organic": {
+                    "label": "Étiquette organique",
+                    "color": "Couleur organique",
+                    "icon": "Icône organique",
+                    "pattern": "Modèle de détection organique"
+                },
+                "paper": {
+                    "label": "Étiquette papier",
+                    "color": "Couleur papier",
+                    "icon": "Icône papier",
+                    "pattern": "Modèle de détection papier"
+                },
+                "recycle": {
+                    "label": "Étiquette recyclage",
+                    "color": "Couleur recyclage",
+                    "icon": "Icône recyclage",
+                    "pattern": "Modèle de détection recyclage"
+                },
+                "waste": {
+                    "label": "Étiquette déchets",
+                    "color": "Couleur déchets",
+                    "icon": "Icône déchets",
+                    "pattern": "Modèle de détection déchets"
+                },
+                "others": {
+                    "color": "Couleur autres",
+                    "icon": "Icône autres"
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Entité non trouvée",
+        "trash": {
+            "today": "aujourd'hui",
+            "tomorrow": "demain"
+        }
+    }
+}
