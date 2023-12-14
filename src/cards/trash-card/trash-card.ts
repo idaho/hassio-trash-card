@@ -157,7 +157,6 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const tomorrowDay = getDayFromDate(tomorrow);
 
     const stateDay = getDayFromDate(this.currentItem.date.start);
-    const endDay = getDayFromDate(this.currentItem.date.end);
 
     const startTime = !this.currentItem.isWholeDayEvent ?
       this.currentItem.date.start.toLocaleTimeString(this.hass.language, {
