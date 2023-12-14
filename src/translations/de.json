@@ -58,7 +58,11 @@
         "not_found": "Entität nicht gefunden",
         "trash": {
             "today": "Heute",
-            "tomorrow": "Morgen"
+            "tomorrow": "Morgen",
+            "day": "<DAY>",
+            "today_from_till": "Heute\nvon <START> bis <END>",
+            "tomorrow_from_till": "Morgen zwischen <START> und <END>",
+            "day_from_till": "<DAY>\n\nzwischen <START> und <END>"
         }
     }
 }

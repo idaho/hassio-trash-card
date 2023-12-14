@@ -1,0 +1,46 @@
+[
+  {
+    "start": {
+      "date": "2023-12-10"
+    },
+    "end": {
+      "date": "2023-12-11"
+    },
+    "summary": "BIO",
+    "description": null,
+    "location": null
+  },
+  {
+    "start": {
+      "dateTime": "2023-12-14T13:10:00+01:00"
+    },
+    "end": {
+      "dateTime": "2023-12-14T14:10:00+01:00"
+    },
+    "summary": "Event 1",
+    "description": null,
+    "location": null
+  },
+  {
+    "start": {
+      "dateTime": "2023-12-18T09:10:00+01:00"
+    },
+    "end": {
+      "dateTime": "2023-12-18T10:10:00+01:00"
+    },
+    "summary": "Event 2",
+    "description": null,
+    "location": null
+  },
+  {
+    "start": {
+      "dateTime": "2023-12-18T18:00:00+01:00"
+    },
+    "end": {
+      "dateTime": "2023-12-18T19:00:00+01:00"
+    },
+    "summary": "Event 3",
+    "description": null,
+    "location": null
+  }
+]
