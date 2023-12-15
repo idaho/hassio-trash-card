@@ -1,0 +1,22 @@
+{
+  "name": "trash-card-release",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {},
+  "author": "Florian Triebel",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idaho/hassio-trash-card"
+  },
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/commit-analyzer": "10.0.4",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "9.0.5",
+    "@semantic-release/npm": "10.0.5",
+    "@semantic-release/release-notes-generator": "11.0.7",
+    "semantic-release": "21.1.1"
+  }
+}
