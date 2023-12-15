@@ -58,7 +58,11 @@
         "not_found": "Entita sa nenašla",
         "trash": {
             "today": "dnes",
-            "tomorrow": "zajtra"
+            "tomorrow": "zajtra",
+            "day": "<DAY>",
+            "today_from_till": "Dnes\nod <START> do <END>",
+            "tomorrow_from_till": "Zajtra\nod <START> do <END>",
+            "day_from_till": "<DAY>\nmedzi <START> a <END>"
         }
     }
 }
