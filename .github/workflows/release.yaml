@@ -22,7 +22,4 @@ jobs:
     - name: Release
       env:
         GITHUB_TOKEN: ${{ secrets.SEMANTIC_TOKEN }}
-      run: |
-        cd .release/
-        npm install
-        npx semantic-release
+      run: npx semantic-release
