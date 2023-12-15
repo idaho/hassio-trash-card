@@ -37,6 +37,7 @@
   "dependencies": {
     "@material/mwc-select": "0.27.0",
     "@material/mwc-textfield": "0.27.0",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
     "color": "4.2.3",
     "hammerjs": "2.0.8",
     "home-assistant-js-websocket": "8.2.0",
