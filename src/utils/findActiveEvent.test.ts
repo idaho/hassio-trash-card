@@ -46,7 +46,7 @@ describe('findActiveEvent', (): void => {
     const events = normaliseEvents(calendarEvents as RawCalendarEvent[]);
 
     const result = findActiveEvent(events, {
-      now: new Date(`2023-12-14T13:45:00${offset}`)
+      now: new Date(`2023-12-14T13:45:00+01:00`)
     });
 
     expect(result).toEqual(expect.objectContaining({
@@ -59,11 +59,11 @@ describe('findActiveEvent', (): void => {
     }));
   });
 
-  test('the second event, event 1 is today but today in the past', async () => {
+  test('the second event, event 2 is today but today in the past', async () => {
     const events = normaliseEvents(calendarEvents as RawCalendarEvent[]);
 
     const result = findActiveEvent(events, {
-      now: new Date(`2023-12-14T14:15:00${offset}`)
+      now: new Date(`2023-12-14T14:15:00+01:00`)
     });
 
     expect(result).toEqual(expect.objectContaining({
