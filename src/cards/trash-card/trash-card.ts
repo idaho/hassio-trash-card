@@ -242,7 +242,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
                             slot="info"
                             .primary=${label}
                             .secondary=${secondary}
-                            .multiline_secondary="true"
+                            .multiline_secondary=${true}
                         ></mushroom-state-info>
                     </mushroom-state-item>
                 </mushroom-card>
