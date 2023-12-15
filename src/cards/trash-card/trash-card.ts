@@ -11,7 +11,7 @@ import type { HassEntity } from 'home-assistant-js-websocket';
 import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import { normaliseEvents } from '../../utils/normaliseEvents';
 import type { RawCalendarEvent } from '../../utils/calendarEvents';
-import { registerCustomCard } from 'lovelace-mushroom/src/utils/custom-cards';
+import { registerCustomCard } from '../../utils/registerCustomCard';
 import setupCustomlocalize from '../../localize';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { TrashCardConfig } from './trash-card-config';
