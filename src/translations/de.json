@@ -61,8 +61,8 @@
             "tomorrow": "Morgen",
             "day": "<DAY>",
             "today_from_till": "Heute\nvon <START> bis <END>",
-            "tomorrow_from_till": "Morgen zwischen <START> und <END>",
-            "day_from_till": "<DAY>\n\nzwischen <START> und <END>"
+            "tomorrow_from_till": "Morgen\nzwischen <START> und <END>",
+            "day_from_till": "<DAY>\nzwischen <START> und <END>"
         }
     }
 }

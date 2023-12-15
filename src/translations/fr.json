@@ -58,7 +58,11 @@
         "not_found": "Entité non trouvée",
         "trash": {
             "today": "aujourd'hui",
-            "tomorrow": "demain"
+            "tomorrow": "demain",
+            "day": "<DAY>",
+            "today_from_till": "aujourd'hui\nentre <START> et <END>",
+            "tomorrow_from_till": "Zajtra\nentre <START> et <END>",
+            "day_from_till": "<DAY>\nentre <START> et <END>"
         }
     }
 }

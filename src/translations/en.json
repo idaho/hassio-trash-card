@@ -58,7 +58,11 @@
         "not_found": "Entity not found",
         "trash": {
             "today": "today",
-            "tomorrow": "tomorrow"
+            "tomorrow": "tomorrow",
+            "day": "<DAY>",
+            "today_from_till": "Today\nfrom <START> to <END>",
+            "tomorrow_from_till": "Tomorrow\nbetween <START> and <END>",
+            "day_from_till": "<DAY>\nbetween <START> and <END>"
         }
     }
 }
