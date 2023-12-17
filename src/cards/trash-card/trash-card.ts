@@ -108,7 +108,12 @@ export class TrashCard extends LitElement implements LovelaceCard {
       then((response): CalendarItem =>
         eventToItem(
           findActiveEvent(
-            normaliseEvents(response), { settings: this.config!.settings!, now: new Date() }
+            normaliseEvents(response), { config: {
+              settings: this.config!.settings!,
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              filter_events: this.config!.filter_events
+            },
+            now: new Date() }
           ),
           { settings: this.config!.settings!, useSummary: false }
         )).
