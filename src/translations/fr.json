@@ -20,6 +20,7 @@
                 "layout": "Disposition",
                 "fill_container": "Remplir le conteneur",
                 "next_days": "Jours dans le futur",
+                "filter_events": "Filtrer les événements par motifs",
                 "full_size": "Carte sans marge"
             },
             "trash": {

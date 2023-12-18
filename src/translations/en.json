@@ -20,6 +20,7 @@
                 "layout": "Layout",
                 "fill_container": "Fill container",
                 "next_days": "Days in the future",
+                "filter_events": "Filter events by patterns",
                 "full_size": "Card without margin"
             },
             "trash": {
