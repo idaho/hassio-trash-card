@@ -18,7 +18,10 @@
             "generic": {
                 "icon_color": "Icon-Farbe",
                 "layout": "Layout",
-                "fill_container": "Container ausfüllen"
+                "fill_container": "Container ausfüllen",
+                "next_days": "Tage in der Zukunft",
+                "filter_events": "Ereignisse nach Mustern filtern",
+                "full_size": "Karte ohne Seitenrand"
             },
             "trash": {
                 "organic": {
@@ -56,7 +59,11 @@
         "not_found": "Entität nicht gefunden",
         "trash": {
             "today": "Heute",
-            "tomorrow": "Morgen"
+            "tomorrow": "Morgen",
+            "day": "<DAY>",
+            "today_from_till": "Heute\nvon <START> bis <END>",
+            "tomorrow_from_till": "Morgen\nzwischen <START> und <END>",
+            "day_from_till": "<DAY>\nzwischen <START> und <END>"
         }
     }
 }
