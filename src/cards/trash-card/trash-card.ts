@@ -22,6 +22,7 @@ import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValue
 import { customElement, property, state } from 'lit/decorators.js';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
+import { isTodayAfter } from '../../utils/isTodayAfter';
 
 registerCustomCard({
   type: TRASH_CARD_NAME,
@@ -102,6 +103,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
     const uri = `calendars/${this.config?.entity}?start=${start}&end=${end}`;
 
+    const dropAfter = isTodayAfter(new Date(), this.config!.drop_todayevents_from ?? '10:00:00');
+
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.hass.
       callApi<RawCalendarEvent[]>('GET', uri).
@@ -111,10 +114,9 @@ export class TrashCard extends LitElement implements LovelaceCard {
             normaliseEvents(response), { config: {
               settings: this.config!.settings!,
               // eslint-disable-next-line @typescript-eslint/naming-convention
-              filter_events: this.config!.filter_events,
-              // eslint-disable-next-line @typescript-eslint/naming-convention
-              drop_todayevents_from: this.config!.drop_todayevents_from!
+              filter_events: this.config!.filter_events
             },
+            dropAfter,
             now: new Date() }
           ),
           { settings: this.config!.settings!, useSummary: Boolean(this.config!.use_summary) }
