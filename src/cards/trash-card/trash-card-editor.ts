@@ -42,7 +42,8 @@ const OTHER_LABELS = new Set([
   'next_days',
   'filter_events',
   'full_size',
-  'drop_todayevents_from'
+  'drop_todayevents_from',
+  'use_summary'
 ]);
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -154,6 +155,7 @@ const SCHEMA: HaFormSchema[] = [
           seconds: 0
         },
         selector: { time: {}}},
+      { name: 'use_summary', selector: { boolean: {}}},
       { name: 'next_days',
         selector: { number: {
           min: 1,

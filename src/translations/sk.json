@@ -22,7 +22,8 @@
                 "next_days": "Dni v budúcnosti",
                 "filter_events": "Filtrovanie udalostí podľa vzorov",
                 "drop_todayevents_from": "d akého času sa má skryť celodenná udalosť",
-                "full_size": "Karta bez marže"
+                "full_size": "Karta bez marže",
+                "use_summary": "Zhrnutie udalosti namiesto označenia"
             },
             "trash": {
                 "organic": {

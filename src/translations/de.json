@@ -22,7 +22,8 @@
                 "next_days": "Tage in der Zukunft",
                 "filter_events": "Ereignisse nach Mustern filtern",
                 "drop_todayevents_from": "Ab wieviel Uhr Ganztages Ereignis ausblenden",
-                "full_size": "Karte ohne Seitenrand"
+                "full_size": "Karte ohne Seitenrand",
+                "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden"
             },
             "trash": {
                 "organic": {
