@@ -1,3 +1,33 @@
+## [1.2.2](https://github.com/idaho/hassio-trash-card/compare/1.2.1...1.2.2) (2023-12-15)
+
+
+### Bug Fixes
+
+* adjust link of help icon in editor card ([#111](https://github.com/idaho/hassio-trash-card/issues/111)) ([2765e49](https://github.com/idaho/hassio-trash-card/commit/2765e49a1db4788f4c044ad5620c64d40e1bc12f))
+* invalid date in cases its not a full day event ([#109](https://github.com/idaho/hassio-trash-card/issues/109)) ([7f831c8](https://github.com/idaho/hassio-trash-card/commit/7f831c8f52c7851cc4dbaee2670a1995b0c8943b))
+
+## [1.2.1](https://github.com/idaho/hassio-trash-card/compare/1.2.0...1.2.1) (2023-12-13)
+
+
+### Bug Fixes
+
+* editor labels ([#108](https://github.com/idaho/hassio-trash-card/issues/108)) ([3a0b57f](https://github.com/idaho/hassio-trash-card/commit/3a0b57fc772f6207980c198a925480299278662c))
+
+# [1.2.0](https://github.com/idaho/hassio-trash-card/compare/1.1.0...1.2.0) (2023-12-13)
+
+
+### Bug Fixes
+
+* actions install job ([#90](https://github.com/idaho/hassio-trash-card/issues/90)) ([c2d7360](https://github.com/idaho/hassio-trash-card/commit/c2d736090c98d6205a4b95c1c0dea6b5e03d4fad))
+* add full_size option to readme and visual editor ([#107](https://github.com/idaho/hassio-trash-card/issues/107)) ([2e5e0b4](https://github.com/idaho/hassio-trash-card/commit/2e5e0b43159fffa922488bd252f5e0f91943492a))
+* bump lovelace-mushroom from v3.0.5 to v3.1.0 ([#36](https://github.com/idaho/hassio-trash-card/issues/36)) ([bc94643](https://github.com/idaho/hassio-trash-card/commit/bc9464385b746b9cf70f24687c0fd5729eedccd0))
+
+
+### Features
+
+* add config for date range ([#106](https://github.com/idaho/hassio-trash-card/issues/106)) ([3f9a970](https://github.com/idaho/hassio-trash-card/commit/3f9a970052351ed7c78541a14f262cfff4a5e17d))
+* add french translations ([#105](https://github.com/idaho/hassio-trash-card/issues/105)) ([8786a2d](https://github.com/idaho/hassio-trash-card/commit/8786a2d1ed817e6e7532994073a840302e690266))
+
 # [1.1.0](https://github.com/idaho/hassio-trash-card/compare/1.0.1...1.1.0) (2023-12-04)
 
 
