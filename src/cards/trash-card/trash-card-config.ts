@@ -21,6 +21,10 @@ EntityWithOutIcon & {
   filter_events?: boolean;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   full_size?: boolean;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  drop_todayevents_from?: string;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  use_summary?: boolean;
 };
 
 export const entityCardConfigStruct = assign(
@@ -36,7 +40,12 @@ export const entityCardConfigStruct = assign(
     // eslint-disable-next-line @typescript-eslint/naming-convention
     full_size: optional(boolean()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
+    use_summary: optional(boolean()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     next_days: optional(integer()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    drop_todayevents_from: optional(string()),
+
     settings: optional(
       object({
         organic: optional(
