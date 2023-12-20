@@ -17,6 +17,7 @@ For this purpose a calendar entity is used, in which you have entered all appoin
 **Features**
 - Extra color, icon and text for residual, organic, paper waste and recycling
 - Color and icon for all other appointments
+- Filter out unexpected items
 
 **Restrictions**
 Currently only full day appointments are supported
@@ -69,9 +70,10 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `entity`            | string                                              | Required    | Entity                                                                              |
 | `layout`            | string                                              | Optional    | Layout of the card. Vertical, horizontal and default layout are supported           |
 | `fill_container`    | boolean                                             | `false`     | Fill container or not. Useful when card is in a grid, vertical or horizontal layout |
-| `full_size`    | boolean                                             | `false`     | Show the card without the default card margins |
-| `next_days`    | number                                                   | 2     | How many times the card will look into the future to find the next event |
-| `settings`    | [Settings](#settings)                                            | Required | Settings to detect the kind of trash and how to display |
+| `filter_events`     | boolean                                             | `false`     | Filter fetched events by patterns (if at least one is defined) before selecting the one to display |
+| `full_size`         | boolean                                             | `false`     | Show the card without the default card margins |
+| `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event |
+| `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display |
 
 
 #### Settings
@@ -83,24 +85,24 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `paper`      | [TrashTypeConfig](#trash-type-configuration)       | Required    | Configuration to detect and display that the paper trash is picked up |
 | `recycle`    | [TrashTypeConfig](#trash-type-configuration)       | Required    | Configuration to detect and display that the organic trash is picked up |
 | `waste`      | [TrashTypeConfig](#trash-type-configuration)       | Required    | Configuration to detect and display that the waste trash is picked up |
-| `others`     | [OtherConfig](#other-type-trash-configuration)       | Required    | Configuration what should be display if non of the others types are matching |
+| `others`     | [OtherConfig](#other-type-trash-configuration)     | Required    | Configuration what should be display if non of the others types are matching |
 
 
 #### Trash type configuration
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
-| `label`    | string       | Required    | Label which should be shown  |
-| `icon`      | string       | Required    | Icon which should be displayed  |
-| `color`    | string       | Required    | Background color of the card which should be used |
-| `pattern`      | string       | Required    | Pattern used to detected to display the apply this trash type. (Is tested against the calendar entry title) 
+| `label`             | string       | Required    | Label which should be shown  |
+| `icon`              | string       | Required    | Icon which should be displayed  |
+| `color`             | string       | Required    | Background color of the card which should be used |
+| `pattern`           | string       | Required    | Pattern used to detected to display the apply this trash type. (Is tested against the calendar entry title) |
 
 #### Other type trash configuration
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
-| `icon`      | string       | Required    | Icon which should be displayed  |
-| `color`    | string       | Required    | Background color of the card which should be used |
+| `icon`              | string                                              | Required    | Icon which should be displayed  |
+| `color`             | string                                              | Required    | Background color of the card which should be used |
 
 
 ### Example YAML configuration
