@@ -8,6 +8,7 @@ import { eventToItem } from '../../utils/eventToItem';
 import { findActiveEvent } from '../../utils/findActiveEvent';
 import { getDayFromDate } from '../../utils/getDayFromDate';
 import type { HassEntity } from 'home-assistant-js-websocket';
+import { isTodayAfter } from '../../utils/isTodayAfter';
 import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import { normaliseEvents } from '../../utils/normaliseEvents';
 import type { RawCalendarEvent } from '../../utils/calendarEvents';
@@ -22,7 +23,6 @@ import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValue
 import { customElement, property, state } from 'lit/decorators.js';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
-import { isTodayAfter } from '../../utils/isTodayAfter';
 
 registerCustomCard({
   type: TRASH_CARD_NAME,
