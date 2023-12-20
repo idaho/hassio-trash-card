@@ -115,7 +115,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
             },
             now: new Date() }
           ),
-          { settings: this.config!.settings!, useSummary: false }
+          { settings: this.config!.settings!, useSummary: Boolean(this.config!.use_summary) }
         )).
       then((data: CalendarItem) => {
         this.currentItem = data;
