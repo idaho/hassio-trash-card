@@ -7,16 +7,19 @@ changelog:
     authors:
       - octocat
   categories:
-    - title: Breaking Changes
+    - title: Breaking Changes 🛠
       labels:
         - breaking-change
-    - title: Features
+    - title: Features 🎉
       labels:
         - feature
-    - title: Bug Fixes
+    - title: Bug Fixes 🐛
       labels:
         - fix
         - bug
+    - title: Translations 🌍
+      labels:
+        - translations
     - title: Other Changes
       labels:
         - "*"
