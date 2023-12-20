@@ -1,26 +1,24 @@
 import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/entity-config';
+import type { ItemSettings } from '../../utils/itemSettings';
 import { layoutStruct } from 'lovelace-mushroom/src/utils/layout';
 import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 import { lovelaceCardConfigStruct } from 'lovelace-mushroom/src/shared/config/lovelace-card-config';
-import { assign, boolean, object, optional, string } from 'superstruct';
-
-export interface TrashItem {
-  label?: string;
-  color?: string;
-  pattern?: string;
-  icon?: string;
-}
+import { assign, boolean, integer, object, optional, string } from 'superstruct';
 
 type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
 export type TrashCardConfig = LovelaceCardConfig &
 EntityWithOutIcon & {
   settings?: {
-    organic?: TrashItem;
-    paper?: TrashItem;
-    recycle?: TrashItem;
-    waste?: TrashItem;
-    others?: TrashItem;
+    organic?: ItemSettings;
+    paper?: ItemSettings;
+    recycle?: ItemSettings;
+    waste?: ItemSettings;
+    others?: ItemSettings;
   };
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  next_days?: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  filter_events?: boolean;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   full_size?: boolean;
 };
@@ -34,7 +32,11 @@ export const entityCardConfigStruct = assign(
     // eslint-disable-next-line @typescript-eslint/naming-convention
     fill_container: optional(boolean()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
+    filter_events: optional(boolean()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     full_size: optional(boolean()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    next_days: optional(integer()),
     settings: optional(
       object({
         organic: optional(

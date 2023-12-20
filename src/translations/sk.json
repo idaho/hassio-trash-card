@@ -18,7 +18,10 @@
             "generic": {
                 "icon_color": "Farba ikony",
                 "layout": "Rozloženie",
-                "fill_container": "Naplňte nádobu"
+                "fill_container": "Naplňte nádobu",
+                "next_days": "Dni v budúcnosti",
+                "filter_events": "Filtrovanie udalostí podľa vzorov",
+                "full_size": "Karta bez marže"
             },
             "trash": {
                 "organic": {
@@ -56,7 +59,11 @@
         "not_found": "Entita sa nenašla",
         "trash": {
             "today": "dnes",
-            "tomorrow": "zajtra"
+            "tomorrow": "zajtra",
+            "day": "<DAY>",
+            "today_from_till": "Dnes\nod <START> do <END>",
+            "tomorrow_from_till": "Zajtra\nod <START> do <END>",
+            "day_from_till": "<DAY>\nmedzi <START> a <END>"
         }
     }
 }
