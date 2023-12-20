@@ -19,4 +19,5 @@ jobs:
         with:
             draft: true
             generate_release_notes: true
+            token: ${{ secrets.HASSIO_RELEASE_ACTION }}
             files: dist/*.js
