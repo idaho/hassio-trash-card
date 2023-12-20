@@ -40,6 +40,7 @@ const TRASH_LABELS = new Set([
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const OTHER_LABELS = new Set([
   'next_days',
+  'filter_events',
   'full_size'
 ]);
 
@@ -144,6 +145,7 @@ const SCHEMA: HaFormSchema[] = [
       { name: 'layout', selector: { mush_layout: {}}},
       { name: 'fill_container', selector: { boolean: {}}},
       { name: 'full_size', selector: { boolean: {}}},
+      { name: 'filter_events', selector: { boolean: {}}},
       { name: 'next_days',
         selector: { number: {
           min: 1,

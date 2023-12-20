@@ -20,6 +20,7 @@
                 "layout": "Layout",
                 "fill_container": "Container ausfüllen",
                 "next_days": "Tage in der Zukunft",
+                "filter_events": "Ereignisse nach Mustern filtern",
                 "full_size": "Karte ohne Seitenrand"
             },
             "trash": {
