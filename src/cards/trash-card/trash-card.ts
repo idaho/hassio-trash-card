@@ -111,7 +111,9 @@ export class TrashCard extends LitElement implements LovelaceCard {
             normaliseEvents(response), { config: {
               settings: this.config!.settings!,
               // eslint-disable-next-line @typescript-eslint/naming-convention
-              filter_events: this.config!.filter_events
+              filter_events: this.config!.filter_events,
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              drop_todayevents_from: this.config!.drop_todayevents_from!
             },
             now: new Date() }
           ),

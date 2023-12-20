@@ -1,11 +1,14 @@
 import type { CalendarEvent } from './calendarEvents';
 import { getDayFromDate } from './getDayFromDate';
+import { isTodayAfter } from './isTodayAfter';
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 
 interface Config {
   settings: Required<TrashCardConfig>['settings'];
   // eslint-disable-next-line @typescript-eslint/naming-convention
   filter_events: TrashCardConfig['filter_events'];
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  drop_todayevents_from: Required<TrashCardConfig>['drop_todayevents_from'];
 }
 
 interface Options {
@@ -24,8 +27,8 @@ const isMatchingAnyPatterns = (item: CalendarEvent, config: Config) => {
   return patterns.length === 0 || patterns.find(pattern => item.content.summary.includes(pattern));
 };
 
-const isNotPastWholeDayEvent = (item: CalendarEvent, now: Date): boolean =>
-  (item.isWholeDayEvent && getDayFromDate(item.date.start) === getDayFromDate(now) && now.getHours() < 10) ||
+const isNotPastWholeDayEvent = (item: CalendarEvent, now: Date, dropAfter: string): boolean =>
+  (item.isWholeDayEvent && getDayFromDate(item.date.start) === getDayFromDate(now) && !isTodayAfter(now, dropAfter)) ||
     (item.isWholeDayEvent && getDayFromDate(item.date.start) !== getDayFromDate(now));
 
 const findActiveEvent = (items: CalendarEvent[], { config, now }: Options): CalendarEvent | undefined => {
@@ -46,7 +49,7 @@ const findActiveEvent = (items: CalendarEvent[], { config, now }: Options): Cale
   return activeItems.
     find((item): boolean =>
       isMatchingAnyPatterns(item, config) &&
-    (isNotPastWholeDayEvent(item, now) ||
+    (isNotPastWholeDayEvent(item, now, config.drop_todayevents_from) ||
       !item.isWholeDayEvent));
 };
 

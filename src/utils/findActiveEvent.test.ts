@@ -9,7 +9,8 @@ describe('findActiveEvent', (): void => {
   const offset = getTimeZoneOffset();
   const emptyConfig = {
     settings: {},
-    filter_events: undefined
+    filter_events: undefined,
+    drop_todayevents_from: '10:00:00'
   };
 
   test('the whole day event today cause its before 10 o`clock', async () => {
@@ -94,7 +95,8 @@ describe('findActiveEvent', (): void => {
             pattern: 'Event 3'
           }
         },
-        filter_events: true
+        filter_events: true,
+        drop_todayevents_from: '10:00:00'
       },
       now: new Date(`2023-12-14T14:15:00+01:00`)
     });
@@ -119,7 +121,8 @@ describe('findActiveEvent', (): void => {
             pattern: 'Event 3'
           }
         },
-        filter_events: false
+        filter_events: false,
+        drop_todayevents_from: '10:00:00'
       },
       now: new Date(`2023-12-14T14:15:00+01:00`)
     });
