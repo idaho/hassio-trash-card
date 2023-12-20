@@ -39,7 +39,7 @@
     "@material/mwc-textfield": "0.27.0",
     "color": "4.2.3",
     "hammerjs": "2.0.8",
-    "home-assistant-js-websocket": "8.2.0",
+    "home-assistant-js-websocket": "9.1.0",
     "lit": "2.8.0",
     "lovelace-mushroom": "git+https://github.com/piitaya/lovelace-mushroom.git#v3.0.5",
     "memoize-one": "6.0.0",
@@ -71,6 +71,6 @@
     "rollup": "3.29.1",
     "rollup-plugin-serve": "2.0.2",
     "ts-jest": "29.1.1",
-    "typescript": "5.2.2"
+    "typescript": "5.3.3"
   }
 }
