@@ -10,6 +10,9 @@ updates:
       - "idaho"
     reviewers:
       - "idaho"
+    commit-message:
+      prefix: "fix"
+      prefix-development: "chore"
     labels:
       - "dependencies"
     pull-request-branch-name:
