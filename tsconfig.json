@@ -20,12 +20,12 @@
         "experimentalDecorators": true,
         "outDir": "dist",
         "rootDir": ".",
+        "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true
     },
     "include": [
         "**/*.ts"
     ],
     "exclude": [
-        "node_modules"
     ]
 }

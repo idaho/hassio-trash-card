@@ -38,6 +38,13 @@ const TRASH_LABELS = new Set([
 ]);
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
+const OTHER_LABELS = new Set([
+  'next_days',
+  'filter_events',
+  'full_size'
+]);
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const SCHEMA: HaFormSchema[] = [
   { name: 'entity', selector: { entity: { domain: 'calendar' }}},
   {
@@ -136,7 +143,16 @@ const SCHEMA: HaFormSchema[] = [
     schema: [
       // eslint-disable-next-line @typescript-eslint/naming-convention
       { name: 'layout', selector: { mush_layout: {}}},
-      { name: 'fill_container', selector: { boolean: {}}}
+      { name: 'fill_container', selector: { boolean: {}}},
+      { name: 'full_size', selector: { boolean: {}}},
+      { name: 'filter_events', selector: { boolean: {}}},
+      { name: 'next_days',
+        selector: { number: {
+          min: 1,
+          max: 365,
+          step: 1,
+          mode: 'box'
+        }}}
     ]
   }
 ];
@@ -186,7 +202,7 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
     const customLocalize = setupCustomlocalize(this.hass);
 
-    if (GENERIC_LABELS.includes(schema.name)) {
+    if (GENERIC_LABELS.includes(schema.name) || OTHER_LABELS.has(schema.name)) {
       return customLocalize(`editor.card.generic.${schema.name}`);
     }
     if (schema.label && TRASH_LABELS.has(schema.label)) {
