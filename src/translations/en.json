@@ -18,7 +18,10 @@
             "generic": {
                 "icon_color": "Icon color",
                 "layout": "Layout",
-                "fill_container": "Fill container"
+                "fill_container": "Fill container",
+                "next_days": "Days in the future",
+                "filter_events": "Filter events by patterns",
+                "full_size": "Card without margin"
             },
             "trash": {
                 "organic": {
@@ -56,7 +59,11 @@
         "not_found": "Entity not found",
         "trash": {
             "today": "today",
-            "tomorrow": "tomorrow"
+            "tomorrow": "tomorrow",
+            "day": "<DAY>",
+            "today_from_till": "Today\nfrom <START> to <END>",
+            "tomorrow_from_till": "Tomorrow\nbetween <START> and <END>",
+            "day_from_till": "<DAY>\nbetween <START> and <END>"
         }
     }
 }

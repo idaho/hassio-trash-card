@@ -4,18 +4,24 @@ import { cardStyle } from 'lovelace-mushroom/src/utils/card-styles';
 import { classMap } from 'lit/directives/class-map.js';
 import { computeAppearance } from 'lovelace-mushroom/src/utils/appearance';
 import { computeInfoDisplay } from 'lovelace-mushroom/src/utils/info';
+import { eventToItem } from '../../utils/eventToItem';
+import { findActiveEvent } from '../../utils/findActiveEvent';
+import { getDayFromDate } from '../../utils/getDayFromDate';
 import type { HassEntity } from 'home-assistant-js-websocket';
 import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
-import { registerCustomCard } from 'lovelace-mushroom/src/utils/custom-cards';
+import { normaliseEvents } from '../../utils/normaliseEvents';
+import type { RawCalendarEvent } from '../../utils/calendarEvents';
+import { registerCustomCard } from '../../utils/registerCustomCard';
 import setupCustomlocalize from '../../localize';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { TrashCardConfig } from './trash-card-config';
 import { actionHandler, computeRTL, computeStateDisplay, hasAction, type HomeAssistant, type LovelaceCard, type LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
+import type { CalendarItem, ValidCalendarItem } from '../../utils/calendarItem';
 import { computeRgbColor, defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
-import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME, type TrashData, type TrashDataItem } from './const';
+import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
 
 registerCustomCard({
   type: TRASH_CARD_NAME,
@@ -44,7 +50,11 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
   @state() private config?: TrashCardConfig;
 
-  @property() private trashData?: TrashData;
+  @property() private currentItem?: CalendarItem;
+
+  @property() private startDate: Date = new Date();
+
+  @property() private endDate: Date = new Date();
 
   private lastChanged?: Date;
 
@@ -73,51 +83,11 @@ export class TrashCard extends LitElement implements LovelaceCard {
     };
   }
 
-  private getTrashItem (data): TrashDataItem | undefined {
-    const { settings } = this.config!;
+  public setDateRange () {
+    this.startDate = new Date();
+    this.endDate = new Date();
 
-    if (!data || !('summary' in data)) {
-      return {
-        type: 'none'
-      };
-    }
-
-    const { summary: value } = data;
-
-    if (value.includes(settings?.organic?.pattern)) {
-      return {
-        ...settings?.organic,
-        data,
-        type: 'organic'
-      };
-    }
-    if (value.includes(settings?.paper?.pattern)) {
-      return {
-        ...settings?.paper,
-        data,
-        type: 'paper'
-      };
-    }
-    if (value.includes(settings?.recycle?.pattern)) {
-      return {
-        ...settings?.recycle,
-        data,
-        type: 'recycle'
-      };
-    }
-    if (value.includes(settings?.waste?.pattern)) {
-      return {
-        ...settings?.waste,
-        data,
-        type: 'waste'
-      };
-    }
-
-    return {
-      ...settings?.others,
-      data,
-      type: 'others'
-    };
+    this.endDate.setDate(this.endDate.getDate() + (this.config?.next_days ?? 2));
   }
 
   protected fetchCurrentTrashData () {
@@ -125,51 +95,39 @@ export class TrashCard extends LitElement implements LovelaceCard {
       return;
     }
 
-    const today = new Date();
-    const endDate = new Date();
+    this.setDateRange();
 
-    endDate.setDate(endDate.getDate() + 2);
-
-    const start = this.getDayFromDate(today);
-    const end = this.getDayFromDate(endDate);
+    const start = getDayFromDate(this.startDate);
+    const end = getDayFromDate(this.endDate);
 
     const uri = `calendars/${this.config?.entity}?start=${start}&end=${end}`;
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.hass.
-      callApi('GET', uri).
-      then((response: any): TrashData => {
-        if (response.length === 0) {
-          return {
-            date: new Date(),
-            item: undefined
-          };
-        }
-
-        const todaysItem = response.find(item => item.start.date === start);
-
-        const firstNextItem = response.
-          filter(item => item.start.date !== start).
-          sort((first, second) => `${first.start.date}`.localeCompare(`${second.start.date}`))[0];
-
-        const item = today.getHours() <= 10 ? todaysItem ?? firstNextItem : firstNextItem;
-
-        return {
-          date: item ? new Date(item.start.date) : new Date(),
-          item: this.getTrashItem(item)
-        };
-      }).
-      then((data: TrashData) => {
-        this.trashData = data;
+      callApi<RawCalendarEvent[]>('GET', uri).
+      then((response): CalendarItem =>
+        eventToItem(
+          findActiveEvent(
+            normaliseEvents(response), { config: {
+              settings: this.config!.settings!,
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              filter_events: this.config!.filter_events
+            },
+            now: new Date() }
+          ),
+          { settings: this.config!.settings!, useSummary: false }
+        )).
+      then((data: CalendarItem) => {
+        this.currentItem = data;
         this.lastChanged = new Date();
       });
   }
 
   protected shouldUpdate (changedProps: PropertyValues): boolean {
-    if (changedProps.has('trashData')) {
+    if (changedProps.has('currentItem')) {
       return true;
     }
-    changedProps.delete('trashData');
+    changedProps.delete('currentItem');
     if (
       !this.lastChanged ||
             changedProps.has('config') ||
@@ -184,15 +142,12 @@ export class TrashCard extends LitElement implements LovelaceCard {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected getDayFromDate (date: Date): string {
-    return `${date.getFullYear()}-${`${date.getMonth() + 1}`.padStart(
-      2,
-      '0'
-    )}-${`${date.getDate()}`.padStart(2, '0')}`;
+  protected isValidItem (item?: CalendarItem): item is ValidCalendarItem {
+    return Boolean(item && item.type !== 'none');
   }
 
   protected getDateString (): string {
-    if (!this.trashData?.date || !this.hass) {
+    if (!this.isValidItem(this.currentItem) || !this.hass) {
       return '';
     }
 
@@ -203,24 +158,41 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    const todayDay = this.getDayFromDate(today);
-    const tomorrowDay = this.getDayFromDate(tomorrow);
+    const todayDay = getDayFromDate(today);
+    const tomorrowDay = getDayFromDate(tomorrow);
 
-    const stateDay = this.getDayFromDate(this.trashData.date);
+    const stateDay = getDayFromDate(this.currentItem.date.start);
 
-    if (todayDay === stateDay) {
-      return customLocalize('card.trash.today');
+    const startTime = !this.currentItem.isWholeDayEvent ?
+      this.currentItem.date.start.toLocaleTimeString(this.hass.language, {
+        hour: 'numeric',
+        minute: 'numeric'
+      }) :
+      undefined;
+
+    const endTime = !this.currentItem.isWholeDayEvent ?
+      this.currentItem.date.end.toLocaleTimeString(this.hass.language, {
+        hour: 'numeric',
+        minute: 'numeric'
+      }) :
+      undefined;
+
+    if (stateDay === todayDay || stateDay === tomorrowDay) {
+      const key = `card.trash.${stateDay === todayDay ? 'today' : 'tomorrow'}${startTime ? '_from_till' : ''}`;
+
+      return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
     }
-    if (tomorrowDay === stateDay) {
-      return customLocalize('card.trash.tomorrow');
-    }
 
-    return this.trashData.date.toLocaleDateString(this.hass.language, {
+    const day = this.currentItem.date.start.toLocaleDateString(this.hass.language, {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
+
+    const key = `card.trash.day${startTime ? '_from_till' : ''}`;
+
+    return customLocalize(`${key}`).replace('<DAY>', day).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '');
   }
 
   protected render () {
@@ -235,15 +207,15 @@ export class TrashCard extends LitElement implements LovelaceCard {
       return nothing;
     }
 
-    if (!this.trashData?.item || this.trashData.item.type === 'none') {
+    if (!this.isValidItem(this.currentItem)) {
       return html``;
     }
-
     const appearance = computeAppearance(this.config);
 
     const rtl = computeRTL(this.hass);
 
-    const color = this.trashData.item.color ?? 'disabled';
+    const { label } = this.currentItem;
+    const color = this.currentItem.color ?? 'disabled';
 
     const backgroundStyle = {};
 
@@ -273,12 +245,9 @@ export class TrashCard extends LitElement implements LovelaceCard {
                         ${this.renderIcon(stateObj)}
                         <mushroom-state-info
                             slot="info"
-                            .primary=${this.trashData.item.type !== 'others' ?
-    this.trashData.item.label ??
-                                  this.trashData.item.data?.summary ??
-                                  '' :
-    this.trashData.item.data?.summary}
+                            .primary=${label}
                             .secondary=${secondary}
+                            .multiline_secondary=${true}
                         ></mushroom-state-info>
                     </mushroom-state-item>
                 </mushroom-card>
@@ -288,8 +257,13 @@ export class TrashCard extends LitElement implements LovelaceCard {
   }
 
   protected renderIcon (stateObj: HassEntity): TemplateResult {
-    const icon = this.trashData?.item?.icon ?? 'mdi:delete-outline';
-    const iconColor = this.trashData?.item?.color ?? 'disabled';
+    if (!this.isValidItem(this.currentItem)) {
+      return html``;
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    const icon = this.currentItem.icon ?? 'mdi:delete-outline';
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    const iconColor = this.currentItem.color ?? 'disabled';
 
     const iconStyle = {};
 
