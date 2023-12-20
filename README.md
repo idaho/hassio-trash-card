@@ -72,6 +72,8 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `fill_container`    | boolean                                             | `false`     | Fill container or not. Useful when card is in a grid, vertical or horizontal layout |
 | `filter_events`     | boolean                                             | `false`     | Filter fetched events by patterns (if at least one is defined) before selecting the one to display |
 | `full_size`         | boolean                                             | `false`     | Show the card without the default card margins |
+| `drop_todayevents_from`         | time                                             | `10:00:00`     | From what time to hide all-day event (Format `hh:mm:ss`) |
+| `use_summary`         | boolean                                             | `false`     | Shows  the event summary instead of matched label |
 | `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event |
 | `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display |
 
