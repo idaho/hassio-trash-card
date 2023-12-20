@@ -42,6 +42,7 @@ const OTHER_LABELS = new Set([
   'next_days',
   'filter_events',
   'full_size',
+  'drop_todayevents_from',
   'use_summary'
 ]);
 
@@ -147,6 +148,13 @@ const SCHEMA: HaFormSchema[] = [
       { name: 'fill_container', selector: { boolean: {}}},
       { name: 'full_size', selector: { boolean: {}}},
       { name: 'filter_events', selector: { boolean: {}}},
+      { name: 'drop_todayevents_from',
+        default: {
+          hours: 11,
+          minutes: 0,
+          seconds: 0
+        },
+        selector: { time: {}}},
       { name: 'use_summary', selector: { boolean: {}}},
       { name: 'next_days',
         selector: { number: {
@@ -180,9 +188,15 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     void loadHaComponents();
   }
 
-  public setConfig (config: TrashCardConfig): void {
+  public setConfig (config: Partial<TrashCardConfig>): void {
     assert(config, entityCardConfigStruct);
-    this.config = config;
+    this.config = {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      drop_todayevents_from: '10:00:00',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      next_days: 2,
+      ...config
+    };
   }
 
   protected updated (changedProps: PropertyValues): void {

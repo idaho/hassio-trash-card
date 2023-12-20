@@ -8,6 +8,7 @@ import { eventToItem } from '../../utils/eventToItem';
 import { findActiveEvent } from '../../utils/findActiveEvent';
 import { getDayFromDate } from '../../utils/getDayFromDate';
 import type { HassEntity } from 'home-assistant-js-websocket';
+import { isTodayAfter } from '../../utils/isTodayAfter';
 import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import { normaliseEvents } from '../../utils/normaliseEvents';
 import type { RawCalendarEvent } from '../../utils/calendarEvents';
@@ -102,6 +103,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
     const uri = `calendars/${this.config?.entity}?start=${start}&end=${end}`;
 
+    const dropAfter = isTodayAfter(new Date(), this.config!.drop_todayevents_from ?? '10:00:00');
+
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.hass.
       callApi<RawCalendarEvent[]>('GET', uri).
@@ -113,6 +116,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
               // eslint-disable-next-line @typescript-eslint/naming-convention
               filter_events: this.config!.filter_events
             },
+            dropAfter,
             now: new Date() }
           ),
           { settings: this.config!.settings!, useSummary: Boolean(this.config!.use_summary) }

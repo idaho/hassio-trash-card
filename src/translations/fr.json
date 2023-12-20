@@ -21,6 +21,7 @@
                 "fill_container": "Remplir le conteneur",
                 "next_days": "Jours dans le futur",
                 "filter_events": "Filtrer les événements par motifs",
+                "drop_todayevents_from": "A partir de quelle heure masquer l'événement de toute la journée ?",
                 "full_size": "Carte sans marge",
                 "use_summary": "Résumé de l'événement au lieu de l'étiquette"
             },

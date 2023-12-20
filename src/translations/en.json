@@ -21,6 +21,7 @@
                 "fill_container": "Fill container",
                 "next_days": "Days in the future",
                 "filter_events": "Filter events by patterns",
+                "drop_todayevents_from": "From what time to hide all-day event",
                 "full_size": "Card without margin",
                 "use_summary": "Event summary instead of label"
             },
