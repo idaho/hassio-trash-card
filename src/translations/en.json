@@ -72,7 +72,11 @@
             "day": "<DAY>",
             "today_from_till": "Today\nfrom <START> to <END>",
             "tomorrow_from_till": "Tomorrow\nbetween <START> and <END>",
-            "day_from_till": "<DAY>\nbetween <START> and <END>"
+            "day_from_till": "<DAY>\nbetween <START> and <END>",
+            "daysleft": "in <DAYS> day",
+            "daysleft_more": "in <DAYS> days",
+            "daysleft_from_till": "in <DAYS> day\nbetween <START> and <END>",
+            "daysleft_more_from_till": "in <DAYS> days\nbetween <START> and <END>"
         }
     }
 }

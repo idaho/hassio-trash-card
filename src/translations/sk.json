@@ -72,7 +72,11 @@
             "day": "<DAY>",
             "today_from_till": "Dnes\nod <START> do <END>",
             "tomorrow_from_till": "Zajtra\nod <START> do <END>",
-            "day_from_till": "<DAY>\nmedzi <START> a <END>"
+            "day_from_till": "<DAY>\nmedzi <START> a <END>",
+            "daysleft": "za <DAYS> dní",
+            "daysleft_more": "za <DAYS> dní",
+            "daysleft_from_till": "za <DAYS> dní\nmedzi <START> a <END>",
+            "daysleft_more_from_till": "za <DAYS> dní\nmedzi <START> a <END>"
         }
     }
 }
