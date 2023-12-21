@@ -12,6 +12,11 @@
                     "vertical": "Disposition Verticale",
                     "horizontal": "Disposition Horizontale"
                 }
+            },
+            "tabs" : {
+                "settings" : "Paramètres",
+                "appearance" : "Apparence",
+                "patterns" : "Motifs"
             }
         },
         "card": {

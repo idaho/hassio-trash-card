@@ -12,6 +12,11 @@
                     "vertical": "Vertikálne rozloženie",
                     "horizontal": "Horizontálne rozloženie"
                 }
+            },
+            "tabs": {
+                "settings": "Nastavenia",
+                "vzhľad": "Vzhľad",
+                "patterns": "Pattern"
             }
         },
         "card": {

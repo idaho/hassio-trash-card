@@ -12,6 +12,11 @@
                     "vertical": "Vertikales Layout",
                     "horizontal": "Horizontales Layout"
                 }
+            },
+            "tabs": {
+                "settings": "Einstellungen",
+                "appearance": "Darstellung",
+                "patterns": "Muster"
             }
         },
         "card": {
@@ -26,6 +31,24 @@
                 "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden"
             },
             "trash": {
+                "pattern": {
+                    "title": "Muster bearbeiten",
+                    "edit": "bearbeiten",
+                    "delete": "löschen",
+                    "type": {
+                        "organic": "Bio",
+                        "paper": "Papier",
+                        "recycle": "Verpackung",
+                        "waste": "Restmüll",
+                        "others": "Sonstiges"
+                    },
+                    "fields": {
+                        "label": "Bezeichnung",
+                        "color": "Farbe",
+                        "icon": "Symbol",
+                        "pattern": "erkennen an Muster"
+                    }
+                },
                 "organic": {
                     "label": "Bio Bezeichnung",
                     "color": "Bio Farbe",

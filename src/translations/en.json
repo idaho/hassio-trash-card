@@ -12,6 +12,11 @@
                     "vertical": "Vertical layout",
                     "horizontal": "Horizontal layout"
                 }
+            },
+            "tabs": {
+                "settings": "Settings",
+                "appearance": "Appearance",
+                "patterns": "Patterns"
             }
         },
         "card": {

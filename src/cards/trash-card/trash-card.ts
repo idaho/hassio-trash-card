@@ -150,8 +150,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
     return Boolean(item && item.type !== 'none');
   }
 
-  protected getDateString (): string {
-    if (!this.isValidItem(this.currentItem) || !this.hass) {
+  protected getDateString (item: CalendarItem): string {
+    if (!this.isValidItem(item) || !this.hass) {
       return '';
     }
 
@@ -165,17 +165,17 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const todayDay = getDayFromDate(today);
     const tomorrowDay = getDayFromDate(tomorrow);
 
-    const stateDay = getDayFromDate(this.currentItem.date.start);
+    const stateDay = getDayFromDate(item.date.start);
 
-    const startTime = !this.currentItem.isWholeDayEvent ?
-      this.currentItem.date.start.toLocaleTimeString(this.hass.language, {
+    const startTime = !item.isWholeDayEvent ?
+      item.date.start.toLocaleTimeString(this.hass.language, {
         hour: 'numeric',
         minute: 'numeric'
       }) :
       undefined;
 
-    const endTime = !this.currentItem.isWholeDayEvent ?
-      this.currentItem.date.end.toLocaleTimeString(this.hass.language, {
+    const endTime = !item.isWholeDayEvent ?
+      item.date.end.toLocaleTimeString(this.hass.language, {
         hour: 'numeric',
         minute: 'numeric'
       }) :
@@ -187,7 +187,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
     }
 
-    const day = this.currentItem.date.start.toLocaleDateString(this.hass.language, {
+    const day = item.date.start.toLocaleDateString(this.hass.language, {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -211,15 +211,17 @@ export class TrashCard extends LitElement implements LovelaceCard {
       return nothing;
     }
 
-    if (!this.isValidItem(this.currentItem)) {
+    const item = this.currentItem;
+
+    if (!this.isValidItem(item)) {
       return html``;
     }
     const appearance = computeAppearance(this.config);
 
     const rtl = computeRTL(this.hass);
 
-    const { label } = this.currentItem;
-    const color = this.currentItem.color ?? 'disabled';
+    const { label } = item;
+    const color = item.color ?? 'disabled';
 
     const backgroundStyle = {};
 
@@ -229,7 +231,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       backgroundStyle['background-color'] = `rgba(${rgbColor}, 0.5)`;
     }
 
-    const secondary = this.getDateString();
+    const secondary = this.getDateString(item);
 
     /* eslint-disable @typescript-eslint/naming-convention */
     return html`
@@ -241,12 +243,9 @@ export class TrashCard extends LitElement implements LovelaceCard {
                     <mushroom-state-item
                         ?rtl=${rtl}
                         .appearance=${appearance}
-                        .actionHandler=${actionHandler({
-    hasHold: hasAction(this.config.hold_action),
-    hasDoubleClick: hasAction(this.config.double_tap_action)
-  })}
+                        .actionHandler=${actionHandler({ hasHold: hasAction(this.config.hold_action), hasDoubleClick: hasAction(this.config.double_tap_action) })}
                     >
-                        ${this.renderIcon(stateObj)}
+                        ${this.renderIcon(stateObj, item)}
                         <mushroom-state-info
                             slot="info"
                             .primary=${label}
@@ -260,14 +259,14 @@ export class TrashCard extends LitElement implements LovelaceCard {
     /* eslint-enable @typescript-eslint/naming-convention */
   }
 
-  protected renderIcon (stateObj: HassEntity): TemplateResult {
-    if (!this.isValidItem(this.currentItem)) {
+  protected renderIcon (stateObj: HassEntity, item?: CalendarItem): TemplateResult {
+    if (!this.isValidItem(item)) {
       return html``;
     }
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    const icon = this.currentItem.icon ?? 'mdi:delete-outline';
+    const icon = item.icon ?? 'mdi:delete-outline';
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    const iconColor = this.currentItem.color ?? 'disabled';
+    const iconColor = item.color ?? 'disabled';
 
     const iconStyle = {};
 
@@ -288,35 +287,6 @@ export class TrashCard extends LitElement implements LovelaceCard {
             </mushroom-shape-icon>
         `;
   }
-
-  // Protected renderNotFound(config: any): TemplateResult {
-  //     const appearance = computeAppearance(config);
-  //     const rtl = computeRTL(this.hass);
-
-  //     const customLocalize = setupCustomlocalize(this.hass);
-
-  //     return html`
-  //         <ha-card class=${classMap({ "fill-container": appearance.fill_container })}>
-  //             <mushroom-card .appearance=${appearance} ?rtl=${rtl}>
-  //                 <mushroom-state-item ?rtl=${rtl} .appearance=${appearance} disabled>
-  //                     <mushroom-shape-icon slot="icon" disabled>
-  //                         <ha-icon icon="mdi:help"></ha-icon>
-  //                     </mushroom-shape-icon>
-  //                     <mushroom-badge-icon
-  //                         slot="badge"
-  //                         class="not-found"
-  //                         icon="mdi:exclamation-thick"
-  //                     ></mushroom-badge-icon>
-  //                     <mushroom-state-info
-  //                         slot="info"
-  //                         .primary=${config.entity}
-  //                         secondary=${customLocalize("card.not_found")}
-  //                     ></mushroom-state-info>
-  //                 </mushroom-state-item>
-  //             </mushroom-card>
-  //         </ha-card>
-  //     `;
-  // }
 
   protected renderStateInfo (
     stateObj: HassEntity,
@@ -366,32 +336,32 @@ export class TrashCard extends LitElement implements LovelaceCard {
     return [
       animations,
       css`
-                :host {
-                    ${defaultColorCss}
-                }
-                :host([dark-mode]) {
-                    ${defaultDarkColorCss}
-                }
-                :host {
-                    ${themeColorCss}
-                    ${themeVariables}
-                }
-            `,
+          :host {
+              ${defaultColorCss}
+          }
+          :host([dark-mode]) {
+              ${defaultDarkColorCss}
+          }
+          :host {
+              ${themeColorCss}
+              ${themeVariables}
+          }
+        `,
       cardStyle,
       css`
-                ha-card.fullsize {
-                    margin-left: -17px;
-                    margin-right: -17px;
-                    margin-top: -4px;
-                }
-                mushroom-state-item {
-                    cursor: pointer;
-                }
-                mushroom-shape-icon {
-                    --icon-color: rgb(var(--rgb-state-entity));
-                    --shape-color: rgba(var(--rgb-state-entity), 0.2);
-                }
-            `
+          ha-card.fullsize {
+              margin-left: -17px;
+              margin-right: -17px;
+              margin-top: -4px;
+          }
+          mushroom-state-item {
+              cursor: pointer;
+          }
+          mushroom-shape-icon {
+              --icon-color: rgb(var(--rgb-state-entity));
+              --shape-color: rgba(var(--rgb-state-entity), 0.2);
+          }
+      `
     ];
   }
 }
