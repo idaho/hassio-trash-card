@@ -65,13 +65,13 @@
         }
     },
     "card": {
-        "not_found": "Entité non trouvée",
+        "not_found": "Entité introuvable",
         "trash": {
-            "today": "aujourd'hui",
-            "tomorrow": "demain",
+            "today": "Aujourd'hui",
+            "tomorrow": "Demain",
             "day": "<DAY>",
-            "today_from_till": "aujourd'hui\nentre <START> et <END>",
-            "tomorrow_from_till": "Zajtra\nentre <START> et <END>",
+            "today_from_till": "Aujourd'hui\nentre <START> et <END>",
+            "tomorrow_from_till": "Demain\nentre <START> et <END>",
             "day_from_till": "<DAY>\nentre <START> et <END>",
             "daysleft": "En <DAYS> jour",
             "daysleft_more": "Dans <DAYS> jours",
