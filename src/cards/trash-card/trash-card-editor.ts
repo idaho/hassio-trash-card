@@ -43,7 +43,8 @@ const OTHER_LABELS = new Set([
   'filter_events',
   'full_size',
   'drop_todayevents_from',
-  'use_summary'
+  'use_summary',
+  'day_style'
 ]);
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -147,6 +148,8 @@ const SCHEMA: HaFormSchema[] = [
       { name: 'layout', selector: { mush_layout: {}}},
       { name: 'fill_container', selector: { boolean: {}}},
       { name: 'full_size', selector: { boolean: {}}},
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      { name: 'day_style', selector: { trashcard_datestyle: {}}},
       { name: 'filter_events', selector: { boolean: {}}},
       { name: 'drop_todayevents_from',
         default: {
@@ -195,6 +198,9 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
       drop_todayevents_from: '10:00:00',
       // eslint-disable-next-line @typescript-eslint/naming-convention
       next_days: 2,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      day_style: 'default',
+
       ...config
     };
   }
@@ -240,6 +246,7 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
                 .data=${this.config}
                 .schema=${SCHEMA}
                 .computeLabel=${this.computeLabel}
+                .compute
                 @value-changed=${this.valueChanged}
             ></ha-form>
         `;

@@ -1,5 +1,9 @@
 import type { LitElement } from 'lit';
-import type { Selector } from 'lovelace-mushroom/src/utils/form/ha-selector';
+import type { Selector as MushroomSelectors } from 'lovelace-mushroom/src/utils/form/ha-selector';
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import { TrashCardDateStyleSelector } from './ha-selector-date-style';
+
+type Selector = MushroomSelectors | TrashCardDateStyleSelector;
 
 interface HaDurationData {
   hours?: number;

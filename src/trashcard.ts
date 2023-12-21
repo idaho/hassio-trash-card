@@ -1,4 +1,5 @@
 import { version } from '../package.json';
+import './utils/form/ha-selector-date-style';
 
 export { TrashCard } from './cards/trash-card/trash-card';
 
