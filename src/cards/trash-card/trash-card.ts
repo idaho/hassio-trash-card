@@ -40,7 +40,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
     return document.createElement(TRASH_CARD_EDITOR_NAME) as LovelaceCardEditor;
   }
 
-  public static async getStubConfig (hass: HomeAssistant): Promise<TrashCardConfig> {
+  public static async getStubConfig (hass: HomeAssistant): Promise<Partial<TrashCardConfig>> {
     const entities = Object.keys(hass.states);
 
     return {
@@ -150,8 +150,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
     return Boolean(item && item.type !== 'none');
   }
 
-  protected getDateString (): string {
-    if (!this.isValidItem(this.currentItem) || !this.hass) {
+  protected getDateString (item: ValidCalendarItem): string {
+    if (!this.hass) {
       return '';
     }
 
@@ -165,17 +165,17 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const todayDay = getDayFromDate(today);
     const tomorrowDay = getDayFromDate(tomorrow);
 
-    const stateDay = getDayFromDate(this.currentItem.date.start);
+    const stateDay = getDayFromDate(item.date.start);
 
-    const startTime = !this.currentItem.isWholeDayEvent ?
-      this.currentItem.date.start.toLocaleTimeString(this.hass.language, {
+    const startTime = !item.isWholeDayEvent ?
+      item.date.start.toLocaleTimeString(this.hass.language, {
         hour: 'numeric',
         minute: 'numeric'
       }) :
       undefined;
 
-    const endTime = !this.currentItem.isWholeDayEvent ?
-      this.currentItem.date.end.toLocaleTimeString(this.hass.language, {
+    const endTime = !item.isWholeDayEvent ?
+      item.date.end.toLocaleTimeString(this.hass.language, {
         hour: 'numeric',
         minute: 'numeric'
       }) :
@@ -187,7 +187,15 @@ export class TrashCard extends LitElement implements LovelaceCard {
       return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
     }
 
-    const day = this.currentItem.date.start.toLocaleDateString(this.hass.language, {
+    if (this.config?.day_style === 'counter') {
+      const oneDay = 24 * 60 * 60 * 1_000;
+
+      const daysLeft = Math.round(Math.abs((Date.now() - item.date.start.getTime()) / oneDay));
+
+      return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+    }
+
+    const day = item.date.start.toLocaleDateString(this.hass.language, {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -229,7 +237,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       backgroundStyle['background-color'] = `rgba(${rgbColor}, 0.5)`;
     }
 
-    const secondary = this.getDateString();
+    const secondary = this.getDateString(this.currentItem);
 
     /* eslint-disable @typescript-eslint/naming-convention */
     return html`
