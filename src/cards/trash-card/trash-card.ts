@@ -273,18 +273,14 @@ export class TrashCard extends LitElement implements LovelaceCard {
       return html``;
     }
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     const icon = this.currentItem.icon ?? 'mdi:delete-outline';
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     const iconColor = this.currentItem.color ?? 'disabled';
-
     const iconStyle = {};
 
-    if (iconColor) {
-      const iconRgbColor = computeRgbColor(iconColor);
-
-      iconStyle['--icon-color'] = `rgb(${iconRgbColor})`;
-      iconStyle['--shape-color'] = `rgba(${iconRgbColor}, 0.2)`;
-    }
+    iconStyle['--icon-color'] = `rgba(var(--white-color), 0.5)`;
 
     return html`
             <mushroom-shape-icon
