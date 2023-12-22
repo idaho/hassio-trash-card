@@ -6,6 +6,12 @@
                     "default": "Couleur par défaut"
                 }
             },
+            "day_style": {
+                "values": {
+                    "default": "Date",
+                    "compteur": "jours jusqu'à"
+                }
+            },
             "layout_picker": {
                 "values": {
                     "default": "Disposition par défaut",
@@ -13,10 +19,10 @@
                     "horizontal": "Disposition Horizontale"
                 }
             },
-            "tabs" : {
-                "settings" : "Paramètres",
-                "appearance" : "Apparence",
-                "patterns" : "Motifs"
+            "tabs": {
+                "settings": "Paramètres",
+                "appearance": "Apparence",
+                "patterns": "Motifs"
             }
         },
         "card": {
@@ -28,7 +34,8 @@
                 "filter_events": "Filtrer les événements par motifs",
                 "drop_todayevents_from": "A partir de quelle heure masquer l'événement de toute la journée ?",
                 "full_size": "Carte sans marge",
-                "use_summary": "Résumé de l'événement au lieu de l'étiquette"
+                "use_summary": "Résumé de l'événement au lieu de l'étiquette",
+                "day_style": "Afficher l'heure de l'événement en tant que"
             },
             "trash": {
                 "organic": {
@@ -63,14 +70,18 @@
         }
     },
     "card": {
-        "not_found": "Entité non trouvée",
+        "not_found": "Entité introuvable",
         "trash": {
-            "today": "aujourd'hui",
-            "tomorrow": "demain",
+            "today": "Aujourd'hui",
+            "tomorrow": "Demain",
             "day": "<DAY>",
-            "today_from_till": "aujourd'hui\nentre <START> et <END>",
-            "tomorrow_from_till": "Zajtra\nentre <START> et <END>",
-            "day_from_till": "<DAY>\nentre <START> et <END>"
+            "today_from_till": "Aujourd'hui\nentre <START> et <END>",
+            "tomorrow_from_till": "Demain\nentre <START> et <END>",
+            "day_from_till": "<DAY>\nentre <START> et <END>",
+            "daysleft": "En <DAYS> jour",
+            "daysleft_more": "Dans <DAYS> jours",
+            "daysleft_from_till": "En <DAYS> jour\nentre <START> et <END>",
+            "daysleft_more_from_till": "Dans <DAYS> jours\nentre <START> et <END>"
         }
     }
 }

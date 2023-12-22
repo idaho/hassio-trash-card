@@ -6,6 +6,12 @@
                     "default": "Standard-Farbe"
                 }
             },
+            "day_style": {
+                "values": {
+                    "default": "Datum",
+                    "counter": "Tage bis"
+                }
+            },
             "layout_picker": {
                 "values": {
                     "default": "Standard-Layout",
@@ -28,7 +34,8 @@
                 "filter_events": "Ereignisse nach Mustern filtern",
                 "drop_todayevents_from": "Ab wieviel Uhr Ganztages Ereignis ausblenden",
                 "full_size": "Karte ohne Seitenrand",
-                "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden"
+                "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden",
+                "day_style": "Ereigniss Zeitpunkt anzeigen als"
             },
             "trash": {
                 "pattern": {
@@ -88,7 +95,11 @@
             "day": "<DAY>",
             "today_from_till": "Heute\nvon <START> bis <END>",
             "tomorrow_from_till": "Morgen\nzwischen <START> und <END>",
-            "day_from_till": "<DAY>\nzwischen <START> und <END>"
+            "day_from_till": "<DAY>\nzwischen <START> und <END>",
+            "daysleft": "in <DAYS> Tag",
+            "daysleft_more": "in <DAYS> Tagen",
+            "daysleft_from_till": "in <DAYS> Tag\nvon <START> bis <END>",
+            "daysleft_more_from_till": "in <DAYS> Tagen\nvon <START> bis <END>"
         }
     }
 }

@@ -75,6 +75,7 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `drop_todayevents_from`         | time                                             | `10:00:00`     | From what time to hide all-day event (Format `hh:mm:ss`) |
 | `use_summary`         | boolean                                             | `false`     | Shows  the event summary instead of matched label |
 | `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event |
+| `day_style`            | `default` or `counter` | `default`   | Option of how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining until the event.       |
 | `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display |
 
 

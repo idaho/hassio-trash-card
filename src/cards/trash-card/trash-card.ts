@@ -40,7 +40,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
     return document.createElement(TRASH_CARD_EDITOR_NAME) as LovelaceCardEditor;
   }
 
-  public static async getStubConfig (hass: HomeAssistant): Promise<TrashCardConfig> {
+  public static async getStubConfig (hass: HomeAssistant): Promise<Partial<TrashCardConfig>> {
     const entities = Object.keys(hass.states);
 
     return {
@@ -185,6 +185,14 @@ export class TrashCard extends LitElement implements LovelaceCard {
       const key = `card.trash.${stateDay === todayDay ? 'today' : 'tomorrow'}${startTime ? '_from_till' : ''}`;
 
       return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+    }
+
+    if (this.config?.day_style === 'counter') {
+      const oneDay = 24 * 60 * 60 * 1_000;
+
+      const daysLeft = Math.round(Math.abs((Date.now() - item.date.start.getTime()) / oneDay));
+
+      return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
     }
 
     const day = item.date.start.toLocaleDateString(this.hass.language, {

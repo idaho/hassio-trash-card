@@ -6,6 +6,12 @@
                     "default": "Default color"
                 }
             },
+            "day_style": {
+                "values": {
+                    "default": "Date",
+                    "counter": "days to"
+                }
+            },
             "layout_picker": {
                 "values": {
                     "default": "Default layout",
@@ -28,7 +34,8 @@
                 "filter_events": "Filter events by patterns",
                 "drop_todayevents_from": "From what time to hide all-day event",
                 "full_size": "Card without margin",
-                "use_summary": "Event summary instead of label"
+                "use_summary": "Event summary instead of label",
+                "day_style": "Show event time as"
             },
             "trash": {
                 "organic": {
@@ -70,7 +77,11 @@
             "day": "<DAY>",
             "today_from_till": "Today\nfrom <START> to <END>",
             "tomorrow_from_till": "Tomorrow\nbetween <START> and <END>",
-            "day_from_till": "<DAY>\nbetween <START> and <END>"
+            "day_from_till": "<DAY>\nbetween <START> and <END>",
+            "daysleft": "in <DAYS> day",
+            "daysleft_more": "in <DAYS> days",
+            "daysleft_from_till": "in <DAYS> day\nbetween <START> and <END>",
+            "daysleft_more_from_till": "in <DAYS> days\nbetween <START> and <END>"
         }
     }
 }

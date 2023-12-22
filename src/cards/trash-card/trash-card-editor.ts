@@ -46,7 +46,8 @@ const OTHER_LABELS = new Set([
   'filter_events',
   'full_size',
   'drop_todayevents_from',
-  'use_summary'
+  'use_summary',
+  'day_style'
 ]);
 
 export const computeDarkMode = (hass?: HomeAssistant): boolean => {
@@ -101,6 +102,9 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
         },
         ...config.settings
       },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      day_style: 'default',
+
       ...config
     };
   }

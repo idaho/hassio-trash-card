@@ -15,7 +15,8 @@ const IGNORED_FILES = [
   '@material/mwc-menu/mwc-menu.js',
   '@material/mwc-menu/mwc-menu-surface.js',
   '@material/mwc-icon/mwc-icon.js',
-  'lovelace-mushroom/src/shared/badge-icon.ts'
+  'lovelace-mushroom/src/shared/badge-icon.ts',
+  'lovelace-mushroom/src/shared/form/mushroom-select.ts'
 ];
 
 // eslint-disable-next-line no-process-env
@@ -24,7 +25,7 @@ const dev = process.env.ROLLUP_WATCH;
 const serveOptions = {
   contentBase: [ './dist' ],
   host: '0.0.0.0',
-  port: 4_000,
+  port: 5_200,
   allowCrossOrigin: true,
   headers: {
     'Access-Control-Allow-Origin': '*'

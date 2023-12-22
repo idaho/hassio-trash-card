@@ -3,9 +3,16 @@ import type { ItemSettings } from '../../utils/itemSettings';
 import { layoutStruct } from 'lovelace-mushroom/src/utils/layout';
 import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 import { lovelaceCardConfigStruct } from 'lovelace-mushroom/src/shared/config/lovelace-card-config';
-import { assign, boolean, integer, object, optional, string } from 'superstruct';
+import { assign, boolean, integer, literal, object, optional, string, union } from 'superstruct';
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const DAYSTYLES = [
+  'default',
+  'counter'
+] as const;
 
 type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
+
 export type TrashCardConfig = LovelaceCardConfig &
 EntityWithOutIcon & {
   settings?: {
@@ -25,9 +32,13 @@ EntityWithOutIcon & {
   drop_todayevents_from?: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   use_summary?: boolean;
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  day_style?: typeof DAYSTYLES[number];
 };
 
-export const entityCardConfigStruct = assign(
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+const entityCardConfigStruct = assign(
   lovelaceCardConfigStruct,
   object({
     entity: optional(string()),
@@ -45,6 +56,8 @@ export const entityCardConfigStruct = assign(
     next_days: optional(integer()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
     drop_todayevents_from: optional(string()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),
 
     settings: optional(
       object({
@@ -90,3 +103,7 @@ export const entityCardConfigStruct = assign(
     )
   })
 );
+
+export {
+  entityCardConfigStruct
+};
