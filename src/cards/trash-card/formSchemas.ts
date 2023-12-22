@@ -10,6 +10,7 @@ const SCHEMA_SETTINGS: HaFormSchema[] = [
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   { name: 'filter_events', selector: { boolean: {}}},
+  { name: 'day_style', selector: { trashcard_datestyle: {}}},
   { name: 'drop_todayevents_from',
     default: {
       hours: 11,
