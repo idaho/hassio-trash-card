@@ -1,13 +1,32 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable no-return-assign */
+import { fireEvent } from 'lovelace-mushroom/src/ha';
 import { guard } from 'lit/directives/guard.js';
+import type { HomeAssistant } from '../../utils/ha';
+import type { ItemSettings } from '../../utils/itemSettings';
 import setupCustomlocalize from '../../localize';
 import { type TrashCardConfig } from './trash-card-config';
 
 import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { fireEvent, type HomeAssistant } from 'lovelace-mushroom/src/ha';
+
+export interface SubElementEditorConfig {
+  index?: number;
+  key?: string;
+  elementConfig?: ItemSettings;
+  type: string;
+}
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  interface HASSDomEvents {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'edit-detail-element': {
+      subElementConfig: SubElementEditorConfig;
+    };
+  }
+}
 
 @customElement(`trash-card-pattern-editor`)
 export class TrashCardPatternEditor extends LitElement {
@@ -87,7 +106,7 @@ export class TrashCardPatternEditor extends LitElement {
     const { index } = (ev.currentTarget as any);
     const settings = Object.entries(this.settings!);
 
-    fireEvent<any>(this, 'edit-detail-element', {
+    fireEvent(this, 'edit-detail-element', {
       subElementConfig: {
         index,
         key: settings[index][0],

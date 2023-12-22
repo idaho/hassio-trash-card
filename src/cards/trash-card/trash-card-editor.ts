@@ -5,31 +5,32 @@ import { animations } from 'lovelace-mushroom/src/utils/entity-styles';
 import { assert } from 'superstruct';
 import { GENERIC_LABELS } from 'lovelace-mushroom/src/utils/form/generic-fields';
 import type { HaFormSchema } from '../../utils/form/ha-form';
-import type { ItemSettings } from '../../utils/itemSettings';
+import { type HomeAssistant } from '../../utils/ha';
 import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
+import memoizeOne from 'memoize-one';
 import setupCustomlocalize from '../../localize';
+import type { SubElementEditorConfig } from './trash-card-pattern-editor';
 import { TRASH_CARD_EDITOR_NAME } from './const';
 
 import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { entityCardConfigStruct, type TrashCardConfig } from './trash-card-config';
-import { fireEvent, type HASSDomEvent, type HomeAssistant, type LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
-import { SCHEMA_APPEARANCE, SCHEMA_ENTITY, SCHEMA_PATTERN, SCHEMA_PATTERN_OTHERS, SCHEMA_SETTINGS } from './formSchemas';
+import { fireEvent, type HASSDomEvent, type LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
+
+import { getSchema, SCHEMA_PATTERN, SCHEMA_PATTERN_OTHERS } from './formSchemas';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
+// eslint-disable-next-line no-duplicate-imports
 import './trash-card-pattern-editor';
 
-interface MwcTabBarEvent extends Event {
-  detail: {
-    index: number;
-  };
-}
-
-export interface SubElementEditorConfig {
-  index?: number;
-  key?: string;
-  elementConfig?: ItemSettings;
-  type: string;
+declare global {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  interface HASSDomEvents {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'config-changed': {
+      config: TrashCardConfig;
+    };
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -65,10 +66,12 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   @state() private config?: TrashCardConfig;
 
-  @property() private selectedTabIndex = 0;
+  @property() private readonly selectedTabIndex = 0;
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   @state() private subElementEditorConfig?: SubElementEditorConfig;
+
+  @state() private readonly schema = memoizeOne(getSchema);
 
   public connectedCallback (): void {
     super.connectedCallback();
@@ -131,6 +134,7 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     if (GENERIC_LABELS.includes(schema.name) || OTHER_LABELS.has(schema.name)) {
       return customLocalize(`editor.card.generic.${schema.name}`);
     }
+
     if (schema.label && TRASH_LABELS.has(schema.label)) {
       return customLocalize(`editor.card.trash.pattern.fields.${schema.label}`);
     }
@@ -142,17 +146,6 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     this.subElementEditorConfig = ev.detail.subElementConfig;
   }
 
-  private renderFormAppearance () {
-    return html`
-      <ha-form
-        .hass=${this.hass}
-        .data=${this.config}
-        .schema=${SCHEMA_APPEARANCE}
-        .computeLabel=${this.computeLabel}
-        @value-changed=${this.valueChanged}
-      ></ha-form>`;
-  }
-
   private renderFormPatternsEditor () {
     if (!this.hass) {
       return nothing;
@@ -162,7 +155,7 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
     if (this.subElementEditorConfig) {
       return html`
-        <div class="header">
+        <div class="header" id="trashcard-pattern-editor">
           <div class="back-title">
               <ha-icon-button
                   .label=${this.hass.localize('ui.common.back')}
@@ -193,28 +186,17 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
       ></trash-card-pattern-editor>`;
   }
 
-  private renderFormSettings () {
-    return html`
-    <ha-form
-      .hass=${this.hass}
-      .data=${this.config}
-      .schema=${SCHEMA_SETTINGS}
-      .computeLabel=${this.computeLabel}
-      @value-changed=${this.valueChanged}
-    ></ha-form>`;
-  }
-
   private goBack (): void {
     this.subElementEditorConfig = undefined;
   }
 
   private handleSubElementChanged (ev: CustomEvent): void {
     ev.stopPropagation();
-    if (!this.config || !this.hass) {
+    if (!this.config || !this.hass || !this.subElementEditorConfig) {
       return;
     }
 
-    const item = this.subElementEditorConfig!.key!;
+    const item = this.subElementEditorConfig.key!;
 
     const { value } = ev.detail;
 
@@ -227,11 +209,10 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     };
 
     this.subElementEditorConfig = {
-      ...this.subElementEditorConfig!,
+      ...this.subElementEditorConfig,
       elementConfig: value
     };
 
-    // @ts-expect-error 2345
     fireEvent(this, 'config-changed', { config: this.config });
   }
 
@@ -239,38 +220,36 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     if (!this.hass || !this.config) {
       return nothing;
     }
-
     const customLocalize = setupCustomlocalize(this.hass);
+
+    const schema = this.schema(customLocalize);
 
     return html`
       <ha-form
         .hass=${this.hass}
         .data=${this.config}
-        .schema=${SCHEMA_ENTITY}
+        .schema=${schema}
         .computeLabel=${this.computeLabel}
         @value-changed=${this.valueChanged}
       ></ha-form>
-      <mwc-tab-bar
-        style="padding-top:15px;"
-        @MDCTabBar:activated=${(ev: MwcTabBarEvent) => (this.selectedTabIndex = ev.detail.index)}
-        activeIndex="0"
-      >
-        <mwc-tab label=${customLocalize('editor.form.tabs.settings')} ></mwc-tab>
-        <mwc-tab label=${customLocalize('editor.form.tabs.appearance')} ></mwc-tab>
-        <mwc-tab label=${customLocalize('editor.form.tabs.patterns')} ></mwc-tab>
-      </mwc-tab-bar>
-      <section>
-        <article style="padding-top:10px">
-          ${this.selectedTabIndex === 0 ? this.renderFormSettings() : nothing}
-          ${this.selectedTabIndex === 1 ? this.renderFormAppearance() : nothing}
-          ${this.selectedTabIndex === 2 ? this.renderFormPatternsEditor() : nothing}
-        </article>
-      </section/>
+      <ha-expansion-panel 
+        id="pattern-expansion-panel" 
+        outlined
+        >
+        <div slot="header" role="heading" aria-level="3" >
+          <ha-icon icon="mdi:image-filter-center-focus">
+          </ha-icon>
+          ${customLocalize('editor.form.tabs.patterns')}
+        </div>
+        <div class="content">
+          ${this.renderFormPatternsEditor()}
+        </div>
+      </ha-form-expandable>
+
     `;
   }
 
   protected valueChanged (ev: CustomEvent): void {
-    // @ts-expect-error 2345
     fireEvent(this, 'config-changed', { config: ev.detail.value });
   }
 
@@ -288,20 +267,44 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
             ${themeColorCss}
             ${themeVariables}
         }
-        header {
+
+        #trashcard-pattern-editor header {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
-        .back-title {
+        #trashcard-pattern-editor .back-title {
             display: flex;
             align-items: center;
             font-size: 18px;
         }
-        ha-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        #trashcard-pattern-editor ha-icon {
+             display: flex;
+             align-items: center;
+             justify-content: center;
+         }
+
+        #pattern-expansion-panel {
+          margin-top: 24px;
+          display: flex !important;
+          flex-direction: column;
+        }
+        #pattern-expansion-panel ha-form {
+          display: block;
+        }
+        #pattern-expansion-panel .content {
+          padding: 12px;
+        }
+        #pattern-expansion-panel {
+          display: block;
+          --expansion-panel-content-padding: 0;
+          border-radius: 6px;
+          --ha-card-border-radius: 6px;
+        }
+        #ha-expansion-panel ha-svg-icon,
+        #ha-expansion-panel ha-icon {
+          color: var(--secondary-text-color);
         }
       `
     ];

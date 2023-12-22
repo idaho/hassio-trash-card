@@ -1,4 +1,4 @@
-import type { HomeAssistant } from 'lovelace-mushroom/src/ha';
+import type { HomeAssistant } from '../ha';
 import setupCustomlocalize from '../../localize';
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
