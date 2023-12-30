@@ -17,7 +17,7 @@ describe('findActiveEvent', (): void => {
   test('the whole day event today cause its before 10 o`clock', async () => {
     const events = normaliseEvents(calendarEvents as RawCalendarEvent[]);
 
-    const now = new Date(`2023-12-10T09:59:59${offset}`);
+    const now = new Date(`2023-12-10T09:59:59`);
     const dropAfter = isTodayAfter(now, '10:00:00');
 
     const result = findActiveEvent(events, {
