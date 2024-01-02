@@ -1,13 +1,21 @@
-import { getDayFromDate } from './getDayFromDate';
-import { getTimeZoneOffset } from './getTimeZoneOffset';
-
 const isTodayAfter = (now: Date, dropAfter: string): boolean => {
   const [ hours, minutes, seconds ] = dropAfter.split(':');
 
-  const dropAfterDateString = `${getDayFromDate(now)}T${hours}:${minutes}:${seconds}.000${getTimeZoneOffset()}`;
-  const dropAfterDate = new Date(dropAfterDateString);
+  if (now.getHours() < Number(hours)) {
+    return false;
+  }
+  if (now.getHours() > Number(hours)) {
+    return true;
+  }
 
-  return now > dropAfterDate;
+  if (now.getMinutes() > Number(minutes)) {
+    return true;
+  }
+  if (now.getSeconds() >= Number(seconds)) {
+    return true;
+  }
+
+  return false;
 };
 
 export {
