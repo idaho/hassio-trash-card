@@ -38,33 +38,23 @@
                 "day_style": "Show event time as"
             },
             "trash": {
-                "organic": {
-                    "label": "Organic label",
-                    "color": "Organic color",
-                    "icon": "Organic icon",
-                    "pattern": "Organic detection pattern"
-                },
-                "paper": {
-                    "label": "Paper label",
-                    "color": "Paper color",
-                    "icon": "Paper icon",
-                    "pattern": "Paper detection pattern"
-                },
-                "recycle": {
-                    "label": "Recycle label",
-                    "color": "Recycle color",
-                    "icon": "Recycle icon",
-                    "pattern": "Recycle detection pattern"
-                },
-                "waste": {
-                    "label": "Waste label",
-                    "color": "Waste color",
-                    "icon": "Waste icon",
-                    "pattern": "Waste detection pattern"
-                },
-                "others": {
-                    "color": "Others color",
-                    "icon": "Others icon"
+                "pattern": {
+                    "title": "Edit pattern",
+                    "edit": "edit",
+                    "delete": "delete",
+                    "type": {
+                        "organic": "Organic",
+                        "paper": "Paper",
+                        "recycle": "Recycle",
+                        "waste": "Waste",
+                        "others": "Others"
+                    },
+                    "fields": {
+                        "label": "Label",
+                        "color": "Color",
+                        "icon": "Icon",
+                        "pattern": "Detection patter"
+                    }
                 }
             }
         }

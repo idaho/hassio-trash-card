@@ -55,34 +55,6 @@
                         "icon": "Symbol",
                         "pattern": "erkennen an Muster"
                     }
-                },
-                "organic": {
-                    "label": "Bio Bezeichnung",
-                    "color": "Bio Farbe",
-                    "icon": "Bio Symbol",
-                    "pattern": "Bio erkennen an pattern"
-                },
-                "paper": {
-                    "label": "Papier Bezeichnung",
-                    "color": "Papier Farbe",
-                    "icon": "Papier Symbol",
-                    "pattern": "Papier erkennen an pattern"
-                },
-                "recycle": {
-                    "label": "Verpackung Bezeichnung",
-                    "color": "Verpackung Farbe",
-                    "icon": "Verpackung Symbol",
-                    "pattern": "Verpackung erkennen an pattern"
-                },
-                "waste": {
-                    "label": "Restmüll Bezeichnung",
-                    "color": "Restmüll Farbe",
-                    "icon": "Restmüll Symbol",
-                    "pattern": "Restmüll erkennen an pattern"
-                },
-                "others": {
-                    "color": "Andere Farbe",
-                    "icon": "Andere Symbol"
                 }
             }
         }

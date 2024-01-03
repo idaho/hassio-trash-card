@@ -21,7 +21,7 @@
             },
             "tabs": {
                 "settings": "Nastavenia",
-                "vzhľad": "Vzhľad",
+                "appearance": "Vzhľad",
                 "patterns": "Pattern"
             }
         },
@@ -38,33 +38,23 @@
                 "day_style": "Zobraziť čas udalosti ako"
             },
             "trash": {
-                "organic": {
-                    "label": "Organický štítok",
-                    "color": "Organická farba",
-                    "icon": "Organická ikona",
-                    "pattern": "Vzorec organickej detekcie"
-                },
-                "paper": {
-                    "label": "Papierový štítok",
-                    "color": "Farba papiera",
-                    "icon": "Ikona papiera",
-                    "pattern": "Vzor detekcie papiera"
-                },
-                "recycle": {
-                    "label": "Recyklačný štítok",
-                    "color": "Recyklovaný farba",
-                    "icon": "Recycklované ikona",
-                    "pattern": "Vzor detekcie recyklácie"
-                },
-                "waste": {
-                    "label": "Štítok odpadu",
-                    "color": "Farba odpadu",
-                    "icon": "Opdad ikona",
-                    "pattern": "Vzor detekcie odpadu"
-                },
-                "others": {
-                    "color": "Iné farby",
-                    "icon": "Iné ikony"
+                "pattern": {
+                    "title": "Upraviť vzor",
+                    "edit": "upraviť",
+                    "delete": "delete",
+                    "type": {
+                        "organic": "Organický",
+                        "paper": "Papiera",
+                        "recycle": "Recyklačný",
+                        "waste": "Odpadu",
+                        "others": "Iné"
+                    },
+                    "fields": {
+                        "label": "štítok",
+                        "color": "Farba",
+                        "icon": "Ikona",
+                        "pattern": "Vzor detekcie"
+                    }
                 }
             }
         }

@@ -18,6 +18,11 @@
           "vertical": "Layout verticale",
           "horizontal": "Layout orizzontala"
         }
+      },
+      "tabs": {
+        "settings": "Impostazioni",
+        "appearance": "Aspetto",
+        "patterns": "Modelli"
       }
     },
     "card": {
@@ -33,33 +38,23 @@
         "day_style": "Mostra la data degli eventi come"
       },
       "trash": {
-        "organic": {
-          "label": "Etichetta Organico",
-          "color": "Colore Organico",
-          "icon": "Icona Organico",
-          "pattern": "Pattern identificazione Organico"
-        },
-        "paper": {
-          "label": "Etichetta Carta",
-          "color": "Colore Carta",
-          "icon": "Icona Carta",
-          "pattern": "Pattern identificazione Carta"
-        },
-        "recycle": {
-          "label": "Etichetta Plastica",
-          "color": "Colore Plastica",
-          "icon": "Icona Plastica",
-          "pattern": "Pattern identificazione Plastica"
-        },
-        "waste": {
-          "label": "Etichetta Indifferenziato",
-          "color": "Colore Indifferenziato",
-          "icon": "Icona Indifferenziato",
-          "pattern": "Pattern identificazione Indifferenziato"
-        },
-        "others": {
-          "color": "Colore Altro",
-          "icon": "Icona Altro"
+        "pattern": {
+          "title": "Modifica del modello",
+          "edit": "modificare",
+          "delete": "cancellare",
+          "type": {
+            "organic": "Organico",
+            "paper": "Carta",
+            "recycle": "Plastica",
+            "waste": "Indifferenziato",
+            "others": "Altro"
+          },
+          "fields": {
+            "label": "Etichetta",
+            "color": "Colore",
+            "icon": "Icona",
+            "pattern": "Pattern identificazione"
+          }
         }
       }
     }
