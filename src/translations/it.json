@@ -1,0 +1,82 @@
+{
+  "editor": {
+    "form": {
+      "color_picker": {
+        "values": {
+          "default": "Colore di default"
+        }
+      },
+      "day_style": {
+        "values": {
+          "default": "Data",
+          "counter": "giorni a"
+        }
+      },
+      "layout_picker": {
+        "values": {
+          "default": "Layout di default",
+          "vertical": "Layout verticale",
+          "horizontal": "Layout orizzontala"
+        }
+      }
+    },
+    "card": {
+      "generic": {
+        "icon_color": "Colore icona",
+        "layout": "Layout",
+        "fill_container": "Riempi il container",
+        "next_days": "Giorni nel futuro",
+        "filter_events": "Filtra eventi con i pattern",
+        "drop_todayevents_from": "Da quale orario nascondere gli eventi di Tutto il giorno",
+        "full_size": "Card senza margini",
+        "use_summary": "Usa l'oggetto dell'evento al posto dell'etichetta",
+        "day_style": "Mostra la data degli eventi come"
+      },
+      "trash": {
+        "organic": {
+          "label": "Etichetta Organico",
+          "color": "Colore Organico",
+          "icon": "Icona Organico",
+          "pattern": "Pattern identificazione Organico"
+        },
+        "paper": {
+          "label": "Etichetta Carta",
+          "color": "Colore Carta",
+          "icon": "Icona Carta",
+          "pattern": "Pattern identificazione Carta"
+        },
+        "recycle": {
+          "label": "Etichetta Plastica",
+          "color": "Colore Plastica",
+          "icon": "Icona Plastica",
+          "pattern": "Pattern identificazione Plastica"
+        },
+        "waste": {
+          "label": "Etichetta Indifferenziato",
+          "color": "Colore Indifferenziato",
+          "icon": "Icona Indifferenziato",
+          "pattern": "Pattern identificazione Indifferenziato"
+        },
+        "others": {
+          "color": "Colore Altro",
+          "icon": "Icona Altro"
+        }
+      }
+    }
+  },
+  "card": {
+    "not_found": "Entità non trovata",
+    "trash": {
+      "today": "Oggi",
+      "tomorrow": "Domani",
+      "day": "<DAY>",
+      "today_from_till": "Oggi\nda <START> a <END>",
+      "tomorrow_from_till": "Domani\ntra <START> e <END>",
+      "day_from_till": "<DAY>\ntra <START> e <END>",
+      "daysleft": "entro <DAYS> giorni",
+      "daysleft_more": "entro <DAYS> giorni",
+      "daysleft_from_till": "entro <DAYS> giorni\ntra <START> e <END>",
+      "daysleft_more_from_till": "entro <DAYS> giorni\ntra <START> e <END>"
+    }
+  }
+}
