@@ -78,9 +78,9 @@
             "today_from_till": "Aujourd'hui\nentre <START> et <END>",
             "tomorrow_from_till": "Demain\nentre <START> et <END>",
             "day_from_till": "<DAY>\nentre <START> et <END>",
-            "daysleft": "En <DAYS> jour",
+            "daysleft": "Dans <DAYS> jour",
             "daysleft_more": "Dans <DAYS> jours",
-            "daysleft_from_till": "En <DAYS> jour\nentre <START> et <END>",
+            "daysleft_from_till": "Dans <DAYS> jour\nentre <START> et <END>",
             "daysleft_more_from_till": "Dans <DAYS> jours\nentre <START> et <END>"
         }
     }
