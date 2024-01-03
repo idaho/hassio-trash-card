@@ -11,7 +11,7 @@ const languages: Record<string, unknown> = {
   en,
   fr,
   it,
-  sk,
+  sk
 };
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
