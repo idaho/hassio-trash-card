@@ -4,20 +4,21 @@ import { cardStyle } from 'lovelace-mushroom/src/utils/card-styles';
 import { classMap } from 'lit/directives/class-map.js';
 import { computeAppearance } from 'lovelace-mushroom/src/utils/appearance';
 import { computeInfoDisplay } from 'lovelace-mushroom/src/utils/info';
-import { eventToItem } from '../../utils/eventToItem';
-import { findActiveEvent } from '../../utils/findActiveEvent';
+import { eventsToItems } from '../../utils/eventsToItems';
+import { filterDuplicatedItems } from '../../utils/filterDuplicatedItems';
+import { findActiveEvents } from '../../utils/findActiveEvents';
 import { getDayFromDate } from '../../utils/getDayFromDate';
 import type { HassEntity } from 'home-assistant-js-websocket';
 import type { HomeAssistant } from '../../utils/ha';
 import { isTodayAfter } from '../../utils/isTodayAfter';
 import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import { normaliseEvents } from '../../utils/normaliseEvents';
-import type { RawCalendarEvent } from '../../utils/calendarEvents';
 import { registerCustomCard } from '../../utils/registerCustomCard';
 import setupCustomlocalize from '../../localize';
 import { styleMap } from 'lit/directives/style-map.js';
 import type { TrashCardConfig } from './trash-card-config';
 import { actionHandler, computeRTL, computeStateDisplay, hasAction, type LovelaceCard, type LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
+import type { CalendarEvent, RawCalendarEvent } from '../../utils/calendarEvents';
 import type { CalendarItem, ValidCalendarItem } from '../../utils/calendarItem';
 import { computeRgbColor, defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues, type TemplateResult } from 'lit';
@@ -52,7 +53,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
   @state() private config?: TrashCardConfig;
 
-  @property() private currentItem?: CalendarItem;
+  @property() private currentItems?: CalendarItem[];
 
   @property() private startDate: Date = new Date();
 
@@ -109,30 +110,35 @@ export class TrashCard extends LitElement implements LovelaceCard {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.hass.
       callApi<RawCalendarEvent[]>('GET', uri).
-      then((response): CalendarItem =>
-        eventToItem(
-          findActiveEvent(
-            normaliseEvents(response), { config: {
-              settings: this.config!.settings!,
-              // eslint-disable-next-line @typescript-eslint/naming-convention
-              filter_events: this.config!.filter_events
-            },
-            dropAfter,
-            now: new Date() }
-          ),
-          { settings: this.config!.settings!, useSummary: Boolean(this.config!.use_summary) }
-        )).
-      then((data: CalendarItem) => {
-        this.currentItem = data;
+      then((response): CalendarEvent[] => normaliseEvents(response)).
+      then((data: CalendarEvent[]): CalendarEvent[] =>
+        findActiveEvents(data, {
+          config: {
+            settings: this.config!.settings!,
+            // eslint-disable-next-line @typescript-eslint/naming-convention
+            filter_events: this.config!.filter_events
+          },
+          dropAfter,
+          now: new Date()
+        })).
+      then((data: CalendarEvent[]): CalendarItem[] =>
+        eventsToItems(data, {
+          settings: this.config!.settings!,
+          useSummary: Boolean(this.config!.use_summary)
+        })).
+      then((data: CalendarItem[]): CalendarItem[] =>
+        filterDuplicatedItems(data)).
+      then((data: CalendarItem[]) => {
+        this.currentItems = data;
         this.lastChanged = new Date();
       });
   }
 
   protected shouldUpdate (changedProps: PropertyValues): boolean {
-    if (changedProps.has('currentItem')) {
+    if (changedProps.has('currentItems')) {
       return true;
     }
-    changedProps.delete('currentItem');
+    changedProps.delete('currentItems');
     if (
       !this.lastChanged ||
             changedProps.has('config') ||
@@ -220,11 +226,37 @@ export class TrashCard extends LitElement implements LovelaceCard {
       return nothing;
     }
 
-    const item = this.currentItem;
+    const items = this.currentItems;
 
-    if (!this.isValidItem(item)) {
+    if (!items || items.length === 0) {
       return html``;
     }
+    const itemsPerRow = this.config.items_per_row ?? 1;
+
+    const cssStyleMap = styleMap({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'grid-template-columns': `repeat(${itemsPerRow}, calc(calc(100% - ${(itemsPerRow - 1) * 5}px) / ${itemsPerRow}))`
+    });
+
+    return html`
+            <div style=${cssStyleMap}>
+            ${items.map(item => this.renderItem(item))}
+            </div>
+        `;
+  }
+
+  protected renderItem (item: CalendarItem) {
+    if (!this.config || !this.hass || !this.config.entity) {
+      return nothing;
+    }
+
+    const entityId = this.config.entity;
+    const stateObj = this.hass.states[entityId] as HassEntity | undefined;
+
+    if (!stateObj || !this.isValidItem(item)) {
+      return nothing;
+    }
+
     const appearance = computeAppearance(this.config);
 
     const rtl = computeRTL(this.hass);
@@ -242,30 +274,31 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
     const secondary = this.getDateString(item);
 
-    /* eslint-disable @typescript-eslint/naming-convention */
+    const cssClassMap = classMap({
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'fill-container': appearance.fill_container,
+      fullsize: this.config.full_size === true
+    });
+
     return html`
-            <ha-card
-                class=${classMap({ 'fill-container': appearance.fill_container, fullsize: this.config.full_size === true })}
-                style=${styleMap(backgroundStyle)}
+      <ha-card class=${cssClassMap} style=${styleMap(backgroundStyle)}>
+        <mushroom-card .appearance=${appearance} ?rtl=${rtl}>
+            <mushroom-state-item
+                ?rtl=${rtl}
+                .appearance=${appearance}
+                .actionHandler=${actionHandler({ hasHold: hasAction(this.config.hold_action), hasDoubleClick: hasAction(this.config.double_tap_action) })}
             >
-                <mushroom-card .appearance=${appearance} ?rtl=${rtl}>
-                    <mushroom-state-item
-                        ?rtl=${rtl}
-                        .appearance=${appearance}
-                        .actionHandler=${actionHandler({ hasHold: hasAction(this.config.hold_action), hasDoubleClick: hasAction(this.config.double_tap_action) })}
-                    >
-                        ${this.renderIcon(stateObj, item)}
-                        <mushroom-state-info
-                            slot="info"
-                            .primary=${label}
-                            .secondary=${secondary}
-                            .multiline_secondary=${true}
-                        ></mushroom-state-info>
-                    </mushroom-state-item>
-                </mushroom-card>
-            </ha-card>
-        `;
-    /* eslint-enable @typescript-eslint/naming-convention */
+                ${this.renderIcon(stateObj, item)}
+                <mushroom-state-info
+                    slot="info"
+                    .primary=${label}
+                    .secondary=${secondary}
+                    .multiline_secondary=${true}
+                ></mushroom-state-info>
+            </mushroom-state-item>
+          </mushroom-card>
+        </ha-card>
+    `;
   }
 
   protected renderIcon (stateObj: HassEntity, item?: CalendarItem): TemplateResult {
@@ -353,6 +386,10 @@ export class TrashCard extends LitElement implements LovelaceCard {
         `,
       cardStyle,
       css`
+          div {
+            display: grid;
+            grid-gap:5px;
+          }
           ha-card.fullsize {
               margin-left: -17px;
               margin-right: -17px;

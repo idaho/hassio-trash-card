@@ -25,6 +25,8 @@ EntityWithOutIcon & {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   next_days?: number;
   // eslint-disable-next-line @typescript-eslint/naming-convention
+  items_per_row?: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   filter_events?: boolean;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   full_size?: boolean;
@@ -54,6 +56,8 @@ const entityCardConfigStruct = assign(
     use_summary: optional(boolean()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
     next_days: optional(integer()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    items_per_row: optional(integer()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
     drop_todayevents_from: optional(string()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
