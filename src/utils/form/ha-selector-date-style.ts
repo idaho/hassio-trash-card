@@ -1,5 +1,6 @@
+import { fireEvent } from 'lovelace-mushroom/src/ha';
+import { type HomeAssistant } from '../ha';
 import { customElement, property } from 'lit/decorators.js';
-import { fireEvent, type HomeAssistant } from 'lovelace-mushroom/src/ha';
 import { html, LitElement } from 'lit';
 import './date-style';
 

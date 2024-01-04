@@ -37,7 +37,8 @@ const plugins = [
     files: IGNORED_FILES.map(file => require.resolve(file))
   }),
   typescript({
-    declaration: false
+    declaration: false,
+    exclude: [ '**/*.test.ts' ]
   }),
   nodeResolve(),
   json(),

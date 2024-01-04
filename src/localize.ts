@@ -1,4 +1,4 @@
-import type { HomeAssistant } from 'lovelace-mushroom/src/ha';
+import type { HomeAssistant } from './utils/ha';
 
 import * as de from './translations/de.json';
 import * as en from './translations/en.json';

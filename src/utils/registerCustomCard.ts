@@ -13,8 +13,6 @@ const registerCustomCard = (params: RegisterCardParams) => {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   windowWithCards.customCards = windowWithCards.customCards || [];
 
-  // Const cardPage = params.type.replace('-card', '').replace('mushroom-', '');
-
   windowWithCards.customCards.push({
     ...params,
     preview: true,

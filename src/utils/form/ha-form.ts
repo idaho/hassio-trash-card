@@ -3,7 +3,15 @@ import type { Selector as MushroomSelectors } from 'lovelace-mushroom/src/utils/
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import { TrashCardDateStyleSelector } from './ha-selector-date-style';
 
-type Selector = MushroomSelectors | TrashCardDateStyleSelector;
+export interface ColorUiSelector {
+  // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/ban-types
+  ui_color: {};
+}
+
+type Selector =
+MushroomSelectors |
+ColorUiSelector |
+TrashCardDateStyleSelector;
 
 interface HaDurationData {
   hours?: number;
@@ -23,6 +31,7 @@ export type HaFormSchema =
     | HaFormTimeSchema
     | HaFormSelector
     | HaFormGridSchema
+    | HaFormExpandableSchema
     | HaFormPatternSchema;
 
 export interface HaFormBaseSchema {
@@ -47,6 +56,13 @@ export interface HaFormGridSchema extends HaFormBaseSchema {
   name: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   column_min_width?: string;
+  schema: HaFormSchema[];
+}
+
+export interface HaFormExpandableSchema extends HaFormBaseSchema {
+  type: 'expandable';
+  title: string;
+  icon?: string;
   schema: HaFormSchema[];
 }
 

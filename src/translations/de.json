@@ -18,6 +18,11 @@
                     "vertical": "Vertikales Layout",
                     "horizontal": "Horizontales Layout"
                 }
+            },
+            "tabs": {
+                "settings": "Einstellungen",
+                "appearance": "Darstellung",
+                "patterns": "Muster"
             }
         },
         "card": {
@@ -33,33 +38,23 @@
                 "day_style": "Ereigniss Zeitpunkt anzeigen als"
             },
             "trash": {
-                "organic": {
-                    "label": "Bio Bezeichnung",
-                    "color": "Bio Farbe",
-                    "icon": "Bio Symbol",
-                    "pattern": "Bio erkennen an pattern"
-                },
-                "paper": {
-                    "label": "Papier Bezeichnung",
-                    "color": "Papier Farbe",
-                    "icon": "Papier Symbol",
-                    "pattern": "Papier erkennen an pattern"
-                },
-                "recycle": {
-                    "label": "Verpackung Bezeichnung",
-                    "color": "Verpackung Farbe",
-                    "icon": "Verpackung Symbol",
-                    "pattern": "Verpackung erkennen an pattern"
-                },
-                "waste": {
-                    "label": "Restmüll Bezeichnung",
-                    "color": "Restmüll Farbe",
-                    "icon": "Restmüll Symbol",
-                    "pattern": "Restmüll erkennen an pattern"
-                },
-                "others": {
-                    "color": "Andere Farbe",
-                    "icon": "Andere Symbol"
+                "pattern": {
+                    "title": "Muster bearbeiten",
+                    "edit": "bearbeiten",
+                    "delete": "löschen",
+                    "type": {
+                        "organic": "Bio",
+                        "paper": "Papier",
+                        "recycle": "Verpackung",
+                        "waste": "Restmüll",
+                        "others": "Sonstiges"
+                    },
+                    "fields": {
+                        "label": "Bezeichnung",
+                        "color": "Farbe",
+                        "icon": "Symbol",
+                        "pattern": "erkennen an Muster"
+                    }
                 }
             }
         }
