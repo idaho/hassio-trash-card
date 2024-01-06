@@ -36,8 +36,6 @@ declare global {
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const TRASH_LABELS = new Set([
   'label',
-  'icon',
-  'color',
   'pattern'
 ]);
 
@@ -137,6 +135,16 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
     if (schema.label && TRASH_LABELS.has(schema.label)) {
       return customLocalize(`editor.card.trash.pattern.fields.${schema.label}`);
+    }
+
+    if (schema.name === 'items_per_row') {
+      return this.hass.localize('ui.panel.lovelace.editor.card.grid.columns');
+    }
+    if (schema.name === 'icon') {
+      return this.hass.localize('ui.panel.lovelace.editor.card.generic.icon');
+    }
+    if (schema.name === 'color') {
+      return this.hass.localize('ui.panel.lovelace.editor.card.tile.color');
     }
 
     return this.hass.localize(`ui.panel.lovelace.editor.card.generic.${schema.name}`);

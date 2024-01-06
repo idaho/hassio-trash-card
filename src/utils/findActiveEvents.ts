@@ -29,7 +29,7 @@ const isNotPastWholeDayEvent = (item: CalendarEvent, now: Date, dropAfter: boole
   (item.isWholeDayEvent && getDayFromDate(item.date.start) === getDayFromDate(now) && !dropAfter) ||
     (item.isWholeDayEvent && getDayFromDate(item.date.start) !== getDayFromDate(now));
 
-const findActiveEvent = (items: CalendarEvent[], { config, now, dropAfter }: Options): CalendarEvent | undefined => {
+const findActiveEvents = (items: CalendarEvent[], { config, now, dropAfter }: Options): CalendarEvent[] => {
   const activeItems = items.
     filter((item): boolean => {
       if (item.isWholeDayEvent) {
@@ -45,12 +45,12 @@ const findActiveEvent = (items: CalendarEvent[], { config, now, dropAfter }: Opt
     sort((first, second): number => first.date.start.getTime() - second.date.start.getTime());
 
   return activeItems.
-    find((item): boolean =>
+    filter((item): boolean =>
       isMatchingAnyPatterns(item, config) &&
     (isNotPastWholeDayEvent(item, now, dropAfter) ||
       !item.isWholeDayEvent));
 };
 
 export {
-  findActiveEvent
+  findActiveEvents
 };

@@ -54,6 +54,9 @@ const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }:
   return getData(event, 'others', settings, useSummary);
 };
 
+const eventsToItems = (events: CalendarEvent[], options: Options): CalendarItem[] =>
+  events.map(event => eventToItem(event, options));
+
 export {
-  eventToItem
+  eventsToItems
 };
