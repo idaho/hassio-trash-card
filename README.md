@@ -26,7 +26,7 @@ Currently only full day appointments are supported
 
 ### Pre-Requirements
 
-TrashCard requires [Mushroom][mushroom-url] for Home Assistant to be installed. Please follow the installation instructions of Mushroom. Once you have installed Mushroom you can continue install TrashCard using HACS (prefered) or manually.
+TrashCard requires [Mushroom][mushroom-url] for Home Assistant to be installed. Please follow the installation instructions of Mushroom. Once you have installed Mushroom you can continue install TrashCard using HACS (preferred) or manually.
 
 ### HACS
 
@@ -40,17 +40,18 @@ TrashCard is available in [HACS][hacs] (Home Assistant Community Store).
 
 ### Manual
 
-1. Download `trashcrard.js` file from the [latest release][release-url].
+1. Download `trashcard.js` file from the [latest release][release-url].
 2. Put `trashcard.js` file into your `config/www` folder.
 3. Add reference to `trashcard.js` in Dashboard. There's two way to do that:
     - **Using UI:** _Settings_ → _Dashboards_ → _More Options icon_ → _Resources_ → _Add Resource_ → Set _Url_ as `/local/trashcard.js` → Set _Resource type_ as `JavaScript Module`.
       **Note:** If you do not see the Resources menu, you will need to enable _Advanced Mode_ in your _User Profile_
     - **Using YAML:** Add following code to `lovelace` section.
-        ```yaml
-        resources:
-            - url: /local/trashcard.js
-              type: module
-        ```
+
+      ```yaml
+      resources:
+        - url: /local/trashcard.js
+          type: module
+      ```
 
 ## Usage
 
@@ -59,7 +60,7 @@ The TrashCard cards can be configured using Dashboard UI editor.
 1. In Dashboard UI, click 3 dots in top right corner.
 2. Click _Edit Dashboard_.
 3. Click Plus button to add a new card.
-4. Find one of the _Custom: TrashCard_ card in the list.
+4. Find the _Custom: TrashCard_ card in the list.
 
 ## Configuration
 
@@ -76,7 +77,7 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `use_summary`         | boolean                                             | `false`     | Shows  the event summary instead of matched label |
 | `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event |
 | `day_style`            | `default` or `counter` | `default`   | Option of how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining until the event.       |
-| `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display |
+| `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display it.|
 
 
 #### Settings
@@ -138,7 +139,7 @@ settings:
     icon: mdi:trash-can-outline
     color: grey
     pattern: (grau)
-``````
+```
 
 
 ## Thanks
