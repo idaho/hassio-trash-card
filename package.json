@@ -43,7 +43,7 @@
     "lit": "2.8.0",
     "lovelace-mushroom": "git+https://github.com/piitaya/lovelace-mushroom.git#v3.2.2",
     "memoize-one": "6.0.0",
-    "sortablejs": "1.15.1",
+    "sortablejs": "1.15.2",
     "superstruct": "1.0.3"
   },
   "devDependencies": {
