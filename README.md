@@ -22,11 +22,15 @@ For this purpose a calendar entity is used, in which you have entered all appoin
 **Restrictions**
 Currently only full day appointments are supported
 
-## Installation
 
-### Pre-Requirements
+
+## Pre-Requirements
 
 TrashCard requires [Mushroom][mushroom-url] for Home Assistant to be installed. Please follow the installation instructions of Mushroom. Once you have installed Mushroom you can continue install TrashCard using HACS (preferred) or manually.
+
+TrashCard requires a calendar to get its data from. This calendar must be known by Home Assistant as an entity. Check [Home Assistant calednar integrations](https://www.home-assistant.io/integrations/#calendar) for more information on how to add it.
+
+## Installation
 
 ### HACS
 
@@ -55,14 +59,40 @@ TrashCard is available in [HACS][hacs] (Home Assistant Community Store).
 
 ## Usage
 
+### Create events in your calendar
+In order for the Trash card to display informations, they need to be existing in a calendar. Here's some rules to follow when creating the events in your calendar: 
+
+1. It must be entire day events (only form of events supported at the moment)
+2. You must use the same event name for the same method of collection. You'll map them later. Right now, the card support up to 5 different type of collections
+3. You can use repeating events, that's totally fine.
+
+
+
+## Configuration
+
 The TrashCard cards can be configured using Dashboard UI editor.
 
+### Add a new card
 1. In Dashboard UI, click 3 dots in top right corner.
 2. Click _Edit Dashboard_.
 3. Click Plus button to add a new card.
 4. Find the _Custom: TrashCard_ card in the list.
 
-## Configuration
+### Configure the card
+Here's simple steps to follow to configure the trash card with the UI, we'll go throw all the differents configuration field with you: 
+![O](https://github.com/idaho/hassio-trash-card/assets/1178/3610465f-0b9a-4ded-8621-9691c845acd3)
+
+1. First, you need to select your calendar entity in the first field `Entity` (can be different because it's translated in your own language). 
+2. Then, for all the different collection, you'll have to fill those fiels: 
+    a. `Label` is the text you want to be displayed in your card. It can be anything
+    b. `Icon` is the icon you can to be used in your card. You can select through the availabla HA icons, and even start typing to search
+    c. `Color` is the color you want your card to be. ⚠️ it's not gonna be the color of the icon but of the card itself
+    d. `Pattern` is the event title you used when creating events in your calendar. For example, for recycling, mine is "PMC", because that's the event name in my calendar.
+3. `day style` is how to display the information. Full date or "in xx days"
+4. `drop today events from` is at which hour you want to stop displaying today's collection
+5. `next days` is how many days in the future the card will look up. If there is no upcoming event in the next XX days you selected here, **the card will not display at all**. 
+
+![O](https://github.com/idaho/hassio-trash-card/assets/1178/074164cd-9865-4edc-be48-216b7acba3e5)
 
 All the options are available in the lovelace editor but you can use `yaml` if you want.
 
