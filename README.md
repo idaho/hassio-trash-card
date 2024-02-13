@@ -1,7 +1,11 @@
 # 🗑️ TrashCard
 
-[![hacs][hacs-badge]][hacs-url]
-[![release][release-badge]][release-url]
+[![GitHub Release][releases-shield]][releases]
+[![License][license-shield]](LICENSE)
+[![hacs_badge](https://img.shields.io/badge/HACS-DEFAULT-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
+
+![Project Maintenance][maintenance-shield]
+[![GitHub Activity][commits-shield]][commits]
 ![downloads][downloads-badge]
 ![Build][build-badge]
 
@@ -179,11 +183,19 @@ Thanks go to the team at [Mushroom][mushroom-url] for creating many beautiful ca
 
 
 <!-- Badges -->
-[hacs-url]: https://github.com/hacs/integration
-[hacs-badge]: https://img.shields.io/badge/hacs-default-orange.svg?style=flat-square
-[release-badge]: https://img.shields.io/github/v/release/idaho/hassio-trash-card?style=flat-square
-[downloads-badge]: https://img.shields.io/github/downloads/idaho/hassio-trash-card/total?style=flat-square
-[build-badge]: https://img.shields.io/github/actions/workflow/status/idaho/hassio-trash-card/build.yml?label=Build&style=flat-square
+
+
+[commits-shield]: https://img.shields.io/github/commit-activity/y/idaho/hassio-trash-card.svg?style=for-the-badge
+[commits]: https://github.com/idaho/hassio-trash-card/commits/main
+[license-shield]: https://img.shields.io/github/license/idaho/hassio-trash-card.svg?style=for-the-badge
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg?style=for-the-badge
+[releases-shield]: https://img.shields.io/github/release/idaho/hassio-trash-card.svg?style=for-the-badge
+[releases]: https://github.com/idaho/hassio-trash-card/releases
+[downloads-badge]: https://img.shields.io/github/downloads/idaho/hassio-trash-card/total?style=for-the-badge
+[build-badge]: https://img.shields.io/github/actions/workflow/status/idaho/hassio-trash-card/build.yml?label=Build&style=for-the-badge
+
+
+
 
 <!-- References -->
 [mushroom-url]: https://github.com/piitaya/lovelace-mushroom
