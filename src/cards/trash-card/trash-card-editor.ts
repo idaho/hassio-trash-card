@@ -46,7 +46,8 @@ const OTHER_LABELS = new Set([
   'full_size',
   'drop_todayevents_from',
   'use_summary',
-  'day_style'
+  'day_style',
+  'hide_time_range'
 ]);
 
 export const computeDarkMode = (hass?: HomeAssistant): boolean => {

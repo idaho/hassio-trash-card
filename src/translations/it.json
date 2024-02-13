@@ -35,7 +35,8 @@
         "drop_todayevents_from": "Da quale orario nascondere gli eventi di Tutto il giorno",
         "full_size": "Card senza margini",
         "use_summary": "Usa l'oggetto dell'evento al posto dell'etichetta",
-        "day_style": "Mostra la data degli eventi come"
+        "day_style": "Mostra la data degli eventi come",
+        "hide_time_range": "nascondere il tempo"
       },
       "trash": {
         "pattern": {

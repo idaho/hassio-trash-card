@@ -35,7 +35,8 @@
                 "drop_todayevents_from": "From what time to hide all-day event",
                 "full_size": "Card without margin",
                 "use_summary": "Event summary instead of label",
-                "day_style": "Show event time as"
+                "day_style": "Show event time as",
+                "hide_time_range": "Hide time"
             },
             "trash": {
                 "pattern": {
