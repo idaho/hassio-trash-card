@@ -30,7 +30,7 @@ const getData = <T extends TrashTypes> (event: CalendarEvent, key: T, settings: 
 const typeInSettings = <T extends TrashTypes> (key: T, settings: Options['settings']): settings is Required<Options['settings']> =>
   key in settings;
 
-const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }: Options): CalendarItem => {
+const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }: Options): CalendarItem | { type: 'none' } => {
   if (!event || !('summary' in event.content)) {
     return {
       ...event,
@@ -55,7 +55,9 @@ const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }:
 };
 
 const eventsToItems = (events: CalendarEvent[], options: Options): CalendarItem[] =>
-  events.map(event => eventToItem(event, options));
+  events.
+    map(event => eventToItem(event, options)).
+    filter((item): boolean => Boolean(item.type !== 'none')) as CalendarItem[];
 
 export {
   eventsToItems

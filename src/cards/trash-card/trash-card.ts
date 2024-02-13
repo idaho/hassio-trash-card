@@ -1,5 +1,6 @@
 import { animations } from 'lovelace-mushroom/src/utils/entity-styles';
 import type { Appearance } from 'lovelace-mushroom/src/shared/config/appearance-config';
+import type { CalendarItem } from '../../utils/calendarItem';
 import { cardStyle } from 'lovelace-mushroom/src/utils/card-styles';
 import { classMap } from 'lit/directives/class-map.js';
 import { computeAppearance } from 'lovelace-mushroom/src/utils/appearance';
@@ -19,7 +20,6 @@ import { styleMap } from 'lit/directives/style-map.js';
 import type { TrashCardConfig } from './trash-card-config';
 import { actionHandler, computeRTL, computeStateDisplay, hasAction, type LovelaceCard, type LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
 import type { CalendarEvent, RawCalendarEvent } from '../../utils/calendarEvents';
-import type { CalendarItem, ValidCalendarItem } from '../../utils/calendarItem';
 import { computeRgbColor, defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
@@ -152,13 +152,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
     return false;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  protected isValidItem (item?: CalendarItem): item is ValidCalendarItem {
-    return Boolean(item && item.type !== 'none');
-  }
-
   protected getDateString (item: CalendarItem): string {
-    if (!this.isValidItem(item) || !this.hass) {
+    if (!this.hass) {
       return '';
     }
 
@@ -227,16 +222,12 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
     const entityId = this.config.entity;
     const stateObj = this.hass.states[entityId] as HassEntity | undefined;
+    const items = this.currentItems;
 
-    if (!stateObj) {
+    if (!stateObj || !items || items.length === 0) {
       return nothing;
     }
 
-    const items = this.currentItems;
-
-    if (!items || items.length === 0) {
-      return html``;
-    }
     const itemsPerRow = this.config.items_per_row ?? 1;
 
     const cssStyleMap = styleMap({
@@ -246,7 +237,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
     return html`
             <div style=${cssStyleMap}>
-            ${items.map(item => this.renderItem(item))}
+              ${items.map(item => this.renderItem(item))}
             </div>
         `;
   }
@@ -259,7 +250,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const entityId = this.config.entity;
     const stateObj = this.hass.states[entityId] as HassEntity | undefined;
 
-    if (!stateObj || !this.isValidItem(item)) {
+    if (!stateObj) {
       return nothing;
     }
 
@@ -287,7 +278,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
     });
 
     return html`
-      <ha-card class=${cssClassMap} style=${styleMap(backgroundStyle)}>
+<ha-card class=${cssClassMap} style=${styleMap(backgroundStyle)}>
         <mushroom-card .appearance=${appearance} ?rtl=${rtl}>
             <mushroom-state-item
                 ?rtl=${rtl}
@@ -295,22 +286,20 @@ export class TrashCard extends LitElement implements LovelaceCard {
                 .actionHandler=${actionHandler({ hasHold: hasAction(this.config.hold_action), hasDoubleClick: hasAction(this.config.double_tap_action) })}
             >
                 ${this.renderIcon(stateObj, item)}
-                <mushroom-state-info
-                    slot="info"
-                    .primary=${label}
-                    .secondary=${secondary}
-                    .multiline_secondary=${true}
-                ></mushroom-state-info>
-            </mushroom-state-item>
+    <mushroom-state-info
+        slot="info"
+      .primary=${label}
+      .secondary=${secondary}
+      .multiline_secondary=${true}
+      ></mushroom-state-info>
+      </mushroom-state-item>
           </mushroom-card>
         </ha-card>
     `;
   }
 
-  protected renderIcon (stateObj: HassEntity, item?: CalendarItem): TemplateResult {
-    if (!this.isValidItem(item)) {
-      return html``;
-    }
+  // eslint-disable-next-line class-methods-use-this
+  protected renderIcon (stateObj: HassEntity, item: CalendarItem): TemplateResult {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     const icon = item.icon ?? 'mdi:delete-outline';
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -405,10 +394,10 @@ export class TrashCard extends LitElement implements LovelaceCard {
               cursor: pointer;
           }
           mushroom-shape-icon {
-              --icon-color: rgb(var(--rgb-state-entity));
+                        --icon-color: rgb(var(--rgb-state-entity));
               --shape-color: rgba(var(--rgb-state-entity), 0.2);
           }
-      `
+                `
     ];
   }
 }
