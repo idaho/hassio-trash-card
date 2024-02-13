@@ -197,7 +197,13 @@ export class TrashCard extends LitElement implements LovelaceCard {
     if (this.config?.day_style === 'counter') {
       const oneDay = 24 * 60 * 60 * 1_000;
 
-      const daysLeft = Math.round(Math.abs((Date.now() - item.date.start.getTime()) / oneDay));
+      const todayMorning = new Date();
+
+      todayMorning.setHours(0);
+      todayMorning.setMinutes(0);
+      todayMorning.setSeconds(0);
+
+      const daysLeft = Math.round(Math.abs((todayMorning.getTime() - item.date.start.getTime()) / oneDay));
 
       return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
     }
