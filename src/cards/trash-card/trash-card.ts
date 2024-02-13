@@ -152,7 +152,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
     return false;
   }
 
-  protected getDateString (item: CalendarItem): string {
+  protected getDateString (item: CalendarItem, excludeTime?: boolean): string {
     if (!this.hass) {
       return '';
     }
@@ -184,7 +184,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       undefined;
 
     if (stateDay === todayDay || stateDay === tomorrowDay) {
-      const key = `card.trash.${stateDay === todayDay ? 'today' : 'tomorrow'}${startTime ? '_from_till' : ''}`;
+      const key = `card.trash.${stateDay === todayDay ? 'today' : 'tomorrow'}${startTime && !excludeTime ? '_from_till' : ''}`;
 
       return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
     }
@@ -200,7 +200,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
       const daysLeft = Math.round(Math.abs((todayMorning.getTime() - item.date.start.getTime()) / oneDay));
 
-      return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+      return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
     }
 
     const day = item.date.start.toLocaleDateString(this.hass.language, {
@@ -210,7 +210,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       day: 'numeric'
     });
 
-    const key = `card.trash.day${startTime ? '_from_till' : ''}`;
+    const key = `card.trash.day${startTime && !excludeTime ? '_from_till' : ''}`;
 
     return customLocalize(`${key}`).replace('<DAY>', day).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '');
   }
@@ -269,7 +269,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       backgroundStyle['background-color'] = `rgba(${rgbColor}, 0.5)`;
     }
 
-    const secondary = this.getDateString(item);
+    const secondary = this.getDateString(item, this.config.hide_time_range ?? false);
 
     const cssClassMap = classMap({
       // eslint-disable-next-line @typescript-eslint/naming-convention

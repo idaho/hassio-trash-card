@@ -35,7 +35,8 @@
                 "drop_todayevents_from": "Ab wieviel Uhr Ganztages Ereignis ausblenden",
                 "full_size": "Karte ohne Seitenrand",
                 "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden",
-                "day_style": "Ereigniss Zeitpunkt anzeigen als"
+                "day_style": "Ereigniss Zeitpunkt anzeigen als",
+                "hide_time_range": "Uhrzeit ausblenden"
             },
             "trash": {
                 "pattern": {

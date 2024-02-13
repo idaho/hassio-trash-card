@@ -58,6 +58,7 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>) => {
     { name: 'use_summary', selector: { boolean: {}}},
     // eslint-disable-next-line @typescript-eslint/naming-convention
     { name: 'day_style', selector: { trashcard_datestyle: {}}},
+    { name: 'hide_time_range', selector: { boolean: { }}},
     { name: 'items_per_row',
       selector: { number: {
         min: 1,
