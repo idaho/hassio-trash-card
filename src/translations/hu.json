@@ -35,7 +35,8 @@
         "drop_todayevents_from": "Mikortól rejtsük el az egésznapos eseményeket",
         "full_size": "Margó nélküli kártya",
         "use_summary": "Esemény összegzés a cimke helyett",
-        "day_style": "Esemény idejének megjelenítése mint"
+        "day_style": "Esemény idejének megjelenítése mint",
+        "hide_time_range": "Rejtsd el az időt"
       },
       "trash": {
         "pattern": {
