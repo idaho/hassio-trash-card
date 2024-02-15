@@ -1,0 +1,34 @@
+name: 🌍 Translation request / update
+description: Suggest an idea for this project
+title: "[Translation]: <language>"
+labels: ["translations"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type of request
+      description: What is your request about?
+      options:
+        - Add a new language
+        - Updates / fixes to a existing language
+      default: 0
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: For which language you want to make a request
+      placeholder: ex. de, en, hu, it
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Content of the translations
+      description: >
+        Paste your translation content in here, upload a file or link the related pull request to this issue (*optional)
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for contributing 🎉
