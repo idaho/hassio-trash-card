@@ -64,7 +64,7 @@
     "trash": {
       "today": "ma",
       "tomorrow": "holnap",
-      "day": "<NAP>",
+      "day": "<DAY>",
       "today_from_till": "Ma\n<START>-tól <END>-ig",
       "tomorrow_from_till": "Holnap\n<START> és <END> között",
       "day_from_till": "<DAY>\n<START> és <END> között",
