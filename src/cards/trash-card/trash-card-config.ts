@@ -37,6 +37,8 @@ EntityWithOutIcon & {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   hide_time_range?: boolean;
   // eslint-disable-next-line @typescript-eslint/naming-convention
+  event_grouping?: boolean;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   day_style?: typeof DAYSTYLES[number];
 };
 
@@ -63,6 +65,8 @@ const entityCardConfigStruct = assign(
     items_per_row: optional(integer()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
     drop_todayevents_from: optional(string()),
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    event_grouping: optional(boolean()),
     // eslint-disable-next-line @typescript-eslint/naming-convention
     day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),
 

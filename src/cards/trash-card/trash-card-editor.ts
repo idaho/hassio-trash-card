@@ -47,7 +47,8 @@ const OTHER_LABELS = new Set([
   'drop_todayevents_from',
   'use_summary',
   'day_style',
-  'hide_time_range'
+  'hide_time_range',
+  'event_grouping'
 ]);
 
 export const computeDarkMode = (hass?: HomeAssistant): boolean => {
@@ -82,6 +83,8 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     assert(config, entityCardConfigStruct);
 
     this.config = {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      event_grouping: true,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       drop_todayevents_from: '10:00:00',
       // eslint-disable-next-line @typescript-eslint/naming-convention
