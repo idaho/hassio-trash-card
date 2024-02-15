@@ -36,7 +36,8 @@
                 "full_size": "Karte ohne Seitenrand",
                 "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden",
                 "day_style": "Ereigniss Zeitpunkt anzeigen als",
-                "hide_time_range": "Uhrzeit ausblenden"
+                "hide_time_range": "Uhrzeit ausblenden",
+                "event_grouping": "Nur das nächste Ereignis je Muster anzeigen"
             },
             "trash": {
                 "pattern": {

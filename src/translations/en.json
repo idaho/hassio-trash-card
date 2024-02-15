@@ -36,7 +36,8 @@
                 "full_size": "Card without margin",
                 "use_summary": "Event summary instead of label",
                 "day_style": "Show event time as",
-                "hide_time_range": "Hide time"
+                "hide_time_range": "Hide time",
+                "event_grouping": "Only display the next event per pattern"
             },
             "trash": {
                 "pattern": {

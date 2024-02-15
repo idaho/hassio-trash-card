@@ -127,7 +127,9 @@ export class TrashCard extends LitElement implements LovelaceCard {
           useSummary: Boolean(this.config!.use_summary)
         })).
       then((data: CalendarItem[]): CalendarItem[] =>
-        filterDuplicatedItems(data)).
+        !this.config!.event_grouping ?
+          data :
+          filterDuplicatedItems(data)).
       then((data: CalendarItem[]) => {
         this.currentItems = data;
         this.lastChanged = new Date();

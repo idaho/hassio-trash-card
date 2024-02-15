@@ -36,7 +36,8 @@
         "full_size": "Margó nélküli kártya",
         "use_summary": "Esemény összegzés a cimke helyett",
         "day_style": "Esemény idejének megjelenítése mint",
-        "hide_time_range": "Rejtsd el az időt"
+        "hide_time_range": "Rejtsd el az időt",
+        "event_grouping": "Csak a következő eseményt jeleníti meg mintánként"
       },
       "trash": {
         "pattern": {

@@ -36,7 +36,8 @@
                 "full_size": "Karta bez marže",
                 "use_summary": "Zhrnutie udalosti namiesto označenia",
                 "day_style": "Zobraziť čas udalosti ako",
-                "hide_time_range": "čas skrývania"
+                "hide_time_range": "čas skrývania",
+                "event_grouping": "Zobrazenie iba nasledujúcej udalosti na vzor"
             },
             "trash": {
                 "pattern": {
