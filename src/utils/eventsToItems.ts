@@ -30,34 +30,36 @@ const getData = <T extends TrashTypes> (event: CalendarEvent, key: T, settings: 
 const typeInSettings = <T extends TrashTypes> (key: T, settings: Options['settings']): settings is Required<Options['settings']> =>
   key in settings;
 
-const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }: Options): CalendarItem | { type: 'none' } => {
+const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }: Options): CalendarItem[] => {
   if (!event || !('summary' in event.content)) {
-    return {
-      ...event,
-      type: 'none'
-    };
+    return [];
   }
 
   const { content: { summary }} = event;
 
   const checkTypes: TrashTypes[] = [ 'organic', 'paper', 'recycle', 'waste' ];
 
-  const possibleType = checkTypes.
-    find((type: TrashTypes) => typeInSettings(type, settings) && settings[type].pattern && summary.includes(settings[type].pattern!));
+  const possibleTypes = checkTypes.
+    filter((type: TrashTypes) => typeInSettings(type, settings) && settings[type].pattern && summary.includes(settings[type].pattern!));
 
-  if (possibleType && possibleType in settings) {
+  if (possibleTypes.length > 0) {
     // @ts-expect-error TS2345
-    return getData<typeof possibleType>(event, possibleType, settings, useSummary);
+    return possibleTypes.map(item => getData<typeof item>(event, item, settings, useSummary));
   }
 
   // @ts-expect-error TS2345
-  return getData(event, 'others', settings, useSummary);
+  return [ getData(event, 'others', settings, useSummary) ];
 };
 
-const eventsToItems = (events: CalendarEvent[], options: Options): CalendarItem[] =>
-  events.
-    map(event => eventToItem(event, options)).
-    filter((item): boolean => Boolean(item.type !== 'none')) as CalendarItem[];
+const eventsToItems = (events: CalendarEvent[], options: Options): CalendarItem[] => {
+  const items = events.reduce<CalendarItem[]>((prev, event): CalendarItem[] => {
+    const itemsFromEvents = eventToItem(event, options);
+
+    return [ ...prev, ...itemsFromEvents ];
+  }, []);
+
+  return items.filter((item): boolean => Boolean(item.type !== 'none'));
+};
 
 export {
   eventsToItems
