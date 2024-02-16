@@ -1,4 +1,5 @@
 import { getTimeZoneOffset } from './getTimeZoneOffset';
+
 import type { CalendarEvent, RawCalendarEvent } from './calendarEvents';
 
 const normaliseEvents = (events: RawCalendarEvent[]): CalendarEvent[] => {

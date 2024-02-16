@@ -7,8 +7,68 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "settings": {},
+  "plugins": [
+    "import"
+  ],
+  "settings": {
+    "import/extensions": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ],
+    "import/parsers": {
+      "@typescript-eslint/parser": [
+        ".ts",
+        " .tsx "
+      ]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "**/*/tsconfig.json"
+      }
+    }
+  },
   "rules": {
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": [
+          "variableLike",
+          "memberLike"
+        ],
+        "format": [
+          "strictCamelCase",
+          "StrictPascalCase",
+          "snake_case",
+          "UPPER_CASE"
+        ],
+        "filter": {
+          "regex": "^__html$",
+          "match": false
+        }
+      },
+      {
+        "selector": [
+          "typeLike"
+        ],
+        "format": [
+          "StrictPascalCase"
+        ]
+      },
+      {
+        "selector": [
+          "typeParameter"
+        ],
+        "format": [
+          "StrictPascalCase"
+        ],
+        "prefix": [
+          "T"
+        ]
+      }
+    ],
     "@typescript-eslint/explicit-function-return-type": [
       "off"
     ],
@@ -19,6 +79,42 @@
           "camelCase": true,
           "kebabCase": true
         }
+      }
+    ],
+    "import/no-duplicates": [
+      "error",
+      {
+        "prefer-inline": false
+      }
+    ],
+    "no-duplicate-imports": "off",
+    "sort-imports": "off",
+    "import/group-exports": "error",
+    "import/exports-last": "error",
+    "import/consistent-type-specifier-style": [
+      "error",
+      "prefer-top-level"
+    ],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "ignore",
+          "orderImportKind": "desc"
+        },
+        "groups": [
+          [
+            "index",
+            "sibling",
+            "parent",
+            "internal",
+            "external",
+            "builtin",
+            "object"
+          ],
+          "type"
+        ]
       }
     ]
   },

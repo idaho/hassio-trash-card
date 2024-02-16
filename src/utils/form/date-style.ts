@@ -1,7 +1,8 @@
-import type { HomeAssistant } from '../ha';
 import setupCustomlocalize from '../../localize';
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+
+import type { HomeAssistant } from '../ha';
 import 'lovelace-mushroom/src/shared/form/mushroom-select';
 
 @customElement('trash-card-datestyle-selector')

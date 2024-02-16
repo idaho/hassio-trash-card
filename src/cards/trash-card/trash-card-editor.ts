@@ -3,24 +3,27 @@
 /* eslint-disable no-return-assign */
 import { animations } from 'lovelace-mushroom/src/utils/entity-styles';
 import { assert } from 'superstruct';
+import { computeDarkMode } from '../../utils/computeDarkMode';
 import { GENERIC_LABELS } from 'lovelace-mushroom/src/utils/form/generic-fields';
-import type { HaFormSchema } from '../../utils/form/ha-form';
-import { type HomeAssistant } from '../../utils/ha';
 import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import memoizeOne from 'memoize-one';
 import setupCustomlocalize from '../../localize';
-import type { SubElementEditorConfig } from './trash-card-pattern-editor';
 import { TRASH_CARD_EDITOR_NAME } from './const';
-
-import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
-import { entityCardConfigStruct, type TrashCardConfig } from './trash-card-config';
-import { fireEvent, type HASSDomEvent, type LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
-
+import { entityCardConfigStruct } from './trash-card-config';
+import { fireEvent } from 'lovelace-mushroom/src/ha';
 import { getSchema, SCHEMA_PATTERN, SCHEMA_PATTERN_OTHERS } from './formSchemas';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
-// eslint-disable-next-line no-duplicate-imports
+
+import type { HASSDomEvent, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
+import type { TrashCardConfig } from './trash-card-config';
+import type { CSSResultGroup, PropertyValues } from 'lit';
+import type { HomeAssistant } from '../../utils/ha';
+import type { SubElementEditorConfig } from './trash-card-pattern-editor';
+import type { HaFormSchema } from '../../utils/form/ha-form';
+
 import './trash-card-pattern-editor';
 
 declare global {
@@ -33,13 +36,11 @@ declare global {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const TRASH_LABELS = new Set([
   'label',
   'pattern'
 ]);
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const OTHER_LABELS = new Set([
   'next_days',
   'filter_events',
@@ -51,16 +52,8 @@ const OTHER_LABELS = new Set([
   'event_grouping'
 ]);
 
-export const computeDarkMode = (hass?: HomeAssistant): boolean => {
-  if (!hass) {
-    return false;
-  }
-
-  return (hass.themes as any).darkMode as boolean;
-};
-
 @customElement(TRASH_CARD_EDITOR_NAME)
-export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
+class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -322,3 +315,7 @@ export class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     ];
   }
 }
+
+export {
+  TrashCardEditor
+};
