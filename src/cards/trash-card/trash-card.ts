@@ -1,6 +1,4 @@
 import { animations } from 'lovelace-mushroom/src/utils/entity-styles';
-import type { Appearance } from 'lovelace-mushroom/src/shared/config/appearance-config';
-import type { CalendarItem } from '../../utils/calendarItem';
 import { cardStyle } from 'lovelace-mushroom/src/utils/card-styles';
 import { classMap } from 'lit/directives/class-map.js';
 import { computeAppearance } from 'lovelace-mushroom/src/utils/appearance';
@@ -9,22 +7,27 @@ import { eventsToItems } from '../../utils/eventsToItems';
 import { filterDuplicatedItems } from '../../utils/filterDuplicatedItems';
 import { findActiveEvents } from '../../utils/findActiveEvents';
 import { getDayFromDate } from '../../utils/getDayFromDate';
-import type { HassEntity } from 'home-assistant-js-websocket';
-import type { HomeAssistant } from '../../utils/ha';
 import { isTodayAfter } from '../../utils/isTodayAfter';
 import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import { normaliseEvents } from '../../utils/normaliseEvents';
 import { registerCustomCard } from '../../utils/registerCustomCard';
 import setupCustomlocalize from '../../localize';
 import { styleMap } from 'lit/directives/style-map.js';
-import type { TrashCardConfig } from './trash-card-config';
-import { actionHandler, computeRTL, computeStateDisplay, hasAction, type LovelaceCard, type LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
-import type { CalendarEvent, RawCalendarEvent } from '../../utils/calendarEvents';
+import { actionHandler, computeRTL, computeStateDisplay, hasAction } from 'lovelace-mushroom/src/ha';
 import { computeRgbColor, defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
-import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues, type TemplateResult } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
+
+import type { CSSResultGroup, PropertyValues, TemplateResult } from 'lit';
+import type { LovelaceCard, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
+import type { CalendarEvent, RawCalendarEvent } from '../../utils/calendarEvents';
+import type { TrashCardConfig } from './trash-card-config';
+import type { HomeAssistant } from '../../utils/ha';
+import type { HassEntity } from 'home-assistant-js-websocket';
+import type { CalendarItem } from '../../utils/calendarItem';
+import type { Appearance } from 'lovelace-mushroom/src/shared/config/appearance-config';
 
 registerCustomCard({
   type: TRASH_CARD_NAME,
