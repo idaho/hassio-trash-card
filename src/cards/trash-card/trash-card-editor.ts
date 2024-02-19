@@ -14,7 +14,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { entityCardConfigStruct } from './trash-card-config';
 import { fireEvent } from 'lovelace-mushroom/src/ha';
-import { getSchema, SCHEMA_PATTERN, SCHEMA_PATTERN_OTHERS } from './formSchemas';
+import { getPatternOthersSchema, getPatternSchema, getSchema } from './formSchemas';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 
 import type { HASSDomEvent, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
@@ -157,6 +157,10 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     const customLocalize = setupCustomlocalize(this.hass);
 
     if (this.subElementEditorConfig) {
+      const patternSchema = this.subElementEditorConfig.key === 'others' ?
+        getPatternOthersSchema() :
+        getPatternSchema(customLocalize);
+
       return html`
         <div class="header" id="trashcard-pattern-editor">
           <div class="back-title">
@@ -173,7 +177,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
               .hass=${this.hass}
               .computeLabel=${this.computeLabel}
               .data=${this.subElementEditorConfig.elementConfig}
-              .schema=${this.subElementEditorConfig.key === 'others' ? SCHEMA_PATTERN_OTHERS : SCHEMA_PATTERN}
+              .schema=${patternSchema}
               @value-changed=${this.handleSubElementChanged}
           >
           </ha-form>

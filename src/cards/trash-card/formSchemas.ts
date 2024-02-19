@@ -4,21 +4,36 @@ import type { TrashCardConfig } from './trash-card-config';
 import type { HaFormSchema } from '../../utils/form/ha-form';
 import type setupCustomlocalize from '../../localize';
 
-const SCHEMA_PATTERN_OTHERS: HaFormSchema[] = [
+const getPatternOthersSchema = () => [
   {
-    label: 'icon',
     name: 'icon',
-    selector: { icon: {}},
+    selector: {
+      icon: {}
+    },
     context: { icon_entity: 'entity' }
   },
-  { label: 'color', name: 'color', selector: { ui_color: {}}}
-
+  {
+    name: 'color',
+    selector: { ui_color: {}}
+  }
 ];
 
-const SCHEMA_PATTERN: HaFormSchema[] = [
-  { label: 'label', name: 'label', selector: { text: {}}},
-  ...SCHEMA_PATTERN_OTHERS,
-  { label: 'pattern', name: 'pattern', selector: { text: {}}}
+const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>) => [
+  {
+    label: customLocalize(`editor.card.trash.pattern.fields.label`),
+    name: 'label',
+    selector: {
+      text: {}
+    }
+  },
+  ...getPatternOthersSchema(),
+  {
+    label: customLocalize(`editor.card.trash.pattern.fields.pattern`),
+    name: 'pattern',
+    selector: {
+      text: {}
+    }
+  }
 ];
 
 const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, currentValues: TrashCardConfig) => {
@@ -144,6 +159,6 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
 
 export {
   getSchema,
-  SCHEMA_PATTERN,
-  SCHEMA_PATTERN_OTHERS
+  getPatternSchema,
+  getPatternOthersSchema
 };
