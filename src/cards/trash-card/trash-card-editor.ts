@@ -151,6 +151,8 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     if (schema.helper) {
       return schema.helper;
     }
+
+    return '';
   };
 
   private editDetailElement (ev: HASSDomEvent<{ subElementConfig: SubElementEditorConfig }>): void {
