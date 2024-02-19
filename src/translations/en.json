@@ -12,6 +12,12 @@
                     "counter": "days to"
                 }
             },
+            "card_style": {
+                "values": {
+                    "card": "Standard card",
+                    "chip": "Chip card"
+                }
+            },
             "layout_picker": {
                 "values": {
                     "default": "Default layout",
@@ -37,7 +43,8 @@
                 "use_summary": "Event summary instead of label",
                 "day_style": "Show event time as",
                 "hide_time_range": "Hide time",
-                "event_grouping": "Only display the next event per pattern"
+                "event_grouping": "Only display the next event per pattern",
+                "card_style": "Display as"
             },
             "trash": {
                 "pattern": {
