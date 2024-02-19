@@ -24,25 +24,48 @@ const SCHEMA_PATTERN: HaFormSchema[] = [
 const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, currentValues: TrashCardConfig) => {
   const settings: HaFormSchema[] = [
 
-    { name: 'filter_events', selector: { boolean: {}}},
-    { name: 'drop_todayevents_from',
-      default: {
-        hours: 11,
-        minutes: 0,
-        seconds: 0
-      },
-      selector: {
-        time: {
-        }
-      }},
-    { name: 'next_days',
-      selector: { number: {
-        min: 1,
-        max: 365,
-        step: 1,
-        mode: 'box'
-      }}}
+    {
+      type: 'grid',
+      name: '',
+      schema: [
 
+        { name: 'filter_events', selector: { boolean: {}}},
+        { name: 'drop_todayevents_from',
+          default: {
+            hours: 11,
+            minutes: 0,
+            seconds: 0
+          },
+          selector: {
+            time: {
+            }
+          }},
+        {
+          name: 'next_days',
+          selector: {
+            number: {
+              min: 1,
+              max: 365,
+              step: 1,
+              mode: 'box'
+            }
+          }
+        },
+        {
+          name: 'refresh_rate',
+          label: customLocalize(`editor.form.refresh_rate.title`),
+          helper: customLocalize(`editor.form.refresh_rate.helper`),
+          selector: {
+            number: {
+              min: 5,
+              max: 1_440,
+              step: 5,
+              mode: 'box'
+            }
+          }
+        }
+      ]
+    }
   ];
 
   const appearance: HaFormSchema[] = [

@@ -37,6 +37,7 @@ interface HaFormBaseSchema {
   // This value is applied if no data is submitted for this field
   default?: HaFormData;
   required?: boolean;
+  helper?: string;
   description?: {
     suffix?: string;
 
