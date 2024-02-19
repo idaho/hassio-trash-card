@@ -48,6 +48,7 @@ const OTHER_LABELS = new Set([
   'drop_todayevents_from',
   'use_summary',
   'day_style',
+  'card_style',
   'hide_time_range',
   'event_grouping'
 ]);
@@ -227,7 +228,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     }
     const customLocalize = setupCustomlocalize(this.hass);
 
-    const schema = this.schema(customLocalize);
+    const schema = this.schema(customLocalize, this.config);
 
     return html`
       <ha-form
