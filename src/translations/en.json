@@ -7,15 +7,24 @@
                 }
             },
             "day_style": {
+                "title": "Show event time as",
                 "values": {
                     "default": "Date",
                     "counter": "days to"
                 }
             },
             "card_style": {
+                "title": "Display as",
                 "values": {
                     "card": "Standard card",
                     "chip": "Chip card"
+                }
+            },
+            "color_mode": {
+                "title": "Apply color to",
+                "values": {
+                    "background": "Background",
+                    "icon": "Icon"
                 }
             },
             "layout_picker": {
@@ -41,10 +50,8 @@
                 "drop_todayevents_from": "From what time to hide all-day event",
                 "full_size": "Card without margin",
                 "use_summary": "Event summary instead of label",
-                "day_style": "Show event time as",
                 "hide_time_range": "Hide time",
-                "event_grouping": "Only display the next event per pattern",
-                "card_style": "Display as"
+                "event_grouping": "Only display the next event per pattern"
             },
             "trash": {
                 "pattern": {

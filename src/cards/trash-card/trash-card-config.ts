@@ -16,6 +16,11 @@ const CARDSTYLES = [
   'chip'
 ] as const;
 
+const COLORMODES = [
+  'background',
+  'icon'
+] as const;
+
 type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
 
  type TrashCardConfig = LovelaceCardConfig &
@@ -37,6 +42,7 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
    event_grouping?: boolean;
    day_style?: typeof DAYSTYLES[number];
    card_style?: typeof CARDSTYLES[number];
+   color_mode?: typeof COLORMODES[number];
  };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
@@ -57,6 +63,7 @@ const entityCardConfigStruct = assign(
     event_grouping: optional(boolean()),
     day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),
     card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]) ])),
+    color_mode: optional(union([ literal(COLORMODES[0]), literal(COLORMODES[1]) ])),
 
     settings: optional(
       object({
@@ -105,7 +112,9 @@ const entityCardConfigStruct = assign(
 
 export {
   entityCardConfigStruct,
-  DAYSTYLES
+  DAYSTYLES,
+  COLORMODES,
+  CARDSTYLES
 };
 
 export type {

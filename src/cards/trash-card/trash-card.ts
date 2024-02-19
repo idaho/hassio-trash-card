@@ -139,13 +139,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       return true;
     }
     changedProps.delete('currentItems');
-    if (
-      !this.lastChanged ||
-            changedProps.has('config') ||
-
-            // Refresh only every 5s.
-            Date.now() - this.lastChanged.getTime() > 5_000
-    ) {
+    if (!this.lastChanged || changedProps.has('config') || Date.now() - this.lastChanged.getTime() > 5_000) {
       this.fetchCurrentTrashData();
     }
 
@@ -189,6 +183,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
         `,
       cardStyle,
       ...Chip.getStyles(),
+      ...Card.getStyles(),
       css`
           div {
             display: grid;
@@ -202,11 +197,6 @@ export class TrashCard extends LitElement implements LovelaceCard {
           mushroom-state-item {
               cursor: pointer;
           }
-          mushroom-shape-icon {
-              --icon-color: rgb(var(--rgb-state-entity));
-              --shape-color: rgba(var(--rgb-state-entity), 0.2);
-          }
-
         `
     ];
   }

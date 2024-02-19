@@ -1,5 +1,3 @@
-import type { TrashCardCardStyleSelector } from './ha-selector-card-style';
-import type { TrashCardDateStyleSelector } from './ha-selector-date-style';
 import type { LitElement } from 'lit';
 import type { Selector as MushroomSelectors } from 'lovelace-mushroom/src/utils/form/ha-selector';
 
@@ -10,9 +8,7 @@ interface ColorUiSelector {
 
 type Selector =
 MushroomSelectors |
-ColorUiSelector |
-TrashCardCardStyleSelector |
-TrashCardDateStyleSelector;
+ColorUiSelector;
 
 interface HaDurationData {
   hours?: number;

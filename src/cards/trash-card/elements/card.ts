@@ -1,6 +1,6 @@
 import { Base } from './base';
 import { actionHandler, computeRTL, hasAction } from 'lovelace-mushroom/src/ha';
-import { html, nothing } from 'lit';
+import { css, html, nothing } from 'lit';
 import { computeAppearance } from 'lovelace-mushroom/src/utils/appearance';
 import { computeRgbColor } from 'lovelace-mushroom/src/utils/colors';
 import { classMap } from 'lit/directives/class-map.js';
@@ -31,7 +31,7 @@ class Card extends Base {
     });
 
     return html`
-        <div style=${cssStyleMap} class="container">
+        <div style=${cssStyleMap} class="card-container">
           ${items.map(item => this.renderItem(item))}
         </div>
       `;
@@ -58,7 +58,7 @@ class Card extends Base {
 
     const backgroundStyle = {};
 
-    if (color !== 'disabled') {
+    if (this.config.color_mode !== 'icon' && color !== 'disabled') {
       const rgbColor = computeRgbColor(color);
 
       backgroundStyle['background-color'] = `rgba(${rgbColor}, 0.5)`;
@@ -80,7 +80,7 @@ class Card extends Base {
                 .appearance=${appearance}
                 .actionHandler=${actionHandler({ hasHold: hasAction(this.config.hold_action), hasDoubleClick: hasAction(this.config.double_tap_action) })}
             >
-                ${this.renderIcon(stateObj, item)}
+                ${this.renderIcon(item)}
               <mushroom-state-info
                 slot="info"
                 .primary=${label}
@@ -94,25 +94,39 @@ class Card extends Base {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  protected renderIcon (stateObj: HassEntity, item: CalendarItem) {
+  protected renderIcon (item: CalendarItem) {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     const icon = item.icon ?? 'mdi:delete-outline';
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     const iconColor = item.color ?? 'disabled';
 
-    const iconStyle = {};
+    const iconStyle = {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      '--icon-color': `rgba(var(--white-color), 0.5)`
+    };
 
-    iconStyle['--icon-color'] = `rgba(var(--white-color), 0.5)`;
+    if (this.config?.color_mode === 'icon') {
+      const rgbColor = computeRgbColor(iconColor);
 
-    return html`
-      <mushroom-shape-icon
-          slot="icon"
-          .disabled=${iconColor === 'disabled'}
-          style=${styleMap(iconStyle)}
-      >
-          <ha-state-icon .state=${stateObj} .icon=${icon}></ha-state-icon>
-      </mushroom-shape-icon>
-      `;
+      iconStyle['--icon-color'] = `rgba(${rgbColor}, 1)`;
+    }
+
+    return html`<ha-state-icon
+        .hass=${this.hass}
+        .icon=${icon}
+        slot="icon"
+        style=${styleMap(iconStyle)}
+      ></ha-state-icon>`;
+  }
+
+  public static getStyles () {
+    return [
+      css`
+        .card-container ha-state-icon {
+            color: var(--icon-color);
+        }
+      `
+    ];
   }
 }
 

@@ -1,7 +1,6 @@
 import { Base } from './base';
 import { computeRTL } from 'lovelace-mushroom/src/ha';
 import { css, html, nothing } from 'lit';
-import { computeAppearance } from 'lovelace-mushroom/src/utils/appearance';
 import { computeRgbColor } from 'lovelace-mushroom/src/utils/colors';
 import { styleMap } from 'lit/directives/style-map.js';
 import { getDateString } from '../../../utils/getDateString';
@@ -48,16 +47,13 @@ class Chip extends Base {
       return nothing;
     }
 
-    const appearance = computeAppearance(this.config);
-
     const rtl = computeRTL(this.hass);
 
-    const { label } = item;
     const color = item.color ?? 'disabled';
 
     const backgroundStyle = {};
 
-    if (color !== 'disabled') {
+    if (this.config.color_mode !== 'icon' && color !== 'disabled') {
       const rgbColor = computeRgbColor(color);
 
       backgroundStyle['--chip-background'] = `rgba(${rgbColor}, 0.5)`;
@@ -86,8 +82,11 @@ class Chip extends Base {
 
     const iconStyle = {};
 
-    // `rgba(${rgbColor}, 1)`
-    iconStyle['--icon-color'] = `rgba(var(--white-color), 0.5)`;
+    if (this.config?.color_mode === 'icon') {
+      const rgbColor = computeRgbColor(iconColor);
+
+      iconStyle['--icon-color'] = `rgba(${rgbColor}, 1)`;
+    }
 
     return html`<ha-state-icon
         .hass=${this.hass}
