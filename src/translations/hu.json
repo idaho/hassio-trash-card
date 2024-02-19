@@ -1,0 +1,77 @@
+{
+  "editor": {
+    "form": {
+      "color_picker": {
+        "values": {
+          "default": "Alapértelmezett szín"
+        }
+      },
+      "day_style": {
+        "values": {
+          "default": "Dátum",
+          "counter": "nap múlva"
+        }
+      },
+      "layout_picker": {
+        "values": {
+          "default": "Alapértelmezett elrendezés",
+          "vertical": "Függőleges elrendezés",
+          "horizontal": "Vízszintes elrendezés"
+        }
+      },
+      "tabs": {
+        "settings": "Beállítások",
+        "appearance": "Kinézet",
+        "patterns": "Minták"
+      }
+    },
+    "card": {
+      "generic": {
+        "icon_color": "Ikon szín",
+        "layout": "Elrendezés",
+        "fill_container": "Konténer kitöltése",
+        "next_days": "Jövőbeli napok száma",
+        "filter_events": "Események minta szerinti szűrése",
+        "drop_todayevents_from": "Mikortól rejtsük el az egésznapos eseményeket",
+        "full_size": "Margó nélküli kártya",
+        "use_summary": "Esemény összegzés a cimke helyett",
+        "day_style": "Esemény idejének megjelenítése mint"
+      },
+      "trash": {
+        "pattern": {
+          "title": "Minta szerkesztése",
+          "edit": "szerkeszt",
+          "delete": "töröl",
+          "type": {
+            "organic": "komposztálható",
+            "paper": "Papír",
+            "recycle": "Újrahasznosítható",
+            "waste": "Szemét",
+            "others": "Egyéb"
+          },
+          "fields": {
+            "label": "Cimke",
+            "color": "Szín",
+            "icon": "Ikon",
+            "pattern": "Felismerési minta"
+          }
+        }
+      }
+    }
+  },
+  "card": {
+    "not_found": "Entitás nem található",
+    "trash": {
+      "today": "ma",
+      "tomorrow": "holnap",
+      "day": "<DAY>",
+      "today_from_till": "Ma\n<START>-tól <END>-ig",
+      "tomorrow_from_till": "Holnap\n<START> és <END> között",
+      "day_from_till": "<DAY>\n<START> és <END> között",
+      "daysleft": "<DAYS> napon belül",
+      "daysleft_more": "<DAYS> napon belül",
+      "daysleft_from_till": "<DAYS> napon belül\n<START> és <END> között",
+      "daysleft_more_from_till": "<DAY> napon belül\n<START> és <END> között"
+    }
+  }
+}
