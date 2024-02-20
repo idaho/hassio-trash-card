@@ -38,6 +38,10 @@
                 "settings": "Einstellungen",
                 "appearance": "Darstellung",
                 "patterns": "Muster"
+            },
+            "refresh_rate": {
+                "title": "Aktuallisierungsinterval",
+                "helper": "Alle x Minuten auf Änderungen im Kalender prüfen."
             }
         },
         "card": {

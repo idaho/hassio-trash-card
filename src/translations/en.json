@@ -38,6 +38,10 @@
                 "settings": "Settings",
                 "appearance": "Appearance",
                 "patterns": "Patterns"
+            },
+            "refresh_rate": {
+                "title": "Update interval",
+                "helper": "Check for changes in the calendar every x minutes"
             }
         },
         "card": {

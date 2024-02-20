@@ -38,6 +38,10 @@
         "settings": "Beállítások",
         "appearance": "Kinézet",
         "patterns": "Minták"
+      },
+      "refresh_rate": {
+          "title": "Aktualizálási időintervallum",
+          "helper": "A naptár változásainak ellenőrzése x percenként."
       }
     },
     "card": {

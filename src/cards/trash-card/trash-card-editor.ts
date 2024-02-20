@@ -101,6 +101,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
       card_style: 'card',
       color_mode: 'background',
       items_per_row: 1,
+      refresh_rate: 60,
       ...config
     };
   }
@@ -145,6 +146,15 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     return this.hass.localize(`ui.panel.lovelace.editor.card.generic.${schema.name}`);
   };
 
+  // eslint-disable-next-line class-methods-use-this
+  private readonly computeHelper = (schema: HaFormSchema) => {
+    if (schema.helper) {
+      return schema.helper;
+    }
+
+    return '';
+  };
+
   private editDetailElement (ev: HASSDomEvent<{ subElementConfig: SubElementEditorConfig }>): void {
     this.subElementEditorConfig = ev.detail.subElementConfig;
   }
@@ -176,6 +186,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
           <ha-form
               .hass=${this.hass}
               .computeLabel=${this.computeLabel}
+              .computeHelper=${this.computeHelper}
               .data=${this.subElementEditorConfig.elementConfig}
               .schema=${patternSchema}
               @value-changed=${this.handleSubElementChanged}
@@ -237,6 +248,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
         .data=${this.config}
         .schema=${schema}
         .computeLabel=${this.computeLabel}
+        .computeHelper=${this.computeHelper}
         @value-changed=${this.valueChanged}
       ></ha-form>
       <ha-expansion-panel 
