@@ -112,7 +112,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       then((data: CalendarEvent[]): CalendarEvent[] =>
         findActiveEvents(data, {
           config: {
-            settings: this.config!.settings!,
+            pattern: this.config!.pattern!,
             // eslint-disable-next-line @typescript-eslint/naming-convention
             filter_events: this.config!.filter_events
           },
@@ -121,7 +121,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
         })).
       then((data: CalendarEvent[]): CalendarItem[] =>
         eventsToItems(data, {
-          settings: this.config!.settings!,
+          pattern: this.config!.pattern!,
           useSummary: Boolean(this.config!.use_summary)
         })).
       then((data: CalendarItem[]): CalendarItem[] =>
