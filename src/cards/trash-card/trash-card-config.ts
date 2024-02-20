@@ -1,6 +1,6 @@
 import { layoutStruct } from 'lovelace-mushroom/src/utils/layout';
 import { lovelaceCardConfigStruct } from 'lovelace-mushroom/src/shared/config/lovelace-card-config';
-import { assign, boolean, integer, literal, object, optional, string, union } from 'superstruct';
+import { array, assign, boolean, integer, literal, object, optional, string, union } from 'superstruct';
 
 import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/entity-config';
 import type { ItemSettings } from '../../utils/itemSettings';
@@ -25,13 +25,7 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
 
  type TrashCardConfig = LovelaceCardConfig &
  EntityWithOutIcon & {
-   settings?: {
-     organic?: ItemSettings;
-     paper?: ItemSettings;
-     recycle?: ItemSettings;
-     waste?: ItemSettings;
-     others?: ItemSettings;
-   };
+   pattern?: ItemSettings[];
    next_days?: number;
    items_per_row?: number;
    filter_events?: boolean;
@@ -64,49 +58,15 @@ const entityCardConfigStruct = assign(
     day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),
     card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]) ])),
     color_mode: optional(union([ literal(COLORMODES[0]), literal(COLORMODES[1]) ])),
-
-    settings: optional(
+    pattern: optional(array(
       object({
-        organic: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string()),
-            label: optional(string()),
-            pattern: optional(string())
-          })
-        ),
-        paper: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string()),
-            label: optional(string()),
-            pattern: optional(string())
-          })
-        ),
-        recycle: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string()),
-            label: optional(string()),
-            pattern: optional(string())
-          })
-        ),
-        waste: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string()),
-            label: optional(string()),
-            pattern: optional(string())
-          })
-        ),
-        others: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string())
-          })
-        )
+        color: optional(string()),
+        icon: optional(string()),
+        label: optional(string()),
+        pattern: optional(string()),
+        type: string()
       })
-    )
+    ))
   })
 );
 

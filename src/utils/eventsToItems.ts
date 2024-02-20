@@ -4,7 +4,7 @@ import type { ItemSettings } from './itemSettings';
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 
 interface Options {
-  settings: Required<TrashCardConfig>['settings'];
+  pattern: Required<TrashCardConfig>['pattern'];
   useSummary: boolean;
 }
 
@@ -19,12 +19,12 @@ const getLabel = (event: CalendarEvent, settings: ItemSettings, useSummary: bool
   return settings.label ?? event.content.summary ?? 'unknown';
 };
 
-const getData = <T extends TrashTypes> (event: CalendarEvent, key: T, settings: Omit<Partial<Options['settings']>, T> & Pick<Required<Options['settings']>, T>, useSummary: boolean): CalendarItem => ({
+const getData = <T extends TrashTypes> (event: CalendarEvent, key: T, pattern: Options['pattern'], useSummary: boolean): CalendarItem => ({
   ...event,
-  label: getLabel(event, settings[key], useSummary),
-  icon: settings[key].icon!,
-  color: settings[key].color!,
-  type: key
+  label: getLabel(event, pattern[key], useSummary),
+  icon: pattern[key].icon!,
+  color: pattern[key].color!,
+  type: pattern[key].type!
 });
 
 const typeInSettings = <T extends TrashTypes> (key: T, settings: Options['settings']): settings is Required<Options['settings']> =>
@@ -37,17 +37,15 @@ const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }:
 
   const { content: { summary }} = event;
 
-  const checkTypes: TrashTypes[] = [ 'organic', 'paper', 'recycle', 'waste' ];
+  const checkTypes = [ 'organic', 'paper', 'recycle', 'waste' ];
 
   const possibleTypes = checkTypes.
-    filter((type: TrashTypes) => typeInSettings(type, settings) && settings[type].pattern && summary.includes(settings[type].pattern!));
+    filter(type => typeInSettings(type, settings) && settings[type].pattern && summary.includes(settings[type].pattern!));
 
   if (possibleTypes.length > 0) {
-    // @ts-expect-error TS2345
     return possibleTypes.map(item => getData<typeof item>(event, item, settings, useSummary));
   }
 
-  // @ts-expect-error TS2345
   return [ getData(event, 'others', settings, useSummary) ];
 };
 

@@ -4,7 +4,7 @@ interface CalendarItem extends CalendarEvent {
   label: string;
   color?: string;
   icon?: string;
-  type: string;
+  type: 'custom' | 'organic' | 'paper' | 'recycle' | 'waste' | 'others';
 }
 
 export type {
