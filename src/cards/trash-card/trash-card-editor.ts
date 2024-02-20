@@ -25,6 +25,7 @@ import type { SubElementEditorConfig } from './trash-card-pattern-editor';
 import type { HaFormSchema } from '../../utils/form/ha-form';
 
 import './trash-card-pattern-editor';
+import type { ItemSettings } from '../../utils/itemSettings';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -48,6 +49,48 @@ const OTHER_LABELS = new Set([
   'event_grouping'
 ]);
 
+const configDefaults = {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  event_grouping: true,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  drop_todayevents_from: '10:00:00',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  next_days: 2,
+  pattern: [
+    {
+      icon: 'mdi:flower',
+      color: 'lime',
+      type: 'organic'
+    },
+    {
+      icon: 'mdi:newspaper',
+      color: 'blue',
+      type: 'paper'
+    },
+    {
+      icon: 'mdi:recycle-variant',
+      color: 'amber',
+      type: 'recycle'
+    },
+    {
+      icon: 'mdi:trash-can-outline',
+      color: 'grey',
+      type: 'waste'
+    },
+    {
+      icon: 'mdi:dump-truck',
+      color: 'purple',
+      type: 'others'
+    }
+  ],
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  day_style: 'default',
+  card_style: 'card',
+  color_mode: 'background',
+  items_per_row: 1,
+  refresh_rate: 60
+};
+
 @customElement(TRASH_CARD_EDITOR_NAME)
 class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   @property({ attribute: false }) public hass?: HomeAssistant;
@@ -67,50 +110,36 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   }
 
   public setConfig (config: Partial<TrashCardConfig>): void {
+    if (config.settings) {
+      const pattern: ItemSettings[] = [];
+      const { settings } = config as unknown as { settings: Record<ItemSettings['type'], ItemSettings> };
+
+      Object.entries(settings).forEach(([ type, data ]) => {
+        pattern.push({
+          ...data,
+          type: type as ItemSettings['type']
+        });
+      });
+
+      const migratedConfiguration = {
+        ...configDefaults,
+        ...config,
+        pattern
+      } as TrashCardConfig;
+
+      delete migratedConfiguration.settings;
+
+      fireEvent(this, 'config-changed', { config: migratedConfiguration });
+
+      return;
+    }
+
     assert(config, entityCardConfigStruct);
 
     this.config = {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      event_grouping: true,
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      drop_todayevents_from: '10:00:00',
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      next_days: 2,
-      pattern: [
-        {
-          icon: 'mdi:flower',
-          color: 'lime',
-          type: 'organic'
-        },
-        {
-          icon: 'mdi:newspaper',
-          color: 'blue',
-          type: 'paper'
-        },
-        {
-          icon: 'mdi:recycle-variant',
-          color: 'amber',
-          type: 'recycle'
-        },
-        {
-          icon: 'mdi:trash-can-outline',
-          color: 'grey',
-          type: 'waste'
-        },
-        {
-          icon: 'mdi:dump-truck',
-          color: 'purple',
-          type: 'others'
-        }
-      ],
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      day_style: 'default',
-      card_style: 'card',
-      color_mode: 'background',
-      items_per_row: 1,
-      refresh_rate: 60,
+      ...configDefaults,
       ...config
-    };
+    } as TrashCardConfig;
   }
 
   protected updated (changedProps: PropertyValues): void {
@@ -297,6 +326,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     }
     const customLocalize = setupCustomlocalize(this.hass);
 
+    console.log('render', this.config);
     const schema = this.schema(customLocalize, this.config);
 
     return html`

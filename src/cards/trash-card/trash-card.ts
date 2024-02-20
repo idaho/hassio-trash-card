@@ -16,8 +16,9 @@ import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
 import { Chip } from './elements/chip';
 import { Card } from './elements/card';
 
-import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { LovelaceCard, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
+import type { ItemSettings } from '../../utils/itemSettings';
+import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { CalendarEvent, RawCalendarEvent } from '../../utils/calendarEvents';
 import type { TrashCardConfig } from './trash-card-config';
 import type { HomeAssistant } from '../../utils/ha';
@@ -71,6 +72,37 @@ export class TrashCard extends LitElement implements LovelaceCard {
   }
 
   public setConfig (config: TrashCardConfig): void {
+    if (config.settings) {
+      const pattern: ItemSettings[] = [];
+      const { settings } = config as unknown as { settings: Record<ItemSettings['type'], ItemSettings> };
+
+      Object.entries(settings).forEach(([ type, data ]) => {
+        pattern.push({
+          ...data,
+          type: type as ItemSettings['type']
+        });
+      });
+
+      const migratedConfiguration = {
+        ...config,
+        pattern
+      };
+
+      this.config = {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        tap_action: {
+          action: 'more-info'
+        },
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        hold_action: {
+          action: 'more-info'
+        },
+        ...migratedConfiguration
+      };
+
+      return;
+    }
+
     this.config = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       tap_action: {
