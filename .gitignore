@@ -10,6 +10,8 @@ dist
 !.hass_dev/scenes.yaml
 !.hass_dev/views
 !.hass_dev/packages
+!.hass_dev/www
+.hass_dev/www/*
 !.hass_dev/www/.gitkeep
 
 # Mac OS
