@@ -12,6 +12,12 @@
           "counter": "nap múlva"
         }
       },
+      "card_style": {
+          "values": {
+              "card": "Standard kártya",
+              "chip": "Chipkártya"
+          }
+      },
       "layout_picker": {
         "values": {
           "default": "Alapértelmezett elrendezés",
@@ -37,7 +43,8 @@
         "use_summary": "Esemény összegzés a cimke helyett",
         "day_style": "Esemény idejének megjelenítése mint",
         "hide_time_range": "Rejtsd el az időt",
-        "event_grouping": "Csak a következő eseményt jeleníti meg mintánként"
+        "event_grouping": "Csak a következő eseményt jeleníti meg mintánként",
+        "card_style": "Megjelenítés"
       },
       "trash": {
         "pattern": {

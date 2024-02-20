@@ -12,6 +12,12 @@
           "counter": "giorni a"
         }
       },
+      "card_style": {
+          "values": {
+              "card": "Carta standard",
+              "chip": "Carta chip"
+          }
+      },
       "layout_picker": {
         "values": {
           "default": "Layout di default",
@@ -37,7 +43,8 @@
         "use_summary": "Usa l'oggetto dell'evento al posto dell'etichetta",
         "day_style": "Mostra la data degli eventi come",
         "hide_time_range": "nascondere il tempo",
-        "event_grouping": "Visualizza solo l'evento successivo per schema"
+        "event_grouping": "Visualizza solo l'evento successivo per schema",
+        "card_style": "Visualizza come"
       },
       "trash": {
         "pattern": {

@@ -6,10 +6,14 @@ import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/ent
 import type { ItemSettings } from '../../utils/itemSettings';
 import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 const DAYSTYLES = [
   'default',
   'counter'
+] as const;
+
+const CARDSTYLES = [
+  'card',
+  'chip'
 ] as const;
 
 type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
@@ -23,24 +27,16 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
      waste?: ItemSettings;
      others?: ItemSettings;
    };
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    next_days?: number;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    items_per_row?: number;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    filter_events?: boolean;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    full_size?: boolean;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    drop_todayevents_from?: string;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    use_summary?: boolean;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    hide_time_range?: boolean;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    event_grouping?: boolean;
-   // eslint-disable-next-line @typescript-eslint/naming-convention
    day_style?: typeof DAYSTYLES[number];
+   card_style?: typeof CARDSTYLES[number];
  };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
@@ -50,26 +46,17 @@ const entityCardConfigStruct = assign(
     entity: optional(string()),
     name: optional(string()),
     layout: optional(layoutStruct),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     fill_container: optional(boolean()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     filter_events: optional(boolean()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     full_size: optional(boolean()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     use_summary: optional(boolean()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     hide_time_range: optional(boolean()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     next_days: optional(integer()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     items_per_row: optional(integer()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     drop_todayevents_from: optional(string()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     event_grouping: optional(boolean()),
-    // eslint-disable-next-line @typescript-eslint/naming-convention
     day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),
+    card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]) ])),
 
     settings: optional(
       object({
