@@ -1,0 +1,77 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Domyślny kolor"
+                }
+            },
+            "day_style": {
+                "values": {
+                    "default": "Data",
+                    "counter": "dni do"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Domyślny układ",
+                    "vertical": "Pionowy układ",
+                    "horizontal": "Poziomy układ"
+                }
+            },
+            "tabs": {
+                "settings": "Ustawienia",
+                "appearance": "Wygląd",
+                "patterns": "Wzorce"
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Kolor ikony",
+                "layout": "Układ",
+                "fill_container": "Wypełnij zawartością",
+                "next_days": "Ilość dni do przodu",
+                "filter_events": "Filtruj zdarzenia według wzorca",
+                "drop_todayevents_from": "Od której godziny ukryć wydarzenie całodniowe",
+                "full_size": "Karta bez marginesu",
+                "use_summary": "Podsumowanie zamiast oznaczenia",
+                "day_style": "Pokaż czas zdarzenia jako"
+            },
+            "trash": {
+                "pattern": {
+                    "title": "Edytuj wzorzec",
+                    "edit": "edytuj",
+                    "delete": "usuń",
+                    "type": {
+                        "organic": "BIO",
+                        "paper": "Papier",
+                        "recycle": "Tworzywa",
+                        "waste": "Zmieszane",
+                        "others": "Pozostałe"
+                    },
+                    "fields": {
+                        "label": "Oznaczenie",
+                        "color": "Kolor",
+                        "icon": "Ikona",
+                        "pattern": "Szablon wzorca"
+                    }
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Encji nie znaleziono",
+        "trash": {
+            "today": "dziś",
+            "tomorrow": "jutro",
+            "day": "<DAY>",
+            "today_from_till": "Dziś\nod <START> do <END>",
+            "tomorrow_from_till": "Jutro\npomięzdy <START> a <END>",
+            "day_from_till": "<DAY>\npomiędzy <START> a <END>",
+            "daysleft": "za <DAYS> dzień",
+            "daysleft_more": "za <DAYS> dni",
+            "daysleft_from_till": "za <DAYS> dni\npomiędzy <START> a <END>",
+            "daysleft_more_from_till": "za <DAYS> dni\npomiędzy <START> a <END>"
+        }
+    }
+}
