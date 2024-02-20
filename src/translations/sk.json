@@ -7,15 +7,24 @@
                 }
             },
             "day_style": {
+                "title": "Zobraziť čas udalosti ako",
                 "values": {
                     "default": "Dátum",
                     "counter": "dni do"
                 }
             },
             "card_style": {
+                "title": "Zobrazenie ako",
                 "values": {
                     "card": "Štandardná karta",
                     "chip": "čipová karta"
+                }
+            },
+            "color_mode": {
+                "title": "Použiť farbu na",
+                "values": {
+                    "background": "Pozadie",
+                    "icon": "Ikona"
                 }
             },
             "layout_picker": {
@@ -41,10 +50,8 @@
                 "drop_todayevents_from": "d akého času sa má skryť celodenná udalosť",
                 "full_size": "Karta bez marže",
                 "use_summary": "Zhrnutie udalosti namiesto označenia",
-                "day_style": "Zobraziť čas udalosti ako",
                 "hide_time_range": "čas skrývania",
-                "event_grouping": "Zobrazenie iba nasledujúcej udalosti na vzor",
-                "card_style": "Zobrazenie ako"
+                "event_grouping": "Zobrazenie iba nasledujúcej udalosti na vzor"
             },
             "trash": {
                 "pattern": {

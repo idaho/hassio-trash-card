@@ -14,7 +14,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { entityCardConfigStruct } from './trash-card-config';
 import { fireEvent } from 'lovelace-mushroom/src/ha';
-import { getSchema, SCHEMA_PATTERN, SCHEMA_PATTERN_OTHERS } from './formSchemas';
+import { getPatternOthersSchema, getPatternSchema, getSchema } from './formSchemas';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 
 import type { HASSDomEvent, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
@@ -35,11 +35,6 @@ declare global {
     };
   }
 }
-
-const TRASH_LABELS = new Set([
-  'label',
-  'pattern'
-]);
 
 const OTHER_LABELS = new Set([
   'next_days',
@@ -103,7 +98,9 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
       },
       // eslint-disable-next-line @typescript-eslint/naming-convention
       day_style: 'default',
-
+      card_style: 'card',
+      color_mode: 'background',
+      items_per_row: 1,
       ...config
     };
   }
@@ -127,12 +124,12 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
     const customLocalize = setupCustomlocalize(this.hass);
 
-    if (GENERIC_LABELS.includes(schema.name) || OTHER_LABELS.has(schema.name)) {
-      return customLocalize(`editor.card.generic.${schema.name}`);
+    if (schema.label) {
+      return schema.label;
     }
 
-    if (schema.label && TRASH_LABELS.has(schema.label)) {
-      return customLocalize(`editor.card.trash.pattern.fields.${schema.label}`);
+    if (GENERIC_LABELS.includes(schema.name) || OTHER_LABELS.has(schema.name)) {
+      return customLocalize(`editor.card.generic.${schema.name}`);
     }
 
     if (schema.name === 'items_per_row') {
@@ -160,6 +157,10 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     const customLocalize = setupCustomlocalize(this.hass);
 
     if (this.subElementEditorConfig) {
+      const patternSchema = this.subElementEditorConfig.key === 'others' ?
+        getPatternOthersSchema() :
+        getPatternSchema(customLocalize);
+
       return html`
         <div class="header" id="trashcard-pattern-editor">
           <div class="back-title">
@@ -176,7 +177,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
               .hass=${this.hass}
               .computeLabel=${this.computeLabel}
               .data=${this.subElementEditorConfig.elementConfig}
-              .schema=${this.subElementEditorConfig.key === 'others' ? SCHEMA_PATTERN_OTHERS : SCHEMA_PATTERN}
+              .schema=${patternSchema}
               @value-changed=${this.handleSubElementChanged}
           >
           </ha-form>
@@ -256,7 +257,21 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   }
 
   protected valueChanged (ev: CustomEvent): void {
-    fireEvent(this, 'config-changed', { config: ev.detail.value });
+    const config = { ...ev.detail.value };
+
+    if (config.color_mode === 'background') {
+      delete config.color_mode;
+    }
+
+    if (config.day_style === 'default') {
+      delete config.day_style;
+    }
+
+    if (config.card_style === 'card') {
+      delete config.card_style;
+    }
+
+    fireEvent(this, 'config-changed', { config });
   }
 
   public static get styles (): CSSResultGroup {

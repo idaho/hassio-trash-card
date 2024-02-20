@@ -7,15 +7,24 @@
                 }
             },
             "day_style": {
+                "title": "Afficher l'heure de l'événement en tant que",
                 "values": {
                     "default": "Date",
                     "compteur": "jours jusqu'à"
                 }
             },
             "card_style": {
+                "title": "Représenter comme",
                 "values": {
                     "card" : "carte standard",
                     "chip" : "carte à puce"
+                }
+            },
+            "color_mode": {
+                "title" : "Appliquer une couleur à",
+                "values" : {
+                    "background" : "Contexte",
+                    "icon" : "Icône"
                 }
             },
             "layout_picker": {
@@ -41,10 +50,8 @@
                 "drop_todayevents_from": "A partir de quelle heure masquer l'événement de toute la journée ?",
                 "full_size": "Carte sans marge",
                 "use_summary": "Résumé de l'événement au lieu de l'étiquette",
-                "day_style": "Afficher l'heure de l'événement en tant que",
                 "hide_time_range": "cacher le temps",
-                "event_grouping": "Afficher uniquement l'événement suivant par modèle",
-                "card_style": "Représenter comme"
+                "event_grouping": "Afficher uniquement l'événement suivant par modèle"
             },
             "trash": {
                 "pattern": {

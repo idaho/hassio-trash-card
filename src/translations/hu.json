@@ -7,16 +7,25 @@
         }
       },
       "day_style": {
+        "title": "Esemény idejének megjelenítése mint",
         "values": {
           "default": "Dátum",
           "counter": "nap múlva"
         }
       },
       "card_style": {
-          "values": {
-              "card": "Standard kártya",
-              "chip": "Chipkártya"
-          }
+        "title": "Megjelenítés",
+        "values": {
+          "card": "Standard kártya",
+          "chip": "Chipkártya"
+        }
+      },
+      "color_mode": {
+        "title": "Alkalmazza a színt",
+        "values": {
+          "background": "Háttér",
+          "icon": "Ikon"
+        }
       },
       "layout_picker": {
         "values": {
@@ -41,10 +50,8 @@
         "drop_todayevents_from": "Mikortól rejtsük el az egésznapos eseményeket",
         "full_size": "Margó nélküli kártya",
         "use_summary": "Esemény összegzés a cimke helyett",
-        "day_style": "Esemény idejének megjelenítése mint",
         "hide_time_range": "Rejtsd el az időt",
-        "event_grouping": "Csak a következő eseményt jeleníti meg mintánként",
-        "card_style": "Megjelenítés"
+        "event_grouping": "Csak a következő eseményt jeleníti meg mintánként"
       },
       "trash": {
         "pattern": {

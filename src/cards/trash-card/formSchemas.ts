@@ -1,22 +1,39 @@
+import { CARDSTYLES, COLORMODES, DAYSTYLES } from './trash-card-config';
+
 import type { TrashCardConfig } from './trash-card-config';
 import type { HaFormSchema } from '../../utils/form/ha-form';
 import type setupCustomlocalize from '../../localize';
 
-const SCHEMA_PATTERN_OTHERS: HaFormSchema[] = [
+const getPatternOthersSchema = () => [
   {
-    label: 'icon',
     name: 'icon',
-    selector: { icon: {}},
+    selector: {
+      icon: {}
+    },
     context: { icon_entity: 'entity' }
   },
-  { label: 'color', name: 'color', selector: { ui_color: {}}}
-
+  {
+    name: 'color',
+    selector: { ui_color: {}}
+  }
 ];
 
-const SCHEMA_PATTERN: HaFormSchema[] = [
-  { label: 'label', name: 'label', selector: { text: {}}},
-  ...SCHEMA_PATTERN_OTHERS,
-  { label: 'pattern', name: 'pattern', selector: { text: {}}}
+const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>) => [
+  {
+    label: customLocalize(`editor.card.trash.pattern.fields.label`),
+    name: 'label',
+    selector: {
+      text: {}
+    }
+  },
+  ...getPatternOthersSchema(),
+  {
+    label: customLocalize(`editor.card.trash.pattern.fields.pattern`),
+    name: 'pattern',
+    selector: {
+      text: {}
+    }
+  }
 ];
 
 const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, currentValues: TrashCardConfig) => {
@@ -45,15 +62,52 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
 
   const appearance: HaFormSchema[] = [
 
-    { name: 'card_style', selector: { trashcard_cardstyle: {}}},
+    {
+      name: 'card_style',
+      label: customLocalize(`editor.form.card_style.title`),
+      selector: {
+        select: {
+          options: [ ...CARDSTYLES ].map(control => ({
+            value: control,
+            label: customLocalize(`editor.form.card_style.values.${control}`)
+          })),
+          mode: 'dropdown'
+        }
+      }
+    },
     {
       type: 'grid',
       name: '',
       schema: [
-        { name: 'day_style', selector: { trashcard_datestyle: {}}},
+        {
+          name: 'day_style',
+          label: customLocalize(`editor.form.day_style.title`),
+          selector: {
+            select: {
+              options: [ ...DAYSTYLES ].map(control => ({
+                value: control,
+                label: customLocalize(`editor.form.day_style.values.${control}`)
+              })),
+              mode: 'dropdown'
+            }
+          }
+        },
         { name: 'hide_time_range', selector: { boolean: { }}},
         { name: 'use_summary', selector: { boolean: {}}},
-        { name: 'event_grouping', selector: { boolean: { default: true }}}
+        { name: 'event_grouping', selector: { boolean: { default: true }}},
+        {
+          name: 'color_mode',
+          label: customLocalize(`editor.form.color_mode.title`),
+          selector: {
+            select: {
+              options: [ ...COLORMODES ].map(control => ({
+                value: control,
+                label: customLocalize(`editor.form.color_mode.values.${control}`)
+              })),
+              mode: 'dropdown'
+            }
+          }
+        }
       ]
     },
     ...currentValues.card_style !== 'chip' ?
@@ -105,6 +159,6 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
 
 export {
   getSchema,
-  SCHEMA_PATTERN,
-  SCHEMA_PATTERN_OTHERS
+  getPatternSchema,
+  getPatternOthersSchema
 };
