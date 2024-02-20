@@ -1,11 +1,11 @@
-import type { HomeAssistant } from './utils/ha';
-
 import * as de from './translations/de.json';
 import * as en from './translations/en.json';
 import * as fr from './translations/fr.json';
 import * as hu from './translations/hu.json';
 import * as it from './translations/it.json';
 import * as sk from './translations/sk.json';
+
+import type { HomeAssistant } from './utils/ha';
 
 const languages: Record<string, unknown> = {
   de,

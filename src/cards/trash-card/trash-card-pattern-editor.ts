@@ -3,15 +3,16 @@
 /* eslint-disable no-return-assign */
 import { fireEvent } from 'lovelace-mushroom/src/ha';
 import { guard } from 'lit/directives/guard.js';
-import type { HomeAssistant } from '../../utils/ha';
-import type { ItemSettings } from '../../utils/itemSettings';
 import setupCustomlocalize from '../../localize';
-import { type TrashCardConfig } from './trash-card-config';
-
-import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
-export interface SubElementEditorConfig {
+import type { TrashCardConfig } from './trash-card-config';
+import type { CSSResultGroup, PropertyValues } from 'lit';
+import type { ItemSettings } from '../../utils/itemSettings';
+import type { HomeAssistant } from '../../utils/ha';
+
+interface SubElementEditorConfig {
   index?: number;
   key?: string;
   elementConfig?: ItemSettings;
@@ -29,7 +30,7 @@ declare global {
 }
 
 @customElement(`trash-card-pattern-editor`)
-export class TrashCardPatternEditor extends LitElement {
+class TrashCardPatternEditor extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
   @state() protected settings?: TrashCardConfig['settings'];
@@ -175,3 +176,11 @@ export class TrashCardPatternEditor extends LitElement {
     ];
   }
 }
+
+export {
+  TrashCardPatternEditor
+};
+
+export type {
+  SubElementEditorConfig
+};

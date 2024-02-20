@@ -2,6 +2,7 @@
 import calendarEvents from '../../mocks/calendarData.json';
 import { getTimeZoneOffset } from './getTimeZoneOffset';
 import { normaliseEvents } from './normaliseEvents';
+
 import type { RawCalendarEvent } from './calendarEvents';
 
 describe('normaliseEvents', (): void => {

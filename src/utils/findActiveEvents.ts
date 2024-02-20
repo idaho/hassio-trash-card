@@ -1,5 +1,6 @@
-import type { CalendarEvent } from './calendarEvents';
 import { getDayFromDate } from './getDayFromDate';
+
+import type { CalendarEvent } from './calendarEvents';
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 
 interface Config {

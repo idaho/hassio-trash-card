@@ -1,11 +1,12 @@
 import { fireEvent } from 'lovelace-mushroom/src/ha';
-import { type HomeAssistant } from '../ha';
 import { customElement, property } from 'lit/decorators.js';
 import { html, LitElement } from 'lit';
+
+import type { HomeAssistant } from '../ha';
 import './date-style';
 
 export interface TrashCardDateStyleSelector {
-  // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/ban-types
   trashcard_datestyle: {};
 }
 

@@ -1,46 +1,47 @@
-import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/entity-config';
-import type { ItemSettings } from '../../utils/itemSettings';
 import { layoutStruct } from 'lovelace-mushroom/src/utils/layout';
-import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 import { lovelaceCardConfigStruct } from 'lovelace-mushroom/src/shared/config/lovelace-card-config';
 import { assign, boolean, integer, literal, object, optional, string, union } from 'superstruct';
 
+import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/entity-config';
+import type { ItemSettings } from '../../utils/itemSettings';
+import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
+
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export const DAYSTYLES = [
+const DAYSTYLES = [
   'default',
   'counter'
 ] as const;
 
 type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
 
-export type TrashCardConfig = LovelaceCardConfig &
-EntityWithOutIcon & {
-  settings?: {
-    organic?: ItemSettings;
-    paper?: ItemSettings;
-    recycle?: ItemSettings;
-    waste?: ItemSettings;
-    others?: ItemSettings;
-  };
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  next_days?: number;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  items_per_row?: number;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  filter_events?: boolean;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  full_size?: boolean;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  drop_todayevents_from?: string;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  use_summary?: boolean;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  hide_time_range?: boolean;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  event_grouping?: boolean;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  day_style?: typeof DAYSTYLES[number];
-};
+ type TrashCardConfig = LovelaceCardConfig &
+ EntityWithOutIcon & {
+   settings?: {
+     organic?: ItemSettings;
+     paper?: ItemSettings;
+     recycle?: ItemSettings;
+     waste?: ItemSettings;
+     others?: ItemSettings;
+   };
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   next_days?: number;
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   items_per_row?: number;
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   filter_events?: boolean;
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   full_size?: boolean;
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   drop_todayevents_from?: string;
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   use_summary?: boolean;
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   hide_time_range?: boolean;
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   event_grouping?: boolean;
+   // eslint-disable-next-line @typescript-eslint/naming-convention
+   day_style?: typeof DAYSTYLES[number];
+ };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
 const entityCardConfigStruct = assign(
@@ -116,5 +117,11 @@ const entityCardConfigStruct = assign(
 );
 
 export {
-  entityCardConfigStruct
+  entityCardConfigStruct,
+  DAYSTYLES
 };
+
+export type {
+  TrashCardConfig
+};
+

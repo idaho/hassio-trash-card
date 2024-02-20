@@ -1,5 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export const TRASH_CARD_NAME = `trash-card`;
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export const TRASH_CARD_EDITOR_NAME = `${TRASH_CARD_NAME}-editor`;
+const TRASH_CARD_NAME = `trash-card`;
+const TRASH_CARD_EDITOR_NAME = `${TRASH_CARD_NAME}-editor`;
 
+export {
+  TRASH_CARD_NAME,
+  TRASH_CARD_EDITOR_NAME
+};
