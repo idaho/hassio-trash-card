@@ -134,12 +134,16 @@ export class TrashCard extends LitElement implements LovelaceCard {
       });
   }
 
+  protected getRefreshRate (): number {
+    return (this.config?.refresh_rate ?? 60) * 1_000;
+  }
+
   protected shouldUpdate (changedProps: PropertyValues): boolean {
     if (changedProps.has('currentItems')) {
       return true;
     }
     changedProps.delete('currentItems');
-    if (!this.lastChanged || changedProps.has('config') || Date.now() - this.lastChanged.getTime() > 5_000) {
+    if (!this.lastChanged || changedProps.has('config') || Date.now() - this.lastChanged.getTime() > this.getRefreshRate()) {
       this.fetchCurrentTrashData();
     }
 

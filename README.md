@@ -115,6 +115,7 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `day_style`            | `default` or `counter` | `default`   | Option of how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining until the event.       |
 | `card_style`            | `card` or `chip` | `card`   | Switch between the events style `Standard card` or `Chip card`. |
 | `color_mode`            | `background` or `icon` | `background`   | Select whether the color settings should be applied to the background or to the symbol |
+| `refresh_rate`            | integer | 60   | Check for changes in the calendar every x minutes, by default we will check every 60 minutes. Values can be set from 5 to 1440. |
 | `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display it.|
 
 

@@ -1,6 +1,5 @@
-import { layoutStruct } from 'lovelace-mushroom/src/utils/layout';
-import { lovelaceCardConfigStruct } from 'lovelace-mushroom/src/shared/config/lovelace-card-config';
 import { array, assign, boolean, integer, literal, object, optional, string, union } from 'superstruct';
+import { defaultConfigStruct } from '../../utils/form/defaultConfigStruct';
 
 import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/entity-config';
 import type { ItemSettings } from '../../utils/itemSettings';
@@ -37,15 +36,16 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
    day_style?: typeof DAYSTYLES[number];
    card_style?: typeof CARDSTYLES[number];
    color_mode?: typeof COLORMODES[number];
+   refresh_rate?: number;
  };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
 const entityCardConfigStruct = assign(
-  lovelaceCardConfigStruct,
+  defaultConfigStruct,
   object({
     entity: optional(string()),
     name: optional(string()),
-    layout: optional(layoutStruct),
+    layout: optional(union([ literal('horizontal'), literal('vertical'), literal('default') ])),
     fill_container: optional(boolean()),
     filter_events: optional(boolean()),
     full_size: optional(boolean()),
@@ -53,6 +53,7 @@ const entityCardConfigStruct = assign(
     hide_time_range: optional(boolean()),
     next_days: optional(integer()),
     items_per_row: optional(integer()),
+    refresh_rate: optional(integer()),
     drop_todayevents_from: optional(string()),
     event_grouping: optional(boolean()),
     day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),

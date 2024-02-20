@@ -38,6 +38,10 @@
                 "settings": "Nastavenia",
                 "appearance": "Vzhľad",
                 "patterns": "Pattern"
+            },
+            "refresh_rate": {
+                "title": "Interval realizácie",
+                "helper": "Kontrola zmien v kalendári každých x minút."
             }
         },
         "card": {

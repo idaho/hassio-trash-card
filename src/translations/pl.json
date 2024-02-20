@@ -7,9 +7,24 @@
                 }
             },
             "day_style": {
+                "title": "Pokaż czas zdarzenia jako",
                 "values": {
                     "default": "Data",
                     "counter": "dni do"
+                }
+            },
+            "card_style": {
+                "title": "Wyświetl jako",
+                "values": {
+                    "card": "Karta standardowa",
+                    "chip": "Karta chipowa"
+                }
+            },
+            "color_mode": {
+                "title": "Zastosuj kolor do",
+                "values": {
+                    "background": "Kontekst",
+                    "icon": "Symbol"
                 }
             },
             "layout_picker": {
@@ -23,6 +38,10 @@
                 "settings": "Ustawienia",
                 "appearance": "Wygląd",
                 "patterns": "Wzorce"
+            },
+            "refresh_rate": {
+                "title": "Interwał aktualizacji",
+                "helper": "Sprawdzanie zmian w kalendarzu co x minut."
             }
         },
         "card": {
@@ -35,7 +54,8 @@
                 "drop_todayevents_from": "Od której godziny ukryć wydarzenie całodniowe",
                 "full_size": "Karta bez marginesu",
                 "use_summary": "Podsumowanie zamiast oznaczenia",
-                "day_style": "Pokaż czas zdarzenia jako"
+                "hide_time_range": "Ukryj czas",
+                "event_grouping": "Wyświetla tylko następne zdarzenie dla wzorca"
             },
             "trash": {
                 "pattern": {
