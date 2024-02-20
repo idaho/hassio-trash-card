@@ -19,6 +19,7 @@
   "private": true,
   "main": "dist/trashcard.js",
   "scripts": {
+    "prestart": "cd node_modules/lovelace-mushroom && npm run build && cp ./dist/mushroom.js ../../.hass_dev/www",
     "start": "rollup -c --watch --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs",
     "clean": "npx rimraf ./dist",
