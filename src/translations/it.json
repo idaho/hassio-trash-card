@@ -38,6 +38,10 @@
         "settings": "Impostazioni",
         "appearance": "Aspetto",
         "patterns": "Modelli"
+      },
+      "refresh_rate": {
+          "title": "Intervallo di realizzazione",
+          "helper": "Controlla le modifiche al calendario ogni x minuti."
       }
     },
     "card": {
