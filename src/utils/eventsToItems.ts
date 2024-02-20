@@ -40,7 +40,8 @@ const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }:
   const checkTypes: TrashTypes[] = [ 'organic', 'paper', 'recycle', 'waste' ];
 
   const possibleTypes = checkTypes.
-    filter((type: TrashTypes) => typeInSettings(type, settings) && settings[type].pattern && summary.includes(settings[type].pattern!));
+    filter((type: TrashTypes) =>
+      typeInSettings(type, settings) && settings[type].pattern && summary.toLowerCase().includes(settings[type].pattern!.toLowerCase()));
 
   if (possibleTypes.length > 0) {
     // @ts-expect-error TS2345
