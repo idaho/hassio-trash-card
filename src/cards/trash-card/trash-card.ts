@@ -9,12 +9,13 @@ import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import { normaliseEvents } from '../../utils/normaliseEvents';
 import { registerCustomCard } from '../../utils/registerCustomCard';
 import { defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
-import { css, LitElement, nothing } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
 import { Chip } from './elements/chip';
 import { Card } from './elements/card';
+import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
 
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { LovelaceCard, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
@@ -57,6 +58,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
   @property() private endDate: Date = new Date();
 
+  @property() private debugdata: { message: string; data: any }[] = [];
+
   private lastChanged?: Date;
 
   public connectedCallback () {
@@ -91,6 +94,17 @@ export class TrashCard extends LitElement implements LovelaceCard {
     this.endDate.setDate(this.endDate.getDate() + (this.config?.next_days ?? 2));
   }
 
+  protected resetLog () {
+    this.debugdata = [];
+  }
+
+  protected log (message: string, data: any) {
+    this.debugdata.push({
+      message,
+      data
+    });
+  }
+
   protected fetchCurrentTrashData () {
     if (!this.hass) {
       return;
@@ -108,26 +122,53 @@ export class TrashCard extends LitElement implements LovelaceCard {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.hass.
       callApi<RawCalendarEvent[]>('GET', uri).
-      then((response): CalendarEvent[] => normaliseEvents(response)).
-      then((data: CalendarEvent[]): CalendarEvent[] =>
-        findActiveEvents(data, {
+      then((response): CalendarEvent[] => {
+        if (this.config?.debug) {
+          this.resetLog();
+          this.log(`timezone`, getTimeZoneOffset());
+          this.log(`calendar data`, response);
+        }
+
+        return normaliseEvents(response);
+      }).
+      then((data: CalendarEvent[]): CalendarEvent[] => {
+        const now = new Date();
+
+        if (this.config?.debug) {
+          this.log(`normaliseEvents`, data);
+          this.log(`dropAfter`, dropAfter);
+          this.log(`now`, now);
+        }
+
+        return findActiveEvents(data, {
           config: {
             settings: this.config!.settings!,
             // eslint-disable-next-line @typescript-eslint/naming-convention
             filter_events: this.config!.filter_events
           },
           dropAfter,
-          now: new Date()
-        })).
-      then((data: CalendarEvent[]): CalendarItem[] =>
-        eventsToItems(data, {
+          now
+        });
+      }).
+      then((data: CalendarEvent[]): CalendarItem[] => {
+        if (this.config?.debug) {
+          this.log(`activeElements`, data);
+        }
+
+        return eventsToItems(data, {
           settings: this.config!.settings!,
           useSummary: Boolean(this.config!.use_summary)
-        })).
-      then((data: CalendarItem[]): CalendarItem[] =>
-        !this.config!.event_grouping ?
+        });
+      }).
+      then((data: CalendarItem[]): CalendarItem[] => {
+        if (this.config?.debug) {
+          this.log(`eventsToItems`, data);
+        }
+
+        return !this.config!.event_grouping ?
           data :
-          filterDuplicatedItems(data)).
+          filterDuplicatedItems(data);
+      }).
       then((data: CalendarItem[]) => {
         this.currentItems = data;
         this.lastChanged = new Date();
@@ -160,14 +201,45 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const items = this.currentItems;
 
     if (!stateObj || !items || items.length === 0) {
-      return nothing;
+      return this.config.debug ?
+        this.renderDebug() :
+        nothing;
     }
 
     const elementInstance = this.config.card_style === 'chip' ?
       new Chip(this.config, this.hass) :
       new Card(this.config, this.hass);
 
-    return elementInstance.renderItems(items);
+    return html`${this.config.debug ? this.renderDebug() : nothing}
+        ${elementInstance.renderItems(items)} `;
+  }
+
+  protected copyDebugLogToClipboard (ev: CustomEvent): void {
+    ev.stopPropagation();
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    navigator.clipboard.writeText(JSON.stringify(this.debugdata)).
+      then(() => {
+        // eslint-disable-next-line no-alert
+        alert('Debug data copied to clipboard');
+      });
+  }
+
+  protected renderDebug () {
+    return html`<ha-card  class="debug-container">
+      <div>
+        <div class="title">
+          <h3>DEBUG LOG</h3>
+          <ha-icon-button
+              .label="copy debug log to clipboard"
+              class="copy-to-clipboard-icon"
+              @click=${this.copyDebugLogToClipboard.bind(this)}
+              >
+              <ha-icon icon="mdi:content-copy"></ha-icon>
+            </ha-icon-button>
+        </div>
+        ${this.debugdata.map(({ message, data }) => html`<b>${message}:</b><span>${JSON.stringify(data)}</span><hr >`)}
+      </div>
+    </ha-card>`;
   }
 
   public static get styles (): CSSResultGroup {
@@ -192,6 +264,14 @@ export class TrashCard extends LitElement implements LovelaceCard {
           div {
             display: grid;
             grid-gap:5px;
+          }
+          ha-card.debug-container {
+            background-color:rgb(var(--rgb-pink));;
+            color: #fff;
+          }
+          ha-card.debug-container .title {
+            display: grid;
+            grid-template-columns: auto  50px
           }
           ha-card.fullsize {
               margin-left: -17px;

@@ -63,6 +63,18 @@ body:
       required: false
   - type: textarea
     attributes:
+      label: Debug data
+      description: |
+        Copy the available debug data you from the card. You can get those debug information to update to at least version 2.0.0-beta.4.
+        Edit the trash-card item you have added, open the yaml editor and add `debug: true` to it. 
+        After that you will see some debug information. At the right corner you will see a copy icon. Click on this and icon to
+        copy the debug information to you clipboard and paste them in here. After that you can remove the added debug line from
+        your yaml configuration.
+      render: json
+    validations:
+      required: false
+  - type: textarea
+    attributes:
       label: Anything else?
       description: |
         Links? References? Anything that will give us more context about the issue you are encountering!
