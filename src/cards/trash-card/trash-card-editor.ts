@@ -23,9 +23,9 @@ import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { HomeAssistant } from '../../utils/ha';
 import type { SubElementEditorConfig } from './trash-card-pattern-editor';
 import type { HaFormSchema } from '../../utils/form/ha-form';
+import type { ItemSettings } from '../../utils/itemSettings';
 
 import './trash-card-pattern-editor';
-import type { ItemSettings } from '../../utils/itemSettings';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -326,7 +326,6 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     }
     const customLocalize = setupCustomlocalize(this.hass);
 
-    console.log('render', this.config);
     const schema = this.schema(customLocalize, this.config);
 
     return html`
