@@ -37,6 +37,7 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
    card_style?: typeof CARDSTYLES[number];
    color_mode?: typeof COLORMODES[number];
    refresh_rate?: number;
+   debug?: boolean;
  };
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
@@ -59,6 +60,7 @@ const entityCardConfigStruct = assign(
     day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),
     card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]) ])),
     color_mode: optional(union([ literal(COLORMODES[0]), literal(COLORMODES[1]) ])),
+    debug: optional(boolean()),
     pattern: optional(array(
       object({
         color: optional(string()),
