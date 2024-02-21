@@ -16,6 +16,7 @@ import { entityCardConfigStruct } from './trash-card-config';
 import { fireEvent } from 'lovelace-mushroom/src/ha';
 import { getPatternOthersSchema, getPatternSchema, getSchema } from './formSchemas';
 import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
+import { migrateConfig, needsConfigToMigrate } from './utils/migration';
 
 import type { HASSDomEvent, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
 import type { TrashCardConfig } from './trash-card-config';
@@ -23,7 +24,6 @@ import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { HomeAssistant } from '../../utils/ha';
 import type { SubElementEditorConfig } from './trash-card-pattern-editor';
 import type { HaFormSchema } from '../../utils/form/ha-form';
-import type { ItemSettings } from '../../utils/itemSettings';
 
 import './trash-card-pattern-editor';
 
@@ -110,26 +110,11 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   }
 
   public setConfig (config: Partial<TrashCardConfig>): void {
-    if (config.settings) {
-      const pattern: ItemSettings[] = [];
-      const { settings } = config as unknown as { settings: Record<ItemSettings['type'], ItemSettings> };
-
-      Object.entries(settings).forEach(([ type, data ]) => {
-        pattern.push({
-          ...data,
-          type: type as ItemSettings['type']
-        });
-      });
-
-      const migratedConfiguration = {
+    if (needsConfigToMigrate(config)) {
+      fireEvent(this, 'config-changed', { config: {
         ...configDefaults,
-        ...config,
-        pattern
-      } as TrashCardConfig;
-
-      delete migratedConfiguration.settings;
-
-      fireEvent(this, 'config-changed', { config: migratedConfiguration });
+        ...migrateConfig(config)
+      } as TrashCardConfig });
 
       return;
     }
