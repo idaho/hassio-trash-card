@@ -76,7 +76,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
       hold_action: {
         action: 'more-info'
       },
-      ...config
+      ...config,
+      debug: config.debug === true
     };
 
     this.debugger = new Debugger();
@@ -185,7 +186,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const items = this.currentItems;
 
     if (!stateObj || !items || items.length === 0) {
-      return html`${this.config.debug && html`<trash-card-debugger-card .debugger=${this.debugger}></trash-card-debugger-card>`}`;
+      return this.config.debug ? html`<trash-card-debug-card .debugger=${this.debugger}></trash-card-debug-card>` : nothing;
     }
 
     const elementInstance = this.config.card_style === 'chip' ?
@@ -193,7 +194,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
       new Card(this.config, this.hass);
 
     return html`
-      ${this.config.debug === true ? html`<trash-card-debug-card .debugger=${this.debugger}></trash-card-debug-card>` : ''}
+      ${this.config.debug ? html`<trash-card-debug-card .debugger=${this.debugger}></trash-card-debug-card>` : ``}
       ${elementInstance.renderItems(items)}
     `;
   }
