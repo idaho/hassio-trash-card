@@ -1,21 +1,15 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable no-return-assign */
-import { animations } from 'lovelace-mushroom/src/utils/entity-styles';
 import { assert } from 'superstruct';
 import { computeDarkMode } from '../../utils/computeDarkMode';
 import { GENERIC_LABELS } from 'lovelace-mushroom/src/utils/form/generic-fields';
-import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import memoizeOne from 'memoize-one';
 import setupCustomlocalize from '../../localize';
 import { TRASH_CARD_EDITOR_NAME } from './const';
 import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { entityCardConfigStruct } from './trash-card-config';
-import { fireEvent } from 'lovelace-mushroom/src/ha';
 import { getPatternOthersSchema, getPatternSchema, getSchema } from './formSchemas';
-import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
+import { fireEvent } from '../../utils/fireEvent';
 
 import type { HASSDomEvent, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
 import type { TrashCardConfig } from './trash-card-config';
@@ -61,12 +55,6 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   @state() private subElementEditorConfig?: SubElementEditorConfig;
 
   @state() private readonly schema = memoizeOne(getSchema);
-
-  public connectedCallback (): void {
-    super.connectedCallback();
-    // eslint-disable-next-line no-void
-    void loadHaComponents();
-  }
 
   public setConfig (config: Partial<TrashCardConfig>): void {
     assert(config, entityCardConfigStruct);
@@ -251,10 +239,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
         .computeHelper=${this.computeHelper}
         @value-changed=${this.valueChanged}
       ></ha-form>
-      <ha-expansion-panel 
-        id="pattern-expansion-panel" 
-        outlined
-        >
+      <ha-expansion-panel id="pattern-expansion-panel" outlined >
         <div slot="header" role="heading" aria-level="3" >
           <ha-icon icon="mdi:image-filter-center-focus">
           </ha-icon>
@@ -288,18 +273,8 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
   public static get styles (): CSSResultGroup {
     return [
-      animations,
       css`
-        :host {
-            ${defaultColorCss}
-        }
-        :host([dark-mode]) {
-            ${defaultDarkColorCss}
-        }
-        :host {
-            ${themeColorCss}
-            ${themeVariables}
-        }
+      
 
         #trashcard-pattern-editor header {
           display: flex;

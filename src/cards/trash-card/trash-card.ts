@@ -1,21 +1,20 @@
-import { animations } from 'lovelace-mushroom/src/utils/entity-styles';
-import { cardStyle } from 'lovelace-mushroom/src/utils/card-styles';
 import { eventsToItems } from '../../utils/eventsToItems';
 import { filterDuplicatedItems } from '../../utils/filterDuplicatedItems';
 import { findActiveEvents } from '../../utils/findActiveEvents';
 import { getDayFromDate } from '../../utils/getDayFromDate';
 import { isTodayAfter } from '../../utils/isTodayAfter';
-import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import { normaliseEvents } from '../../utils/normaliseEvents';
 import { registerCustomCard } from '../../utils/registerCustomCard';
-import { defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
 import { Chip } from './elements/chip';
 import { Card } from './elements/card';
 import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
+import { Debugger } from '../../utils/debugger';
+import { defaultHaCardStyle } from '../../utils/defaultHaCardStyle';
+
+import './elements/debug';
 
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { LovelaceCard, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
@@ -58,15 +57,9 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
   @property() private endDate: Date = new Date();
 
-  @property() private debugdata: { message: string; data: any }[] = [];
+  @property() private debugger?: Debugger;
 
   private lastChanged?: Date;
-
-  public connectedCallback () {
-    super.connectedCallback();
-    // eslint-disable-next-line no-void
-    void loadHaComponents();
-  }
 
   // eslint-disable-next-line class-methods-use-this
   public getCardSize (): number | Promise<number> {
@@ -83,8 +76,11 @@ export class TrashCard extends LitElement implements LovelaceCard {
       hold_action: {
         action: 'more-info'
       },
-      ...config
+      ...config,
+      debug: config.debug === true
     };
+
+    this.debugger = new Debugger();
   }
 
   public setDateRange () {
@@ -92,17 +88,6 @@ export class TrashCard extends LitElement implements LovelaceCard {
     this.endDate = new Date();
 
     this.endDate.setDate(this.endDate.getDate() + (this.config?.next_days ?? 2));
-  }
-
-  protected resetLog () {
-    this.debugdata = [];
-  }
-
-  protected log (message: string, data: any) {
-    this.debugdata.push({
-      message,
-      data
-    });
   }
 
   protected fetchCurrentTrashData () {
@@ -123,10 +108,10 @@ export class TrashCard extends LitElement implements LovelaceCard {
     this.hass.
       callApi<RawCalendarEvent[]>('GET', uri).
       then((response): CalendarEvent[] => {
-        if (this.config?.debug) {
-          this.resetLog();
-          this.log(`timezone`, getTimeZoneOffset());
-          this.log(`calendar data`, response);
+        if (this.debugger) {
+          this.debugger.reset();
+          this.debugger.log(`timezone`, getTimeZoneOffset());
+          this.debugger.log(`calendar data`, response);
         }
 
         return normaliseEvents(response);
@@ -134,10 +119,10 @@ export class TrashCard extends LitElement implements LovelaceCard {
       then((data: CalendarEvent[]): CalendarEvent[] => {
         const now = new Date();
 
-        if (this.config?.debug) {
-          this.log(`normaliseEvents`, data);
-          this.log(`dropAfter`, dropAfter);
-          this.log(`now`, now);
+        if (this.debugger) {
+          this.debugger.log(`normaliseEvents`, data);
+          this.debugger.log(`dropAfter`, dropAfter);
+          this.debugger.log(`now`, now);
         }
 
         return findActiveEvents(data, {
@@ -151,8 +136,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
         });
       }).
       then((data: CalendarEvent[]): CalendarItem[] => {
-        if (this.config?.debug) {
-          this.log(`activeElements`, data);
+        if (this.debugger) {
+          this.debugger.log(`activeElements`, data);
         }
 
         return eventsToItems(data, {
@@ -161,8 +146,8 @@ export class TrashCard extends LitElement implements LovelaceCard {
         });
       }).
       then((data: CalendarItem[]): CalendarItem[] => {
-        if (this.config?.debug) {
-          this.log(`eventsToItems`, data);
+        if (this.debugger) {
+          this.debugger.log(`eventsToItems`, data);
         }
 
         return !this.config!.event_grouping ?
@@ -201,77 +186,28 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const items = this.currentItems;
 
     if (!stateObj || !items || items.length === 0) {
-      return this.config.debug ?
-        this.renderDebug() :
-        nothing;
+      return this.config.debug ? html`<trash-card-debug-card .debugger=${this.debugger}></trash-card-debug-card>` : nothing;
     }
 
     const elementInstance = this.config.card_style === 'chip' ?
       new Chip(this.config, this.hass) :
       new Card(this.config, this.hass);
 
-    return html`${this.config.debug ? this.renderDebug() : nothing}
-        ${elementInstance.renderItems(items)} `;
-  }
-
-  protected copyDebugLogToClipboard (ev: CustomEvent): void {
-    ev.stopPropagation();
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    navigator.clipboard.writeText(JSON.stringify(this.debugdata)).
-      then(() => {
-        // eslint-disable-next-line no-alert
-        alert('Debug data copied to clipboard');
-      });
-  }
-
-  protected renderDebug () {
-    return html`<ha-card  class="debug-container">
-      <div>
-        <div class="title">
-          <h3>DEBUG LOG</h3>
-          <ha-icon-button
-              .label="copy debug log to clipboard"
-              class="copy-to-clipboard-icon"
-              @click=${this.copyDebugLogToClipboard.bind(this)}
-              >
-              <ha-icon icon="mdi:content-copy"></ha-icon>
-            </ha-icon-button>
-        </div>
-        ${this.debugdata.map(({ message, data }) => html`<b>${message}:</b><span>${JSON.stringify(data)}</span><hr >`)}
-      </div>
-    </ha-card>`;
+    return html`
+      ${this.config.debug ? html`<trash-card-debug-card .debugger=${this.debugger}></trash-card-debug-card>` : ``}
+      ${elementInstance.renderItems(items)}
+    `;
   }
 
   public static get styles (): CSSResultGroup {
     return [
-      animations,
-      css`
-          :host {
-              ${defaultColorCss}
-          }
-          :host([dark-mode]) {
-              ${defaultDarkColorCss}
-          }
-          :host {
-              ${themeColorCss}
-              ${themeVariables}
-          }
-        `,
-      cardStyle,
+      defaultHaCardStyle,
       ...Chip.getStyles(),
       ...Card.getStyles(),
       css`
           div {
             display: grid;
             grid-gap:5px;
-          }
-          ha-card.debug-container {
-            background-color:rgb(var(--rgb-pink));;
-            color: #fff;
-          }
-          ha-card.debug-container .title {
-            display: grid;
-            grid-template-columns: auto  50px
           }
           ha-card.fullsize {
               margin-left: -17px;
