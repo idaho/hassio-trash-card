@@ -11,7 +11,6 @@ import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
 import './container';
 
 import type { PropertyValues } from 'lit';
-import type { LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
 import type { TrashCardConfig } from './trash-card-config';
 import type { HomeAssistant } from '../../utils/ha';
 import type { CalendarItem } from '../../utils/calendarItem';
@@ -26,10 +25,10 @@ registerCustomCard({
 export class TrashCard extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  public static async getConfigElement (): Promise<LovelaceCardEditor> {
+  public static async getConfigElement () {
     await import('./trash-card-editor');
 
-    return document.createElement(TRASH_CARD_EDITOR_NAME) as LovelaceCardEditor;
+    return document.createElement(TRASH_CARD_EDITOR_NAME);
   }
 
   public static async getStubConfig (hass: HomeAssistant): Promise<Partial<TrashCardConfig>> {

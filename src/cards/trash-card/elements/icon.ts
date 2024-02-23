@@ -4,8 +4,8 @@ import { customElement, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 import { styleMap } from 'lit/directives/style-map.js';
 
+import type { HomeAssistant } from '../../../utils/ha';
 import type { CardStyleConfig } from '../trash-card-config';
-import type { HomeAssistant } from 'lovelace-mushroom/src/ha';
 import type { CalendarItem } from '../../../utils/calendarItem';
 
 @customElement(`${TRASH_CARD_NAME}-element-icon`)

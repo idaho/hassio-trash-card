@@ -3,12 +3,12 @@ import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { customElement, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 
+import '../items/chip';
+
+import type { HomeAssistant } from '../../../utils/ha';
 import type { TrashCardConfig } from '../trash-card-config';
 import type { HassEntity } from 'home-assistant-js-websocket';
-import type { HomeAssistant } from 'lovelace-mushroom/src/ha';
 import type { CalendarItem } from '../../../utils/calendarItem';
-
-import '../items/chip';
 
 @customElement(`${TRASH_CARD_NAME}-chips-container`)
 class Chips extends LitElement {

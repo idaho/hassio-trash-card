@@ -12,8 +12,8 @@ import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import '../elements/icon';
 
 import type { CardStyleConfig } from '../trash-card-config';
-import type { HomeAssistant } from 'lovelace-mushroom/src/ha';
 import type { CalendarItem } from '../../../utils/calendarItem';
+import type { HomeAssistant } from '../../../utils/ha';
 
 @customElement(`${TRASH_CARD_NAME}-item-card`)
 class ItemCard extends LitElement {

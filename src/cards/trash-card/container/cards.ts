@@ -3,12 +3,12 @@ import { styleMap } from 'lit/directives/style-map.js';
 import { customElement, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 
+import '../items/card';
+
 import type { TrashCardConfig } from '../trash-card-config';
 import type { HassEntity } from 'home-assistant-js-websocket';
-import type { HomeAssistant } from 'lovelace-mushroom/src/ha';
 import type { CalendarItem } from '../../../utils/calendarItem';
-
-import '../items/card';
+import type { HomeAssistant } from '../../../utils/ha';
 
 @customElement(`${TRASH_CARD_NAME}-cards-container`)
 class Cards extends LitElement {
