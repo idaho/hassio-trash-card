@@ -9,7 +9,7 @@
             "day_style": {
                 "values": {
                     "default": "Date",
-                    "compteur": "jours jusqu'à"
+                    "counter": "jours jusqu'à"
                 }
             },
             "layout_picker": {
