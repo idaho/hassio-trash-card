@@ -71,7 +71,7 @@ class IconCard extends LitElement {
         :host {
           --ha-card-background: transparent;
           --ha-card-border-width: 0px;
-          --mdc-icon-size: calc(var(--trash-card-icon-size, 40px) * 0.8);
+          --mdc-icon-size: var(--trash-card-icon-size, 40px);
         
         }
         ha-card {
@@ -83,12 +83,6 @@ class IconCard extends LitElement {
         }
         mushroom-card {
           align-self: center;
-        }
-        .nextEvent {
-          --mdc-icon-size: var(--trash-card-icon-size, 40px);
-        }
-        .futureEvent {
-          --mdc-icon-size: calc(var(--trash-card-icon-size, 40px) * 0.6);
         }
         .badge {
           display: inline-grid;
