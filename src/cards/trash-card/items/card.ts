@@ -1,13 +1,11 @@
 import { computeRTL } from 'lovelace-mushroom/src/ha';
-import { LitElement, html, nothing } from 'lit';
-import { computeAppearance } from 'lovelace-mushroom/src/utils/appearance';
-import { computeRgbColor } from 'lovelace-mushroom/src/utils/colors';
-import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { getDateString } from '../../../utils/getDateString';
 import { customElement, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
+import { getColoredStyle } from '../../../utils/getColoredStyle';
 
 import '../elements/icon';
 
@@ -31,35 +29,22 @@ class ItemCard extends LitElement {
     // eslint-disable-next-line prefer-destructuring
     const item = this.item;
 
-    const appearance = computeAppearance({ layout: this.config.layout });
-
     const rtl = computeRTL(this.hass);
 
+    const { color_mode, hide_time_range, day_style, layout } = this.config;
+
     const { label } = item;
-    const color = item.color ?? 'disabled';
 
-    const backgroundStyle = {};
+    const style = {
+      ...getColoredStyle(color_mode, item)
+    };
 
-    if (this.config.color_mode !== 'icon' && color !== 'disabled') {
-      const rgbColor = computeRgbColor(color);
-
-      backgroundStyle['background-color'] = `rgba(${rgbColor}, 0.5)`;
-    }
-
-    const secondary = getDateString(item, this.config.hide_time_range ?? false, this.config.day_style, this.hass);
-
-    const cssClassMap = classMap({
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      'fill-container': appearance.fill_container
-    });
+    const secondary = getDateString(item, hide_time_range ?? false, day_style, this.hass);
 
     return html`
-      <ha-card class=${cssClassMap} style=${styleMap(backgroundStyle)}>
-        <mushroom-card .appearance=${appearance} ?rtl=${rtl}>
-          <mushroom-state-item
-              ?rtl=${rtl}
-              .appearance=${appearance}
-          >
+      <ha-card style=${styleMap(style)}>
+        <mushroom-card .appearance=${{ layout }} ?rtl=${rtl}>
+          <mushroom-state-item .appearance=${{ layout }} ?rtl=${rtl}>
             <trash-card-element-icon
               .hass=${this.hass}
               .config=${this.config}
@@ -80,7 +65,16 @@ class ItemCard extends LitElement {
 
   public static get styles () {
     return [
-      defaultHaCardStyle
+      defaultHaCardStyle,
+      css`
+        ha-card {
+          background: var(--trash-card-background, 
+              var(--ha-card-background, 
+                var(--card-background-color, #fff)
+              )
+            );
+        } 
+      `
     ];
   }
 }

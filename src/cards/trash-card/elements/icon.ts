@@ -1,8 +1,6 @@
 import { LitElement, css, html, nothing } from 'lit';
-import { computeRgbColor } from 'lovelace-mushroom/src/utils/colors';
 import { customElement, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
-import { styleMap } from 'lit/directives/style-map.js';
 
 import type { HomeAssistant } from '../../../utils/ha';
 import type { CardStyleConfig } from '../trash-card-config';
@@ -23,21 +21,10 @@ class ItemCard extends LitElement {
 
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     const icon = this.item.icon ?? 'mdi:delete-outline';
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    const iconColor = this.item.color ?? 'disabled';
-
-    const iconStyle = {};
-
-    if (this.config.color_mode === 'icon') {
-      const rgbColor = computeRgbColor(iconColor);
-
-      iconStyle['--icon-color'] = `rgba(${rgbColor}, 1)`;
-    }
 
     return html`<ha-state-icon
         .hass=${this.hass}
         .icon=${icon}
-        style=${styleMap(iconStyle)}
         slot=${this.slot ? this.slot : undefined}
       ></ha-state-icon>`;
   }
@@ -46,7 +33,7 @@ class ItemCard extends LitElement {
     return [
       css`
         ha-state-icon {
-          color: var(--icon-color);
+          color: var(--trash-card-icon-color);
         }
       `
     ];

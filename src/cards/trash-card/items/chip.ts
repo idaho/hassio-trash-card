@@ -1,10 +1,10 @@
 import { computeRTL } from 'lovelace-mushroom/src/ha';
-import { LitElement, html, nothing } from 'lit';
-import { computeRgbColor } from 'lovelace-mushroom/src/utils/colors';
+import { LitElement, css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { getDateString } from '../../../utils/getDateString';
 import { customElement, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
+import { getColoredStyle } from '../../../utils/getColoredStyle';
 
 import '../elements/icon';
 
@@ -30,21 +30,17 @@ class ItemChip extends LitElement {
 
     const rtl = computeRTL(this.hass);
 
-    const color = item.color ?? 'disabled';
+    const { color_mode, hide_time_range, day_style } = this.config;
 
-    const backgroundStyle = {};
+    const style = {
+      ...getColoredStyle(color_mode, item)
+    };
 
-    if (this.config.color_mode !== 'icon' && color !== 'disabled') {
-      const rgbColor = computeRgbColor(color);
-
-      backgroundStyle['--chip-background'] = `rgba(${rgbColor}, 0.5)`;
-    }
-
-    const content = getDateString(item, this.config.hide_time_range ?? false, this.config.day_style, this.hass);
+    const content = getDateString(item, hide_time_range ?? false, day_style, this.hass);
 
     return html`
       <mushroom-chip
-        style=${styleMap(backgroundStyle)}
+        style=${styleMap(style)}
         ?rtl=${rtl}
         .avatarOnly=${false}
       >
@@ -55,6 +51,20 @@ class ItemChip extends LitElement {
         ></trash-card-element-icon>
         ${content ? html`<span>${content}</span>` : nothing}
       </mushroom-chip>`;
+  }
+
+  public static get styles () {
+    return [
+      css`
+        mushroom-chip {
+          --chip-background: var(--trash-card-background, 
+              var(--ha-card-background, 
+                var(--card-background-color, #fff)
+              )
+            );
+        } 
+      `
+    ];
   }
 }
 
