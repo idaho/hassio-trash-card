@@ -93,7 +93,7 @@ export class TrashCard extends LitElement {
     this.startDate = new Date();
     this.endDate = new Date();
 
-    this.endDate.setDate(this.endDate.getDate() + (this.config?.next_days ?? 2));
+    this.endDate.setDate(this.endDate.getDate() + (this.config?.next_days ?? 2) + 1);
   }
 
   protected fetchCurrentTrashData () {
