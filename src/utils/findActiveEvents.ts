@@ -4,7 +4,7 @@ import type { CalendarEvent } from './calendarEvents';
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 
 interface Config {
-  settings: Required<TrashCardConfig>['settings'];
+  pattern: Required<TrashCardConfig>['pattern'];
   // eslint-disable-next-line @typescript-eslint/naming-convention
   filter_events: TrashCardConfig['filter_events'];
 }
@@ -20,10 +20,10 @@ const isMatchingAnyPatterns = (item: CalendarEvent, config: Config) => {
     return true;
   }
 
-  const trashTypes = Object.keys(config.settings).filter(type => type !== 'others');
-  const patterns = trashTypes.map(type => Reflect.get(config.settings, type).pattern!).filter(pattern => pattern !== null);
+  const trashTypes = config.pattern.filter(pat => pat.type !== 'others');
+  const patterns = trashTypes.map(pat => pat.pattern).filter(pattern => pattern !== undefined);
 
-  return patterns.length === 0 || patterns.find(pattern => item.content.summary.includes(pattern));
+  return patterns.length === 0 || patterns.some(pattern => item.content.summary.toLowerCase().includes(pattern!.toLowerCase()));
 };
 
 const isNotPastWholeDayEvent = (item: CalendarEvent, now: Date, dropAfter: boolean): boolean =>

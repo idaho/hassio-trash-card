@@ -61,7 +61,9 @@
                 "pattern": {
                     "title": "Upraviť vzor",
                     "edit": "upraviť",
-                    "delete": "delete",
+                    "delete": "vyma",
+                    "create": "Vytvoriť nový vzor",
+                    "new_custom_label": "Nový vzor",
                     "type": {
                         "organic": "Organický",
                         "paper": "Papiera",

@@ -7,6 +7,7 @@ import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
 import { Debugger } from '../../utils/debugger';
 import { getCalendarData } from '../../utils/getCalendarData';
 import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
+import { migrateConfig, needsConfigToMigrate } from './utils/migration';
 
 import './container';
 
@@ -20,6 +21,17 @@ registerCustomCard({
   name: 'TrashCard',
   description: 'TrashCard - indicates what type of trash will be picked up next based on your calendar entries 🗑️'
 });
+
+const configDefaults = {
+  tap_action: {
+    action: 'more-info'
+  },
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  hold_action: {
+    action: 'more-info'
+  },
+  debug: false
+};
 
 @customElement(TRASH_CARD_NAME)
 export class TrashCard extends LitElement {
@@ -54,16 +66,8 @@ export class TrashCard extends LitElement {
 
   public setConfig (config: TrashCardConfig): void {
     this.config = {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      tap_action: {
-        action: 'more-info'
-      },
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      hold_action: {
-        action: 'more-info'
-      },
-      ...config,
-      debug: config.debug === true
+      ...configDefaults,
+      ...needsConfigToMigrate(config) ? migrateConfig(config) : config
     };
 
     this.debugger = new Debugger();

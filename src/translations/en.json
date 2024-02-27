@@ -62,6 +62,8 @@
                     "title": "Edit pattern",
                     "edit": "edit",
                     "delete": "delete",
+                    "create": "Create new pattern",
+                    "new_custom_label": "New pattern",
                     "type": {
                         "organic": "Organic",
                         "paper": "Paper",

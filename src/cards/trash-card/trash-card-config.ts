@@ -1,4 +1,4 @@
-import { assign, boolean, integer, literal, object, optional, string, union } from 'superstruct';
+import { array, assign, boolean, integer, literal, object, optional, string, union } from 'superstruct';
 import { defaultConfigStruct } from '../../utils/form/defaultConfigStruct';
 
 import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/entity-config';
@@ -24,13 +24,7 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
 
  type TrashCardConfig = LovelaceCardConfig &
  EntityWithOutIcon & {
-   settings?: {
-     organic?: ItemSettings;
-     paper?: ItemSettings;
-     recycle?: ItemSettings;
-     waste?: ItemSettings;
-     others?: ItemSettings;
-   };
+   pattern?: ItemSettings[];
    next_days?: number;
    items_per_row?: number;
    filter_events?: boolean;
@@ -68,49 +62,15 @@ const entityCardConfigStruct = assign(
     card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]) ])),
     color_mode: optional(union([ literal(COLORMODES[0]), literal(COLORMODES[1]) ])),
     debug: optional(boolean()),
-
-    settings: optional(
+    pattern: optional(array(
       object({
-        organic: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string()),
-            label: optional(string()),
-            pattern: optional(string())
-          })
-        ),
-        paper: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string()),
-            label: optional(string()),
-            pattern: optional(string())
-          })
-        ),
-        recycle: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string()),
-            label: optional(string()),
-            pattern: optional(string())
-          })
-        ),
-        waste: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string()),
-            label: optional(string()),
-            pattern: optional(string())
-          })
-        ),
-        others: optional(
-          object({
-            color: optional(string()),
-            icon: optional(string())
-          })
-        )
+        color: optional(string()),
+        icon: optional(string()),
+        label: optional(string()),
+        pattern: optional(string()),
+        type: string()
       })
-    )
+    ))
   })
 );
 
