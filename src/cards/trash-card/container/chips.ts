@@ -1,22 +1,35 @@
 import { LitElement, css, html, nothing } from 'lit';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 
 import '../items/chip';
 
+import type { BaseContainerElement } from './BaseContainerElement';
 import type { HomeAssistant } from '../../../utils/ha';
 import type { TrashCardConfig } from '../trash-card-config';
 import type { HassEntity } from 'home-assistant-js-websocket';
 import type { CalendarItem } from '../../../utils/calendarItem';
 
 @customElement(`${TRASH_CARD_NAME}-chips-container`)
-class Chips extends LitElement {
-  @state() private readonly items?: CalendarItem[];
+class Chips extends LitElement implements BaseContainerElement {
+  @state() private items?: CalendarItem[];
 
-  @state() private readonly hass?: HomeAssistant;
+  @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @state() private readonly config?: TrashCardConfig;
+  @state() private config?: TrashCardConfig;
+
+  public setConfig (config?: TrashCardConfig) {
+    this.config = config;
+  }
+
+  public setItems (items?: CalendarItem[]) {
+    this.items = items;
+  }
+
+  public setHass (hass?: HomeAssistant) {
+    this.hass = hass;
+  }
 
   public render () {
     if (!this.config || !this.hass || !this.config.entity) {

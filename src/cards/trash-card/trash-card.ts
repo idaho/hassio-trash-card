@@ -14,6 +14,7 @@ import type { PropertyValues } from 'lit';
 import type { TrashCardConfig } from './trash-card-config';
 import type { HomeAssistant } from '../../utils/ha';
 import type { CalendarItem } from '../../utils/calendarItem';
+import type { BaseContainerElement } from './container/BaseContainerElement';
 
 registerCustomCard({
   type: TRASH_CARD_NAME,
@@ -23,7 +24,8 @@ registerCustomCard({
 
 @customElement(TRASH_CARD_NAME)
 export class TrashCard extends LitElement {
-  @property({ attribute: false }) public hass?: HomeAssistant;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  @state() private _hass?: HomeAssistant;
 
   public static async getConfigElement () {
     await import('./trash-card-editor');
@@ -52,6 +54,20 @@ export class TrashCard extends LitElement {
 
   private lastChanged?: Date;
 
+  public get hass (): HomeAssistant | undefined {
+    // eslint-disable-next-line no-underscore-dangle
+    return this._hass;
+  }
+
+  public set hass (hass: HomeAssistant) {
+    // eslint-disable-next-line no-underscore-dangle
+    this._hass = hass;
+    this.shadowRoot?.querySelectorAll('div > *').forEach((element: unknown) => {
+      // eslint-disable-next-line no-param-reassign
+      (element as BaseContainerElement).setHass(hass);
+    });
+  }
+
   public setConfig (config: TrashCardConfig): void {
     this.config = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -62,6 +78,7 @@ export class TrashCard extends LitElement {
       hold_action: {
         action: 'more-info'
       },
+      icon_size: 24,
       ...config,
       debug: config.debug === true
     };
@@ -122,6 +139,40 @@ export class TrashCard extends LitElement {
     return false;
   }
 
+  protected createBaseContainerElement (cardStyle: TrashCardConfig['card_style']) {
+    try {
+      const tag = `trash-card-${cardStyle ?? 'card'}s-container`;
+
+      if (customElements.get(tag)) {
+        // @ts-expect-error TS2769
+        const element = document.createElement(tag, this.config) as BaseContainerElement;
+
+        element.setConfig(this.config);
+        element.setItems(this.currentItems);
+
+        return element;
+      }
+
+      const element = document.createElement(tag) as BaseContainerElement;
+
+      customElements.whenDefined(tag).
+        then(() => {
+          customElements.upgrade(element);
+          element.setConfig(this.config);
+          element.setItems(this.currentItems);
+        }).
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        catch(() => {
+        });
+
+      return element;
+    // eslint-disable-next-line no-empty
+    } catch {
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      return undefined;
+    }
+  }
+
   protected render () {
     if (!this.config || !this.hass) {
       return nothing;
@@ -131,18 +182,16 @@ export class TrashCard extends LitElement {
       return this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : nothing;
     }
 
+    const element = this.createBaseContainerElement(this.config.card_style);
+
+    if (!element) {
+      return nothing;
+    }
+
+    element.setHass(this.hass);
+
     return html`
       ${this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : ``}
-      ${this.config.card_style === 'chip' ?
-    html`<trash-card-chips-container
-      .config=${this.config}
-      .hass=${this.hass}
-      .items=${this.currentItems}
-      ></trash-card-chips-container>` :
-    html`<trash-card-cards-container
-        .config=${this.config}
-        .hass=${this.hass}
-        .items=${this.currentItems}
-        ></trash-card-cards-container>`}`;
+      ${element}`;
   }
 }

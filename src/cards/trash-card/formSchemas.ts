@@ -112,50 +112,74 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
       type: 'grid',
       name: '',
       schema: [
-        {
-          name: 'day_style',
-          label: customLocalize(`editor.form.day_style.title`),
-          selector: {
-            select: {
-              options: [ ...DAYSTYLES ].map(control => ({
-                value: control,
-                label: customLocalize(`editor.form.day_style.values.${control}`)
-              })),
-              mode: 'dropdown'
+        ...currentValues.card_style === 'icon' ?
+          [{
+            name: 'icon_size',
+            label: customLocalize(`editor.card.generic.icon_size`),
+            selector: {
+              number: {
+                min: 10,
+                max: 160,
+                step: 1,
+                mode: 'box'
+              }
             }
-          }
-        },
-        {
-          name: 'hide_time_range',
-          label: customLocalize(`editor.card.generic.hide_time_range`),
-          selector: { boolean: { }}
-        },
-        {
-          name: 'use_summary',
-          label: customLocalize(`editor.card.generic.use_summary`),
-          selector: { boolean: {}}
-        },
-        {
-          name: 'event_grouping',
-          label: customLocalize(`editor.card.generic.event_grouping`),
-          selector: { boolean: { default: true }}
-        },
-        {
-          name: 'color_mode',
-          label: customLocalize(`editor.form.color_mode.title`),
-          selector: {
-            select: {
-              options: [ ...COLORMODES ].map(control => ({
-                value: control,
-                label: customLocalize(`editor.form.color_mode.values.${control}`)
-              })),
-              mode: 'dropdown'
+          }] as HaFormSchema[] :
+          [],
+        ...currentValues.card_style === 'card' || currentValues.card_style === 'chip' ?
+          [{
+            name: 'day_style',
+            label: customLocalize(`editor.form.day_style.title`),
+            selector: {
+              select: {
+                options: [ ...DAYSTYLES ].map(control => ({
+                  value: control,
+                  label: customLocalize(`editor.form.day_style.values.${control}`)
+                })),
+                mode: 'dropdown'
+              }
             }
-          }
-        }
+          }] as HaFormSchema[] :
+          [],
+        ...currentValues.card_style === 'card' || currentValues.card_style === 'chip' ?
+          [{
+            name: 'hide_time_range',
+            label: customLocalize(`editor.card.generic.hide_time_range`),
+            selector: { boolean: { }}
+          }] as HaFormSchema[] :
+          [],
+        ...currentValues.card_style === 'card' ?
+          [{
+            name: 'use_summary',
+            label: customLocalize(`editor.card.generic.use_summary`),
+            selector: { boolean: {}}
+          }] as HaFormSchema[] :
+          [],
+        ...currentValues.card_style === 'card' || currentValues.card_style === 'chip' ?
+          [{
+            name: 'event_grouping',
+            label: customLocalize(`editor.card.generic.event_grouping`),
+            selector: { boolean: { default: true }}
+          }] as HaFormSchema[] :
+          [],
+        ...currentValues.card_style === 'card' || currentValues.card_style === 'chip' ?
+          [{
+            name: 'color_mode',
+            label: customLocalize(`editor.form.color_mode.title`),
+            selector: {
+              select: {
+                options: [ ...COLORMODES ].map(control => ({
+                  value: control,
+                  label: customLocalize(`editor.form.color_mode.values.${control}`)
+                })),
+                mode: 'dropdown'
+              }
+            }
+          }] as HaFormSchema[] :
+          []
       ]
     },
-    ...currentValues.card_style !== 'chip' ?
+    ...currentValues.card_style === 'card' ?
       [{
         type: 'grid',
         name: '',
@@ -189,7 +213,7 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
           }
         ]
       }] as HaFormSchema[] :
-      [] as HaFormSchema[]
+      []
   ];
 
   const schema: HaFormSchema[] = [
