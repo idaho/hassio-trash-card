@@ -69,10 +69,8 @@ class IconCard extends LitElement {
       defaultHaCardStyle,
       css`
         :host {
-          --ha-card-background: transparent;
           --ha-card-border-width: 0px;
-          --mdc-icon-size: var(--trash-card-icon-size, 40px);
-        
+          --ha-card-background: transparent;
         }
         ha-card {
           height: 100%;
@@ -80,6 +78,7 @@ class IconCard extends LitElement {
           display: grid;
           grid-template-columns: 1fr;
           grid-template-rows: 1fr auto;
+          --mdc-icon-size: var(--trash-card-icon-size, 40px);
         }
         mushroom-card {
           align-self: center;
