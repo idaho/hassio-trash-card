@@ -17,7 +17,8 @@
                 "title": "Darstellen als",
                 "values": {
                     "card": "Standard Karte",
-                    "chip": "Chip Karte"
+                    "chip": "Chip Karte",
+                    "icon": "Icon"
                 }
             },
             "color_mode": {
@@ -55,7 +56,8 @@
                 "full_size": "Karte ohne Seitenrand",
                 "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden",
                 "hide_time_range": "Uhrzeit ausblenden",
-                "event_grouping": "Nur das nächste Ereignis je Muster anzeigen"
+                "event_grouping": "Nur das nächste Ereignis je Muster anzeigen",
+                "icon_size": "Icon größe"
             },
             "trash": {
                 "pattern": {

@@ -17,7 +17,8 @@
                 "title": "Wyświetl jako",
                 "values": {
                     "card": "Karta standardowa",
-                    "chip": "Karta chipowa"
+                    "chip": "Karta chipowa",
+                    "icon": "Symbol"
                 }
             },
             "color_mode": {
@@ -55,7 +56,8 @@
                 "full_size": "Karta bez marginesu",
                 "use_summary": "Podsumowanie zamiast oznaczenia",
                 "hide_time_range": "Ukryj czas",
-                "event_grouping": "Wyświetla tylko następne zdarzenie dla wzorca"
+                "event_grouping": "Wyświetla tylko następne zdarzenie dla wzorca",
+                "icon_size": "Rozmiar ikony"
             },
             "trash": {
                 "pattern": {
