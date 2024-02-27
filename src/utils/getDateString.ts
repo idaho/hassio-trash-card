@@ -5,8 +5,8 @@ import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 import type { HomeAssistant } from './ha';
 import type { CalendarItem } from './calendarItem';
 
-const getDateString = (item: CalendarItem, excludeTime?: boolean, config?: TrashCardConfig, hass?: HomeAssistant): string => {
-  if (!hass || !config) {
+const getDateString = (item: CalendarItem, excludeTime?: boolean, dayStyle?: TrashCardConfig['day_style'], hass?: HomeAssistant): string => {
+  if (!hass) {
     return '';
   }
 
@@ -42,7 +42,7 @@ const getDateString = (item: CalendarItem, excludeTime?: boolean, config?: Trash
     return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
   }
 
-  if (config.day_style === 'counter') {
+  if (dayStyle === 'counter') {
     const oneDay = 24 * 60 * 60 * 1_000;
 
     const todayMorning = new Date();

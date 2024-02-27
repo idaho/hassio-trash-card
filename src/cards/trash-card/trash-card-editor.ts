@@ -1,22 +1,17 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable no-return-assign */
-import { animations } from 'lovelace-mushroom/src/utils/entity-styles';
 import { assert } from 'superstruct';
 import { computeDarkMode } from '../../utils/computeDarkMode';
-import { GENERIC_LABELS } from 'lovelace-mushroom/src/utils/form/generic-fields';
-import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
 import memoizeOne from 'memoize-one';
 import setupCustomlocalize from '../../localize';
 import { TRASH_CARD_EDITOR_NAME } from './const';
 import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
 import { entityCardConfigStruct } from './trash-card-config';
-import { fireEvent } from 'lovelace-mushroom/src/ha';
 import { getPatternOthersSchema, getPatternSchema, getSchema } from './formSchemas';
-import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 import { migrateConfig, needsConfigToMigrate } from './utils/migration';
+import { fireEvent } from '../../utils/fireEvent';
+
+import './trash-card-pattern-editor';
 
 import type { HASSDomEvent, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
 import type { TrashCardConfig } from './trash-card-config';
@@ -24,8 +19,6 @@ import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { HomeAssistant } from '../../utils/ha';
 import type { SubElementEditorConfig } from './trash-card-pattern-editor';
 import type { HaFormSchema } from '../../utils/form/ha-form';
-
-import './trash-card-pattern-editor';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -36,18 +29,6 @@ declare global {
     };
   }
 }
-
-const OTHER_LABELS = new Set([
-  'next_days',
-  'filter_events',
-  'full_size',
-  'drop_todayevents_from',
-  'use_summary',
-  'day_style',
-  'card_style',
-  'hide_time_range',
-  'event_grouping'
-]);
 
 const configDefaults = {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -95,19 +76,11 @@ const configDefaults = {
 class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   @state() private config?: TrashCardConfig;
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   @state() private subElementEditorConfig?: SubElementEditorConfig;
 
   @state() private readonly schema = memoizeOne(getSchema);
-
-  public connectedCallback (): void {
-    super.connectedCallback();
-    // eslint-disable-next-line no-void
-    void loadHaComponents();
-  }
 
   public setConfig (config: Partial<TrashCardConfig>): void {
     if (needsConfigToMigrate(config)) {
@@ -141,39 +114,18 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
   private readonly computeLabel = (schema: HaFormSchema) => {
     if (!this.hass) {
-      return schema.name;
-    }
-
-    const customLocalize = setupCustomlocalize(this.hass);
-
-    if (schema.label) {
       return schema.label;
     }
 
-    if (GENERIC_LABELS.includes(schema.name) || OTHER_LABELS.has(schema.name)) {
-      return customLocalize(`editor.card.generic.${schema.name}`);
-    }
-
-    if (schema.name === 'items_per_row') {
-      return this.hass.localize('ui.panel.lovelace.editor.card.grid.columns');
-    }
-    if (schema.name === 'icon') {
-      return this.hass.localize('ui.panel.lovelace.editor.card.generic.icon');
-    }
-    if (schema.name === 'color') {
-      return this.hass.localize('ui.panel.lovelace.editor.card.tile.color');
-    }
-
-    return this.hass.localize(`ui.panel.lovelace.editor.card.generic.${schema.name}`);
+    return schema.label ?? '';
   };
 
-  // eslint-disable-next-line class-methods-use-this
   private readonly computeHelper = (schema: HaFormSchema) => {
-    if (schema.helper) {
-      return schema.helper;
+    if (!this.hass) {
+      return schema.name;
     }
 
-    return '';
+    return schema.helper ?? '';
   };
 
   private renderFormPatternsEditor () {
@@ -185,8 +137,8 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
     if (this.subElementEditorConfig) {
       const patternSchema = this.subElementEditorConfig.elementConfig?.type === 'others' ?
-        getPatternOthersSchema() :
-        getPatternSchema(customLocalize);
+        getPatternOthersSchema(this.hass.localize) :
+        getPatternSchema(customLocalize, this.hass.localize);
 
       return html`
         <div class="header" id="trashcard-pattern-editor">
@@ -311,7 +263,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     }
     const customLocalize = setupCustomlocalize(this.hass);
 
-    const schema = this.schema(customLocalize, this.config);
+    const schema = this.schema(customLocalize, this.config, this.hass.localize);
 
     return html`
       <ha-form
@@ -322,10 +274,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
         .computeHelper=${this.computeHelper}
         @value-changed=${this.valueChanged}
       ></ha-form>
-      <ha-expansion-panel 
-        id="pattern-expansion-panel" 
-        outlined
-        >
+      <ha-expansion-panel id="pattern-expansion-panel" outlined >
         <div slot="header" role="heading" aria-level="3" >
           <ha-icon icon="mdi:image-filter-center-focus">
           </ha-icon>
@@ -359,24 +308,13 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
   public static get styles (): CSSResultGroup {
     return [
-      animations,
       css`
-        :host {
-            ${defaultColorCss}
-        }
-        :host([dark-mode]) {
-            ${defaultDarkColorCss}
-        }
-        :host {
-            ${themeColorCss}
-            ${themeVariables}
-        }
-
         #trashcard-pattern-editor header {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
+
         #trashcard-pattern-editor .back-title {
             display: flex;
             align-items: center;
@@ -394,12 +332,15 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
           display: flex !important;
           flex-direction: column;
         }
+
         #pattern-expansion-panel ha-form {
           display: block;
         }
+
         #pattern-expansion-panel .content {
           padding: 12px;
         }
+
         #pattern-expansion-panel {
           display: block;
           --expansion-panel-content-padding: 0;

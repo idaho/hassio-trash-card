@@ -4,9 +4,10 @@ import type { TrashCardConfig } from './trash-card-config';
 import type { HaFormSchema } from '../../utils/form/ha-form';
 import type setupCustomlocalize from '../../localize';
 
-const getPatternOthersSchema = () => [
+const getPatternOthersSchema = (localize: (key: string, ...args: any) => string) => [
   {
     name: 'icon',
+    label: localize(`ui.panel.lovelace.editor.card.generic.icon`),
     selector: {
       icon: {}
     },
@@ -14,11 +15,12 @@ const getPatternOthersSchema = () => [
   },
   {
     name: 'color',
+    label: localize(`ui.panel.lovelace.editor.card.tile.color`),
     selector: { ui_color: {}}
   }
 ];
 
-const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>) => [
+const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, localize: (key: string, ...args: any) => string) => [
   {
     label: customLocalize(`editor.card.trash.pattern.fields.label`),
     name: 'label',
@@ -26,7 +28,7 @@ const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>
       text: {}
     }
   },
-  ...getPatternOthersSchema(),
+  ...getPatternOthersSchema(localize),
   {
     label: customLocalize(`editor.card.trash.pattern.fields.pattern`),
     name: 'pattern',
@@ -36,7 +38,7 @@ const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>
   }
 ];
 
-const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, currentValues: TrashCardConfig) => {
+const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, currentValues: TrashCardConfig, localize: (key: string, ...args: any) => string) => {
   const settings: HaFormSchema[] = [
 
     {
@@ -44,8 +46,14 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
       name: '',
       schema: [
 
-        { name: 'filter_events', selector: { boolean: {}}},
-        { name: 'drop_todayevents_from',
+        {
+          name: 'filter_events',
+          label: customLocalize(`editor.card.generic.filter_events`),
+          selector: { boolean: {}}
+        },
+        {
+          name: 'drop_todayevents_from',
+          label: customLocalize(`editor.card.generic.drop_todayevents_from`),
           default: {
             hours: 11,
             minutes: 0,
@@ -54,9 +62,11 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
           selector: {
             time: {
             }
-          }},
+          }
+        },
         {
           name: 'next_days',
+          label: customLocalize(`editor.card.generic.next_days`),
           selector: {
             number: {
               min: 1,
@@ -115,9 +125,21 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
             }
           }
         },
-        { name: 'hide_time_range', selector: { boolean: { }}},
-        { name: 'use_summary', selector: { boolean: {}}},
-        { name: 'event_grouping', selector: { boolean: { default: true }}},
+        {
+          name: 'hide_time_range',
+          label: customLocalize(`editor.card.generic.hide_time_range`),
+          selector: { boolean: { }}
+        },
+        {
+          name: 'use_summary',
+          label: customLocalize(`editor.card.generic.use_summary`),
+          selector: { boolean: {}}
+        },
+        {
+          name: 'event_grouping',
+          label: customLocalize(`editor.card.generic.event_grouping`),
+          selector: { boolean: { default: true }}
+        },
         {
           name: 'color_mode',
           label: customLocalize(`editor.form.color_mode.title`),
@@ -138,7 +160,11 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
         type: 'grid',
         name: '',
         schema: [
-          { name: 'layout', selector: { mush_layout: {}}}
+          {
+            name: 'layout',
+            label: customLocalize(`editor.card.generic.layout`),
+            selector: { mush_layout: {}}
+          }
         ]
       },
       {
@@ -146,14 +172,21 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
         name: '',
         schema: [
 
-          { name: 'full_size', selector: { boolean: {}}},
-          { name: 'items_per_row',
+          {
+            name: 'full_size',
+            label: customLocalize(`editor.card.generic.full_size`),
+            selector: { boolean: {}}
+          },
+          {
+            name: 'items_per_row',
+            label: localize(`ui.panel.lovelace.editor.card.grid.columns`),
             selector: { number: {
               min: 1,
               max: 6,
               step: 1,
               mode: 'box'
-            }}}
+            }}
+          }
         ]
       }] as HaFormSchema[] :
       [] as HaFormSchema[]

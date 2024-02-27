@@ -40,7 +40,8 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
    debug?: boolean;
  };
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment, @typescript-eslint/prefer-ts-expect-error
+ type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'color_mode' | 'layout'>;
+
 const entityCardConfigStruct = assign(
   defaultConfigStruct,
   object({
@@ -81,6 +82,7 @@ export {
 };
 
 export type {
-  TrashCardConfig
+  TrashCardConfig,
+  CardStyleConfig
 };
 

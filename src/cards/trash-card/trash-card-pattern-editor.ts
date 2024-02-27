@@ -1,11 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable no-return-assign */
-import { fireEvent } from 'lovelace-mushroom/src/ha';
 import { guard } from 'lit/directives/guard.js';
 import setupCustomlocalize from '../../localize';
 import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { fireEvent } from '../../utils/fireEvent';
 
 import type { TrashCardConfig } from './trash-card-config';
 import type { CSSResultGroup, PropertyValues } from 'lit';

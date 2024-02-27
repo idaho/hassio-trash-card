@@ -10,21 +10,21 @@
                 "title": "Afficher l'heure de l'événement en tant que",
                 "values": {
                     "default": "Date",
-                    "compteur": "jours jusqu'à"
+                    "counter": "jours jusqu'à"
                 }
             },
             "card_style": {
                 "title": "Représenter comme",
                 "values": {
-                    "card" : "carte standard",
-                    "chip" : "carte à puce"
+                    "card": "carte standard",
+                    "chip": "carte à puce"
                 }
             },
             "color_mode": {
-                "title" : "Appliquer une couleur à",
-                "values" : {
-                    "background" : "Contexte",
-                    "icon" : "Icône"
+                "title": "Appliquer une couleur à",
+                "values": {
+                    "background": "Contexte",
+                    "icon": "Icône"
                 }
             },
             "layout_picker": {
