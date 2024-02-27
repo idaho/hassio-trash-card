@@ -56,7 +56,11 @@ class Cards extends LitElement {
       css`
         .card-container {
           display: grid;
+          grid-auto-rows: 1fr;
           grid-gap: var(--grid-card-gap, 2px);
+        }
+        trash-card-item-card {
+          grid-row: auto / span 1;
         }
       `
     ];

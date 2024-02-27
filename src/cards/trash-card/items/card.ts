@@ -68,6 +68,8 @@ class ItemCard extends LitElement {
       defaultHaCardStyle,
       css`
         ha-card {
+          justify-content: space-between;
+          height: 100%;
           background: var(--trash-card-background, 
               var(--ha-card-background, 
                 var(--card-background-color, #fff)
