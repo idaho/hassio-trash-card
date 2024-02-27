@@ -12,7 +12,8 @@ const DAYSTYLES = [
 
 const CARDSTYLES = [
   'card',
-  'chip'
+  'chip',
+  'icon'
 ] as const;
 
 const COLORMODES = [
@@ -40,7 +41,7 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
    debug?: boolean;
  };
 
- type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'color_mode' | 'layout'>;
+ type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'color_mode' | 'layout' | 'icon_size'>;
 
 const entityCardConfigStruct = assign(
   defaultConfigStruct,
@@ -59,9 +60,11 @@ const entityCardConfigStruct = assign(
     drop_todayevents_from: optional(string()),
     event_grouping: optional(boolean()),
     day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),
-    card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]) ])),
+    card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]), literal(CARDSTYLES[2]) ])),
     color_mode: optional(union([ literal(COLORMODES[0]), literal(COLORMODES[1]) ])),
     debug: optional(boolean()),
+    icon_size: optional(integer()),
+
     pattern: optional(array(
       object({
         color: optional(string()),

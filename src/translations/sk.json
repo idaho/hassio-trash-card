@@ -17,7 +17,8 @@
                 "title": "Zobrazenie ako",
                 "values": {
                     "card": "Štandardná karta",
-                    "chip": "čipová karta"
+                    "chip": "čipová karta",
+                    "icon": "Ikona"
                 }
             },
             "color_mode": {
@@ -55,7 +56,8 @@
                 "full_size": "Karta bez marže",
                 "use_summary": "Zhrnutie udalosti namiesto označenia",
                 "hide_time_range": "čas skrývania",
-                "event_grouping": "Zobrazenie iba nasledujúcej udalosti na vzor"
+                "event_grouping": "Zobrazenie iba nasledujúcej udalosti na vzor",
+                "icon_size": "Veľkosť ikony"
             },
             "trash": {
                 "pattern": {

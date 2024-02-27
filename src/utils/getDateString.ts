@@ -1,5 +1,6 @@
 import setupCustomlocalize from '../localize';
 import { getDayFromDate } from './getDayFromDate';
+import { daysTill } from './daysTill';
 
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 import type { HomeAssistant } from './ha';
@@ -43,15 +44,7 @@ const getDateString = (item: CalendarItem, excludeTime?: boolean, dayStyle?: Tra
   }
 
   if (dayStyle === 'counter') {
-    const oneDay = 24 * 60 * 60 * 1_000;
-
-    const todayMorning = new Date();
-
-    todayMorning.setHours(0);
-    todayMorning.setMinutes(0);
-    todayMorning.setSeconds(0);
-
-    const daysLeft = Math.round(Math.abs((todayMorning.getTime() - item.date.start.getTime()) / oneDay));
+    const daysLeft = daysTill(item);
 
     return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
   }

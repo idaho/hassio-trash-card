@@ -17,7 +17,8 @@
                 "title": "Display as",
                 "values": {
                     "card": "Standard card",
-                    "chip": "Chip card"
+                    "chip": "Chip card",
+                    "icon": "Icon"
                 }
             },
             "color_mode": {
@@ -55,7 +56,8 @@
                 "full_size": "Card without margin",
                 "use_summary": "Event summary instead of label",
                 "hide_time_range": "Hide time",
-                "event_grouping": "Only display the next event per pattern"
+                "event_grouping": "Only display the next event per pattern",
+                "icon_size": "Icon size"
             },
             "trash": {
                 "pattern": {

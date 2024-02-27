@@ -17,7 +17,8 @@
         "title": "Visualizza come",
         "values": {
           "card": "Carta standard",
-          "chip": "Carta chip"
+          "chip": "Carta chip",
+          "icon": "Icona"
         }
       },
       "color_mode": {
@@ -55,7 +56,8 @@
         "full_size": "Card senza margini",
         "use_summary": "Usa l'oggetto dell'evento al posto dell'etichetta",
         "hide_time_range": "nascondere il tempo",
-        "event_grouping": "Visualizza solo l'evento successivo per schema"
+        "event_grouping": "Visualizza solo l'evento successivo per schema",
+        "icon_size": "Dimensione dell'icona"
       },
       "trash": {
         "pattern": {

@@ -17,7 +17,8 @@
                 "title": "Représenter comme",
                 "values": {
                     "card": "carte standard",
-                    "chip": "carte à puce"
+                    "chip": "carte à puce",
+                    "icon": "Icône"
                 }
             },
             "color_mode": {
@@ -55,15 +56,16 @@
                 "full_size": "Carte sans marge",
                 "use_summary": "Résumé de l'événement au lieu de l'étiquette",
                 "hide_time_range": "cacher le temps",
-                "event_grouping": "Afficher uniquement l'événement suivant par modèle"
+                "event_grouping": "Afficher uniquement l'événement suivant par modèle",
+                "icon_size" : "taille de l'icône"
             },
             "trash": {
                 "pattern": {
                     "title": "Modifier le modèle",
                     "edit": "Modifier",
                     "delete": "Supprimer",
-                    "create" : "Créer un nouveau modèle",
-                    "new_custom_label" : "Nouveau modèle",
+                    "create": "Créer un nouveau modèle",
+                    "new_custom_label": "Nouveau modèle",
                     "type": {
                         "organic": "Organique",
                         "paper": "Papier",
