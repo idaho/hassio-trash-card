@@ -34,7 +34,7 @@ const getCalendarData = async (
 
   const activeEvents = findActiveEvents(normalisedEvents, {
     config: {
-      settings: config.settings!,
+      pattern: config.pattern!,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       filter_events: config.filter_events
     },
@@ -45,7 +45,7 @@ const getCalendarData = async (
   debuggerInstance.log(`activeElements`, activeEvents);
 
   const eventItems = eventsToItems(activeEvents, {
-    settings: config.settings!,
+    pattern: config.pattern!,
     useSummary: Boolean(config.use_summary)
   });
 
