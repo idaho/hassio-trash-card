@@ -113,10 +113,11 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `event_grouping`         | boolean                                             | `true`     | Only display the next event per pattern, otherwise all events during the selected time will be displayed  |
 | `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event |
 | `day_style`            | `default` or `counter` | `default`   | Option of how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining until the event.       |
-| `card_style`            | `card` or `chip` | `card`   | Switch between the events style `Standard card` or `Chip card`. |
+| `card_style`            | `card`, `chip` or `icon` | `card`   | Switch between the events style `Standard card`, `Chip card` or a new `Icon` predefined layout. |
 | `color_mode`            | `background` or `icon` | `background`   | Select whether the color settings should be applied to the background or to the symbol |
 | `refresh_rate`            | integer | 60   | Check for changes in the calendar every x minutes, by default we will check every 60 minutes. Values can be set from 5 to 1440. |
 | `debug`            | boolean | `false`   | Option to enable debug mode to help fixing bugs ;) . |
+| `icon_size`            | integer | 40 | Size of the icons in px if you choose `card_style` as `icon` . |
 | `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display it.|
 
 
