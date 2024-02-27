@@ -1,5 +1,10 @@
+interface DebuggerData {
+  message: string;
+  data: any;
+}
+
 class Debugger {
-  protected data: { message: string; data: any }[] = [];
+  protected data: DebuggerData[] = [];
 
   public reset () {
     this.data = [];
@@ -16,6 +21,11 @@ class Debugger {
     return this.data;
   }
 }
+
 export {
   Debugger
+};
+
+export type {
+  DebuggerData
 };

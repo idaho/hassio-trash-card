@@ -1,27 +1,18 @@
-import { eventsToItems } from '../../utils/eventsToItems';
-import { filterDuplicatedItems } from '../../utils/filterDuplicatedItems';
-import { findActiveEvents } from '../../utils/findActiveEvents';
 import { getDayFromDate } from '../../utils/getDayFromDate';
 import { isTodayAfter } from '../../utils/isTodayAfter';
-import { normaliseEvents } from '../../utils/normaliseEvents';
 import { registerCustomCard } from '../../utils/registerCustomCard';
-import { css, html, LitElement, nothing } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
-import { Chip } from './elements/chip';
-import { Card } from './elements/card';
-import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
 import { Debugger } from '../../utils/debugger';
-import { defaultHaCardStyle } from '../../utils/defaultHaCardStyle';
+import { getCalendarData } from '../../utils/getCalendarData';
+import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
 
-import './elements/debug';
+import './container';
 
-import type { CSSResultGroup, PropertyValues } from 'lit';
-import type { LovelaceCard, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
-import type { CalendarEvent, RawCalendarEvent } from '../../utils/calendarEvents';
+import type { PropertyValues } from 'lit';
 import type { TrashCardConfig } from './trash-card-config';
 import type { HomeAssistant } from '../../utils/ha';
-import type { HassEntity } from 'home-assistant-js-websocket';
 import type { CalendarItem } from '../../utils/calendarItem';
 
 registerCustomCard({
@@ -31,13 +22,13 @@ registerCustomCard({
 });
 
 @customElement(TRASH_CARD_NAME)
-export class TrashCard extends LitElement implements LovelaceCard {
+export class TrashCard extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  public static async getConfigElement (): Promise<LovelaceCardEditor> {
+  public static async getConfigElement () {
     await import('./trash-card-editor');
 
-    return document.createElement(TRASH_CARD_EDITOR_NAME) as LovelaceCardEditor;
+    return document.createElement(TRASH_CARD_EDITOR_NAME);
   }
 
   public static async getStubConfig (hass: HomeAssistant): Promise<Partial<TrashCardConfig>> {
@@ -60,11 +51,6 @@ export class TrashCard extends LitElement implements LovelaceCard {
   @property() private debugger?: Debugger;
 
   private lastChanged?: Date;
-
-  // eslint-disable-next-line class-methods-use-this
-  public getCardSize (): number | Promise<number> {
-    return 1;
-  }
 
   public setConfig (config: TrashCardConfig): void {
     this.config = {
@@ -91,7 +77,7 @@ export class TrashCard extends LitElement implements LovelaceCard {
   }
 
   protected fetchCurrentTrashData () {
-    if (!this.hass) {
+    if (!this.hass || !this.config || !this.debugger) {
       return;
     }
 
@@ -100,60 +86,18 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const start = getDayFromDate(this.startDate);
     const end = getDayFromDate(this.endDate);
 
-    const uri = `calendars/${this.config?.entity}?start=${start}&end=${end}`;
-
-    const dropAfter = isTodayAfter(new Date(), this.config!.drop_todayevents_from ?? '10:00:00');
+    const dropAfter = isTodayAfter(new Date(), this.config.drop_todayevents_from ?? '10:00:00');
+    const timezoneOffset = getTimeZoneOffset();
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    this.hass.
-      callApi<RawCalendarEvent[]>('GET', uri).
-      then((response): CalendarEvent[] => {
-        if (this.debugger) {
-          this.debugger.reset();
-          this.debugger.log(`timezone`, getTimeZoneOffset());
-          this.debugger.log(`calendar data`, response);
-        }
-
-        return normaliseEvents(response);
-      }).
-      then((data: CalendarEvent[]): CalendarEvent[] => {
-        const now = new Date();
-
-        if (this.debugger) {
-          this.debugger.log(`normaliseEvents`, data);
-          this.debugger.log(`dropAfter`, dropAfter);
-          this.debugger.log(`now`, now);
-        }
-
-        return findActiveEvents(data, {
-          config: {
-            settings: this.config!.settings!,
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            filter_events: this.config!.filter_events
-          },
-          dropAfter,
-          now
-        });
-      }).
-      then((data: CalendarEvent[]): CalendarItem[] => {
-        if (this.debugger) {
-          this.debugger.log(`activeElements`, data);
-        }
-
-        return eventsToItems(data, {
-          settings: this.config!.settings!,
-          useSummary: Boolean(this.config!.use_summary)
-        });
-      }).
-      then((data: CalendarItem[]): CalendarItem[] => {
-        if (this.debugger) {
-          this.debugger.log(`eventsToItems`, data);
-        }
-
-        return !this.config!.event_grouping ?
-          data :
-          filterDuplicatedItems(data);
-      }).
+    getCalendarData(
+      this.hass,
+      this.config.entity!,
+      { start, end, dropAfter },
+      this.debugger,
+      this.config,
+      timezoneOffset
+    ).
       then((data: CalendarItem[]) => {
         this.currentItems = data;
         this.lastChanged = new Date();
@@ -168,7 +112,9 @@ export class TrashCard extends LitElement implements LovelaceCard {
     if (changedProps.has('currentItems')) {
       return true;
     }
+
     changedProps.delete('currentItems');
+
     if (!this.lastChanged || changedProps.has('config') || Date.now() - this.lastChanged.getTime() > this.getRefreshRate()) {
       this.fetchCurrentTrashData();
     }
@@ -177,47 +123,26 @@ export class TrashCard extends LitElement implements LovelaceCard {
   }
 
   protected render () {
-    if (!this.config || !this.hass || !this.config.entity) {
+    if (!this.config || !this.hass) {
       return nothing;
     }
 
-    const entityId = this.config.entity;
-    const stateObj = this.hass.states[entityId] as HassEntity | undefined;
-    const items = this.currentItems;
-
-    if (!stateObj || !items || items.length === 0) {
-      return this.config.debug ? html`<trash-card-debug-card .debugger=${this.debugger}></trash-card-debug-card>` : nothing;
+    if (!this.currentItems || this.currentItems.length === 0) {
+      return this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : nothing;
     }
 
-    const elementInstance = this.config.card_style === 'chip' ?
-      new Chip(this.config, this.hass) :
-      new Card(this.config, this.hass);
-
     return html`
-      ${this.config.debug ? html`<trash-card-debug-card .debugger=${this.debugger}></trash-card-debug-card>` : ``}
-      ${elementInstance.renderItems(items)}
-    `;
-  }
-
-  public static get styles (): CSSResultGroup {
-    return [
-      defaultHaCardStyle,
-      ...Chip.getStyles(),
-      ...Card.getStyles(),
-      css`
-          div {
-            display: grid;
-            grid-gap:5px;
-          }
-          ha-card.fullsize {
-              margin-left: -17px;
-              margin-right: -17px;
-              margin-top: -4px;
-          }
-          mushroom-state-item {
-              cursor: pointer;
-          }
-        `
-    ];
+      ${this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : ``}
+      ${this.config.card_style === 'chip' ?
+    html`<trash-card-chips-container
+      .config=${this.config}
+      .hass=${this.hass}
+      .items=${this.currentItems}
+      ></trash-card-chips-container>` :
+    html`<trash-card-cards-container
+        .config=${this.config}
+        .hass=${this.hass}
+        .items=${this.currentItems}
+        ></trash-card-cards-container>`}`;
   }
 }
