@@ -217,6 +217,8 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
       return;
     }
 
+    const customLocalize = setupCustomlocalize(this.hass);
+
     const config = {
       ...this.config,
       pattern: [
@@ -230,7 +232,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
       length + 1;
 
     config.pattern.push({
-      label: `New Custom Pattern ${newIdx}`,
+      label: `${customLocalize('editor.card.trash.pattern.new_custom_label')} ${newIdx}`,
       icon: 'mdi:calendar',
       color: 'pink',
       type: 'custom'

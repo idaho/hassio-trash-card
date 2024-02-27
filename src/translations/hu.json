@@ -62,6 +62,8 @@
           "title": "Minta szerkesztése",
           "edit": "szerkeszt",
           "delete": "töröl",
+          "create": "Új minta létrehozása",
+          "new_custom_label": "Új minta",
           "type": {
             "organic": "Komposztálható",
             "paper": "Papír",

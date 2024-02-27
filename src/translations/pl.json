@@ -62,6 +62,8 @@
                     "title": "Edytuj wzorzec",
                     "edit": "edytuj",
                     "delete": "usuń",
+                    "create": "Utwórz nowy wzorzec",
+                    "new_custom_label": "Nowy wzorzec",
                     "type": {
                         "organic": "BIO",
                         "paper": "Papier",

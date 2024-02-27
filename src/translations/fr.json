@@ -62,6 +62,8 @@
                     "title": "Modifier le modèle",
                     "edit": "Modifier",
                     "delete": "Supprimer",
+                    "create" : "Créer un nouveau modèle",
+                    "new_custom_label" : "Nouveau modèle",
                     "type": {
                         "organic": "Organique",
                         "paper": "Papier",

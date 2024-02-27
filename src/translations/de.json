@@ -62,6 +62,8 @@
                     "title": "Muster bearbeiten",
                     "edit": "bearbeiten",
                     "delete": "löschen",
+                    "create": "Neues Muster erstellen",
+                    "new_custom_label": "Neues Muster",
                     "type": {
                         "organic": "Bio",
                         "paper": "Papier",

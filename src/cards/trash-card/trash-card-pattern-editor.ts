@@ -84,6 +84,7 @@ class TrashCardPatternEditor extends LitElement {
     return html`
       <div class="settings">
       ${guard([ this.pattern ],
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     () => this.pattern!.map((settingsConfig, index) =>
       html`
           <div class="setting">
@@ -119,9 +120,7 @@ class TrashCardPatternEditor extends LitElement {
         <mwc-button
           @click=${this.createItem}
           class="gui-mode-button"
-        >
-          Neues Muster erstellen
-      </mwc-button>
+        >${customLocalize('editor.card.trash.pattern.create')}</mwc-button>
     </div>`;
   }
 
@@ -132,6 +131,7 @@ class TrashCardPatternEditor extends LitElement {
       subElementConfig: {
         index,
         key: index,
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         elementConfig: this.pattern![index]
       }
     });
