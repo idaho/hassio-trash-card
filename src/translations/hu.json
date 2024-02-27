@@ -43,7 +43,7 @@
           "edit": "szerkeszt",
           "delete": "töröl",
           "type": {
-            "organic": "komposztálható",
+            "organic": "Komposztálható",
             "paper": "Papír",
             "recycle": "Újrahasznosítható",
             "waste": "Szemét",
