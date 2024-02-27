@@ -8,6 +8,7 @@ import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { entityCardConfigStruct } from './trash-card-config';
 import { getPatternOthersSchema, getPatternSchema, getSchema } from './formSchemas';
+import { migrateConfig, needsConfigToMigrate } from './utils/migration';
 import { fireEvent } from '../../utils/fireEvent';
 
 import './trash-card-pattern-editor';
@@ -29,6 +30,48 @@ declare global {
   }
 }
 
+const configDefaults = {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  event_grouping: true,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  drop_todayevents_from: '10:00:00',
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  next_days: 2,
+  pattern: [
+    {
+      icon: 'mdi:flower',
+      color: 'lime',
+      type: 'organic'
+    },
+    {
+      icon: 'mdi:newspaper',
+      color: 'blue',
+      type: 'paper'
+    },
+    {
+      icon: 'mdi:recycle-variant',
+      color: 'amber',
+      type: 'recycle'
+    },
+    {
+      icon: 'mdi:trash-can-outline',
+      color: 'grey',
+      type: 'waste'
+    },
+    {
+      icon: 'mdi:dump-truck',
+      color: 'purple',
+      type: 'others'
+    }
+  ],
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  day_style: 'default',
+  card_style: 'card',
+  color_mode: 'background',
+  items_per_row: 1,
+  refresh_rate: 60
+};
+
 @customElement(TRASH_CARD_EDITOR_NAME)
 class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   @property({ attribute: false }) public hass?: HomeAssistant;
@@ -40,37 +83,21 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   @state() private readonly schema = memoizeOne(getSchema);
 
   public setConfig (config: Partial<TrashCardConfig>): void {
+    if (needsConfigToMigrate(config)) {
+      fireEvent(this, 'config-changed', { config: {
+        ...configDefaults,
+        ...migrateConfig(config)
+      } as TrashCardConfig });
+
+      return;
+    }
+
     assert(config, entityCardConfigStruct);
 
     this.config = {
-      event_grouping: true,
-      drop_todayevents_from: '10:00:00',
-      next_days: 2,
-      settings: {
-        organic: {
-          icon: 'mdi:flower'
-        },
-        paper: {
-          icon: 'mdi:newspaper'
-        },
-        recycle: {
-          icon: 'mdi:recycle-variant'
-        },
-        waste: {
-          icon: 'mdi:trash-can-outline'
-        },
-        others: {
-          icon: 'mdi:dump-truck'
-        },
-        ...config.settings
-      },
-      day_style: 'default',
-      card_style: 'card',
-      color_mode: 'background',
-      items_per_row: 1,
-      refresh_rate: 60,
+      ...configDefaults,
       ...config
-    };
+    } as TrashCardConfig;
   }
 
   protected updated (changedProps: PropertyValues): void {
@@ -101,10 +128,6 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     return schema.helper ?? '';
   };
 
-  private editDetailElement (ev: HASSDomEvent<{ subElementConfig: SubElementEditorConfig }>): void {
-    this.subElementEditorConfig = ev.detail.subElementConfig;
-  }
-
   private renderFormPatternsEditor () {
     if (!this.hass) {
       return nothing;
@@ -113,7 +136,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     const customLocalize = setupCustomlocalize(this.hass);
 
     if (this.subElementEditorConfig) {
-      const patternSchema = this.subElementEditorConfig.key === 'others' ?
+      const patternSchema = this.subElementEditorConfig.elementConfig?.type === 'others' ?
         getPatternOthersSchema(this.hass.localize) :
         getPatternSchema(customLocalize, this.hass.localize);
 
@@ -144,9 +167,11 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     return html`
       <trash-card-pattern-editor
         .hass=${this.hass}
-          .settings=${this.config!.settings}
+          .pattern=${this.config!.pattern}
+          @delete-pattern-item=${this.deletePatternItem}  
+          @create-pattern-item=${this.createPatternItem}  
+          @edit-pattern-item=${this.editPatternItem}
           @settings-changed=${this.valueChanged}
-          @edit-detail-element=${this.editDetailElement}
       ></trash-card-pattern-editor>`;
   }
 
@@ -164,20 +189,74 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
     const { value } = ev.detail;
 
-    this.config.settings = {
-      ...this.config.settings,
-      [item]: {
-        ...this.config.settings![item] ?? {},
-        ...value
-      }
+    const config = {
+      ...this.config,
+      pattern: [
+        ...this.config.pattern ?? []
+      ]
     };
+
+    config.pattern[item] = value;
 
     this.subElementEditorConfig = {
       ...this.subElementEditorConfig,
       elementConfig: value
     };
 
-    fireEvent(this, 'config-changed', { config: this.config });
+    fireEvent(this, 'config-changed', { config });
+  }
+
+  private editPatternItem (ev: HASSDomEvent<{ subElementConfig: SubElementEditorConfig }>): void {
+    this.subElementEditorConfig = ev.detail.subElementConfig;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  protected createPatternItem (ev: CustomEvent): void {
+    ev.stopPropagation();
+    if (!this.config || !this.hass) {
+      return;
+    }
+
+    const customLocalize = setupCustomlocalize(this.hass);
+
+    const config = {
+      ...this.config,
+      pattern: [
+        ...this.config.pattern ?? []
+      ]
+    };
+
+    const newIdx = config.
+      pattern.
+      filter(pat => pat.type === 'custom').
+      length + 1;
+
+    config.pattern.push({
+      label: `${customLocalize('editor.card.trash.pattern.new_custom_label')} ${newIdx}`,
+      icon: 'mdi:calendar',
+      color: 'pink',
+      type: 'custom'
+    });
+
+    fireEvent(this, 'config-changed', { config });
+  }
+
+  protected deletePatternItem (ev: CustomEvent): void {
+    ev.stopPropagation();
+    if (!this.config || !this.hass) {
+      return;
+    }
+
+    const config = {
+      ...this.config,
+      pattern: [
+        ...this.config.pattern ?? []
+      ]
+    };
+
+    config.pattern.splice(ev.detail.index, 1);
+
+    fireEvent(this, 'config-changed', { config });
   }
 
   protected render () {

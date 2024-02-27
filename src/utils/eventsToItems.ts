@@ -4,11 +4,11 @@ import type { ItemSettings } from './itemSettings';
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 
 interface Options {
-  settings: Required<TrashCardConfig>['settings'];
+  pattern: Required<TrashCardConfig>['pattern'];
   useSummary: boolean;
 }
 
-type TrashTypes = keyof Required<Required<TrashCardConfig>['settings']>;
+type Pattern = Options['pattern'][number];
 
 const getLabel = (event: CalendarEvent, settings: ItemSettings, useSummary: boolean): string => {
   if (useSummary && event.content.summary) {
@@ -19,37 +19,34 @@ const getLabel = (event: CalendarEvent, settings: ItemSettings, useSummary: bool
   return settings.label ?? event.content.summary ?? 'unknown';
 };
 
-const getData = <T extends TrashTypes> (event: CalendarEvent, key: T, settings: Omit<Partial<Options['settings']>, T> & Pick<Required<Options['settings']>, T>, useSummary: boolean): CalendarItem => ({
+const getData = (event: CalendarEvent, pattern: Pattern & { idx: number }, useSummary: boolean): CalendarItem => ({
   ...event,
-  label: getLabel(event, settings[key], useSummary),
-  icon: settings[key].icon!,
-  color: settings[key].color!,
-  type: key
+  label: getLabel(event, pattern, useSummary),
+  icon: pattern.icon!,
+  color: pattern.color!,
+  type: pattern.type === 'custom' ? `custom-${pattern.idx}` : pattern.type
 });
 
-const typeInSettings = <T extends TrashTypes> (key: T, settings: Options['settings']): settings is Required<Options['settings']> =>
-  key in settings;
-
-const eventToItem = (event: CalendarEvent | undefined, { settings, useSummary }: Options): CalendarItem[] => {
+const eventToItem = (event: CalendarEvent | undefined, { pattern, useSummary }: Options): CalendarItem[] => {
   if (!event || !('summary' in event.content)) {
     return [];
   }
 
   const { content: { summary }} = event;
 
-  const checkTypes: TrashTypes[] = [ 'organic', 'paper', 'recycle', 'waste' ];
-
-  const possibleTypes = checkTypes.
-    filter((type: TrashTypes) =>
-      typeInSettings(type, settings) && settings[type].pattern && summary.toLowerCase().includes(settings[type].pattern!.toLowerCase()));
+  const possibleTypes = pattern.
+    map((pat, idx) => ({
+      ...pat,
+      idx
+    })).
+    filter((pat: Pattern) =>
+      pat.pattern && summary.toLowerCase().includes(pat.pattern.toLowerCase()));
 
   if (possibleTypes.length > 0) {
-    // @ts-expect-error TS2345
-    return possibleTypes.map(item => getData<typeof item>(event, item, settings, useSummary));
+    return possibleTypes.map(pat => getData(event, pat, useSummary));
   }
 
-  // @ts-expect-error TS2345
-  return [ getData(event, 'others', settings, useSummary) ];
+  return [ getData(event, { ...pattern.find(pat => pat.type === 'others')!, idx: 0 }, useSummary) ];
 };
 
 const eventsToItems = (events: CalendarEvent[], options: Options): CalendarItem[] => {
@@ -59,7 +56,7 @@ const eventsToItems = (events: CalendarEvent[], options: Options): CalendarItem[
     return [ ...prev, ...itemsFromEvents ];
   }, []);
 
-  return items.filter((item): boolean => Boolean(item.type !== 'none'));
+  return items.filter((item): boolean => Boolean(item));
 };
 
 export {
