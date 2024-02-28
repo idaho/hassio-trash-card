@@ -38,6 +38,7 @@ const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>
   },
   {
     label: customLocalize(`editor.card.trash.pattern.fields.picture_url`),
+    helper: customLocalize(`editor.card.trash.pattern.fields.picture_url_description`),
     name: 'picture',
     selector: {
       text: {}
