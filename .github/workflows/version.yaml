@@ -1,0 +1,34 @@
+name: Create new version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number"
+        required: true
+        type: string
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Add version to packages
+        run: npm version ${{ inputs.version }} --git-tag-version false
+
+      - name: Add files to commit
+        run: add package.json package-lock.json
+
+      - name: Create commit message
+        run: git commit -m "${{ inputs.version }}"
+
+      - name: Push to repository
+        run: git push
+
+      - name: Tag commit
+        run: git tag ${{ inputs.version }}
+
+      - name: Push tags
+        run: git push origin --tags
