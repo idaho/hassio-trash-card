@@ -77,7 +77,9 @@
                         "label": "Label",
                         "color": "Color",
                         "icon": "Icon",
-                        "pattern": "Detection pattern"
+                        "pattern": "Detection pattern",
+                        "picture_url": "Picture URL",
+                        "picture_url_description": "If a picture URL is specified, the corresponding picture is displayed instead of the icon. Place an image in the `/config/www` folder and use `/local/[filename]`."
                     }
                 }
             }

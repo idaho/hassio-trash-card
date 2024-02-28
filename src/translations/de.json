@@ -79,7 +79,7 @@
                         "icon": "Symbol",
                         "pattern": "erkennen an Muster",
                         "picture_url": "Bild URL",
-                        "picture_url_description": "Wenn eine Bild URL angegeben wird, wird das entsprechende Bild anstelle das Icon angezeigt. Lege ein Bild in dem `/config/www` Ordner ab und verwende `/local/[BILDNAME.ENDNUNG]`."
+                        "picture_url_description": "Wenn eine Bild URL angegeben wird, wird das entsprechende Bild anstelle das Icon angezeigt. Lege ein Bild in dem `/config/www` Ordner ab und verwende `/local/[Dateiname]`."
                     }
                 }
             }

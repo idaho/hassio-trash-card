@@ -77,7 +77,9 @@
                         "label": "štítok",
                         "color": "Farba",
                         "icon": "Ikona",
-                        "pattern": "Vzor detekcie"
+                        "pattern": "Vzor detekcie",
+                        "picture_url": "URL obrázku",
+                        "picture_url_description": "Ak je zadaná adresa URL obrázka, namiesto ikony sa zobrazí príslušný obrázok. Umiestnite obrázok do priečinka `/config/www` a použite `/local/[meno súboru]`."
                     }
                 }
             }
