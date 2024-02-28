@@ -1,29 +1,21 @@
 import { computeRTL } from 'lovelace-mushroom/src/ha';
-import { LitElement, css, html, nothing } from 'lit';
+import { css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { daysTill } from '../../../utils/daysTill';
+import { BaseItemElement } from './BaseItemElement';
 
 import '../elements/icon';
-
-import type { CardStyleConfig } from '../trash-card-config';
-import type { CalendarItem } from '../../../utils/calendarItem';
-import type { HomeAssistant } from '../../../utils/ha';
+import '../elements/picture';
 
 @customElement(`${TRASH_CARD_NAME}-icon-card`)
-class IconCard extends LitElement {
-  @state() private readonly item?: CalendarItem & {
+class IconCard extends BaseItemElement<{
     nextEvent: boolean;
-  };
-
-  @state() private readonly hass?: HomeAssistant;
-
-  @state() private readonly config?: CardStyleConfig;
-
+  }> {
   public render () {
     if (!this.hass || !this.item || !this.config) {
       return nothing;
@@ -37,7 +29,7 @@ class IconCard extends LitElement {
     const style = {
       ...getColoredStyle([ 'icon', 'background' ], item),
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      '--trash-card-icon-size': `${this.config.icon_size}px`
+      '--trash-card-icon-size': `${this.config.icon_size ?? 40}px`
     };
 
     const cssClass = {
@@ -47,16 +39,15 @@ class IconCard extends LitElement {
 
     const daysLeft = daysTill(item);
 
+    const pictureUrl = this.getPictureUrl();
+
     return html`
       <ha-card style=${styleMap(style)} class=${classMap(cssClass)}>
         <mushroom-card .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
           <mushroom-state-item .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
-            <trash-card-element-icon
-              .hass=${this.hass}
-              .config=${this.config}
-              .item=${item}
-              slot="icon"
-            ></trash-card-element-icon>
+          <div slot="icon">
+            ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
+          </div>
           </mushroom-state-item>
         </mushroom-card>
         <span class="badge" >${daysLeft}</span>

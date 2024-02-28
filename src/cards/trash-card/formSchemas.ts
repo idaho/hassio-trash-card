@@ -35,6 +35,14 @@ const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>
     selector: {
       text: {}
     }
+  },
+  {
+    label: customLocalize(`editor.card.trash.pattern.fields.picture_url`),
+    name: 'picture',
+    selector: {
+      text: {}
+    },
+    context: { icon_entity: 'entity' }
   }
 ];
 
