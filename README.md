@@ -11,21 +11,18 @@
 
 <a href="https://www.buymeacoffee.com/idaho" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-![Cover](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/overview.png)
+<img width="510" alt="new-overview" src="https://github.com/idaho/hassio-trash-card/assets/664101/8adeaf6a-f236-4972-805d-e173c3aa554b">
 
-![Organic](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/organic.png)![Other Trash](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/others.png)![Paper](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/paper.png)![Recycle](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/recycle.png)![Waste](https://raw.githubusercontent.com/idaho/hassio-trash-card/c4d1af0895da6e0ad75ae46d0d6ce9c4cbce4a07/docs/img/waste.png)
 
 TrashCard - is a custom Home Assistant card that shows you the next upcoming or current trash removal appointment. 
 For this purpose a calendar entity is used, in which you have entered all appointments.
+
+See screenshots for what you can do
 
 **Features**
 - Extra color, icon and text for residual, organic, paper waste and recycling
 - Color and icon for all other appointments
 - Filter out unexpected items
-
-**Restrictions**
-Currently only full day appointments are supported
-
 
 
 ## Pre-Requirements
@@ -193,6 +190,19 @@ pattern:
     pattern: elektro
 ```
 
+## Screenshots
+
+### Layout icons
+<img width="482" alt="layout-icons" src="https://github.com/idaho/hassio-trash-card/assets/664101/b1509694-7ece-49a4-8f84-6298731e315f">
+
+### Layout chips
+<img width="1043" alt="layout-chips" src="https://github.com/idaho/hassio-trash-card/assets/664101/c420d073-c65d-41cc-8d47-c296c1c03fd4">
+
+### Layout cards
+![layout-cards](https://github.com/idaho/hassio-trash-card/assets/664101/f3f3130c-172f-42dc-aaca-2bc0c9a3bc26)
+
+### Use picture instead of icons
+<img width="1032" alt="with-image" src="https://github.com/idaho/hassio-trash-card/assets/664101/212537e0-65d3-4c2c-a25c-9431d7ff04b9">
 
 ## Thanks
 
