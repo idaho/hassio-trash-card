@@ -8,8 +8,6 @@ import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { BaseItemElement } from './BaseItemElement';
 
-import '../elements/icon';
-
 @customElement(`${TRASH_CARD_NAME}-item-card`)
 class ItemCard extends BaseItemElement {
   public render () {
@@ -22,7 +20,7 @@ class ItemCard extends BaseItemElement {
 
     const rtl = computeRTL(this.hass);
 
-    const { color_mode, hide_time_range, day_style, layout } = this.config;
+    const { color_mode, hide_time_range, day_style, layout, with_label } = this.config;
 
     const { label } = item;
 
@@ -34,6 +32,8 @@ class ItemCard extends BaseItemElement {
 
     const pictureUrl = this.getPictureUrl();
 
+    this.withBackground = true;
+
     return html`
       <ha-card style=${styleMap(style)}>
         <mushroom-card .appearance=${{ layout }} ?rtl=${rtl}>
@@ -43,8 +43,8 @@ class ItemCard extends BaseItemElement {
             </div>
             <mushroom-state-info
               slot="info"
-              .primary=${label}
-              .secondary=${secondary}
+              .primary=${with_label ? label : secondary}
+              .secondary=${with_label ? secondary : undefined}
               .multiline_secondary=${true}
             ></mushroom-state-info>
           </mushroom-state-item>
@@ -56,6 +56,7 @@ class ItemCard extends BaseItemElement {
   public static get styles () {
     return [
       defaultHaCardStyle,
+      ...BaseItemElement.styles,
       css`
         ha-card {
           justify-content: space-between;

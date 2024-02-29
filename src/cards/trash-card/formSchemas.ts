@@ -157,7 +157,15 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
             selector: { boolean: { }}
           }] as HaFormSchema[] :
           [],
-        ...currentValues.card_style === 'card' ?
+        ...currentValues.card_style === 'card' || currentValues.card_style === 'chip' ?
+          [{
+            name: 'with_label',
+            label: customLocalize(`editor.card.generic.with_label`),
+            selector: { boolean: {}}
+          }] as HaFormSchema[] :
+          [],
+
+        ...currentValues.with_label && (currentValues.card_style === 'card' || currentValues.card_style === 'chip') ?
           [{
             name: 'use_summary',
             label: customLocalize(`editor.card.generic.use_summary`),

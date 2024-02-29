@@ -57,7 +57,8 @@
                 "use_summary": "Podsumowanie zamiast oznaczenia",
                 "hide_time_range": "Ukryj czas",
                 "event_grouping": "Wyświetla tylko następne zdarzenie dla wzorca",
-                "icon_size": "Rozmiar ikony"
+                "icon_size": "Rozmiar ikony",
+                "with_label": "Pokaż oznaczenie"
             },
             "trash": {
                 "pattern": {

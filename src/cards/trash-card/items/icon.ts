@@ -9,13 +9,8 @@ import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { daysTill } from '../../../utils/daysTill';
 import { BaseItemElement } from './BaseItemElement';
 
-import '../elements/icon';
-import '../elements/picture';
-
 @customElement(`${TRASH_CARD_NAME}-icon-card`)
-class IconCard extends BaseItemElement<{
-    nextEvent: boolean;
-  }> {
+class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
   public render () {
     if (!this.hass || !this.item || !this.config) {
       return nothing;
@@ -41,13 +36,15 @@ class IconCard extends BaseItemElement<{
 
     const pictureUrl = this.getPictureUrl();
 
+    this.withBackground = true;
+
     return html`
       <ha-card style=${styleMap(style)} class=${classMap(cssClass)}>
         <mushroom-card .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
           <mushroom-state-item .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
-          <div slot="icon">
-            ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
-          </div>
+            <div slot="icon">
+              ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
+            </div>
           </mushroom-state-item>
         </mushroom-card>
         <span class="badge" >${daysLeft}</span>
@@ -58,6 +55,7 @@ class IconCard extends BaseItemElement<{
   public static get styles () {
     return [
       defaultHaCardStyle,
+      ...BaseItemElement.styles,
       css`
         :host {
           --ha-card-border-width: 0px;
@@ -82,11 +80,14 @@ class IconCard extends BaseItemElement<{
           overflow: hidden;
           font-size: 80%;
           text-align: center;
-        }
-
-        .nextEvent .badge {
-          font-size: 90;
-          
+          width: fit-content;
+          padding: 0 1em;
+          justify-self: center;
+          border-width: var(--trash-card-badge-border-width, 1px);
+          border-color: var(--chip-border-color);
+          border-style: solid;
+          box-shadow: var(--chip-box-shadow);
+          box-sizing: content-box;
         }
       `
     ];

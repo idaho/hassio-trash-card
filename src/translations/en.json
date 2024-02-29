@@ -57,7 +57,8 @@
                 "use_summary": "Event summary instead of label",
                 "hide_time_range": "Hide time",
                 "event_grouping": "Only display the next event per pattern",
-                "icon_size": "Icon size"
+                "icon_size": "Icon size",
+                "with_label": "Show label"
             },
             "trash": {
                 "pattern": {

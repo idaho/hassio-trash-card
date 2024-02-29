@@ -57,7 +57,8 @@
         "use_summary": "Usa l'oggetto dell'evento al posto dell'etichetta",
         "hide_time_range": "nascondere il tempo",
         "event_grouping": "Visualizza solo l'evento successivo per schema",
-        "icon_size": "Dimensione dell'icona"
+        "icon_size": "Dimensione dell'icona",
+        "with_label": "Mostra etichetta"
       },
       "trash": {
         "pattern": {

@@ -57,7 +57,8 @@
                 "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden",
                 "hide_time_range": "Uhrzeit ausblenden",
                 "event_grouping": "Nur das nächste Ereignis je Muster anzeigen",
-                "icon_size": "Icon größe"
+                "icon_size": "Icon größe",
+                "with_label": "Bezeichnung anzeigen"
             },
             "trash": {
                 "pattern": {
