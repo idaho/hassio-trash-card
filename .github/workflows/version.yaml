@@ -19,7 +19,7 @@ jobs:
         run: npm version ${{ inputs.version }} --git-tag-version false
 
       - name: Add files to commit
-        run: add package.json package-lock.json
+        run: git add package.json package-lock.json
 
       - name: Create commit message
         run: git commit -m "${{ inputs.version }}"
