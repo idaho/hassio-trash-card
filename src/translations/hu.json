@@ -57,7 +57,8 @@
         "use_summary": "Esemény összegzés a cimke helyett",
         "hide_time_range": "Rejtsd el az időt",
         "event_grouping": "Csak a következő eseményt jeleníti meg mintánként",
-        "icon_size": "Ikon mérete"
+        "icon_size": "Ikon mérete",
+        "with_label": "Címke megjelenítése"
       },
       "trash": {
         "pattern": {

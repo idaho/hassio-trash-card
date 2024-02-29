@@ -31,6 +31,7 @@ const configDefaults = {
   hold_action: {
     action: 'more-info'
   },
+  with_label: true,
   debug: false
 };
 

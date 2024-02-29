@@ -31,7 +31,7 @@ class ItemCard extends LitElement {
 
     const rtl = computeRTL(this.hass);
 
-    const { color_mode, hide_time_range, day_style, layout } = this.config;
+    const { color_mode, hide_time_range, day_style, layout, with_label } = this.config;
 
     const { label } = item;
 
@@ -53,8 +53,8 @@ class ItemCard extends LitElement {
             ></trash-card-element-icon>
             <mushroom-state-info
               slot="info"
-              .primary=${label}
-              .secondary=${secondary}
+              .primary=${with_label ? label : secondary}
+              .secondary=${with_label ? secondary : undefined}
               .multiline_secondary=${true}
             ></mushroom-state-info>
           </mushroom-state-item>
