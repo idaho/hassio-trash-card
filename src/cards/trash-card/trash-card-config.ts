@@ -1,7 +1,6 @@
 import { array, assign, boolean, integer, literal, object, optional, string, union } from 'superstruct';
 import { defaultConfigStruct } from '../../utils/form/defaultConfigStruct';
 
-import type { EntitySharedConfig } from 'lovelace-mushroom/src/shared/config/entity-config';
 import type { ItemSettings } from '../../utils/itemSettings';
 import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 
@@ -21,10 +20,8 @@ const COLORMODES = [
   'icon'
 ] as const;
 
-type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
-
- type TrashCardConfig = LovelaceCardConfig &
- EntityWithOutIcon & {
+ type TrashCardConfig = LovelaceCardConfig & {
+   entities: string[];
    pattern?: ItemSettings[];
    next_days?: number;
    items_per_row?: number;
@@ -48,7 +45,7 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
 const entityCardConfigStruct = assign(
   defaultConfigStruct,
   object({
-    entity: optional(string()),
+    entities: optional(array(string())),
     name: optional(string()),
     layout: optional(union([ literal('horizontal'), literal('vertical'), literal('default') ])),
     fill_container: optional(boolean()),

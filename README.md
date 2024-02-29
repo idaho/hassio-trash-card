@@ -102,7 +102,7 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
-| `entity`            | string                                              | Required    | Entity                                                                              |
+| `entities`            | array of strings                                              | Required    | Entities                                                                              |
 | `layout`            | string                                              | Optional    | Layout of the card. Vertical, horizontal and default layout are supported           |
 | `fill_container`    | boolean                                             | `false`     | Fill container or not. Useful when card is in a grid, vertical or horizontal layout |
 | `filter_events`     | boolean                                             | `false`     | Filter fetched events by patterns (if at least one is defined) before selecting the one to display |
@@ -119,29 +119,21 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `debug`            | boolean | `false`   | Option to enable debug mode to help fixing bugs ;) . |
 | `icon_size`            | integer | 40 | Size of the icons in px if you choose `card_style` as `icon` . |
 | `with_label`            | boolean | `true` | Option to decide if you want to see the label in the card or the chip style. |
-| `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display it.|
+| `pattern`          | array of [Pattern](#pattern)                               | Required    | Pattern to detect the kind of trash and how to display it.|
 
 
-#### Settings
+#### Pattern
 
 
-| Name                | Type                                                | Default     | Description                                                                         |
-| :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
-| `organic`    | [TrashTypeConfig](#trash-type-configuration)       | Required    | Configuration to detect and display that the organic trash is picked up  |
-| `paper`      | [TrashTypeConfig](#trash-type-configuration)       | Required    | Configuration to detect and display that the paper trash is picked up |
-| `recycle`    | [TrashTypeConfig](#trash-type-configuration)       | Required    | Configuration to detect and display that the organic trash is picked up |
-| `waste`      | [TrashTypeConfig](#trash-type-configuration)       | Required    | Configuration to detect and display that the waste trash is picked up |
-| `others`     | [OtherConfig](#other-type-trash-configuration)     | Required    | Configuration what should be display if non of the others types are matching |
-
-
-#### Trash type configuration
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
+| `type`             | `organic`, `paper`, `recycle`, `waste`, `others`, `custom`        | Required    | Label which should be shown  |
 | `label`             | string       | Required    | Label which should be shown  |
 | `icon`              | string       | Required    | Icon which should be displayed  |
 | `color`             | string       | Required    | Background color of the card which should be used |
 | `pattern`           | string       | Required    | Pattern used to detected to display the apply this trash type. (Is tested against the calendar entry title) |
+| `picture`           | string       | Optional    | picture url to a image to show instead of the icon |
 
 #### Other type trash configuration
 
@@ -155,32 +147,50 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 
 ```yaml
 type: custom:trash-card
-entity: calendar.mags_abfuhrtermine
+entities:
+  - calendar.mags_abfuhrtermine
 layout: vertical
-settings:
-  others:
-    color: purple
-    icon: mdi:trash-can
-  organic:
-    label: Organic
+event_grouping: true
+drop_todayevents_from: '10:00:00'
+next_days: 300
+day_style: counter
+card_style: card
+color_mode: background
+items_per_row: 4
+refresh_rate: 60
+with_label: true
+filter_events: false
+use_summary: false
+hide_time_range: false
+pattern:
+  - label: Organic
     icon: mdi:flower
-    color: green
-    pattern: (braun)
-  paper:
-    label: Paper
-    icon: mdi:newspaper-variant-multiple
-    color: blue
-    pattern: (blau)
-  recycle:
-    label: Recycle
+    pattern: braun
+    color: light-green
+    type: organic
+  - label: Paper
+    icon: mdi:newspaper-variant-multiple-outline
+    color: indigo
+    pattern: blau
+    type: paper
+  - label: Recycling
+    pattern: gelb
     icon: mdi:recycle-variant
     color: amber
-    pattern: (gelb)
-  waste:
-    label: Trash
-    icon: mdi:trash-can-outline
-    color: grey
-    pattern: (grau)
+    type: recycle
+  - pattern: grau
+    icon: mdi:trash-can
+    label: Waste
+    color: dark-grey
+    type: waste
+  - icon: mdi:dump-truck
+    color: purple
+    type: others
+  - label: Electric
+    icon: mdi:electron-framework
+    color: pink
+    type: custom
+    pattern: elektro
 ```
 
 

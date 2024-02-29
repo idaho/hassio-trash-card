@@ -9,11 +9,23 @@ type OldConfigWithSetting = TrashCardConfig & Partial<SettingsOfConfig>;
 type LegacayConfig = TrashCardConfig & SettingsOfConfig;
 
 const needsConfigToMigrate = (config: Partial<OldConfigWithSetting>): config is LegacayConfig =>
-  'settings' in config;
+  'settings' in config || 'entity' in config;
 
 const migrateConfig = (config: LegacayConfig) => {
   const pattern: ItemSettings[] = [];
-  const { settings, ...restOfConfiguration } = config;
+  const { settings, entity, ...restOfConfiguration } = config;
+
+  const newConfiguration = {
+    ...restOfConfiguration
+  };
+
+  if ('entity' in config) {
+    newConfiguration.entities = Array.isArray(entity) ? entity : [ entity ];
+  }
+
+  if (!('settings' in config)) {
+    return newConfiguration;
+  }
 
   Object.entries(settings).forEach(([ type, data ]) => {
     pattern.push({
@@ -23,7 +35,7 @@ const migrateConfig = (config: LegacayConfig) => {
   });
 
   return {
-    ...restOfConfiguration,
+    ...newConfiguration,
     pattern
   };
 };
