@@ -39,9 +39,10 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
    color_mode?: typeof COLORMODES[number];
    refresh_rate?: number;
    debug?: boolean;
+   with_label?: boolean;
  };
 
- type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'color_mode' | 'layout' | 'icon_size'>;
+ type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'color_mode' | 'layout' | 'icon_size' | 'with_label'>;
 
 const entityCardConfigStruct = assign(
   defaultConfigStruct,
@@ -64,6 +65,7 @@ const entityCardConfigStruct = assign(
     color_mode: optional(union([ literal(COLORMODES[0]), literal(COLORMODES[1]) ])),
     debug: optional(boolean()),
     icon_size: optional(integer()),
+    with_label: optional(boolean()),
 
     pattern: optional(array(
       object({
