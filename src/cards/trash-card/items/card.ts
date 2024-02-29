@@ -1,26 +1,17 @@
 import { computeRTL } from 'lovelace-mushroom/src/ha';
-import { LitElement, css, html, nothing } from 'lit';
+import { css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { getDateString } from '../../../utils/getDateString';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
+import { BaseItemElement } from './BaseItemElement';
 
 import '../elements/icon';
 
-import type { CardStyleConfig } from '../trash-card-config';
-import type { CalendarItem } from '../../../utils/calendarItem';
-import type { HomeAssistant } from '../../../utils/ha';
-
 @customElement(`${TRASH_CARD_NAME}-item-card`)
-class ItemCard extends LitElement {
-  @state() private readonly item?: CalendarItem;
-
-  @state() private readonly hass?: HomeAssistant;
-
-  @state() private readonly config?: CardStyleConfig;
-
+class ItemCard extends BaseItemElement {
   public render () {
     if (!this.hass || !this.item || !this.config) {
       return nothing;
@@ -41,16 +32,15 @@ class ItemCard extends LitElement {
 
     const secondary = getDateString(item, hide_time_range ?? false, day_style, this.hass);
 
+    this.withBackground = true;
+
     return html`
       <ha-card style=${styleMap(style)}>
         <mushroom-card .appearance=${{ layout }} ?rtl=${rtl}>
           <mushroom-state-item .appearance=${{ layout }} ?rtl=${rtl}>
-            <trash-card-element-icon
-              .hass=${this.hass}
-              .config=${this.config}
-              .item=${item}
-              slot="icon"
-            ></trash-card-element-icon>
+            <span slot="icon">
+              ${this.renderIcon()}
+            </span>
             <mushroom-state-info
               slot="info"
               .primary=${label}
@@ -66,10 +56,12 @@ class ItemCard extends LitElement {
   public static get styles () {
     return [
       defaultHaCardStyle,
+      ...BaseItemElement.styles,
       css`
         ha-card {
           justify-content: space-between;
           height: 100%;
+          --mdc-icon-size: 24px;
           background: var(--trash-card-background, 
               var(--ha-card-background, 
                 var(--card-background-color, #fff)
