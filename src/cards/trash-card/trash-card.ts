@@ -51,7 +51,7 @@ export class TrashCard extends LitElement {
 
     return {
       type: `custom:${TRASH_CARD_NAME}`,
-      entity: entities[0]
+      entities: [ entities[0] ]
     };
   }
 
@@ -113,7 +113,7 @@ export class TrashCard extends LitElement {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     getCalendarData(
       this.hass,
-      this.config.entity!,
+      this.config.entities,
       { start, end, dropAfter },
       this.debugger,
       this.config,

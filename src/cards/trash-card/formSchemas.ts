@@ -225,7 +225,15 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
   ];
 
   const schema: HaFormSchema[] = [
-    { name: 'entity', selector: { entity: { domain: 'calendar' }}},
+    {
+      name: 'entities',
+      selector: {
+        entity: {
+          domain: 'calendar',
+          multiple: true
+        }
+      }
+    },
     {
       type: 'expandable',
       name: '',

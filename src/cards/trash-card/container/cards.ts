@@ -7,7 +7,6 @@ import '../items/card';
 
 import type { BaseContainerElement } from './BaseContainerElement';
 import type { TrashCardConfig } from '../trash-card-config';
-import type { HassEntity } from 'home-assistant-js-websocket';
 import type { CalendarItem } from '../../../utils/calendarItem';
 import type { HomeAssistant } from '../../../utils/ha';
 
@@ -32,14 +31,11 @@ class Cards extends LitElement implements BaseContainerElement {
   }
 
   public render () {
-    if (!this.config || !this.hass || !this.config.entity) {
+    if (!this.config || !this.hass) {
       return nothing;
     }
 
-    const entityId = this.config.entity;
-    const stateObj = this.hass.states[entityId] as HassEntity | undefined;
-
-    if (!stateObj || !this.items || this.items.length === 0) {
+    if (!this.items || this.items.length === 0) {
       return nothing;
     }
 
@@ -47,7 +43,7 @@ class Cards extends LitElement implements BaseContainerElement {
 
     const cssStyleMap = styleMap({
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      'grid-template-columns': `repeat(${itemsPerRow}, calc(calc(100% - calc(${(itemsPerRow - 1)} * var(--grid-card-gap, 2px))) / ${itemsPerRow}))`
+      'grid-template-columns': `repeat(${itemsPerRow}, calc(calc(100% - calc(${itemsPerRow - 1} * var(--grid-card-gap, 2px))) / ${itemsPerRow}))`
     });
 
     return html`
