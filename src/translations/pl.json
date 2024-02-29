@@ -78,7 +78,9 @@
                         "label": "Oznaczenie",
                         "color": "Kolor",
                         "icon": "Ikona",
-                        "pattern": "Szablon wzorca"
+                        "pattern": "Szablon wzorca",
+                        "picture_url": "Adres URL obrazka",
+                        "picture_url_description": "Jeśli podano adres URL obrazu, odpowiedni obraz jest wyświetlany zamiast ikony. Umieść obrazek w folderze `/config/www` i użyj `/local/[nazwa_pliku]`."
                     }
                 }
             }

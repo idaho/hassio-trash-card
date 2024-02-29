@@ -6,34 +6,32 @@ import type { HomeAssistant } from '../../../utils/ha';
 import type { CardStyleConfig } from '../trash-card-config';
 import type { CalendarItem } from '../../../utils/calendarItem';
 
-@customElement(`${TRASH_CARD_NAME}-element-icon`)
-class Icon extends LitElement {
+@customElement(`${TRASH_CARD_NAME}-element-picture`)
+class Picture extends LitElement {
   @state() private readonly item?: CalendarItem;
 
   @state() private readonly hass?: HomeAssistant;
 
   @state() private readonly config?: CardStyleConfig;
 
+  @state() private readonly pictureUrl?: string;
+
   public render () {
-    if (!this.item || !this.config) {
+    if (!this.pictureUrl) {
       return nothing;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    const icon = this.item.icon ?? 'mdi:delete-outline';
-
-    return html`<ha-state-icon
-        .hass=${this.hass}
-        .icon=${icon}
-        slot=${this.slot ? this.slot : undefined}
-      ></ha-state-icon>`;
+    return html`<img
+    src="${this.pictureUrl}" slot=${this.slot ? this.slot : undefined}/>`;
   }
 
   public static get styles () {
     return [
       css`
-        ha-state-icon {
-          color: var(--trash-card-icon-color);
+        img {
+          height: var(--mdc-icon-size);
+          width:  var(--mdc-icon-size);
+          object-fit: contain;
         }
       `
     ];
@@ -41,5 +39,5 @@ class Icon extends LitElement {
 }
 
 export {
-  Icon
+  Picture
 };

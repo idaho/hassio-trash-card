@@ -78,7 +78,9 @@
             "label": "Cimke",
             "color": "Szín",
             "icon": "Ikon",
-            "pattern": "Felismerési minta"
+            "pattern": "Felismerési minta",
+            "picture_url": "Kép URL címe",
+            "picture_url_description": "Ha egy kép URL címe van megadva, akkor az ikon helyett a megfelelő kép jelenik meg. Helyezzen el egy képet a `/config/www` mappában, és használja a `/local/[fájlnév]`"
           }
         }
       }

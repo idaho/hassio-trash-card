@@ -7,8 +7,6 @@ import { TRASH_CARD_NAME } from '../const';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { BaseItemElement } from './BaseItemElement';
 
-import '../elements/icon';
-
 @customElement(`${TRASH_CARD_NAME}-item-chip`)
 class ItemChip extends BaseItemElement {
   public render () {
@@ -31,6 +29,8 @@ class ItemChip extends BaseItemElement {
 
     const content = getDateString(item, hide_time_range ?? false, day_style, this.hass);
 
+    const pictureUrl = this.getPictureUrl();
+
     this.withBackground = true;
 
     return html`
@@ -39,7 +39,7 @@ class ItemChip extends BaseItemElement {
         ?rtl=${rtl}
         .avatarOnly=${false}
       >
-        ${this.renderIcon()}
+        ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
         <span>
           ${with_label ? html`<span class="chip-label">${item.label}</span>` : nothing}
           ${content ? html`<span class="chip-content">${content}</span>` : nothing}
@@ -52,7 +52,7 @@ class ItemChip extends BaseItemElement {
       ...BaseItemElement.styles,
       css`
         mushroom-chip {
-          --mdc-icon-size: 16px;
+          --mdc-icon-size: var(--trash-card-icon-size, 16px);
           --chip-background: var(--trash-card-background, 
               var(--ha-card-background, 
                 var(--card-background-color, #fff)

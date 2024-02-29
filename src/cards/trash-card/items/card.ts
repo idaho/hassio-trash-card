@@ -8,8 +8,6 @@ import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { BaseItemElement } from './BaseItemElement';
 
-import '../elements/icon';
-
 @customElement(`${TRASH_CARD_NAME}-item-card`)
 class ItemCard extends BaseItemElement {
   public render () {
@@ -32,15 +30,17 @@ class ItemCard extends BaseItemElement {
 
     const secondary = getDateString(item, hide_time_range ?? false, day_style, this.hass);
 
+    const pictureUrl = this.getPictureUrl();
+
     this.withBackground = true;
 
     return html`
       <ha-card style=${styleMap(style)}>
         <mushroom-card .appearance=${{ layout }} ?rtl=${rtl}>
           <mushroom-state-item .appearance=${{ layout }} ?rtl=${rtl}>
-            <span slot="icon">
-              ${this.renderIcon()}
-            </span>
+            <div slot="icon">
+              ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
+            </div>
             <mushroom-state-info
               slot="info"
               .primary=${with_label ? label : secondary}
@@ -61,7 +61,7 @@ class ItemCard extends BaseItemElement {
         ha-card {
           justify-content: space-between;
           height: 100%;
-          --mdc-icon-size: 24px;
+          --mdc-icon-size: var(--trash-card-icon-size, 24px);
           background: var(--trash-card-background, 
               var(--ha-card-background, 
                 var(--card-background-color, #fff)

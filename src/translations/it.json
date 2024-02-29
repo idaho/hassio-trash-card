@@ -78,7 +78,9 @@
             "label": "Etichetta",
             "color": "Colore",
             "icon": "Icona",
-            "pattern": "Pattern identificazione"
+            "pattern": "Pattern identificazione",
+            "picture_url": "URL immagine",
+            "picture_url_description": "Se viene specificato un URL dell'immagine, al posto dell'icona viene visualizzata l'immagine corrispondente. Posizionare un'immagine nella cartella `/config/www` e utilizzare `/local/[filename]`."
           }
         }
       }
