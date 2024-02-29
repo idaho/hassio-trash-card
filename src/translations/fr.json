@@ -57,7 +57,8 @@
                 "use_summary": "Résumé de l'événement au lieu de l'étiquette",
                 "hide_time_range": "cacher le temps",
                 "event_grouping": "Afficher uniquement l'événement suivant par modèle",
-                "icon_size": "taille de l'icône"
+                "icon_size": "taille de l'icône",
+                "with_label" : "Afficher l'étiquette"
             },
             "trash": {
                 "pattern": {

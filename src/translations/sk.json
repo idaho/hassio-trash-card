@@ -57,7 +57,8 @@
                 "use_summary": "Zhrnutie udalosti namiesto označenia",
                 "hide_time_range": "čas skrývania",
                 "event_grouping": "Zobrazenie iba nasledujúcej udalosti na vzor",
-                "icon_size": "Veľkosť ikony"
+                "icon_size": "Veľkosť ikony",
+                "with_label": "Zobraziť označenie"
             },
             "trash": {
                 "pattern": {

@@ -42,7 +42,9 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
       <ha-card style=${styleMap(style)} class=${classMap(cssClass)}>
         <mushroom-card .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
           <mushroom-state-item .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
-            ${this.renderIcon()}
+            <span slot="icon">
+              ${this.renderIcon()}
+            </span>
           </mushroom-state-item>
         </mushroom-card>
         <span class="badge" >${daysLeft}</span>
@@ -78,8 +80,15 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
           overflow: hidden;
           font-size: 80%;
           text-align: center;
+          width: fit-content;
+          padding: 0 1em;
+          justify-self: center;
+          border-width: var(--trash-card-badge-border-width, 1px);
+          border-color: var(--chip-border-color);
+          border-style: solid;
+          box-shadow: var(--chip-box-shadow);
+          box-sizing: content-box;
         }
-
         .nextEvent .badge {
           font-size: 90;
           

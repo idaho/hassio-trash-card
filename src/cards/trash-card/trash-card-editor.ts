@@ -69,7 +69,8 @@ const configDefaults = {
   card_style: 'card',
   color_mode: 'background',
   items_per_row: 1,
-  refresh_rate: 60
+  refresh_rate: 60,
+  with_label: true
 };
 
 @customElement(TRASH_CARD_EDITOR_NAME)

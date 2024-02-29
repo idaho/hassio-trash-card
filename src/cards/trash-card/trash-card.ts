@@ -31,6 +31,7 @@ const configDefaults = {
   hold_action: {
     action: 'more-info'
   },
+  with_label: true,
   debug: false
 };
 
@@ -129,7 +130,7 @@ export class TrashCard extends LitElement {
   }
 
   protected shouldUpdate (changedProps: PropertyValues): boolean {
-    if (changedProps.has('currentItems')) {
+    if (changedProps.has('currentItems') || (changedProps.has('_hass') && this.lastChanged)) {
       return true;
     }
 

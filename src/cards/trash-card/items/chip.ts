@@ -21,10 +21,12 @@ class ItemChip extends BaseItemElement {
 
     const rtl = computeRTL(this.hass);
 
-    const { color_mode, hide_time_range, day_style } = this.config;
+    const { color_mode, hide_time_range, day_style, with_label } = this.config;
 
     const style = {
-      ...getColoredStyle(color_mode, item)
+      ...getColoredStyle(color_mode, item),
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      ...with_label ? { '--chip-height': 'calc(36px * 1.15)' } : {}
     };
 
     const content = getDateString(item, hide_time_range ?? false, day_style, this.hass);
@@ -37,8 +39,11 @@ class ItemChip extends BaseItemElement {
         ?rtl=${rtl}
         .avatarOnly=${false}
       >
-      ${this.renderIcon()}
-        ${content ? html`<span>${content}</span>` : nothing}
+        ${this.renderIcon()}
+        <span>
+          ${with_label ? html`<span class="chip-label">${item.label}</span>` : nothing}
+          ${content ? html`<span class="chip-content">${content}</span>` : nothing}
+        </span>
       </mushroom-chip>`;
   }
 
@@ -53,7 +58,21 @@ class ItemChip extends BaseItemElement {
                 var(--card-background-color, #fff)
               )
             );
+          --chip-padding: 0.25em .5em 0.25em 0.25em;
+          --chip-border-radius: 69px;
+          --chip-height: calc(36px * 1.15);
         } 
+        mushroom-chip  ha-card {
+          
+        }
+        .chip-label {
+          font-weight: 600;
+        }
+        .chip-label + .chip-content {
+          display: block;
+          font-weight: 300;
+          margin-top: 3px;
+        }
       `
     ];
   }
