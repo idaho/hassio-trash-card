@@ -118,6 +118,7 @@ All the options are available in the lovelace editor but you can use `yaml` if y
 | `refresh_rate`            | integer | 60   | Check for changes in the calendar every x minutes, by default we will check every 60 minutes. Values can be set from 5 to 1440. |
 | `debug`            | boolean | `false`   | Option to enable debug mode to help fixing bugs ;) . |
 | `icon_size`            | integer | 40 | Size of the icons in px if you choose `card_style` as `icon` . |
+| `with_label`            | boolean | `true` | Option to decide if you want to see the label in the card or the chip style. |
 | `settings`          | [Settings](#settings)                               | Required    | Settings to detect the kind of trash and how to display it.|
 
 
