@@ -1,25 +1,16 @@
 import { computeRTL } from 'lovelace-mushroom/src/ha';
-import { LitElement, css, html, nothing } from 'lit';
+import { css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { getDateString } from '../../../utils/getDateString';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
+import { BaseItemElement } from './BaseItemElement';
 
 import '../elements/icon';
 
-import type { CardStyleConfig } from '../trash-card-config';
-import type { CalendarItem } from '../../../utils/calendarItem';
-import type { HomeAssistant } from '../../../utils/ha';
-
 @customElement(`${TRASH_CARD_NAME}-item-chip`)
-class ItemChip extends LitElement {
-  @state() private readonly item?: CalendarItem;
-
-  @state() private readonly hass?: HomeAssistant;
-
-  @state() private readonly config?: CardStyleConfig;
-
+class ItemChip extends BaseItemElement {
   public render () {
     if (!this.hass || !this.item || !this.config) {
       return nothing;
@@ -40,17 +31,15 @@ class ItemChip extends LitElement {
 
     const content = getDateString(item, hide_time_range ?? false, day_style, this.hass);
 
+    this.withBackground = true;
+
     return html`
       <mushroom-chip
         style=${styleMap(style)}
         ?rtl=${rtl}
         .avatarOnly=${false}
       >
-        <trash-card-element-icon
-        .hass=${this.hass}
-        .config=${this.config}
-        .item=${item}
-        ></trash-card-element-icon>
+        ${this.renderIcon()}
         <span>
           ${with_label ? html`<span class="chip-label">${item.label}</span>` : nothing}
           ${content ? html`<span class="chip-content">${content}</span>` : nothing}
@@ -60,8 +49,10 @@ class ItemChip extends LitElement {
 
   public static get styles () {
     return [
+      ...BaseItemElement.styles,
       css`
         mushroom-chip {
+          --mdc-icon-size: 16px;
           --chip-background: var(--trash-card-background, 
               var(--ha-card-background, 
                 var(--card-background-color, #fff)
