@@ -91,8 +91,15 @@ class IconCard extends LitElement {
           overflow: hidden;
           font-size: 80%;
           text-align: center;
+          width: fit-content;
+          padding: 0 1em;
+          justify-self: center;
+          border-width: var(--trash-card-badge-border-width, 1px);
+          border-color: var(--chip-border-color);
+          border-style: solid;
+          box-shadow: var(--chip-box-shadow);
+          box-sizing: content-box;
         }
-
         .nextEvent .badge {
           font-size: 90;
           
