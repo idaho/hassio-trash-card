@@ -9,8 +9,6 @@ import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { daysTill } from '../../../utils/daysTill';
 import { BaseItemElement } from './BaseItemElement';
 
-import '../elements/icon';
-
 @customElement(`${TRASH_CARD_NAME}-icon-card`)
 class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
   public render () {
@@ -26,7 +24,7 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
     const style = {
       ...getColoredStyle([ 'icon', 'background' ], item),
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      '--trash-card-icon-size': `${this.config.icon_size}px`
+      '--trash-card-icon-size': `${this.config.icon_size ?? 40}px`
     };
 
     const cssClass = {
@@ -36,15 +34,17 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
 
     const daysLeft = daysTill(item);
 
+    const pictureUrl = this.getPictureUrl();
+
     this.withBackground = true;
 
     return html`
       <ha-card style=${styleMap(style)} class=${classMap(cssClass)}>
         <mushroom-card .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
           <mushroom-state-item .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
-            <span slot="icon">
-              ${this.renderIcon()}
-            </span>
+            <div slot="icon">
+              ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
+            </div>
           </mushroom-state-item>
         </mushroom-card>
         <span class="badge" >${daysLeft}</span>
@@ -88,10 +88,6 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
           border-style: solid;
           box-shadow: var(--chip-box-shadow);
           box-sizing: content-box;
-        }
-        .nextEvent .badge {
-          font-size: 90;
-          
         }
       `
     ];

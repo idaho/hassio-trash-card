@@ -21,9 +21,8 @@ const getLabel = (event: CalendarEvent, settings: ItemSettings, useSummary: bool
 
 const getData = (event: CalendarEvent, pattern: Pattern & { idx: number }, useSummary: boolean): CalendarItem => ({
   ...event,
+  ...pattern,
   label: getLabel(event, pattern, useSummary),
-  icon: pattern.icon!,
-  color: pattern.color!,
   type: pattern.type === 'custom' ? `custom-${pattern.idx}` : pattern.type
 });
 

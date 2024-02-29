@@ -47,7 +47,7 @@ class Cards extends LitElement implements BaseContainerElement {
 
     const cssStyleMap = styleMap({
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      'grid-template-columns': `repeat(${itemsPerRow}, calc(calc(100% - calc(${(itemsPerRow - 1)} * var(--grid-card-gap, 2px))) / ${itemsPerRow}))`
+      'grid-template-columns': `repeat(${itemsPerRow}, calc(calc(100% - calc(${itemsPerRow - 1} * var(--grid-card-gap, 2px))) / ${itemsPerRow}))`
     });
 
     return html`

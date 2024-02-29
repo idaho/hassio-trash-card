@@ -38,6 +38,7 @@ type EntityWithOutIcon = Omit<EntitySharedConfig, 'icon'>;
    card_style?: typeof CARDSTYLES[number];
    color_mode?: typeof COLORMODES[number];
    refresh_rate?: number;
+   icon_size?: number;
    debug?: boolean;
    with_label?: boolean;
  };
@@ -73,6 +74,7 @@ const entityCardConfigStruct = assign(
         icon: optional(string()),
         label: optional(string()),
         pattern: optional(string()),
+        picture: optional(string()),
         type: string()
       })
     ))

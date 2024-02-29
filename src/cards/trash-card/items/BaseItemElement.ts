@@ -1,7 +1,11 @@
 /* eslint-disable unicorn/filename-case */
 import { LitElement, css, html } from 'lit';
 import { state } from 'lit/decorators.js';
+import { getPicture } from '../../../utils/getPicture';
 import { classMap } from 'lit-html/directives/class-map.js';
+
+import '../elements/icon';
+import '../elements/picture';
 
 import type { CardStyleConfig } from '../trash-card-config';
 import type { CalendarItem } from '../../../utils/calendarItem';
@@ -15,13 +19,30 @@ class BaseItemElement<T = {}> extends LitElement {
 
   @state() protected readonly config?: CardStyleConfig;
 
-  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-  protected withBackground: boolean = false;
+  protected withBackground = false;
+
+  protected getPictureUrl () {
+    return getPicture(this.item!.picture, this.hass!);
+  }
 
   protected getWithBackgroundClass () {
     return {
       withBackground: Boolean(this.withBackground)
     };
+  }
+
+  protected renderPicture (pictureUrl: string) {
+    const cssClass = {
+      ...this.getWithBackgroundClass()
+    };
+
+    return html`
+      <trash-card-element-picture
+        class=${classMap(cssClass)}
+        .hass=${this.hass}
+        .config=${this.config}
+        .pictureUrl=${pictureUrl}
+      ></trash-card-element-icon>`;
   }
 
   protected renderIcon () {
