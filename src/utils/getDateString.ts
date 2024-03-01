@@ -44,7 +44,7 @@ const getDateString = (item: CalendarItem, excludeTime?: boolean, dayStyle?: Tra
   }
 
   if (dayStyle === 'counter') {
-    const daysLeft = daysTill(item);
+    const daysLeft = daysTill(new Date(), item);
 
     return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
   }

@@ -32,7 +32,7 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
       futureEvent: !this.item.nextEvent
     };
 
-    const daysLeft = daysTill(item);
+    const daysLeft = daysTill(new Date(), item);
 
     const pictureUrl = this.getPictureUrl();
 
