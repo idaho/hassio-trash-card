@@ -14,21 +14,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.VERSION_TOKEN }}
 
       - name: Add version to packages
         run: npm version ${{ inputs.version }} --git-tag-version false
 
-      - name: Add files to commit
-        run: git add package.json package-lock.json
+      - name: Create commit and push
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: '${{ inputs.version }}'
+          add: 'package.json package-lock.json'
+          push: ''
 
-      - name: Create commit message
-        run: git commit -m "${{ inputs.version }}"
-
-      - name: Push to repository
-        run: git push
-
-      - name: Tag commit
-        run: git tag ${{ inputs.version }}
-
-      - name: Push tags
-        run: git push origin --tags
+      - uses: Create tag and push
+        with:
+          tag: '${{ inputs.version }}'
+          force: '--force'
