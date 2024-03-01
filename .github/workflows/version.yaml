@@ -27,7 +27,8 @@ jobs:
           add: 'package.json package-lock.json'
           push: ''
 
-      - uses: Create tag and push
+      - name: Create tag and push
+        uses: EndBug/add-and-commit@v9
         with:
           tag: '${{ inputs.version }}'
           force: '--force'
