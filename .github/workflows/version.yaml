@@ -9,7 +9,7 @@ on:
         type: string
 
 jobs:
-  release:
+  new_version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
