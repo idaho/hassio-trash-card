@@ -25,10 +25,10 @@ jobs:
         with:
           message: '${{ inputs.version }}'
           add: 'package.json package-lock.json'
-          push: ''
+          push: true
 
       - name: Create tag and push
         uses: EndBug/add-and-commit@v9
         with:
           tag: '${{ inputs.version }}'
-          force: '--force'
+          tag_push: '--force'
