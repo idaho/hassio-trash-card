@@ -79,21 +79,6 @@ The TrashCard cards can be configured using Dashboard UI editor.
 3. Click Plus button to add a new card.
 4. Find the _Custom: TrashCard_ card in the list.
 
-### Configure the card
-Here's simple steps to follow to configure the trash card with the UI, we'll go throw all the differents configuration field with you: 
-![O](https://github.com/idaho/hassio-trash-card/assets/1178/3610465f-0b9a-4ded-8621-9691c845acd3)
-
-1. First, you need to select your calendar entity in the first field `Entity` (can be different because it's translated in your own language). 
-2. Then, for all the different collection, you'll have to fill those fiels: 
-    a. `Label` is the text you want to be displayed in your card. It can be anything
-    b. `Icon` is the icon you can to be used in your card. You can select through the availabla HA icons, and even start typing to search
-    c. `Color` is the color you want your card to be. ⚠️ it's not gonna be the color of the icon but of the card itself
-    d. `Pattern` is the event title you used when creating events in your calendar. For example, for recycling, mine is "PMC", because that's the event name in my calendar.
-3. `day style` is how to display the information. Full date or "in xx days"
-4. `drop today events from` is at which hour you want to stop displaying today's collection
-5. `next days` is how many days in the future the card will look up. If there is no upcoming event in the next XX days you selected here, **the card will not display at all**. 
-
-![O](https://github.com/idaho/hassio-trash-card/assets/1178/074164cd-9865-4edc-be48-216b7acba3e5)
 
 All the options are available in the lovelace editor but you can use `yaml` if you want.
 
