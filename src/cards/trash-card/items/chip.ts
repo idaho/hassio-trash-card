@@ -59,7 +59,6 @@ class ItemChip extends BaseItemElement {
               )
             );
           --chip-padding: 0.25em .5em 0.25em 0.25em;
-          --chip-border-radius: 69px;
           --chip-height: calc(36px * 1.15);
         } 
         mushroom-chip  ha-card {
