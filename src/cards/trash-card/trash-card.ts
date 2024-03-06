@@ -130,7 +130,7 @@ export class TrashCard extends LitElement {
   }
 
   protected shouldUpdate (changedProps: PropertyValues): boolean {
-    if (changedProps.has('currentItems') || (changedProps.has('_hass') && this.lastChanged)) {
+    if (changedProps.has('currentItems')) {
       return true;
     }
 
