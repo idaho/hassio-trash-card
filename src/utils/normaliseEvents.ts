@@ -1,7 +1,6 @@
-import { getTimeZoneOffset } from './getTimeZoneOffset';
 import type { CalendarEvent, RawCalendarEvent } from './calendarEvents';
 
-const normaliseEvents = (events: RawCalendarEvent[]): CalendarEvent[] => {
+const normaliseEvents = (events: RawCalendarEvent[], timezoneOffset: string): CalendarEvent[] => {
   const beginingTime = new Date();
 
   beginingTime.setUTCHours(0);
@@ -10,7 +9,7 @@ const normaliseEvents = (events: RawCalendarEvent[]): CalendarEvent[] => {
   beginingTime.setMilliseconds(0);
 
   const isoDateString = beginingTime.toISOString();
-  const timeAtZero = `${isoDateString.slice(isoDateString.indexOf(`T`), -1)}${getTimeZoneOffset()}`;
+  const timeAtZero = `${isoDateString.slice(isoDateString.indexOf(`T`), -1)}${timezoneOffset}`;
 
   return events.
     map((item): CalendarEvent => ({

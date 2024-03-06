@@ -1,29 +1,21 @@
-import { animations } from 'lovelace-mushroom/src/utils/entity-styles';
-import type { Appearance } from 'lovelace-mushroom/src/shared/config/appearance-config';
-import { cardStyle } from 'lovelace-mushroom/src/utils/card-styles';
-import { classMap } from 'lit/directives/class-map.js';
-import { computeAppearance } from 'lovelace-mushroom/src/utils/appearance';
-import { computeInfoDisplay } from 'lovelace-mushroom/src/utils/info';
-import { eventToItem } from '../../utils/eventToItem';
-import { findActiveEvent } from '../../utils/findActiveEvent';
 import { getDayFromDate } from '../../utils/getDayFromDate';
-import type { HassEntity } from 'home-assistant-js-websocket';
-import type { HomeAssistant } from '../../utils/ha';
 import { isTodayAfter } from '../../utils/isTodayAfter';
-import { loadHaComponents } from 'lovelace-mushroom/src/utils/loader';
-import { normaliseEvents } from '../../utils/normaliseEvents';
-import type { RawCalendarEvent } from '../../utils/calendarEvents';
 import { registerCustomCard } from '../../utils/registerCustomCard';
-import setupCustomlocalize from '../../localize';
-import { styleMap } from 'lit/directives/style-map.js';
-import type { TrashCardConfig } from './trash-card-config';
-import { actionHandler, computeRTL, computeStateDisplay, hasAction, type LovelaceCard, type LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
-import type { CalendarItem, ValidCalendarItem } from '../../utils/calendarItem';
-import { computeRgbColor, defaultColorCss, defaultDarkColorCss } from 'lovelace-mushroom/src/utils/colors';
-import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues, type TemplateResult } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { themeColorCss, themeVariables } from 'lovelace-mushroom/src/utils/theme';
 import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
+import { Debugger } from '../../utils/debugger';
+import { getCalendarData } from '../../utils/getCalendarData';
+import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
+import { migrateConfig, needsConfigToMigrate } from './utils/migration';
+
+import './container';
+
+import type { PropertyValues } from 'lit';
+import type { TrashCardConfig } from './trash-card-config';
+import type { HomeAssistant } from '../../utils/ha';
+import type { CalendarItem } from '../../utils/calendarItem';
+import type { BaseContainerElement } from './container/BaseContainerElement';
 
 registerCustomCard({
   type: TRASH_CARD_NAME,
@@ -31,14 +23,27 @@ registerCustomCard({
   description: 'TrashCard - indicates what type of trash will be picked up next based on your calendar entries 🗑️'
 });
 
-@customElement(TRASH_CARD_NAME)
-export class TrashCard extends LitElement implements LovelaceCard {
-  @property({ attribute: false }) public hass?: HomeAssistant;
+const configDefaults = {
+  tap_action: {
+    action: 'more-info'
+  },
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  hold_action: {
+    action: 'more-info'
+  },
+  with_label: true,
+  debug: false
+};
 
-  public static async getConfigElement (): Promise<LovelaceCardEditor> {
+@customElement(TRASH_CARD_NAME)
+export class TrashCard extends LitElement {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  @state() private _hass?: HomeAssistant;
+
+  public static async getConfigElement () {
     await import('./trash-card-editor');
 
-    return document.createElement(TRASH_CARD_EDITOR_NAME) as LovelaceCardEditor;
+    return document.createElement(TRASH_CARD_EDITOR_NAME);
   }
 
   public static async getStubConfig (hass: HomeAssistant): Promise<Partial<TrashCardConfig>> {
@@ -46,54 +51,54 @@ export class TrashCard extends LitElement implements LovelaceCard {
 
     return {
       type: `custom:${TRASH_CARD_NAME}`,
-      entity: entities[0]
+      entities: [ entities[0] ]
     };
   }
 
   @state() private config?: TrashCardConfig;
 
-  @property() private currentItem?: CalendarItem;
+  @property() private currentItems?: CalendarItem[];
 
   @property() private startDate: Date = new Date();
 
   @property() private endDate: Date = new Date();
 
+  @property() private debugger?: Debugger;
+
   private lastChanged?: Date;
 
-  public connectedCallback () {
-    super.connectedCallback();
-    // eslint-disable-next-line no-void
-    void loadHaComponents();
+  public get hass (): HomeAssistant | undefined {
+    // eslint-disable-next-line no-underscore-dangle
+    return this._hass;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  public getCardSize (): number | Promise<number> {
-    return 1;
+  public set hass (hass: HomeAssistant) {
+    // eslint-disable-next-line no-underscore-dangle
+    this._hass = hass;
+    this.shadowRoot?.querySelectorAll('div > *').forEach((element: unknown) => {
+      // eslint-disable-next-line no-param-reassign
+      (element as BaseContainerElement).setHass(hass);
+    });
   }
 
   public setConfig (config: TrashCardConfig): void {
     this.config = {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      tap_action: {
-        action: 'more-info'
-      },
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      hold_action: {
-        action: 'more-info'
-      },
-      ...config
+      ...configDefaults,
+      ...needsConfigToMigrate(config) ? migrateConfig(config) : config
     };
+
+    this.debugger = new Debugger();
   }
 
   public setDateRange () {
     this.startDate = new Date();
     this.endDate = new Date();
 
-    this.endDate.setDate(this.endDate.getDate() + (this.config?.next_days ?? 2));
+    this.endDate.setDate(this.endDate.getDate() + (this.config?.next_days ?? 2) + 1);
   }
 
   protected fetchCurrentTrashData () {
-    if (!this.hass) {
+    if (!this.hass || !this.config || !this.debugger) {
       return;
     }
 
@@ -102,270 +107,95 @@ export class TrashCard extends LitElement implements LovelaceCard {
     const start = getDayFromDate(this.startDate);
     const end = getDayFromDate(this.endDate);
 
-    const uri = `calendars/${this.config?.entity}?start=${start}&end=${end}`;
-
-    const dropAfter = isTodayAfter(new Date(), this.config!.drop_todayevents_from ?? '10:00:00');
+    const dropAfter = isTodayAfter(new Date(), this.config.drop_todayevents_from ?? '10:00:00');
+    const timezoneOffset = getTimeZoneOffset();
 
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    this.hass.
-      callApi<RawCalendarEvent[]>('GET', uri).
-      then((response): CalendarItem =>
-        eventToItem(
-          findActiveEvent(
-            normaliseEvents(response), { config: {
-              settings: this.config!.settings!,
-              // eslint-disable-next-line @typescript-eslint/naming-convention
-              filter_events: this.config!.filter_events
-            },
-            dropAfter,
-            now: new Date() }
-          ),
-          { settings: this.config!.settings!, useSummary: Boolean(this.config!.use_summary) }
-        )).
-      then((data: CalendarItem) => {
-        this.currentItem = data;
+    getCalendarData(
+      this.hass,
+      this.config.entities,
+      { start, end, dropAfter },
+      this.debugger,
+      this.config,
+      timezoneOffset
+    ).
+      then((data: CalendarItem[]) => {
+        this.currentItems = data;
         this.lastChanged = new Date();
       });
   }
 
+  protected getRefreshRate (): number {
+    return (this.config?.refresh_rate ?? 60) * 1_000;
+  }
+
   protected shouldUpdate (changedProps: PropertyValues): boolean {
-    if (changedProps.has('currentItem')) {
+    if (changedProps.has('currentItems')) {
       return true;
     }
-    changedProps.delete('currentItem');
-    if (
-      !this.lastChanged ||
-            changedProps.has('config') ||
 
-            // Refresh only every 5s.
-            Date.now() - this.lastChanged.getTime() > 5_000
-    ) {
+    changedProps.delete('currentItems');
+
+    if (!this.lastChanged || changedProps.has('config') || Date.now() - this.lastChanged.getTime() > this.getRefreshRate()) {
       this.fetchCurrentTrashData();
     }
 
     return false;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  protected isValidItem (item?: CalendarItem): item is ValidCalendarItem {
-    return Boolean(item && item.type !== 'none');
-  }
+  protected createBaseContainerElement (cardStyle: TrashCardConfig['card_style']) {
+    try {
+      const tag = `trash-card-${cardStyle ?? 'card'}s-container`;
 
-  protected getDateString (item: CalendarItem): string {
-    if (!this.isValidItem(item) || !this.hass) {
-      return '';
+      if (customElements.get(tag)) {
+        // @ts-expect-error TS2769
+        const element = document.createElement(tag, this.config) as BaseContainerElement;
+
+        element.setConfig(this.config);
+        element.setItems(this.currentItems);
+
+        return element;
+      }
+
+      const element = document.createElement(tag) as BaseContainerElement;
+
+      customElements.whenDefined(tag).
+        then(() => {
+          customElements.upgrade(element);
+          element.setConfig(this.config);
+          element.setItems(this.currentItems);
+        }).
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        catch(() => {
+        });
+
+      return element;
+    // eslint-disable-next-line no-empty
+    } catch {
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      return undefined;
     }
-
-    const customLocalize = setupCustomlocalize(this.hass);
-
-    const today = new Date();
-    const tomorrow = new Date();
-
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    const todayDay = getDayFromDate(today);
-    const tomorrowDay = getDayFromDate(tomorrow);
-
-    const stateDay = getDayFromDate(item.date.start);
-
-    const startTime = !item.isWholeDayEvent ?
-      item.date.start.toLocaleTimeString(this.hass.language, {
-        hour: 'numeric',
-        minute: 'numeric'
-      }) :
-      undefined;
-
-    const endTime = !item.isWholeDayEvent ?
-      item.date.end.toLocaleTimeString(this.hass.language, {
-        hour: 'numeric',
-        minute: 'numeric'
-      }) :
-      undefined;
-
-    if (stateDay === todayDay || stateDay === tomorrowDay) {
-      const key = `card.trash.${stateDay === todayDay ? 'today' : 'tomorrow'}${startTime ? '_from_till' : ''}`;
-
-      return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
-    }
-
-    if (this.config?.day_style === 'counter') {
-      const oneDay = 24 * 60 * 60 * 1_000;
-
-      const daysLeft = Math.round(Math.abs((Date.now() - item.date.start.getTime()) / oneDay));
-
-      return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
-    }
-
-    const day = item.date.start.toLocaleDateString(this.hass.language, {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-
-    const key = `card.trash.day${startTime ? '_from_till' : ''}`;
-
-    return customLocalize(`${key}`).replace('<DAY>', day).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '');
   }
 
   protected render () {
-    if (!this.config || !this.hass || !this.config.entity) {
+    if (!this.config || !this.hass) {
       return nothing;
     }
 
-    const entityId = this.config.entity;
-    const stateObj = this.hass.states[entityId] as HassEntity | undefined;
+    if (!this.currentItems || this.currentItems.length === 0) {
+      return this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : nothing;
+    }
 
-    if (!stateObj) {
+    const element = this.createBaseContainerElement(this.config.card_style);
+
+    if (!element) {
       return nothing;
     }
 
-    const item = this.currentItem;
-
-    if (!this.isValidItem(item)) {
-      return html``;
-    }
-    const appearance = computeAppearance(this.config);
-
-    const rtl = computeRTL(this.hass);
-
-    const { label } = item;
-    const color = item.color ?? 'disabled';
-
-    const backgroundStyle = {};
-
-    if (color !== 'disabled') {
-      const rgbColor = computeRgbColor(color);
-
-      backgroundStyle['background-color'] = `rgba(${rgbColor}, 0.5)`;
-    }
-
-    const secondary = this.getDateString(item);
-
-    /* eslint-disable @typescript-eslint/naming-convention */
-    return html`
-            <ha-card
-                class=${classMap({ 'fill-container': appearance.fill_container, fullsize: this.config.full_size === true })}
-                style=${styleMap(backgroundStyle)}
-            >
-                <mushroom-card .appearance=${appearance} ?rtl=${rtl}>
-                    <mushroom-state-item
-                        ?rtl=${rtl}
-                        .appearance=${appearance}
-                        .actionHandler=${actionHandler({ hasHold: hasAction(this.config.hold_action), hasDoubleClick: hasAction(this.config.double_tap_action) })}
-                    >
-                        ${this.renderIcon(stateObj, item)}
-                        <mushroom-state-info
-                            slot="info"
-                            .primary=${label}
-                            .secondary=${secondary}
-                            .multiline_secondary=${true}
-                        ></mushroom-state-info>
-                    </mushroom-state-item>
-                </mushroom-card>
-            </ha-card>
-        `;
-    /* eslint-enable @typescript-eslint/naming-convention */
-  }
-
-  protected renderIcon (stateObj: HassEntity, item?: CalendarItem): TemplateResult {
-    if (!this.isValidItem(item)) {
-      return html``;
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    const icon = item.icon ?? 'mdi:delete-outline';
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    const iconColor = item.color ?? 'disabled';
-
-    const iconStyle = {};
-
-    iconStyle['--icon-color'] = `rgba(var(--white-color), 0.5)`;
+    element.setHass(this.hass);
 
     return html`
-            <mushroom-shape-icon
-                slot="icon"
-                .disabled=${iconColor === 'disabled'}
-                style=${styleMap(iconStyle)}
-            >
-                <ha-state-icon .state=${stateObj} .icon=${icon}></ha-state-icon>
-            </mushroom-shape-icon>
-        `;
-  }
-
-  protected renderStateInfo (
-    stateObj: HassEntity,
-    appearance: Appearance,
-    name: string,
-    currentState?: string
-  ): TemplateResult | null {
-    if (!this.hass) {
-      return null;
-    }
-
-    const defaultState = computeStateDisplay(
-      this.hass.localize,
-      stateObj,
-      this.hass.locale,
-      this.hass.config,
-      this.hass.entities
-    );
-    const displayState = currentState ?? defaultState;
-
-    const primary = computeInfoDisplay(
-      appearance.primary_info,
-      name,
-      displayState,
-      stateObj,
-      this.hass
-    );
-
-    const secondary = computeInfoDisplay(
-      appearance.secondary_info,
-      name,
-      displayState,
-      stateObj,
-      this.hass
-    );
-
-    return html`
-            <mushroom-state-info
-                slot="info"
-                .primary=${primary}
-                .secondary=${secondary}
-            ></mushroom-state-info>
-        `;
-  }
-
-  public static get styles (): CSSResultGroup {
-    return [
-      animations,
-      css`
-          :host {
-              ${defaultColorCss}
-          }
-          :host([dark-mode]) {
-              ${defaultDarkColorCss}
-          }
-          :host {
-              ${themeColorCss}
-              ${themeVariables}
-          }
-        `,
-      cardStyle,
-      css`
-          ha-card.fullsize {
-              margin-left: -17px;
-              margin-right: -17px;
-              margin-top: -4px;
-          }
-          mushroom-state-item {
-              cursor: pointer;
-          }
-          mushroom-shape-icon {
-              --icon-color: rgb(var(--rgb-state-entity));
-              --shape-color: rgba(var(--rgb-state-entity), 0.2);
-          }
-      `
-    ];
+      ${this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : ``}
+      ${element}`;
   }
 }

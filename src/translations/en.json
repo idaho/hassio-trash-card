@@ -7,9 +7,25 @@
                 }
             },
             "day_style": {
+                "title": "Show event time as",
                 "values": {
                     "default": "Date",
                     "counter": "days to"
+                }
+            },
+            "card_style": {
+                "title": "Display as",
+                "values": {
+                    "card": "Standard card",
+                    "chip": "Chip card",
+                    "icon": "Icon"
+                }
+            },
+            "color_mode": {
+                "title": "Apply color to",
+                "values": {
+                    "background": "Background",
+                    "icon": "Icon"
                 }
             },
             "layout_picker": {
@@ -23,6 +39,10 @@
                 "settings": "Settings",
                 "appearance": "Appearance",
                 "patterns": "Patterns"
+            },
+            "refresh_rate": {
+                "title": "Update interval",
+                "helper": "Check for changes in the calendar every x minutes"
             }
         },
         "card": {
@@ -35,13 +55,18 @@
                 "drop_todayevents_from": "From what time to hide all-day event",
                 "full_size": "Card without margin",
                 "use_summary": "Event summary instead of label",
-                "day_style": "Show event time as"
+                "hide_time_range": "Hide time",
+                "event_grouping": "Only display the next event per pattern",
+                "icon_size": "Icon size",
+                "with_label": "Show label"
             },
             "trash": {
                 "pattern": {
                     "title": "Edit pattern",
                     "edit": "edit",
                     "delete": "delete",
+                    "create": "Create new pattern",
+                    "new_custom_label": "New pattern",
                     "type": {
                         "organic": "Organic",
                         "paper": "Paper",
@@ -53,7 +78,9 @@
                         "label": "Label",
                         "color": "Color",
                         "icon": "Icon",
-                        "pattern": "Detection pattern"
+                        "pattern": "Detection pattern",
+                        "picture_url": "Picture URL",
+                        "picture_url_description": "If a picture URL is specified, the corresponding picture is displayed instead of the icon. Place an image in the `/config/www` folder and use `/local/[filename]`."
                     }
                 }
             }

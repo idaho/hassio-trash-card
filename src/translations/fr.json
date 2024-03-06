@@ -7,9 +7,25 @@
                 }
             },
             "day_style": {
+                "title": "Afficher l'heure de l'événement en tant que",
                 "values": {
                     "default": "Date",
                     "counter": "jours jusqu'à"
+                }
+            },
+            "card_style": {
+                "title": "Représenter comme",
+                "values": {
+                    "card": "carte standard",
+                    "chip": "carte à puce",
+                    "icon": "Icône"
+                }
+            },
+            "color_mode": {
+                "title": "Appliquer une couleur à",
+                "values": {
+                    "background": "Contexte",
+                    "icon": "Icône"
                 }
             },
             "layout_picker": {
@@ -23,6 +39,10 @@
                 "settings": "Paramètres",
                 "appearance": "Apparence",
                 "patterns": "Motifs"
+            },
+            "refresh_rate": {
+                "title": "Intervalle d'actualisation",
+                "helper": "Vérifier les changements dans le calendrier toutes les x minutes."
             }
         },
         "card": {
@@ -35,13 +55,18 @@
                 "drop_todayevents_from": "A partir de quelle heure masquer l'événement de toute la journée ?",
                 "full_size": "Carte sans marge",
                 "use_summary": "Résumé de l'événement au lieu de l'étiquette",
-                "day_style": "Afficher l'heure de l'événement en tant que"
+                "hide_time_range": "cacher le temps",
+                "event_grouping": "Afficher uniquement l'événement suivant par modèle",
+                "icon_size": "taille de l'icône",
+                "with_label" : "Afficher l'étiquette"
             },
             "trash": {
                 "pattern": {
                     "title": "Modifier le modèle",
                     "edit": "Modifier",
                     "delete": "Supprimer",
+                    "create": "Créer un nouveau modèle",
+                    "new_custom_label": "Nouveau modèle",
                     "type": {
                         "organic": "Organique",
                         "paper": "Papier",
@@ -53,7 +78,9 @@
                         "label": "Étiquette",
                         "color": "Couleur",
                         "icon": "Icône",
-                        "pattern": "Modèle de détection"
+                        "pattern": "Modèle de détection",
+                        "picture_url" : "URL de l'image",
+                        "picture_url_description" : "Si une URL d'image est indiquée, l'image correspondante sera affichée au lieu de l'icône. Placez une image dans le dossier `/config/www` et utilisez `/local/[nom de fichier]`"
                     }
                 }
             }

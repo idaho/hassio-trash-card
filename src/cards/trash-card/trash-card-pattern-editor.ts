@@ -1,38 +1,46 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable no-return-assign */
-import { fireEvent } from 'lovelace-mushroom/src/ha';
 import { guard } from 'lit/directives/guard.js';
-import type { HomeAssistant } from '../../utils/ha';
-import type { ItemSettings } from '../../utils/itemSettings';
 import setupCustomlocalize from '../../localize';
-import { type TrashCardConfig } from './trash-card-config';
-
-import { css, type CSSResultGroup, html, LitElement, nothing, type PropertyValues } from 'lit';
+import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { fireEvent } from '../../utils/fireEvent';
 
-export interface SubElementEditorConfig {
+import type { TrashCardConfig } from './trash-card-config';
+import type { CSSResultGroup, PropertyValues } from 'lit';
+import type { ItemSettings } from '../../utils/itemSettings';
+import type { HomeAssistant } from '../../utils/ha';
+
+interface SubElementEditorConfig {
   index?: number;
   key?: string;
   elementConfig?: ItemSettings;
-  type: string;
 }
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   interface HASSDomEvents {
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    'edit-detail-element': {
+    'edit-pattern-item': {
       subElementConfig: SubElementEditorConfig;
+    };
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'delete-pattern-item': {
+      index: number;
+    };
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'create-pattern-item': {
+      index: number;
     };
   }
 }
 
 @customElement(`trash-card-pattern-editor`)
-export class TrashCardPatternEditor extends LitElement {
+class TrashCardPatternEditor extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
-  @state() protected settings?: TrashCardConfig['settings'];
+  @state() protected pattern?: TrashCardConfig['pattern'];
 
   @state() private attached = false;
 
@@ -50,13 +58,13 @@ export class TrashCardPatternEditor extends LitElement {
     super.updated(changedProps);
 
     const attachedChanged = changedProps.has('attached');
-    const settingsChanged = changedProps.has('settings');
+    const patternChanged = changedProps.has('pattern');
 
-    if (!settingsChanged && !attachedChanged) {
+    if (!patternChanged && !attachedChanged) {
       return;
     }
 
-    if (settingsChanged) {
+    if (patternChanged) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       this.handleSettingsChanged();
     }
@@ -67,17 +75,17 @@ export class TrashCardPatternEditor extends LitElement {
   }
 
   protected render () {
-    if (!this.hass || !this.settings) {
+    if (!this.hass || !this.pattern) {
       return nothing;
     }
 
     const customLocalize = setupCustomlocalize(this.hass);
-    const settings = Object.entries(this.settings);
 
     return html`
       <div class="settings">
-      ${guard([ this.settings ],
-    () => settings.map(([ key, settingsConfig ], index) =>
+      ${guard([ this.pattern ],
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    () => this.pattern!.map((settingsConfig, index) =>
       html`
           <div class="setting">
             <div class="icon">
@@ -86,7 +94,7 @@ export class TrashCardPatternEditor extends LitElement {
 
             <div class="special-row">
               <div>
-                <span> ${settingsConfig.label ?? customLocalize(`editor.card.trash.pattern.type.${key}`)}</span>
+                <span> ${settingsConfig.label ?? customLocalize(`editor.card.trash.pattern.type.${settingsConfig.type}`)}</span>
               </div>
             </div>
 
@@ -98,21 +106,50 @@ export class TrashCardPatternEditor extends LitElement {
               >
               <ha-icon icon="mdi:pencil"></ha-icon>
             </ha-icon-button>
+            <ha-icon-button
+              .label=${customLocalize('editor.card.trash.pattern.delete')}
+              class="delete-icon"
+              .index=${index}
+              .disabled=${settingsConfig.type !== 'custom'}
+              @click=${this.deleteItem}
+              >
+              <ha-icon icon="mdi:close"></ha-icon>
+            </ha-icon-button>
           </div>`))}
+
+        <mwc-button
+          @click=${this.createItem}
+          class="gui-mode-button"
+        >${customLocalize('editor.card.trash.pattern.create')}</mwc-button>
     </div>`;
   }
 
   private editItem (ev: CustomEvent): void {
     const { index } = (ev.currentTarget as any);
-    const settings = Object.entries(this.settings!);
 
-    fireEvent(this, 'edit-detail-element', {
+    fireEvent(this, 'edit-pattern-item', {
       subElementConfig: {
         index,
-        key: settings[index][0],
-        type: 'setting',
-        elementConfig: settings[index][1]
+        key: index,
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+        elementConfig: this.pattern![index]
       }
+    });
+  }
+
+  private deleteItem (ev: CustomEvent): void {
+    const { index } = (ev.currentTarget as any);
+
+    fireEvent(this, 'delete-pattern-item', {
+      index
+    });
+  }
+
+  private createItem (ev: CustomEvent): void {
+    const { index } = (ev.currentTarget as any);
+
+    fireEvent(this, 'create-pattern-item', {
+      index
     });
   }
 
@@ -175,3 +212,11 @@ export class TrashCardPatternEditor extends LitElement {
     ];
   }
 }
+
+export {
+  TrashCardPatternEditor
+};
+
+export type {
+  SubElementEditorConfig
+};

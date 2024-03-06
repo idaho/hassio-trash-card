@@ -7,9 +7,25 @@
         }
       },
       "day_style": {
+        "title": "Mostra la data degli eventi come",
         "values": {
           "default": "Data",
           "counter": "giorni a"
+        }
+      },
+      "card_style": {
+        "title": "Visualizza come",
+        "values": {
+          "card": "Carta standard",
+          "chip": "Carta chip",
+          "icon": "Icona"
+        }
+      },
+      "color_mode": {
+        "title": "Applicare il colore a",
+        "values": {
+          "background": "Sfondo",
+          "icon": "Icona"
         }
       },
       "layout_picker": {
@@ -23,6 +39,10 @@
         "settings": "Impostazioni",
         "appearance": "Aspetto",
         "patterns": "Modelli"
+      },
+      "refresh_rate": {
+          "title": "Intervallo di realizzazione",
+          "helper": "Controlla le modifiche al calendario ogni x minuti."
       }
     },
     "card": {
@@ -35,13 +55,18 @@
         "drop_todayevents_from": "Da quale orario nascondere gli eventi di Tutto il giorno",
         "full_size": "Card senza margini",
         "use_summary": "Usa l'oggetto dell'evento al posto dell'etichetta",
-        "day_style": "Mostra la data degli eventi come"
+        "hide_time_range": "nascondere il tempo",
+        "event_grouping": "Visualizza solo l'evento successivo per schema",
+        "icon_size": "Dimensione dell'icona",
+        "with_label": "Mostra etichetta"
       },
       "trash": {
         "pattern": {
           "title": "Modifica del modello",
           "edit": "modificare",
           "delete": "cancellare",
+          "create": "Crea un nuovo modello",
+          "new_custom_label": "Nuovo modello",
           "type": {
             "organic": "Organico",
             "paper": "Carta",
@@ -53,7 +78,9 @@
             "label": "Etichetta",
             "color": "Colore",
             "icon": "Icona",
-            "pattern": "Pattern identificazione"
+            "pattern": "Pattern identificazione",
+            "picture_url": "URL immagine",
+            "picture_url_description": "Se viene specificato un URL dell'immagine, al posto dell'icona viene visualizzata l'immagine corrispondente. Posizionare un'immagine nella cartella `/config/www` e utilizzare `/local/[filename]`."
           }
         }
       }

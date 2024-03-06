@@ -7,9 +7,25 @@
                 }
             },
             "day_style": {
+                "title": "Zobraziť čas udalosti ako",
                 "values": {
                     "default": "Dátum",
                     "counter": "dni do"
+                }
+            },
+            "card_style": {
+                "title": "Zobrazenie ako",
+                "values": {
+                    "card": "Štandardná karta",
+                    "chip": "čipová karta",
+                    "icon": "Ikona"
+                }
+            },
+            "color_mode": {
+                "title": "Použiť farbu na",
+                "values": {
+                    "background": "Pozadie",
+                    "icon": "Ikona"
                 }
             },
             "layout_picker": {
@@ -23,6 +39,10 @@
                 "settings": "Nastavenia",
                 "appearance": "Vzhľad",
                 "patterns": "Pattern"
+            },
+            "refresh_rate": {
+                "title": "Interval realizácie",
+                "helper": "Kontrola zmien v kalendári každých x minút."
             }
         },
         "card": {
@@ -35,13 +55,18 @@
                 "drop_todayevents_from": "d akého času sa má skryť celodenná udalosť",
                 "full_size": "Karta bez marže",
                 "use_summary": "Zhrnutie udalosti namiesto označenia",
-                "day_style": "Zobraziť čas udalosti ako"
+                "hide_time_range": "čas skrývania",
+                "event_grouping": "Zobrazenie iba nasledujúcej udalosti na vzor",
+                "icon_size": "Veľkosť ikony",
+                "with_label": "Zobraziť označenie"
             },
             "trash": {
                 "pattern": {
                     "title": "Upraviť vzor",
                     "edit": "upraviť",
-                    "delete": "delete",
+                    "delete": "vyma",
+                    "create": "Vytvoriť nový vzor",
+                    "new_custom_label": "Nový vzor",
                     "type": {
                         "organic": "Organický",
                         "paper": "Papiera",
@@ -53,7 +78,9 @@
                         "label": "štítok",
                         "color": "Farba",
                         "icon": "Ikona",
-                        "pattern": "Vzor detekcie"
+                        "pattern": "Vzor detekcie",
+                        "picture_url": "URL obrázku",
+                        "picture_url_description": "Ak je zadaná adresa URL obrázka, namiesto ikony sa zobrazí príslušný obrázok. Umiestnite obrázok do priečinka `/config/www` a použite `/local/[meno súboru]`."
                     }
                 }
             }

@@ -1,17 +1,13 @@
 import type { CalendarEvent } from './calendarEvents';
 
-interface ValidCalendarItem extends CalendarEvent {
+interface CalendarItem extends CalendarEvent {
   label: string;
   color?: string;
   icon?: string;
-  type: string;
+  type: `custom-${number}` | 'organic' | 'paper' | 'recycle' | 'waste' | 'others';
+  picture?: string;
 }
 
-type CalendarItem = {
-  type: 'none';
-} | ValidCalendarItem;
-
 export type {
-  CalendarItem,
-  ValidCalendarItem
+  CalendarItem
 };

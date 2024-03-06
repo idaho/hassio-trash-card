@@ -9,26 +9,26 @@ on:
         type: string
 
 jobs:
-  release:
+  new_version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.VERSION_TOKEN }}
 
       - name: Add version to packages
         run: npm version ${{ inputs.version }} --git-tag-version false
 
-      - name: Add files to commit
-        run: add package.json package-lock.json
+      - name: Create commit and push
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: '${{ inputs.version }}'
+          add: 'package.json package-lock.json'
+          push: true
 
-      - name: Create commit message
-        run: git commit -m "${{ inputs.version }}"
-
-      - name: Push to repository
-        run: git push
-
-      - name: Tag commit
-        run: git tag ${{ inputs.version }}
-
-      - name: Push tags
-        run: git push origin --tags
+      - name: Create tag and push
+        uses: EndBug/add-and-commit@v9
+        with:
+          tag: '${{ inputs.version }}'
+          tag_push: '--force'

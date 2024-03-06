@@ -7,9 +7,25 @@
         }
       },
       "day_style": {
+        "title": "Esemény idejének megjelenítése mint",
         "values": {
           "default": "Dátum",
           "counter": "nap múlva"
+        }
+      },
+      "card_style": {
+        "title": "Megjelenítés",
+        "values": {
+          "card": "Standard kártya",
+          "chip": "Chipkártya",
+          "icon": "Ikon"
+        }
+      },
+      "color_mode": {
+        "title": "Alkalmazza a színt",
+        "values": {
+          "background": "Háttér",
+          "icon": "Ikon"
         }
       },
       "layout_picker": {
@@ -23,6 +39,10 @@
         "settings": "Beállítások",
         "appearance": "Kinézet",
         "patterns": "Minták"
+      },
+      "refresh_rate": {
+          "title": "Aktualizálási időintervallum",
+          "helper": "A naptár változásainak ellenőrzése x percenként."
       }
     },
     "card": {
@@ -35,13 +55,18 @@
         "drop_todayevents_from": "Mikortól rejtsük el az egésznapos eseményeket",
         "full_size": "Margó nélküli kártya",
         "use_summary": "Esemény összegzés a cimke helyett",
-        "day_style": "Esemény idejének megjelenítése mint"
+        "hide_time_range": "Rejtsd el az időt",
+        "event_grouping": "Csak a következő eseményt jeleníti meg mintánként",
+        "icon_size": "Ikon mérete",
+        "with_label": "Címke megjelenítése"
       },
       "trash": {
         "pattern": {
           "title": "Minta szerkesztése",
           "edit": "szerkeszt",
           "delete": "töröl",
+          "create": "Új minta létrehozása",
+          "new_custom_label": "Új minta",
           "type": {
             "organic": "Komposztálható",
             "paper": "Papír",
@@ -53,7 +78,9 @@
             "label": "Cimke",
             "color": "Szín",
             "icon": "Ikon",
-            "pattern": "Felismerési minta"
+            "pattern": "Felismerési minta",
+            "picture_url": "Kép URL címe",
+            "picture_url_description": "Ha egy kép URL címe van megadva, akkor az ikon helyett a megfelelő kép jelenik meg. Helyezzen el egy képet a `/config/www` mappában, és használja a `/local/[fájlnév]`"
           }
         }
       }

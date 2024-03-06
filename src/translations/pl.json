@@ -7,9 +7,25 @@
                 }
             },
             "day_style": {
+                "title": "Pokaż czas zdarzenia jako",
                 "values": {
                     "default": "Data",
                     "counter": "dni do"
+                }
+            },
+            "card_style": {
+                "title": "Wyświetl jako",
+                "values": {
+                    "card": "Karta standardowa",
+                    "chip": "Karta chipowa",
+                    "icon": "Symbol"
+                }
+            },
+            "color_mode": {
+                "title": "Zastosuj kolor do",
+                "values": {
+                    "background": "Kontekst",
+                    "icon": "Symbol"
                 }
             },
             "layout_picker": {
@@ -23,6 +39,10 @@
                 "settings": "Ustawienia",
                 "appearance": "Wygląd",
                 "patterns": "Wzorce"
+            },
+            "refresh_rate": {
+                "title": "Interwał aktualizacji",
+                "helper": "Sprawdzanie zmian w kalendarzu co x minut."
             }
         },
         "card": {
@@ -35,13 +55,18 @@
                 "drop_todayevents_from": "Od której godziny ukryć wydarzenie całodniowe",
                 "full_size": "Karta bez marginesu",
                 "use_summary": "Podsumowanie zamiast oznaczenia",
-                "day_style": "Pokaż czas zdarzenia jako"
+                "hide_time_range": "Ukryj czas",
+                "event_grouping": "Wyświetla tylko następne zdarzenie dla wzorca",
+                "icon_size": "Rozmiar ikony",
+                "with_label": "Pokaż oznaczenie"
             },
             "trash": {
                 "pattern": {
                     "title": "Edytuj wzorzec",
                     "edit": "edytuj",
                     "delete": "usuń",
+                    "create": "Utwórz nowy wzorzec",
+                    "new_custom_label": "Nowy wzorzec",
                     "type": {
                         "organic": "BIO",
                         "paper": "Papier",
@@ -53,7 +78,9 @@
                         "label": "Oznaczenie",
                         "color": "Kolor",
                         "icon": "Ikona",
-                        "pattern": "Szablon wzorca"
+                        "pattern": "Szablon wzorca",
+                        "picture_url": "Adres URL obrazka",
+                        "picture_url_description": "Jeśli podano adres URL obrazu, odpowiedni obraz jest wyświetlany zamiast ikony. Umieść obrazek w folderze `/config/www` i użyj `/local/[nazwa_pliku]`."
                     }
                 }
             }

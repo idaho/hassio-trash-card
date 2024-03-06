@@ -7,9 +7,25 @@
                 }
             },
             "day_style": {
+                "title": "Ereigniss Zeitpunkt anzeigen als",
                 "values": {
                     "default": "Datum",
                     "counter": "Tage bis"
+                }
+            },
+            "card_style": {
+                "title": "Darstellen als",
+                "values": {
+                    "card": "Standard Karte",
+                    "chip": "Chip Karte",
+                    "icon": "Icon"
+                }
+            },
+            "color_mode": {
+                "title": "Farbe anwenden auf",
+                "values": {
+                    "background": "Hintergrund",
+                    "icon": "Symbol"
                 }
             },
             "layout_picker": {
@@ -23,6 +39,10 @@
                 "settings": "Einstellungen",
                 "appearance": "Darstellung",
                 "patterns": "Muster"
+            },
+            "refresh_rate": {
+                "title": "Aktuallisierungsinterval",
+                "helper": "Alle x Minuten auf Änderungen im Kalender prüfen."
             }
         },
         "card": {
@@ -35,13 +55,18 @@
                 "drop_todayevents_from": "Ab wieviel Uhr Ganztages Ereignis ausblenden",
                 "full_size": "Karte ohne Seitenrand",
                 "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden",
-                "day_style": "Ereigniss Zeitpunkt anzeigen als"
+                "hide_time_range": "Uhrzeit ausblenden",
+                "event_grouping": "Nur das nächste Ereignis je Muster anzeigen",
+                "icon_size": "Icon größe",
+                "with_label": "Bezeichnung anzeigen"
             },
             "trash": {
                 "pattern": {
                     "title": "Muster bearbeiten",
                     "edit": "bearbeiten",
                     "delete": "löschen",
+                    "create": "Neues Muster erstellen",
+                    "new_custom_label": "Neues Muster",
                     "type": {
                         "organic": "Bio",
                         "paper": "Papier",
@@ -53,7 +78,9 @@
                         "label": "Bezeichnung",
                         "color": "Farbe",
                         "icon": "Symbol",
-                        "pattern": "erkennen an Muster"
+                        "pattern": "erkennen an Muster",
+                        "picture_url": "Bild URL",
+                        "picture_url_description": "Wenn eine Bild URL angegeben wird, wird das entsprechende Bild anstelle das Icon angezeigt. Lege ein Bild in dem `/config/www` Ordner ab und verwende `/local/[Dateiname]`."
                     }
                 }
             }
