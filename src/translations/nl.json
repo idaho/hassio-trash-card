@@ -10,8 +10,13 @@
                 "title": "Toon afvalinzamelingtijd als",
                 "values": {
                     "default": "Datum",
-                    "counter": "Aftellend"
+                    "counter": "Aftellend",
+                    "custom": "Eigen datumnotatie"
                 }
+            },
+            "day_style_format": {
+                "title": "Aangepast datumformaat",
+                "helper":"Definieer je eigen datumnotatie. (dd = dag met voorloop 0, d = dag, MM = maand met voorloop 0, M = maand, yy = jaar kort, yyyy = jaar lang) Bijv. dd.MM.yyyy = 03.04.2024, waar d.M.yy = 3.4.24 zou resulteren."
             },
             "card_style": {
                 "title": "Weergeven als",

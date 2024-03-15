@@ -10,8 +10,13 @@
                 "title": "Afficher l'heure de l'événement en tant que",
                 "values": {
                     "default": "Date",
-                    "counter": "jours jusqu'à"
+                    "counter": "jours jusqu'à",
+                    "custom" : "Propre format de date"
                 }
+            },
+            "day_style_format": {
+                "title": "Propre format de date",
+                "helper": "Définir un format de date personnalisé. (dd = jour avec 0 en tête, d = jour, MM = mois avec 0 en tête, M = mois, yy = année courte, yyyy = année longue) Par exemple, dd.MM.yyyy = 03.04.2024, où d.M.yy = 3.4.24 donnerait"
             },
             "card_style": {
                 "title": "Représenter comme",
@@ -58,7 +63,7 @@
                 "hide_time_range": "cacher le temps",
                 "event_grouping": "Afficher uniquement l'événement suivant par modèle",
                 "icon_size": "taille de l'icône",
-                "with_label" : "Afficher l'étiquette"
+                "with_label": "Afficher l'étiquette"
             },
             "trash": {
                 "pattern": {
@@ -79,8 +84,8 @@
                         "color": "Couleur",
                         "icon": "Icône",
                         "pattern": "Modèle de détection",
-                        "picture_url" : "URL de l'image",
-                        "picture_url_description" : "Si une URL d'image est indiquée, l'image correspondante sera affichée au lieu de l'icône. Placez une image dans le dossier `/config/www` et utilisez `/local/[nom de fichier]`"
+                        "picture_url": "URL de l'image",
+                        "picture_url_description": "Si une URL d'image est indiquée, l'image correspondante sera affichée au lieu de l'icône. Placez une image dans le dossier `/config/www` et utilisez `/local/[nom de fichier]`"
                     }
                 }
             }

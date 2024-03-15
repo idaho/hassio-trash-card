@@ -150,6 +150,16 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
             }
           }] as HaFormSchema[] :
           [],
+        ...(currentValues.card_style === 'card' || currentValues.card_style === 'chip') && currentValues.day_style === 'custom' ?
+          [{
+            name: 'day_style_format',
+            label: customLocalize(`editor.form.day_style_format.title`),
+            helper: customLocalize(`editor.form.day_style_format.helper`),
+            selector: {
+              text: {}
+            }
+          }] as HaFormSchema[] :
+          [],
         ...currentValues.card_style === 'card' || currentValues.card_style === 'chip' ?
           [{
             name: 'hide_time_range',

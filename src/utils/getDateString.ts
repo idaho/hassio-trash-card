@@ -6,7 +6,34 @@ import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 import type { HomeAssistant } from './ha';
 import type { CalendarItem } from './calendarItem';
 
-const getDateString = (item: CalendarItem, excludeTime?: boolean, dayStyle?: TrashCardConfig['day_style'], hass?: HomeAssistant): string => {
+const format = (date: Date, dateStyleFormat: string) => {
+  const dateParts = {
+    // eslint-disable-next-line id-length
+    M: date.getMonth() + 1,
+    // eslint-disable-next-line id-length
+    d: date.getDate(),
+    // eslint-disable-next-line id-length
+    h: date.getHours(),
+    // eslint-disable-next-line id-length
+    m: date.getMinutes(),
+    // eslint-disable-next-line id-length
+    s: date.getSeconds()
+  };
+
+  // eslint-disable-next-line prefer-named-capture-group, no-param-reassign
+  dateStyleFormat = dateStyleFormat.replace(/(M+|d+|h+|m+|s+)/ug, val => `${val.length > 1 ? '0' : ''}${dateParts[val.slice(-1)]}`.slice(-2));
+
+  // eslint-disable-next-line prefer-named-capture-group
+  return dateStyleFormat.replace(/(y+)/gu, val => date.getFullYear().toString().slice(-val.length));
+};
+
+const getDateString = (
+  item: CalendarItem,
+  excludeTime?: boolean,
+  dayStyle?: TrashCardConfig['day_style'],
+  dayStyleFormat?: TrashCardConfig['day_style_format'],
+  hass?: HomeAssistant
+): string => {
   if (!hass) {
     return '';
   }
@@ -48,13 +75,14 @@ const getDateString = (item: CalendarItem, excludeTime?: boolean, dayStyle?: Tra
 
     return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
   }
-
-  const day = item.date.start.toLocaleDateString(hass.language, {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+  const day = dayStyle !== 'custom' ?
+    item.date.start.toLocaleDateString(hass.language, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }) :
+    format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY');
 
   const key = `card.trash.day${startTime && !excludeTime ? '_from_till' : ''}`;
 

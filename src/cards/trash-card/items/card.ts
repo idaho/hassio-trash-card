@@ -20,7 +20,7 @@ class ItemCard extends BaseItemElement {
 
     const rtl = computeRTL(this.hass);
 
-    const { color_mode, hide_time_range, day_style, layout, with_label } = this.config;
+    const { color_mode, hide_time_range, day_style, layout, with_label, day_style_format } = this.config;
 
     const { label } = item;
 
@@ -28,7 +28,7 @@ class ItemCard extends BaseItemElement {
       ...getColoredStyle(color_mode, item)
     };
 
-    const secondary = getDateString(item, hide_time_range ?? false, day_style, this.hass);
+    const secondary = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
 
     const pictureUrl = this.getPictureUrl();
 

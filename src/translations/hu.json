@@ -10,8 +10,13 @@
         "title": "Esemény idejének megjelenítése mint",
         "values": {
           "default": "Dátum",
-          "counter": "nap múlva"
+          "counter": "nap múlva",
+          "custom": "Saját dátumformátum"
         }
+      },
+      "day_style_format": {
+        "title": "Egyéni dátumformátum",
+        "helper": "Saját dátumformátum meghatározása. (dd = nap 0 előtaggal, d = nap, MM = hónap 0 előtaggal, M = hónap, yy = év rövid, yyyy = év hosszú) Pl. dd.MM.yyyy = 03.04.2024, ahol d.M.yy = 3.4.24 lenne az eredmény."
       },
       "card_style": {
         "title": "Megjelenítés",
@@ -41,8 +46,8 @@
         "patterns": "Minták"
       },
       "refresh_rate": {
-          "title": "Aktualizálási időintervallum",
-          "helper": "A naptár változásainak ellenőrzése x percenként."
+        "title": "Aktualizálási időintervallum",
+        "helper": "A naptár változásainak ellenőrzése x percenként."
       }
     },
     "card": {

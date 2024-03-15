@@ -10,8 +10,13 @@
                 "title": "Zobraziť čas udalosti ako",
                 "values": {
                     "default": "Dátum",
-                    "counter": "dni do"
+                    "counter": "dni do",
+                    "custom": "Vlastný formát dátumu"
                 }
+            },
+            "day_style_format": {
+                "title": "Vlastný formát dátumu",
+                "helper": "Definujte vlastný formát dátumu. (dd = deň s úvodnou 0, d = deň, MM = mesiac s úvodnou 0, M = mesiac, yy = rok krátky, yyyy = rok dlhý) Napr. dd.MM.yyyy = 03.04.2024, kde by výsledkom bolo d.M.yy = 3.4.24."
             },
             "card_style": {
                 "title": "Zobrazenie ako",
