@@ -29,7 +29,7 @@ See screenshots for what you can do
 
 TrashCard requires [Mushroom][mushroom-url] for Home Assistant to be installed. Please follow the installation instructions of Mushroom. Once you have installed Mushroom you can continue install TrashCard using HACS (preferred) or manually.
 
-TrashCard requires a calendar to get its data from. This calendar must be known by Home Assistant as an entity. Check [Home Assistant calednar integrations](https://www.home-assistant.io/integrations/#calendar) for more information on how to add it.
+TrashCard requires a calendar to get its data from. This calendar must be known by Home Assistant as an entity. Check [Home Assistant calendar integrations](https://www.home-assistant.io/integrations/#calendar) for more information on how to add it.
 
 ## Installation
 
