@@ -66,6 +66,7 @@ const configDefaults = {
   ],
   // eslint-disable-next-line @typescript-eslint/naming-convention
   day_style: 'default',
+  day_style_format: 'yyyy.MM.dd',
   card_style: 'card',
   color_mode: 'background',
   items_per_row: 1,
@@ -300,6 +301,9 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
     if (config.day_style === 'default') {
       delete config.day_style;
+    }
+    if (config.day_style !== 'custom') {
+      delete config.day_style_format;
     }
 
     if (config.card_style === 'card') {

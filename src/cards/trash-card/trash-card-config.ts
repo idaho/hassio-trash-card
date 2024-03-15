@@ -6,7 +6,8 @@ import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 
 const DAYSTYLES = [
   'default',
-  'counter'
+  'counter',
+  'custom'
 ] as const;
 
 const CARDSTYLES = [
@@ -32,6 +33,7 @@ const COLORMODES = [
    hide_time_range?: boolean;
    event_grouping?: boolean;
    day_style?: typeof DAYSTYLES[number];
+   day_style_format?: string;
    card_style?: typeof CARDSTYLES[number];
    color_mode?: typeof COLORMODES[number];
    refresh_rate?: number;
@@ -40,7 +42,7 @@ const COLORMODES = [
    with_label?: boolean;
  };
 
- type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'color_mode' | 'layout' | 'icon_size' | 'with_label'>;
+ type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'day_style_format' | 'color_mode' | 'layout' | 'icon_size' | 'with_label'>;
 
 const entityCardConfigStruct = assign(
   defaultConfigStruct,
@@ -58,7 +60,8 @@ const entityCardConfigStruct = assign(
     refresh_rate: optional(integer()),
     drop_todayevents_from: optional(string()),
     event_grouping: optional(boolean()),
-    day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]) ])),
+    day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]), literal(DAYSTYLES[2]) ])),
+    day_style_format: optional(string()),
     card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]), literal(CARDSTYLES[2]) ])),
     color_mode: optional(union([ literal(COLORMODES[0]), literal(COLORMODES[1]) ])),
     debug: optional(boolean()),

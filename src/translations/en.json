@@ -10,8 +10,13 @@
                 "title": "Show event time as",
                 "values": {
                     "default": "Date",
-                    "counter": "days to"
+                    "counter": "days to",
+                    "custom": "Custom date format"
                 }
+            },
+            "day_style_format": {
+                "title": "Custom date format",
+                "helper": "Define your own date format. (dd = day with leading 0, d = day, MM = month with leading 0, M = month, yy = year short, yyyy = year long) E.g. dd.MM.yyyy = 03.04.2024, where d.M.yy = 3.4.24 would result."
             },
             "card_style": {
                 "title": "Display as",

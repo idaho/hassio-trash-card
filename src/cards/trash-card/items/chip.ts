@@ -19,7 +19,7 @@ class ItemChip extends BaseItemElement {
 
     const rtl = computeRTL(this.hass);
 
-    const { color_mode, hide_time_range, day_style, with_label } = this.config;
+    const { color_mode, hide_time_range, day_style, day_style_format, with_label } = this.config;
 
     const style = {
       ...getColoredStyle(color_mode, item),
@@ -27,7 +27,7 @@ class ItemChip extends BaseItemElement {
       ...with_label ? { '--chip-height': 'calc(36px * 1.15)' } : {}
     };
 
-    const content = getDateString(item, hide_time_range ?? false, day_style, this.hass);
+    const content = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
 
     const pictureUrl = this.getPictureUrl();
 

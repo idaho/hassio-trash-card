@@ -10,8 +10,13 @@
                 "title": "Ereigniss Zeitpunkt anzeigen als",
                 "values": {
                     "default": "Datum",
-                    "counter": "Tage bis"
+                    "counter": "Tage bis",
+                    "custom": "Eigenes Datumsformat"
                 }
+            },
+            "day_style_format": {
+                "title": "Eigenes Datumsformat",
+                "helper": "Definiere ein eigenes Datums format. (dd = Tag mit führender 0, d = Tag, MM = Monat mit führender 0, M = Monat, yy = Jahr kurz, yyyy = Jahr lang) Z.b. ergibt dd.MM.yyyy = 03.04.2024, wobei d.M.yy = 3.4.24 ergeben würde."
             },
             "card_style": {
                 "title": "Darstellen als",

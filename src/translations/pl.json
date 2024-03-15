@@ -10,8 +10,13 @@
                 "title": "Pokaż czas zdarzenia jako",
                 "values": {
                     "default": "Data",
-                    "counter": "dni do"
+                    "counter": "dni do",
+                    "custom": "Własny format daty"
                 }
+            },
+            "day_style_format": {
+                "title": "Niestandardowy format daty",
+                "helper": "Zdefiniuj własny format daty. (dd = dzień z początkowym 0, d = dzień, MM = miesiąc z początkowym 0, M = miesiąc, yy = rok krótki, yyyy = rok długi) Np. dd.MM.yyy = 03.04.2024, gdzie d.M.yy = 3.4.24"
             },
             "card_style": {
                 "title": "Wyświetl jako",

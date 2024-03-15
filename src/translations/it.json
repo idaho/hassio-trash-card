@@ -10,8 +10,13 @@
         "title": "Mostra la data degli eventi come",
         "values": {
           "default": "Data",
-          "counter": "giorni a"
+          "counter": "giorni a",
+          "custom": "Formato di data proprio"
         }
+      },
+      "day_style_format": {
+        "title": "Formato di data personalizzato",
+        "helper": "Definisci il tuo formato di data personalizzato. (dd = giorno con lo 0 iniziale, d = giorno, MM = mese con lo 0 iniziale, M = mese, yy = anno breve, yyyy = anno lungo) Ad esempio dd.MM.yyyy = 03.04.2024, dove d.M.yy = 3.4.24 risulterebbe"
       },
       "card_style": {
         "title": "Visualizza come",
@@ -41,8 +46,8 @@
         "patterns": "Modelli"
       },
       "refresh_rate": {
-          "title": "Intervallo di realizzazione",
-          "helper": "Controlla le modifiche al calendario ogni x minuti."
+        "title": "Intervallo di realizzazione",
+        "helper": "Controlla le modifiche al calendario ogni x minuti."
       }
     },
     "card": {
