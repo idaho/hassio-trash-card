@@ -1,0 +1,104 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Standaard kleur"
+                }
+            },
+            "day_style": {
+                "title": "Toon afvalinzamelingtijd als",
+                "values": {
+                    "default": "Datum",
+                    "counter": "Aftellend"
+                }
+            },
+            "card_style": {
+                "title": "Weergeven als",
+                "values": {
+                    "card": "Standaard kaart",
+                    "chip": "Chipkaart",
+                    "icon": "Icoon"
+                }
+            },
+            "color_mode": {
+                "title": "Kleur aanbrengen op",
+                "values": {
+                    "background": "Achtergrond",
+                    "icon": "Icoon"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Standaard lay-out",
+                    "vertical": "Verticale lay-out",
+                    "horizontal": "Horizontale lay-out"
+                }
+            },
+            "tabs": {
+                "settings": "Instellingen",
+                "appearance": "Uiterlijk",
+                "patterns": "Patronen"
+            },
+            "refresh_rate": {
+                "title": "Verversingsinterval",
+                "helper": "Controleert elke x minuten op wijzigingen in de kalenderactiviteiten."
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Icoonkleur",
+                "layout": "Lay-out",
+                "fill_container": "Vul container",
+                "next_days": "Aantal dagen vooruit kijken",
+                "filter_events": "Filter kalenderactiviteiten op patronen",
+                "drop_todayevents_from": "Tijdstip om afvalinzameling voor die dag te verbergen",
+                "full_size": "Kaart zonder marge",
+                "use_summary": "Gebruik de samenvatting van de kalenderactiviteit i.p.v. de label",
+                "hide_time_range": "Verberg tijd",
+                "event_grouping": "Toon per patroon alleen de eerstvolgende afvalinzameling",
+                "icon_size": "Icoongrootte",
+                "with_label": "Toon label"
+            },
+            "trash": {
+                "pattern": {
+                    "title": "Patroon bewerken",
+                    "edit": "bewerken",
+                    "delete": "verwijderen",
+                    "create": "Nieuw patroon aanmaken",
+                    "new_custom_label": "Nieuw patroon",
+                    "type": {
+                        "organic": "GFT",
+                        "paper": "Papier",
+                        "recycle": "PMD",
+                        "waste": "Restafval",
+                        "others": "Overige"
+                    },
+                    "fields": {
+                        "label": "Label",
+                        "color": "Kleur",
+                        "icon": "Icoon",
+                        "pattern": "Detectiepatroon",
+                        "picture_url": "Afbeeldings-URL",
+                        "picture_url_description": "Als er een afbeeldings-URL is opgegeven, wordt de bijbehorende afbeelding weergegeven in plaats van het icoon. Plaats een afbeelding in de `/config/www` map en gebruik `/local/[bestandsnaam]`."
+                    }
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Entiteit niet gevonden",
+        "trash": {
+            "today": "vandaag",
+            "tomorrow": "morgen",
+            "day": "<DAY>",
+            "today_from_till": "Vandaag\nvan <START> tot <END>",
+            "tomorrow_from_till": "Morgen\ntussen <START> en <END>",
+            "day_from_till": "<DAY>\ntussen <START> en <END>",
+            "daysleft": "over <DAYS> dag",
+            "daysleft_more": "over <DAYS> dagen",
+            "daysleft_from_till": "over <DAYS> dag\ntussen <START> en <END>",
+            "daysleft_more_from_till": "over <DAYS> dagen\ntussen <START> en <END>"
+        }
+    }
+}
