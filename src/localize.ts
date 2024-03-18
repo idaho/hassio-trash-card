@@ -1,3 +1,4 @@
+import * as da from './translations/da.json';
 import * as de from './translations/de.json';
 import * as en from './translations/en.json';
 import * as fr from './translations/fr.json';
@@ -10,6 +11,7 @@ import * as sk from './translations/sk.json';
 import type { HomeAssistant } from './utils/ha';
 
 const languages: Record<string, unknown> = {
+  da,
   de,
   en,
   fr,
