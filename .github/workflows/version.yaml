@@ -20,15 +20,11 @@ jobs:
       - name: Add version to packages
         run: npm version ${{ inputs.version }} --git-tag-version false
 
-      - name: Create commit and push
+      - name: tag, commit and push
         uses: EndBug/add-and-commit@v9
         with:
           message: '${{ inputs.version }}'
           add: 'package.json package-lock.json'
           push: true
-
-      - name: Create tag and push
-        uses: EndBug/add-and-commit@v9
-        with:
           tag: '${{ inputs.version }}'
           tag_push: '--force'
