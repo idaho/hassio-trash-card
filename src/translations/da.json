@@ -1,0 +1,109 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Standardfarve"
+                }
+            },
+            "day_style": {
+                "title": "Vis begivenheds tid som",
+                "values": {
+                    "default": "Dato",
+                    "counter": "dage til",
+                    "custom": "Brugerdefineret datoformat"
+                }
+            },
+            "day_style_format": {
+                "title": "Brugerdefineret datoformat",
+                "helper": "Definer dit eget datoformat. (dd = dag med foranstillet 0, d = dag, MM = måned med foranstillet 0, M = måned, yy = kort år, yyyy = langt år) F.eks. dd.MM.yyyy = 03.04.2024, hvor d.M.yy = 3.4.24 ville resultere."
+            },
+            "card_style": {
+                "title": "Vis som",
+                "values": {
+                    "card": "Standardkort",
+                    "chip": "Chip kort",
+                    "icon": "Ikon"
+                }
+            },
+            "color_mode": {
+                "title": "Anvend farve til",
+                "values": {
+                    "background": "Baggrund",
+                    "icon": "Ikon"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Standardlayout",
+                    "vertical": "Vertikalt layout",
+                    "horizontal": "Horisontalt layout"
+                }
+            },
+            "tabs": {
+                "settings": "Indstillinger",
+                "appearance": "Udseende",
+                "patterns": "Mønstre"
+            },
+            "refresh_rate": {
+                "title": "Opdateringsinterval",
+                "helper": "Tjek ændringer i kalenderen hvert x minut"
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Ikonfarve",
+                "layout": "Layout",
+                "fill_container": "Fyld container",
+                "next_days": "Dage frem i tiden",
+                "filter_events": "Filtrer begivenheder efter mønstre",
+                "drop_todayevents_from": "Fra hvilken tid skal heldags begivenhed skjules",
+                "full_size": "Kort uden margen",
+                "use_summary": "Begivenhedssammendrag i stedet for etiket",
+                "hide_time_range": "Skjul tid",
+                "event_grouping": "Vis kun næste begivenhed pr. mønster",
+                "icon_size": "Ikonstørrelse",
+                "with_label": "Vis etiket"
+            },
+            "trash": {
+                "pattern": {
+                    "title": "Rediger mønster",
+                    "edit": "rediger",
+                    "delete": "slet",
+                    "create": "Opret nyt mønster",
+                    "new_custom_label": "Nyt mønster",
+                    "type": {
+                        "organic": "Organisk",
+                        "paper": "Papir",
+                        "recycle": "Genbrug",
+                        "waste": "Affald",
+                        "others": "Andre"
+                    },
+                    "fields": {
+                        "label": "Etiket",
+                        "color": "Farve",
+                        "icon": "Ikon",
+                        "pattern": "Detektions mønster",
+                        "picture_url": "Billede-URL",
+                        "picture_url_description": "Hvis en billed-URL er angivet, vises det tilsvarende billede i stedet for ikonet. Placer et billede i mappen `/config/www` og brug `/local/[filnavn]`."
+                    }
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Entitet ikke fundet",
+        "trash": {
+            "today": "i dag",
+            "tomorrow": "i morgen",
+            "day": "<DAY>",
+            "today_from_till": "I dag\nfra <START> til <END>",
+            "tomorrow_from_till": "I morgen\nmellem <START> og <END>",
+            "day_from_till": "<DAY>\nmellem <START> og <END>",
+            "daysleft": "om <DAYS> dag",
+            "daysleft_more": "om <DAYS> dage",
+            "daysleft_from_till": "om <DAYS> dag\nmellem <START> og <END>",
+            "daysleft_more_from_till": "om <DAYS> dage\nmellem <START> og <END>"
+        }
+    }
+}
