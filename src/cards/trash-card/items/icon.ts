@@ -27,19 +27,22 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
       '--trash-card-icon-size': `${this.config.icon_size ?? 40}px`
     };
 
-    const cssClass = {
+    const daysTillToday = daysTill(new Date(), item);
+
+    const cssClasses = {
+      today: daysTillToday === 0,
+      tomorrow: daysTillToday === 1,
+      another: daysTillToday > 1,
       nextEvent: this.item.nextEvent,
       futureEvent: !this.item.nextEvent
     };
-
-    const daysLeft = daysTill(new Date(), item);
 
     const pictureUrl = this.getPictureUrl();
 
     this.withBackground = true;
 
     return html`
-      <ha-card style=${styleMap(style)} class=${classMap(cssClass)}>
+      <ha-card style=${styleMap(style)} class=${classMap(cssClasses)}>
         <mushroom-card .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
           <mushroom-state-item .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
             <div slot="icon">
@@ -47,7 +50,7 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
             </div>
           </mushroom-state-item>
         </mushroom-card>
-        <span class="badge" >${daysLeft}</span>
+        <span class="badge" >${daysTillToday}</span>
       </ha-card>
     `;
   }

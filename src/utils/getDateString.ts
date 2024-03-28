@@ -27,6 +27,18 @@ const format = (date: Date, dateStyleFormat: string) => {
   return dateStyleFormat.replace(/(y+)/gu, val => date.getFullYear().toString().slice(-val.length));
 };
 
+const getTimeString = (customLocalize, offset: string, day?: string, startTime?: string, endTime?: string, excludeTime?: boolean, short?: boolean) => {
+  if (offset === 'today' || offset === 'tomorrow') {
+    const key = `card.trash.${offset}${startTime && !excludeTime ? '_from_till' : ''}${startTime && !excludeTime && short ? '_short' : ''}`;
+
+    return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+  }
+
+  const key = `card.trash.day${startTime && !excludeTime ? '_from_till' : ''}${startTime && !excludeTime && short ? '_short' : ''}`;
+
+  return customLocalize(`${key}`).replace('<DAY>', day).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '');
+};
+
 const getDateString = (
   item: CalendarItem,
   excludeTime?: boolean,
@@ -65,9 +77,7 @@ const getDateString = (
     undefined;
 
   if (stateDay === todayDay || stateDay === tomorrowDay) {
-    const key = `card.trash.${stateDay === todayDay ? 'today' : 'tomorrow'}${startTime && !excludeTime ? '_from_till' : ''}`;
-
-    return `${customLocalize(`${key}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+    return getTimeString(customLocalize, stateDay === todayDay ? 'today' : 'tomorrow', undefined, startTime, endTime, excludeTime, true);
   }
 
   if (dayStyle === 'counter') {
@@ -84,9 +94,7 @@ const getDateString = (
     }) :
     format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY');
 
-  const key = `card.trash.day${startTime && !excludeTime ? '_from_till' : ''}`;
-
-  return customLocalize(`${key}`).replace('<DAY>', day).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '');
+  return getTimeString(customLocalize, 'day', day, startTime, endTime, excludeTime, true);
 };
 
 export {

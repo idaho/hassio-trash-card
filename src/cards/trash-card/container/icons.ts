@@ -50,6 +50,7 @@ class Icons extends LitElement implements BaseContainerElement {
         <div style=${cssStyleMap} class="icons-container">
           ${this.items.map((item, idx) => html`
               <trash-card-icon-card
+                key=${`card-${idx}-${item.content.uid}`}
                 .item=${{ ...item, nextEvent: idx === 0 }}
                 .config=${this.config}
                 .hass=${this.hass}

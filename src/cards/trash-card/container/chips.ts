@@ -2,6 +2,7 @@ import { LitElement, css, html, nothing } from 'lit';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { customElement, property, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
+import { classMap } from 'lit/directives/class-map.js';
 
 import '../items/chip';
 
@@ -39,22 +40,22 @@ class Chips extends LitElement implements BaseContainerElement {
       return nothing;
     }
 
-    let alignment_class = '';
-
-    if (this.config.alignment_style === 'space') {
-      alignment_class = ' align-justify';
-    }
-    if (this.config.alignment_style === 'center') {
-      alignment_class = ' align-center';
-    }
-    if (this.config.alignment_style === 'right') {
-      alignment_class = ' align-end';
-    }
+    const cssClasses = {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'chip-container': true,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'align-justify': this.config.alignment_style === 'space',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'align-center': this.config.alignment_style === 'center',
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      'align-end': this.config.alignment_style === 'right'
+    };
 
     return html`
-    <div class="chip-container${alignment_class}">
-      ${this.items.map(item => html`
+      <div class=${classMap(cssClasses)}>
+        ${this.items.map((item, idx) => html`
           <trash-card-item-chip
+            key=${`card-${idx}-${item.content.uid}`}
             .item=${item}
             .config=${this.config}
             .hass=${this.hass}

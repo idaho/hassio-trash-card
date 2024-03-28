@@ -48,8 +48,9 @@ class Cards extends LitElement implements BaseContainerElement {
 
     return html`
         <div style=${cssStyleMap} class="card-container">
-          ${this.items.map(item => html`
+          ${this.items.map((item, idx) => html`
               <trash-card-item-card
+                key=${`card-${idx}-${item.content.uid}`}
                 .item=${item}
                 .config=${this.config}
                 .hass=${this.hass}

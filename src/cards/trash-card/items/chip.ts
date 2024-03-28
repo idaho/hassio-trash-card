@@ -6,6 +6,8 @@ import { customElement } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { BaseItemElement } from './BaseItemElement';
+import { classMap } from 'lit/directives/class-map.js';
+import { daysTill } from '../../../utils/daysTill';
 
 @customElement(`${TRASH_CARD_NAME}-item-chip`)
 class ItemChip extends BaseItemElement {
@@ -29,6 +31,14 @@ class ItemChip extends BaseItemElement {
 
     const content = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
 
+    const daysTillToday = daysTill(new Date(), item);
+
+    const cssClasses = {
+      today: daysTillToday === 0,
+      tomorrow: daysTillToday === 1,
+      another: daysTillToday > 1
+    };
+
     const pictureUrl = this.getPictureUrl();
 
     this.withBackground = true;
@@ -36,6 +46,7 @@ class ItemChip extends BaseItemElement {
     return html`
       <mushroom-chip
         style=${styleMap(style)}
+        class=${classMap(cssClasses)}
         ?rtl=${rtl}
         .avatarOnly=${false}
       >
