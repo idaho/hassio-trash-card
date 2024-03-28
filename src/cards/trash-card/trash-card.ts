@@ -126,7 +126,7 @@ export class TrashCard extends LitElement {
   }
 
   protected getRefreshRate (): number {
-    return (this.config?.refresh_rate ?? 60) * 1_000;
+    return (this.config?.refresh_rate ?? 60) * 60 * 1_000;
   }
 
   protected shouldUpdate (changedProps: PropertyValues): boolean {
