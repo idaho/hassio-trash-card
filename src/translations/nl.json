@@ -26,6 +26,15 @@
                     "icon": "Icoon"
                 }
             },
+            "alignment_style": {
+                "title": "Uitlijning",
+                "values": {
+                    "left": "links",
+                    "center": "gecentreerd",
+                    "right": "rechts",
+                    "space": "verdeeld"
+                }
+            },
             "color_mode": {
                 "title": "Kleur aanbrengen op",
                 "values": {

@@ -26,6 +26,15 @@
                     "icon": "Ikon"
                 }
             },
+            "alignment_style": {
+                "title": "Justering",
+                "values": {
+                    "left": "venstre",
+                    "center": "centreret",
+                    "right": "ret",
+                    "space": "med afstand"
+                }
+            },
             "color_mode": {
                 "title": "Anvend farve til",
                 "values": {

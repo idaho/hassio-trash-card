@@ -26,6 +26,15 @@
           "icon": "Ikon"
         }
       },
+      "alignment_style": {
+          "title": "Kiegyenlítés",
+          "values": {
+              "left": "balra",
+              "center": "központosított",
+              "right": "jobbra",
+              "space": "spaced"
+          }
+      },
       "color_mode": {
         "title": "Alkalmazza a színt",
         "values": {
