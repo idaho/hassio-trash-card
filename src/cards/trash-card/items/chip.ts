@@ -46,7 +46,7 @@ class ItemChip extends BaseItemElement {
     return html`
       <mushroom-chip
         style=${styleMap(style)}
-        class=${classMap(cssClasses)}>
+        class=${classMap(cssClasses)}
         ?rtl=${rtl}
         .avatarOnly=${false}
       >
