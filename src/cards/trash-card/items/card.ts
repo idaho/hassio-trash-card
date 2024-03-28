@@ -7,6 +7,8 @@ import { TRASH_CARD_NAME } from '../const';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import { getColoredStyle } from '../../../utils/getColoredStyle';
 import { BaseItemElement } from './BaseItemElement';
+import { daysTill } from '../../../utils/daysTill';
+import { classMap } from 'lit/directives/class-map.js';
 
 @customElement(`${TRASH_CARD_NAME}-item-card`)
 class ItemCard extends BaseItemElement {
@@ -30,12 +32,20 @@ class ItemCard extends BaseItemElement {
 
     const secondary = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
 
+    const daysTillToday = daysTill(new Date(), item);
+
+    const cssClasses = {
+      today: daysTillToday === 0,
+      tomorrow: daysTillToday === 1,
+      another: daysTillToday > 1
+    };
+
     const pictureUrl = this.getPictureUrl();
 
     this.withBackground = true;
 
     return html`
-      <ha-card style=${styleMap(style)}>
+      <ha-card style=${styleMap(style)} class=${classMap(cssClasses)}>
         <mushroom-card .appearance=${{ layout }} ?rtl=${rtl}>
           <mushroom-state-item .appearance=${{ layout }} ?rtl=${rtl}>
             <div slot="icon">
