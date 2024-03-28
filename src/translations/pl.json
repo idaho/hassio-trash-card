@@ -26,6 +26,15 @@
                     "icon": "Symbol"
                 }
             },
+            "alignment_style": {
+                "title": "Wyrównanie",
+                "values": {
+                    "left": "lewy",
+                    "center": "wyśrodkowany",
+                    "right": "prawo",
+                    "space": "rozstawiony"
+                }
+            },
             "color_mode": {
                 "title": "Zastosuj kolor do",
                 "values": {

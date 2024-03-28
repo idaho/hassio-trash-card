@@ -26,6 +26,15 @@
                     "icon": "Icon"
                 }
             },
+            "alignment_style": {
+                "title": "Alignment",
+                "values": {
+                    "left": "left",
+                    "center": "centered",
+                    "right": "right",
+                    "space": "spaced"
+                }
+            },
             "color_mode": {
                 "title": "Apply color to",
                 "values": {

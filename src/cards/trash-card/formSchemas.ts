@@ -1,4 +1,4 @@
-import { CARDSTYLES, COLORMODES, DAYSTYLES } from './trash-card-config';
+import { CARDSTYLES, ALIGNMENTSTYLES, COLORMODES, DAYSTYLES } from './trash-card-config';
 
 import type { TrashCardConfig } from './trash-card-config';
 import type { HaFormSchema } from '../../utils/form/ha-form';
@@ -237,6 +237,27 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
               step: 1,
               mode: 'box'
             }}
+          }
+        ]
+      }] as HaFormSchema[] :
+      [],
+    ...currentValues.card_style === 'chip' ?
+      [{
+        type: 'grid',
+        name: '',
+        schema: [
+          {
+            name: 'alignment_style',
+            label: customLocalize(`editor.form.alignment_style.title`),
+            selector: {
+              select: {
+                options: [ ...ALIGNMENTSTYLES ].map(control => ({
+                  value: control,
+                  label: customLocalize(`editor.form.alignment_style.values.${control}`)
+                })),
+                mode: 'dropdown'
+              }
+            }
           }
         ]
       }] as HaFormSchema[] :

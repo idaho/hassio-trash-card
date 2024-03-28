@@ -39,8 +39,20 @@ class Chips extends LitElement implements BaseContainerElement {
       return nothing;
     }
 
+    let alignment_class = '';
+
+    if (this.config.alignment_style === 'space') {
+      alignment_class = ' align-justify';
+    }
+    if (this.config.alignment_style === 'center') {
+      alignment_class = ' align-center';
+    }
+    if (this.config.alignment_style === 'right') {
+      alignment_class = ' align-end';
+    }
+
     return html`
-    <div class="chip-container">
+    <div class="chip-container${alignment_class}">
       ${this.items.map(item => html`
           <trash-card-item-chip
             .item=${item}

@@ -26,6 +26,15 @@
                     "icon": "Ikona"
                 }
             },
+            "alignment_style": {
+                "title": "Zarovnanie",
+                "values": {
+                    "left": "vľavo",
+                    "center": "vycentrované",
+                    "right": "vpravo",
+                    "space": "rozmiestnené"
+                }
+            },
             "color_mode": {
                 "title": "Použiť farbu na",
                 "values": {

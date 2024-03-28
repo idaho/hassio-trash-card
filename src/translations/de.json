@@ -26,6 +26,15 @@
                     "icon": "Icon"
                 }
             },
+            "alignment_style": {
+                "title": "Ausrichtung",
+                "values": {
+                    "left": "Linksbündig",
+                    "center": "Mittig",
+                    "right": "Rechtsbündig",
+                    "space": "Mit Abstand"
+                }
+            },
             "color_mode": {
                 "title": "Farbe anwenden auf",
                 "values": {

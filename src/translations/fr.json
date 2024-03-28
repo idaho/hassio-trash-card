@@ -26,6 +26,15 @@
                     "icon": "Icône"
                 }
             },
+            "alignment_style": {
+                "title": "Alignement",
+                "values": {
+                    "left": "gauche",
+                    "center": "centré",
+                    "right": "droit",
+                    "space": "espacé"
+                }
+            },
             "color_mode": {
                 "title": "Appliquer une couleur à",
                 "values": {
