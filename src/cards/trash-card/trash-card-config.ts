@@ -16,6 +16,13 @@ const CARDSTYLES = [
   'icon'
 ] as const;
 
+const ALIGNMENTSTYLES = [
+  'left',
+  'center',
+  'right',
+  'space'
+] as const;
+
 const COLORMODES = [
   'background',
   'icon'
@@ -35,6 +42,7 @@ const COLORMODES = [
    day_style?: typeof DAYSTYLES[number];
    day_style_format?: string;
    card_style?: typeof CARDSTYLES[number];
+   alignment_style?: typeof ALIGNMENTSTYLES[number];
    color_mode?: typeof COLORMODES[number];
    refresh_rate?: number;
    icon_size?: number;
@@ -63,6 +71,7 @@ const entityCardConfigStruct = assign(
     day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]), literal(DAYSTYLES[2]) ])),
     day_style_format: optional(string()),
     card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]), literal(CARDSTYLES[2]) ])),
+    alignment_style: optional(union([ literal(ALIGNMENTSTYLES[0]), literal(ALIGNMENTSTYLES[1]), literal(ALIGNMENTSTYLES[2]), literal(ALIGNMENTSTYLES[3]) ])),
     color_mode: optional(union([ literal(COLORMODES[0]), literal(COLORMODES[1]) ])),
     debug: optional(boolean()),
     icon_size: optional(integer()),
@@ -85,7 +94,8 @@ export {
   entityCardConfigStruct,
   DAYSTYLES,
   COLORMODES,
-  CARDSTYLES
+  CARDSTYLES,
+  ALIGNMENTSTYLES
 };
 
 export type {

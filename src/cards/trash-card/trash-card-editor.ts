@@ -68,6 +68,7 @@ const configDefaults = {
   day_style: 'default',
   day_style_format: 'yyyy.MM.dd',
   card_style: 'card',
+  alignment_style: 'left',
   color_mode: 'background',
   items_per_row: 1,
   refresh_rate: 60,
