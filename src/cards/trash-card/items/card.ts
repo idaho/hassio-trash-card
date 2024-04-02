@@ -27,7 +27,7 @@ class ItemCard extends BaseItemElement {
     const { label } = item;
 
     const style = {
-      ...getColoredStyle(color_mode, item)
+      ...getColoredStyle(color_mode, item, this.hass.themes.darkMode)
     };
 
     const secondary = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);

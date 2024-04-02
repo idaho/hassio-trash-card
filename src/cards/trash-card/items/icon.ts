@@ -22,7 +22,7 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
     const rtl = computeRTL(this.hass);
 
     const style = {
-      ...getColoredStyle([ 'icon', 'background' ], item),
+      ...getColoredStyle([ 'icon', 'background' ], item, this.hass.themes.darkMode, false),
       // eslint-disable-next-line @typescript-eslint/naming-convention
       '--trash-card-icon-size': `${this.config.icon_size ?? 40}px`
     };
