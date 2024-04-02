@@ -202,7 +202,7 @@ Thanks go to the team at [Mushroom][mushroom-url] for creating many beautiful ca
 [commits-shield]: https://img.shields.io/github/commit-activity/y/idaho/hassio-trash-card.svg?style=for-the-badge
 [commits]: https://github.com/idaho/hassio-trash-card/commits/main
 [license-shield]: https://img.shields.io/github/license/idaho/hassio-trash-card.svg?style=for-the-badge
-[maintenance-shield]: https://img.shields.io/maintenance/yes/2023.svg?style=for-the-badge
+[maintenance-shield]: https://img.shields.io/maintenance/yes/2024.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/idaho/hassio-trash-card.svg?style=for-the-badge
 [releases]: https://github.com/idaho/hassio-trash-card/releases
 [downloads-badge]: https://img.shields.io/github/downloads/idaho/hassio-trash-card/total?style=for-the-badge
