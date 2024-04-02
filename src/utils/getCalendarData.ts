@@ -58,7 +58,7 @@ const getCalendarData = async (
     },
     dropAfter,
     now,
-    filterFutureEventsDay: start
+    filterFutureEventsDay: end
   });
 
   debuggerInstance.log(`activeElements`, activeEvents);
