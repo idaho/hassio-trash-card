@@ -77,7 +77,7 @@ const getDateString = (
     undefined;
 
   if (stateDay === todayDay || stateDay === tomorrowDay) {
-    return getTimeString(customLocalize, stateDay === todayDay ? 'today' : 'tomorrow', undefined, startTime, endTime, excludeTime, true);
+    return getTimeString(customLocalize, stateDay === todayDay ? 'today' : 'tomorrow', undefined, startTime, endTime, excludeTime, false);
   }
 
   if (dayStyle === 'counter') {
@@ -94,7 +94,7 @@ const getDateString = (
     }) :
     format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY');
 
-  return getTimeString(customLocalize, 'day', day, startTime, endTime, excludeTime, true);
+  return getTimeString(customLocalize, 'day', day, startTime, endTime, excludeTime, false);
 };
 
 export {
