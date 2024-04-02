@@ -24,7 +24,7 @@ class ItemChip extends BaseItemElement {
     const { color_mode, hide_time_range, day_style, day_style_format, with_label } = this.config;
 
     const style = {
-      ...getColoredStyle(color_mode, item),
+      ...getColoredStyle(color_mode, item, this.hass.themes.darkMode),
       // eslint-disable-next-line @typescript-eslint/naming-convention
       ...with_label ? { '--chip-height': 'calc(36px * 1.15)' } : {}
     };
