@@ -26,9 +26,9 @@ const fireEvent = <HassEvent extends ValidHassDomEvent>(
   detail = !detail ? {} : detail;
 
   const event = new Event(type, {
-    bubbles: options.bubbles === undefined ? true : options.bubbles,
+    bubbles: options.bubbles ?? true,
     cancelable: Boolean(options.cancelable),
-    composed: options.composed === undefined ? true : options.composed
+    composed: options.composed ?? true
   });
 
   (event as any).detail = detail;
