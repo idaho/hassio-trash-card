@@ -1,0 +1,118 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Noklusējuma krāsa"
+                }
+            },
+            "day_style": {
+                "title": "Rādīt notikumu laiku kā",
+                "values": {
+                    "default": "datumu",
+                    "counter": "dienas līdz",
+                    "custom": "pielāgotu datuma formātu"
+                }
+            },
+            "day_style_format": {
+                "title": "Pielāgots datuma formāts",
+                "helper": "Definējiet savu datuma formātu. (dd = diena ar sākuma 0, d = diena, MM = mēnesis ar sākuma 0, M = mēnesis, yy = gads saīsināts, yyyy = gads pilns) Piem. dd.MM.yyyy = 03.04.2024, d.M.yy = 3.4.24"
+            },
+            "card_style": {
+                "title": "Parādīt kā",
+                "values": {
+                    "card": "Standarta kartiņu",
+                    "chip": "Chip kartiņu",
+                    "icon": "Ikonu"
+                }
+            },
+            "alignment_style": {
+                "title": "Izlīdzināšana",
+                "values": {
+                    "left": "pa kreisi",
+                    "center": "centrā",
+                    "right": "pa labi",
+                    "space": "atdalīts"
+                }
+            },
+            "color_mode": {
+                "title": "Pielietot krāsu",
+                "values": {
+                    "background": "fonam",
+                    "icon": "ikonai"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Noklusējuma izkārtojums",
+                    "vertical": "Vertikāls izkārtojums",
+                    "horizontal": "Horizontāls izkārtojums"
+                }
+            },
+            "tabs": {
+                "settings": "Iestatījumi",
+                "appearance": "Izskats",
+                "patterns": "Filtri"
+            },
+            "refresh_rate": {
+                "title": "Atjaunināšanas intervāls",
+                "helper": "Pārbaudīt izmaiņas kalendārā ik pēc x minūtēm"
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Ikonas krāsa",
+                "layout": "Izkārtojums",
+                "fill_container": "Piepildīt konteineru",
+                "next_days": "Dienas nākotnē",
+                "filter_events": "Filtrēt notikumus",
+                "drop_todayevents_from": "No kāda laika slēpt visas dienas notikumu",
+                "full_size": "Kartiņa bez robežas",
+                "use_summary": "Notikuma kopsavilkums, nevis etiķete",
+                "hide_time_range": "Paslēpt laiku",
+                "event_grouping": "Rādīt tikai nākamo notikumu katram filtram",
+                "icon_size": "Ikonas izmērs",
+                "with_label": "Rādīt etiķeti"
+            },
+            "trash": {
+                "pattern": {
+                    "title": "Labot filtru",
+                    "edit": "labot",
+                    "delete": "dzēst",
+                    "create": "Pievienot filtru",
+                    "new_custom_label": "Jauns filtrs",
+                    "type": {
+                        "organic": "Bioloģiskie",
+                        "paper": "Iepakojums",
+                        "recycle": "Stikls",
+                        "waste": "Atkritumi",
+                        "others": "Citi"
+                    },
+                    "fields": {
+                        "label": "Etiķete",
+                        "color": "Krāsa",
+                        "icon": "Ikona",
+                        "pattern": "Notikuma filtrs",
+                        "picture_url": "Attēla URL",
+                        "picture_url_description": "Ja ir norādīts attēla URL, ikonas vietā tiek parādīts atbilstošais attēls. Ievietojiet attēlu mapē `/config/www` un izmantojiet `/local/[faila nosaukums]`."
+                    }
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Vienība nav atrasta",
+        "trash": {
+            "today": "šodien",
+            "tomorrow": "rīt",
+            "day": "<DAY>",
+            "today_from_till": "Šodien\nno <START> līdz <END>",
+            "tomorrow_from_till": "Rīt\nno <START> līdz <END>",
+            "day_from_till": "<DAY>\nno <START> līdz <END>",
+            "daysleft": "pēc <DAYS> dienas",
+            "daysleft_more": "pēc <DAYS> dienām",
+            "daysleft_from_till": "pēc <DAYS> dienas\nno <START> līdz <END>",
+            "daysleft_more_from_till": "pēc <DAYS> dienām\nno <START> līdz <END>"
+        }
+    }
+}
