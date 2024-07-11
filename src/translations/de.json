@@ -7,7 +7,7 @@
                 }
             },
             "day_style": {
-                "title": "Ereigniss Zeitpunkt anzeigen als",
+                "title": "Ereignis-Zeitpunkt anzeigen als",
                 "values": {
                     "default": "Datum",
                     "counter": "Tage bis",
@@ -16,10 +16,10 @@
             },
             "day_style_format": {
                 "title": "Eigenes Datumsformat",
-                "helper": "Definiere ein eigenes Datums format. (dd = Tag mit führender 0, d = Tag, MM = Monat mit führender 0, M = Monat, yy = Jahr kurz, yyyy = Jahr lang) Z.b. ergibt dd.MM.yyyy = 03.04.2024, wobei d.M.yy = 3.4.24 ergeben würde."
+                "helper": "Definiere ein eigenes Datumsformat. (dd = Tag mit führender 0, d = Tag, MM = Monat mit führender 0, M = Monat, yy = Jahr kurz, yyyy = Jahr lang) | z.B. ergibt dd.MM.yyyy = 03.04.2024, wobei d.M.yy = 3.4.24 ergeben würde."
             },
             "card_style": {
-                "title": "Darstellen als",
+                "title": "Darstellung",
                 "values": {
                     "card": "Standard Karte",
                     "chip": "Chip Karte",
@@ -44,7 +44,7 @@
             },
             "layout_picker": {
                 "values": {
-                    "default": "Standard-Layout",
+                    "default": "Standard Layout",
                     "vertical": "Vertikales Layout",
                     "horizontal": "Horizontales Layout"
                 }
@@ -52,11 +52,11 @@
             "tabs": {
                 "settings": "Einstellungen",
                 "appearance": "Darstellung",
-                "patterns": "Muster"
+                "patterns": "Vorlagen"
             },
             "refresh_rate": {
-                "title": "Aktuallisierungsinterval",
-                "helper": "Alle x Minuten auf Änderungen im Kalender prüfen."
+                "title": "Aktualisierungsintervall",
+                "helper": "Prüfung aller x Minuten auf Änderungen im Kalender."
             }
         },
         "card": {
@@ -65,22 +65,22 @@
                 "layout": "Layout",
                 "fill_container": "Container ausfüllen",
                 "next_days": "Tage in der Zukunft",
-                "filter_events": "Ereignisse nach Mustern filtern",
+                "filter_events": "Ereignisse nach Vorlagen filtern",
                 "drop_todayevents_from": "Ab wieviel Uhr Ganztages Ereignis ausblenden",
                 "full_size": "Karte ohne Seitenrand",
-                "use_summary": "Ereignisse Bezeichnung anstelle des Lables verwenden",
+                "use_summary": "Ereignisbezeichnung anstelle des Lables verwenden",
                 "hide_time_range": "Uhrzeit ausblenden",
-                "event_grouping": "Nur das nächste Ereignis je Muster anzeigen",
-                "icon_size": "Icon größe",
+                "event_grouping": "Nur das nächste Ereignis je Vorlage anzeigen",
+                "icon_size": "Icongröße",
                 "with_label": "Bezeichnung anzeigen"
             },
             "trash": {
                 "pattern": {
-                    "title": "Muster bearbeiten",
+                    "title": "Vorlage bearbeiten",
                     "edit": "bearbeiten",
                     "delete": "löschen",
-                    "create": "Neues Muster erstellen",
-                    "new_custom_label": "Neues Muster",
+                    "create": "Neue Vorlage erstellen",
+                    "new_custom_label": "Neue Vorlage",
                     "type": {
                         "organic": "Bio",
                         "paper": "Papier",
@@ -92,9 +92,9 @@
                         "label": "Bezeichnung",
                         "color": "Farbe",
                         "icon": "Symbol",
-                        "pattern": "erkennen an Muster",
-                        "picture_url": "Bild URL",
-                        "picture_url_description": "Wenn eine Bild URL angegeben wird, wird das entsprechende Bild anstelle das Icon angezeigt. Lege ein Bild in dem `/config/www` Ordner ab und verwende `/local/[Dateiname]`."
+                        "pattern": "Mustererkennung (z.B. Rest für Restmüll)",
+                        "picture_url": "Bild-URL",
+                        "picture_url_description": "Wenn eine Bild-URL angegeben wird, wird das entsprechende Bild anstelle des Icons angezeigt. Lege dazu einfach ein Bild in dem `/config/www` Ordner ab und verwende `/local/[Dateiname]`."
                     }
                 }
             }
