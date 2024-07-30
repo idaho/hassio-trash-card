@@ -75,6 +75,8 @@ Add following code to the `lovelace` section in configuration.yaml:
 In order for TrashCard to display information, your garbage collection schedule needs to be added in the local calendar.
 Creating a dedicated “Garbage collection” calendar for this purpose is a good way to keep things organised.
 
+![image](https://github.com/user-attachments/assets/576d7446-c759-494b-996e-e60afd9210c7)
+
 Note:
 - When adding the dates, the events must be set to “Full day”.
 - Repeating events are supported.
@@ -86,11 +88,10 @@ Note:
 The TrashCard cards can be configured using the Dashboard UI editor.
 
 ### Add a new card
-1.	In the Dashboard UI, click the 3 dots in top right corner.
-2.	Click Edit Dashboard.
-3.	Click the Plus button to add a new card.
-4.	Find the Custom: TrashCard card in the list.
-5.	Set the entity to the calendar that contains the collection events.
+1.	In the Dashboard UI, select "Edit Dashboard" in top right corner.
+2.	Click the "+Add Card" button.
+3.	Find the Custom: TrashCard card in the list.
+4.	Set the entity to the calendar that contains the collection events.
 
 
 All the options listed below are available in the lovelace editor, but configuring via `yaml` is supported too.
