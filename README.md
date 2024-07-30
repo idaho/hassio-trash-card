@@ -12,6 +12,7 @@
 <a href="https://www.buymeacoffee.com/idaho" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 <img width="510" alt="new-overview" src="https://github.com/idaho/hassio-trash-card/assets/664101/8adeaf6a-f236-4972-805d-e173c3aa554b">
+Never forget garbage collection day again!
 
 TrashCard is a custom Home Assistant card that displays the your current and upcoming trash collection schedule. 
 It uses events contained within the local calendar integration to display the information.
@@ -96,23 +97,23 @@ All the options listed below are available in the lovelace editor, but configuri
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
 | `entities`            | array of strings                                              | Required    | Entities                                                                              |
-| `layout`            | string                                              | Optional    | Layout of the card. Vertical, horizontal and default layout are supported           |
-| `fill_container`    | boolean                                             | `false`     | Fill container or not. Useful when card is in a grid, vertical or horizontal layout |
-| `filter_events`     | boolean                                             | `false`     | Filter fetched events by patterns (if at least one is defined) before selecting the one to display |
-| `full_size`         | boolean                                             | `false`     | Show the card without the default card margins |
-| `drop_todayevents_from`         | time                                             | `10:00:00`     | From what time to hide all-day event (Format `hh:mm:ss`) |
-| `use_summary`         | boolean                                             | `false`     | Shows  the event summary instead of matched label |
-| `hide_time_range`         | boolean                                             | `false`     | Option to hide the time on events which aren't fill day events |
-| `event_grouping`         | boolean                                             | `true`     | Only display the next event per pattern, otherwise all events during the selected time will be displayed  |
-| `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event |
-| `day_style`            | `default` or `counter` | `default`   | Option of how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining until the event.       |
+| `layout`            | string                                              | Optional    | Layout of the card. Vertical, horizontal and default layout are supported.           |
+| `fill_container`    | boolean                                             | `false`     | Fill container or not. Useful when card is in a grid, vertical or horizontal layout. |
+| `filter_events`     | boolean                                             | `false`     | Filter events from the calendar by names (if at least one is defined) before selecting the one to display. |
+| `full_size`         | boolean                                             | `false`     | Show the card without the default card margins. |
+| `drop_todayevents_from`         | time                                             | `10:00:00`     | From what time to hide all-day event (Format `hh:mm:ss`). |
+| `use_summary`         | boolean                                             | `false`     | Shows the event summary instead of matched label. |
+| `hide_time_range`         | boolean                                             | `false`     | Option to hide the time on events that aren't full day events. |
+| `event_grouping`         | boolean                                             | `true`     | Only display the next event per pattern, otherwise all events during the selected time will be displayed.  |
+| `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event. |
+| `day_style`            | `default` or `counter` | `default`   | Option for how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining before the event.       |
 | `card_style`            | `card`, `chip` or `icon` | `card`   | Switch between the events style `Standard card`, `Chip card` or a new `Icon` predefined layout. |
-| `alignment_style`            | `left`, `center`, `right` or `space` | `left`   | Switch between alignments on `Chip card` card_style |
-| `color_mode`            | `background` or `icon` | `background`   | Select whether the color settings should be applied to the background or to the symbol |
-| `refresh_rate`            | integer | 60   | Check for changes in the calendar every x minutes, by default we will check every 60 minutes. Values can be set from 5 to 1440. |
+| `alignment_style`            | `left`, `center`, `right` or `space` | `left`   | Switch between alignments on `Chip card` card_style. |
+| `color_mode`            | `background` or `icon` | `background`   | Select whether the color settings should be applied to the background or to the icon. |
+| `refresh_rate`            | integer | 60   | Check for changes in the calendar every x minutes. By default it will check every 60 minutes. Values can be set from 5 to 1440. |
 | `debug`            | boolean | `false`   | Option to enable debug mode to help fixing bugs ;) . |
 | `icon_size`            | integer | 40 | Size of the icons in px if you choose `card_style` as `icon` . |
-| `with_label`            | boolean | `true` | Option to decide if you want to see the label in the card or the chip style. |
+| `with_label`            | boolean | `true` | Option to display the label in the card or chip style. |
 | `pattern`          | array of [Pattern](#pattern)                               | Required    | Pattern to detect the kind of trash and how to display it.|
 
 
@@ -122,19 +123,19 @@ All the options listed below are available in the lovelace editor, but configuri
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
-| `type`             | `organic`, `paper`, `recycle`, `waste`, `others`, `custom`        | Required    | Label which should be shown  |
-| `label`             | string       | Required    | Label which should be shown  |
-| `icon`              | string       | Required    | Icon which should be displayed  |
-| `color`             | string       | Required    | Background color of the card which should be used |
-| `pattern`           | string       | Required    | Pattern used to detected to display the apply this trash type. (Is tested against the calendar entry title) |
-| `picture`           | string       | Optional    | picture url to a image to show instead of the icon |
+| `type`             | `organic`, `paper`, `recycle`, `waste`, `others`, `custom`        | Required    | Label which should be shown.  |
+| `label`             | string       | Required    | Label which should be shown.  |
+| `icon`              | string       | Required    | Icon which should be displayed.  |
+| `color`             | string       | Required    | Background color of the card which should be used. |
+| `pattern`           | string       | Required    | Pattern used to detected to display the apply this trash type. (Is tested against the calendar entry title). |
+| `picture`           | string       | Optional    | Picture url to a image to show instead of the icon. |
 
 #### Other type trash configuration
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
-| `icon`              | string                                              | Required    | Icon which should be displayed  |
-| `color`             | string                                              | Required    | Background color of the card which should be used |
+| `icon`              | string                                              | Required    | Icon which should be displayed.  |
+| `color`             | string                                              | Required    | Background color of the card which should be used. |
 
 
 ### Example YAML configuration
