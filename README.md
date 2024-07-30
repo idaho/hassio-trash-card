@@ -77,8 +77,6 @@ Creating a dedicated “Garbage collection” calendar for this purpose is a goo
 
 ![image](https://github.com/user-attachments/assets/576d7446-c759-494b-996e-e60afd9210c7)
 
-<img src="https://github.com/user-attachments/assets/576d7446-c759-494b-996e-e60afd9210c7" width="50%" height="50%"> 
-
 Note:
 - When adding the dates, the events must be set to “Full day”.
 - Repeating events are supported.
@@ -141,13 +139,14 @@ All the options listed below are available in the lovelace editor, but configuri
 | `icon`              | string                                              | Required    | The icon that will be displayed.  |
 | `color`             | string                                              | Required    | The background color of the card. |
 
-### Example calendar event
+### Example calendar events
+_The red and yellow bins are collected every fortnight on Thursdays. The Red and green bins are collected every other fortnight on Thursdays._
 ![image](https://github.com/user-attachments/assets/6d72dce1-f2d4-4c7f-a4af-be42c95068b8)
 
-### Example TrashCard configuration that displays the event shown above
+### Example TrashCard configuration that displays the events shown above
 ![image](https://github.com/user-attachments/assets/a40f01bb-3630-4a89-9eee-ac88bbd0d7e8)
 
-### Output of the configuration, using a custom picture instead of an icon.
+### Output of the configuration aboce, using a custom picture instead of an icon.
 ![image](https://github.com/user-attachments/assets/3edb54f2-7232-4d20-8b48-bc947e7abddc)
 
 
