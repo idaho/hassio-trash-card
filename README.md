@@ -46,7 +46,7 @@ TrashCard is available in [HACS][hacs] (Home Assistant Community Store).
 ### Manual
 
 1. Download the latest [latest release][release-url] of `trashcard.js` from the GitHub repository.
-2. Add trashcard.js into your config/www folder.
+2. Add `trashcard.js` into your config/www folder.
 
 You must then add a reference to `trashcard.js` in your Dashboard. There are two methods for doing this:
 
@@ -55,7 +55,8 @@ You must then add a reference to `trashcard.js` in your Dashboard. There are two
 **Note:** If you do not see the Resources menu, you will need to enable _Advanced Mode_ in your _User Profile_
 
 **Using YAML:** 
-Add following code to the `lovelace` section in configuration.yaml.
+Add following code to the `lovelace` section in configuration.yaml:
+
 
       ```yaml
       resources:
