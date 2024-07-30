@@ -92,7 +92,7 @@ The TrashCard cards can be configured using the Dashboard UI editor.
 2.	Click the "+Add Card" button.
 3.	Find the Custom: TrashCard card in the list.
 4.	Set the entity to the calendar that contains the collection events.
-
+5.	Configure the display settings of the card using the options.
 
 All the options listed below are available in the lovelace editor, but configuring via `yaml` is supported too.
 
