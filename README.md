@@ -13,23 +13,23 @@
 
 <img width="510" alt="new-overview" src="https://github.com/idaho/hassio-trash-card/assets/664101/8adeaf6a-f236-4972-805d-e173c3aa554b">
 
-
-TrashCard - is a custom Home Assistant card that shows you the next upcoming or current trash removal appointment..
-For this purpose a calendar entity is used, in which you have entered all appointments.
-
-See screenshots for what you can do
+TrashCard is a custom Home Assistant card that displays the your current and upcoming trash collection schedule. 
+It uses events contained within the local calendar integration to display the information.
 
 **Features**
-- Extra color, icon and text for residual, organic, paper waste and recycling
-- Color and icon for all other appointments
-- Filter out unexpected items
-
+- Extra colors, icons and text for residual, organic, paper waste and recycling events.
+- Colors and icons for all other events.
+- A filter for events.
 
 ## Pre-Requirements
 
-TrashCard requires [Mushroom][mushroom-url] for Home Assistant to be installed. Please follow the installation instructions of Mushroom. Once you have installed Mushroom you can continue install TrashCard using HACS (preferred) or manually.
+TrashCard requires:
+- [Mushroom][mushroom-url] for Home Assistant. You can find the Mushroom cards project and a guide on how to install it here.
+- The [Home Assistant calendar integration](https://www.home-assistant.io/integrations/#calendar).
 
-TrashCard requires a calendar to get its data from. This calendar must be known by Home Assistant as an entity. Check [Home Assistant calendar integrations](https://www.home-assistant.io/integrations/#calendar) for more information on how to add it.
+Once you have both of these installed, you can install TashCard either:
+- Through HACS.
+- Manually.
 
 ## Installation
 
