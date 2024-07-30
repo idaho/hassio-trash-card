@@ -202,18 +202,18 @@ pattern:
     pattern: elektro
 ```
 
-## Screenshots
+## Icons and Layouts
 
-### Layout icons
+### Layout: icons.
 <img width="482" alt="layout-icons" src="https://github.com/idaho/hassio-trash-card/assets/664101/b1509694-7ece-49a4-8f84-6298731e315f">
 
-### Layout chips
+### Layout: chips.
 <img width="1043" alt="layout-chips" src="https://github.com/idaho/hassio-trash-card/assets/664101/c420d073-c65d-41cc-8d47-c296c1c03fd4">
 
-### Layout cards
+### Layout: cards.
 ![layout-cards](https://github.com/idaho/hassio-trash-card/assets/664101/f3f3130c-172f-42dc-aaca-2bc0c9a3bc26)
 
-### Use picture instead of icons
+### Using picture instead of icons.
 <img width="1032" alt="with-image" src="https://github.com/idaho/hassio-trash-card/assets/664101/212537e0-65d3-4c2c-a25c-9431d7ff04b9">
 
 ## Thanks
