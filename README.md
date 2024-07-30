@@ -145,10 +145,10 @@ All the options listed below are available in the lovelace editor, but configuri
 _The red and yellow bins are collected every fortnight on Thursdays. The red and green bins are collected every other fortnight on Thursdays._
 ![image](https://github.com/user-attachments/assets/6d72dce1-f2d4-4c7f-a4af-be42c95068b8)
 
-### Example TrashCard configuration that displays the events shown above.
+### Example TrashCard configuration that displays the events shown above
 ![image](https://github.com/user-attachments/assets/a40f01bb-3630-4a89-9eee-ac88bbd0d7e8)
 
-### Output of the configuration above, using a custom picture instead of an icon.
+### Output of the configuration above, using a custom picture instead of an icon
 ![image](https://github.com/user-attachments/assets/3edb54f2-7232-4d20-8b48-bc947e7abddc)
 
 
