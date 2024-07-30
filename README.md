@@ -19,8 +19,8 @@ TrashCard is a custom Home Assistant card that displays the your current and upc
 It uses events contained within the local calendar integration to display the information.
 
 **Features**
-- Extra colors, icons and text for residual, organic, paper waste and recycling events.
-- Colors and icons for all other events.
+- Colors, icons and text for residual, organic, paper waste and recycling events.
+- Colors and icons for all custom events.
 - A filter for events.
 
 ## Pre-Requirements
