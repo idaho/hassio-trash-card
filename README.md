@@ -24,7 +24,7 @@ It uses events contained within the local calendar integration to display the in
 ## Pre-Requirements
 
 TrashCard requires:
-- [Mushroom][mushroom-url] for Home Assistant. You can find the Mushroom cards project and a guide on how to install it here.
+- [Mushroom][mushroom-url] for Home Assistant.
 - The [Home Assistant calendar integration](https://www.home-assistant.io/integrations/#calendar).
 
 Once you have both of these installed, you can install TashCard either:
@@ -37,20 +37,25 @@ Once you have both of these installed, you can install TashCard either:
 
 TrashCard is available in [HACS][hacs] (Home Assistant Community Store).
 
-1. Install HACS if you don't have it already
-2. Open HACS in Home Assistant
-3. Go to "Frontend" section
-4. Click button with "+" icon
-5. Search for "TrashCard"
+1.	Install HACS if you haven’t already.
+2.	Open HACS in Home Assistant.
+3.	Go to the "Frontend" section.
+4.	Click the "+" icon.
+5.	Search for "TrashCard".
 
 ### Manual
 
-1. Download `trashcard.js` file from the [latest release][release-url].
-2. Put `trashcard.js` file into your `config/www` folder.
-3. Add reference to `trashcard.js` in Dashboard. There's two way to do that:
-    - **Using UI:** _Settings_ → _Dashboards_ → _More Options icon_ → _Resources_ → _Add Resource_ → Set _Url_ as `/local/trashcard.js` → Set _Resource type_ as `JavaScript Module`.
-      **Note:** If you do not see the Resources menu, you will need to enable _Advanced Mode_ in your _User Profile_
-    - **Using YAML:** Add following code to `lovelace` section.
+1. Download the latest [latest release][release-url] of `trashcard.js` from the GitHub repository.
+2. Add trashcard.js into your config/www folder.
+
+You must then add a reference to `trashcard.js` in your Dashboard. There are two methods for doing this:
+
+**Using UI:** 
+- _Settings_ → _Dashboards_ → _More Options icon_ → _Resources_ → _Add Resource_ → Set _Url_ as `/local/trashcard.js` → Set _Resource type_ as `JavaScript Module`.
+**Note:** If you do not see the Resources menu, you will need to enable _Advanced Mode_ in your _User Profile_
+
+**Using YAML:** 
+Add following code to the `lovelace` section in configuration.yaml.
 
       ```yaml
       resources:
@@ -61,26 +66,28 @@ TrashCard is available in [HACS][hacs] (Home Assistant Community Store).
 ## Usage
 
 ### Create events in your calendar
-In order for the Trash card to display informations, they need to be existing in a calendar. Here's some rules to follow when creating the events in your calendar: 
+In order for TrashCard to display information, your garbage collection schedule needs to be added in the local calendar.
+Creating a dedicated “Garbage collection” calendar for this purpose is a good way to keep things organised.
 
-1. It must be entire day events (only form of events supported at the moment)
-2. You must use the same event name for the same method of collection. You'll map them later. Right now, the card support up to 5 different type of collections
-3. You can use repeating events, that's totally fine.
-
-
+Note:
+- When adding the dates, the events must be set to “Full day”.
+- Repeating events are supported.
+- The event name (in the “summary” field) must be the same name as the type of collection event.
+- Up to five different types of collection events are supported (Garbage, recycling, organic waste etc.).
 
 ## Configuration
 
-The TrashCard cards can be configured using Dashboard UI editor.
+The TrashCard cards can be configured using the Dashboard UI editor.
 
 ### Add a new card
-1. In Dashboard UI, click 3 dots in top right corner.
-2. Click _Edit Dashboard_.
-3. Click Plus button to add a new card.
-4. Find the _Custom: TrashCard_ card in the list.
+1.	In the Dashboard UI, click the 3 dots in top right corner.
+2.	Click Edit Dashboard.
+3.	Click the Plus button to add a new card.
+4.	Find the Custom: TrashCard card in the list.
+5.	Set the entity to the calendar that contains the collection events.
 
 
-All the options are available in the lovelace editor but you can use `yaml` if you want.
+All the options listed below are available in the lovelace editor, but configuring via `yaml` is supported too.
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
