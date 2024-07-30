@@ -139,6 +139,8 @@ All the options listed below are available in the lovelace editor, but configuri
 | `icon`              | string                                              | Required    | The icon that will be displayed.  |
 | `color`             | string                                              | Required    | The background color of the card. |
 
+---
+
 ### Example calendar events
 _The red and yellow bins are collected every fortnight on Thursdays. The Red and green bins are collected every other fortnight on Thursdays._
 ![image](https://github.com/user-attachments/assets/6d72dce1-f2d4-4c7f-a4af-be42c95068b8)
