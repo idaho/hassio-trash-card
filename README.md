@@ -14,7 +14,7 @@
 <img width="510" alt="new-overview" src="https://github.com/idaho/hassio-trash-card/assets/664101/8adeaf6a-f236-4972-805d-e173c3aa554b">
 
 
-TrashCard - is a custom Home Assistant card that shows you the next upcoming or current trash removal appointment. 
+TrashCard - is a custom Home Assistant card that shows you the next upcoming or current trash removal appointment..
 For this purpose a calendar entity is used, in which you have entered all appointments.
 
 See screenshots for what you can do
