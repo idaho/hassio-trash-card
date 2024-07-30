@@ -79,9 +79,9 @@ Creating a dedicated “Garbage collection” calendar for this purpose is a goo
 
 **Note:**
 - When adding the dates, the events must be set to “Full day”.
-- Repeating events are supported.
 - The event name (in the “summary” field) must be the same name as the type of collection event.
 - Up to five different types of collection events are supported (Garbage, recycling, organic waste etc.).
+- Repeating events are supported.
 
 ## Configuration
 
