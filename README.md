@@ -129,7 +129,7 @@ All the options listed below are available in the lovelace editor, but configuri
 | `label`             | string       | Required    | The label that will be displayed.  |
 | `icon`              | string       | Required    | The icon that will be displayed.  |
 | `color`             | string       | Required    | The background color of the card. |
-| `pattern`           | string       | Required    | Pattern used to detected to display the apply this trash type. (Is tested against the calendar entry title). |
+| `pattern`           | string       | Required    | Pattern used to detect and display an event type. (Is tested against the calendar entry title). |
 | `picture`           | string       | Optional    | Picture URL do display an image instead of an icon. |
 
 #### Other type trash configuration
@@ -138,6 +138,15 @@ All the options listed below are available in the lovelace editor, but configuri
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
 | `icon`              | string                                              | Required    | The icon that will be displayed.  |
 | `color`             | string                                              | Required    | The background color of the card. |
+
+### Example calendar event
+![image](https://github.com/user-attachments/assets/63a55f43-4912-4efd-a81d-2fc553404bf1)
+
+### Example TrashCard configuration that displays the event shown above
+![image](https://github.com/user-attachments/assets/a40f01bb-3630-4a89-9eee-ac88bbd0d7e8)
+
+### Output of the configuration, using a custom picture instead of an icon.
+![image](https://github.com/user-attachments/assets/3edb54f2-7232-4d20-8b48-bc947e7abddc)
 
 
 ### Example YAML configuration
