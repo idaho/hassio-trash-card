@@ -96,7 +96,7 @@ All the options listed below are available in the lovelace editor, but configuri
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
-| `entities`            | array of strings                                              | Required    | Entities                                                                              |
+| `entities`            | array of strings                                              | Required    | The calendar(s) containing the collection events.                        |
 | `layout`            | string                                              | Optional    | Layout of the card. Vertical, horizontal and default layout are supported.           |
 | `fill_container`    | boolean                                             | `false`     | Fill container or not. Useful when card is in a grid, vertical or horizontal layout. |
 | `filter_events`     | boolean                                             | `false`     | Filter events from the calendar by names (if at least one is defined) before selecting the one to display. |
@@ -124,18 +124,18 @@ All the options listed below are available in the lovelace editor, but configuri
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
 | `type`             | `organic`, `paper`, `recycle`, `waste`, `others`, `custom`        | Required    | Label which should be shown.  |
-| `label`             | string       | Required    | Label which should be shown.  |
-| `icon`              | string       | Required    | Icon which should be displayed.  |
-| `color`             | string       | Required    | Background color of the card which should be used. |
+| `label`             | string       | Required    | The label that will be displayed.  |
+| `icon`              | string       | Required    | The icon that will be displayed.  |
+| `color`             | string       | Required    | The background color of the card. |
 | `pattern`           | string       | Required    | Pattern used to detected to display the apply this trash type. (Is tested against the calendar entry title). |
-| `picture`           | string       | Optional    | Picture url to a image to show instead of the icon. |
+| `picture`           | string       | Optional    | Picture URL do display an image instead of an icon. |
 
 #### Other type trash configuration
 
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
-| `icon`              | string                                              | Required    | Icon which should be displayed.  |
-| `color`             | string                                              | Required    | Background color of the card which should be used. |
+| `icon`              | string                                              | Required    | The icon that will be displayed.  |
+| `color`             | string                                              | Required    | The background color of the card. |
 
 
 ### Example YAML configuration
