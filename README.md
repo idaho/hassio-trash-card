@@ -77,7 +77,7 @@ Creating a dedicated “Garbage collection” calendar for this purpose is a goo
 
 ![image](https://github.com/user-attachments/assets/576d7446-c759-494b-996e-e60afd9210c7)
 
-Note:
+**Note:**
 - When adding the dates, the events must be set to “Full day”.
 - Repeating events are supported.
 - The event name (in the “summary” field) must be the same name as the type of collection event.
