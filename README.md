@@ -13,6 +13,7 @@
 
 ---
 <img width="510" alt="new-overview" src="https://github.com/idaho/hassio-trash-card/assets/664101/8adeaf6a-f236-4972-805d-e173c3aa554b">
+
 ---
 
 ### Never forget garbage collection day again!
