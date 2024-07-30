@@ -142,7 +142,7 @@ All the options listed below are available in the lovelace editor, but configuri
 | `color`             | string                                              | Required    | The background color of the card. |
 
 ### Example calendar event
-![image](https://github.com/user-attachments/assets/63a55f43-4912-4efd-a81d-2fc553404bf1)
+![image](https://github.com/user-attachments/assets/6d72dce1-f2d4-4c7f-a4af-be42c95068b8)
 
 ### Example TrashCard configuration that displays the event shown above
 ![image](https://github.com/user-attachments/assets/a40f01bb-3630-4a89-9eee-ac88bbd0d7e8)
