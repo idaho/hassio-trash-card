@@ -97,9 +97,9 @@ All the options listed below are available in the lovelace editor, but configuri
 | Name                | Type                                                | Default     | Description                                                                         |
 | :------------------ | :-------------------------------------------------- | :---------- | :---------------------------------------------------------------------------------- |
 | `entities`            | array of strings                                              | Required    | The calendar(s) containing the collection events.                        |
-| `layout`            | string                                              | Optional    | Layout of the card. Vertical, horizontal and default layout are supported.           |
+| `layout`            | string                                              | Optional    | Layout of the card. Vertical, horizontal and default layouts are supported.           |
 | `fill_container`    | boolean                                             | `false`     | Fill container or not. Useful when card is in a grid, vertical or horizontal layout. |
-| `filter_events`     | boolean                                             | `false`     | Filter events from the calendar by names (if at least one is defined) before selecting the one to display. |
+| `filter_events`     | boolean                                             | `false`     | Filter and display events from the calendar by names (if at least one is defined). |
 | `full_size`         | boolean                                             | `false`     | Show the card without the default card margins. |
 | `drop_todayevents_from`         | time                                             | `10:00:00`     | From what time to hide all-day event (Format `hh:mm:ss`). |
 | `use_summary`         | boolean                                             | `false`     | Shows the event summary instead of matched label. |
