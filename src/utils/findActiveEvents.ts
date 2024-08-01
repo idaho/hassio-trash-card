@@ -25,7 +25,7 @@ const isMatchingAnyPatterns = (item: CalendarEvent, config: Config) => {
   const trashTypes = config.pattern.filter(pat => pat.type !== 'others');
   const patterns = trashTypes.map(pat => pat.pattern).filter(pattern => pattern !== undefined);
 
-  return patterns.length === 0 || patterns.some(pattern => item.content.summary.toLowerCase().includes(pattern!.toLowerCase()));
+  return patterns.length === 0 || patterns.some(pattern => item.content.summary.toLowerCase().includes(pattern.toLowerCase()));
 };
 
 const isNotPastWholeDayEvent = (item: CalendarEvent, now: Date, dropAfter: boolean): boolean =>
