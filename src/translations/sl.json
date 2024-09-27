@@ -1,0 +1,118 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Privzeta barva"
+                }
+            },
+            "day_style": {
+                "title": "Prikaži čas dogodka kot",
+                "values": {
+                    "default": "Datum",
+                    "counter": "dni dno",
+                    "custom": "Oblika datuma po meri"
+                }
+            },
+            "day_style_format": {
+                "title": "Oblika datuma po meri",
+                "helper": "Določi lastno obliko datuma. (dd = dan z vodilno 0, d = dan, MM = mesec z vodilno 0, M = mesec, yy = kratko leto, llll = dolgo leto) Npr. dd.MM.llll = 03.04.2024, rezultat za oblik od.M.yy pa bi izgledal = 3.4.24."
+            },
+            "card_style": {
+                "title": "Prikaži kot",
+                "values": {
+                    "card": "Standardna kartica",
+                    "chip": "Chip kartica",
+                    "icon": "Ikona"
+                }
+            },
+            "alignment_style": {
+                "title": "Poravnava",
+                "values": {
+                    "left": "leva",
+                    "center": "sredinska",
+                    "right": "desna",
+                    "space": "s presledki"
+                }
+            },
+            "color_mode": {
+                "title": "Pobarvaj",
+                "values": {
+                    "background": "Ozadje",
+                    "icon": "Ikono"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Privzeta postavitev",
+                    "vertical": "Ležeča postavitev",
+                    "horizontal": "Pokončna postavitev"
+                }
+            },
+            "tabs": {
+                "settings": "Nastavitve",
+                "appearance": "Izgled",
+                "patterns": "Vzorci"
+            },
+            "refresh_rate": {
+                "title": "Interval posodabljanja",
+                "helper": "Preverite spremembe v koledarju vsakih x minut"
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Barva ikone",
+                "layout": "Postavitev",
+                "fill_container": "Napolni prostor",
+                "next_days": "Dnevi v prihodnosti",
+                "filter_events": "Filtriraj dogodke po vzorcih",
+                "drop_todayevents_from": "Od katere ure dalje naj se skrije celodnevni dogodek",
+                "full_size": "Kartica brez roba strani",
+                "use_summary": "Povzetek dogodka namesto oznake",
+                "hide_time_range": "Skrij čas",
+                "event_grouping": "Prikaži samo naslednji dogodek glede na vzorec",
+                "icon_size": "Velikost ikone",
+                "with_label": "Pokaži oznako"
+            },
+            "trash": {
+                "pattern": {
+                    "title": "Uredi vzorec",
+                    "edit": "uredi",
+                    "delete": "izbriši",
+                    "create": "Ustvari nov vzorec",
+                    "new_custom_label": "Nov vzorec",
+                    "type": {
+                        "organic": "Bio odpadki",
+                        "paper": "Papir",
+                        "recycle": "Mešana embalaža",
+                        "waste": "Mešani odpadki",
+                        "others": "Ostalo"
+                    },
+                    "fields": {
+                        "label": "Oznaka",
+                        "color": "Barva",
+                        "icon": "Ikona",
+                        "pattern": "Vzorec zaznavanja",
+                        "picture_url": "URL slike",
+                        "picture_url_description": "Če je uporabljen URL slike, se namesto ikone prikaže ustrezna slika. Postavite sliko v mapo '/config/www' in uporabite '/local/[ime_datoteke]'."
+                    }
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Ne najdem entitete",
+        "trash": {
+            "today": "danes",
+            "tomorrow": "jutri",
+            "day": "<DAY>",
+            "today_from_till": "Danes\nod <START> do <END>",
+            "tomorrow_from_till": "Jutri\nmed <START> in <END>",
+            "day_from_till": "<DAY>\nmed <START> in <END>",
+            "daysleft": "čez <DAYS> dan",
+            "daysleft_more": "čez <DAYS> dni",
+            "daysleft_from_till": "čez <DAYS> dan\nmed <START> in <END>",
+            "daysleft_more_from_till": "čez <DAYS> dni\nmed <START> in <END>"
+        }
+    }
+}
