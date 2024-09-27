@@ -1,0 +1,118 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Standardfärg"
+                }
+            },
+            "day_style": {
+                "title": "Visa händelsetiden som",
+                "values": {
+                    "default": "Datum",
+                    "counter": "dagar till",
+                    "custom": "Användardefinierat datumformat"
+                }
+            },
+            "day_style_format": {
+                "title": "Användardefinierat datumformat",
+                "helper": "Definera ditt eget datumformat. (dd = dag med inledande 0, d = dag, MM = månad med inledande 0, M = månad, yy = kort år, yyyy = långt år) T.ex. dd.MM.yyyy = 03.04.2024, där d.M.yy = 3.4.24 blir resultatet."
+            },
+            "card_style": {
+                "title": "Visa som",
+                "values": {
+                    "card": "Standardkort",
+                    "chip": "Chipkort",
+                    "icon": "Ikon"
+                }
+            },
+            "alignment_style": {
+                "title": "Justering",
+                "values": {
+                    "left": "vänster",
+                    "center": "centrerat",
+                    "right": "höger",
+                    "space": "med avstånd"
+                }
+            },
+            "color_mode": {
+                "title": "Använd färg till",
+                "values": {
+                    "background": "Bakgrund",
+                    "icon": "Ikon"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Standardlayout",
+                    "vertical": "Vertikal layout",
+                    "horizontal": "Horisontal layout"
+                }
+            },
+            "tabs": {
+                "settings": "Inställningar",
+                "appearance": "Utseende",
+                "patterns": "Mönster"
+            },
+            "refresh_rate": {
+                "title": "Uppdateringsintervall",
+                "helper": "Kolla ändringar i kalendern var x minut"
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Ikonfärg",
+                "layout": "Layout",
+                "fill_container": "Full container",
+                "next_days": "Dagar fram i tiden",
+                "filter_events": "Filtrera händelser efter mönster",
+                "drop_todayevents_from": "Från vilken tid ska heldagshändelser gömmas",
+                "full_size": "Kort uan marginal",
+                "use_summary": "Summering istället för etikett",
+                "hide_time_range": "Göm tid",
+                "event_grouping": "Visa endast nästa händelse för mönster",
+                "icon_size": "Ikonstorlek",
+                "with_label": "Visa etikett"
+            },
+            "trash": {
+                "pattern": {
+                    "title": "Redigera mönster",
+                    "edit": "redigera",
+                    "delete": "ta bort",
+                    "create": "Skapa nytt mönster",
+                    "new_custom_label": "Nytt mönster",
+                    "type": {
+                        "organic": "Organisk",
+                        "paper": "Papper",
+                        "recycle": "Återvinning",
+                        "waste": "Skräp",
+                        "others": "Andra"
+                    },
+                    "fields": {
+                        "label": "Etikett",
+                        "color": "Färg",
+                        "icon": "Ikon",
+                        "pattern": "Detektions mönster",
+                        "picture_url": "Bild-URL",
+                        "picture_url_description": "Om en bild-URL är angivet, visas det bilden istället för ikonen. Placera en bild i mappen `/config/www` och använd `/local/[filnamn]`."
+                    }
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": "Entiteten hittades inte",
+        "trash": {
+            "today": "idag",
+            "tomorrow": "imorgon",
+            "day": "<DAY>",
+            "today_from_till": "Idag\nfrån <START> till <END>",
+            "tomorrow_from_till": "Imorgon\nmellan <START> och <END>",
+            "day_from_till": "<DAY>\nmellan <START> och <END>",
+            "daysleft": "om <DAYS> dag",
+            "daysleft_more": "om <DAYS> dagar",
+            "daysleft_from_till": "om <DAYS> dag\nmellan <START> och <END>",
+            "daysleft_more_from_till": "om <DAYS> dagar\nmellan <START> och <END>"
+        }
+    }
+}
