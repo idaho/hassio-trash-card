@@ -1,31 +1,14 @@
 import setupCustomlocalize from '../localize';
 import { getDayFromDate } from './getDayFromDate';
 import { daysTill } from './daysTill';
+import { DateTime } from 'luxon';
 
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 import type { HomeAssistant } from './ha';
 import type { CalendarItem } from './calendarItem';
 
-const format = (date: Date, dateStyleFormat: string) => {
-  const dateParts = {
-    // eslint-disable-next-line id-length
-    M: date.getMonth() + 1,
-    // eslint-disable-next-line id-length
-    d: date.getDate(),
-    // eslint-disable-next-line id-length
-    h: date.getHours(),
-    // eslint-disable-next-line id-length
-    m: date.getMinutes(),
-    // eslint-disable-next-line id-length
-    s: date.getSeconds()
-  };
-
-  // eslint-disable-next-line prefer-named-capture-group, no-param-reassign
-  dateStyleFormat = dateStyleFormat.replace(/(M+|d+|h+|m+|s+)/ug, val => `${val.length > 1 ? '0' : ''}${dateParts[val.slice(-1)]}`.slice(-2));
-
-  // eslint-disable-next-line prefer-named-capture-group
-  return dateStyleFormat.replace(/(y+)/gu, val => date.getFullYear().toString().slice(-val.length));
-};
+const format = (date: Date, dateStyleFormat: string, language: string) =>
+  DateTime.fromJSDate(date).setLocale(language).toFormat(dateStyleFormat);
 
 const getTimeString = (customLocalize, offset: string, day?: string, startTime?: string, endTime?: string, excludeTime?: boolean, short?: boolean) => {
   if (offset === 'today' || offset === 'tomorrow') {
@@ -85,6 +68,13 @@ const getDateString = (
 
     return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
   }
+
+  if (dayStyle === 'weekday') {
+    return item.date.start.toLocaleDateString(hass.language, {
+      weekday: 'long'
+    });
+  }
+
   const day = dayStyle !== 'custom' ?
     item.date.start.toLocaleDateString(hass.language, {
       weekday: 'long',
@@ -92,7 +82,7 @@ const getDateString = (
       month: 'long',
       day: 'numeric'
     }) :
-    format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY');
+    format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY', hass.language);
 
   return getTimeString(customLocalize, 'day', day, startTime, endTime, excludeTime, false);
 };

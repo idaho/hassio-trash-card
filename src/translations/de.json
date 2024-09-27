@@ -11,6 +11,7 @@
                 "values": {
                     "default": "Datum",
                     "counter": "Tage bis",
+                    "weekday": "Wochentag",
                     "custom": "Eigenes Datumsformat"
                 }
             },
