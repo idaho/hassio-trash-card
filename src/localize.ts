@@ -9,6 +9,7 @@ import * as pl from './translations/pl.json';
 import * as sk from './translations/sk.json';
 import * as sl from './translations/sl.json';
 import * as lv from './translations/lv.json';
+import * as se from './translations/se.json';
 
 import type { HomeAssistant } from './utils/ha';
 
@@ -23,7 +24,8 @@ const languages: Record<string, unknown> = {
   pl,
   sk,
   sl,
-  lv
+  lv,
+  se
 };
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
