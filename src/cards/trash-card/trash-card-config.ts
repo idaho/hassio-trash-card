@@ -44,7 +44,7 @@ const COLORMODES = [
    day_style_format?: string;
    card_style?: typeof CARDSTYLES[number];
    alignment_style?: typeof ALIGNMENTSTYLES[number];
-   color_mode?: typeof COLORMODES[number];
+   color_mode?: typeof COLORMODES[number] | 'badge';
    refresh_rate?: number;
    icon_size?: number;
    debug?: boolean;

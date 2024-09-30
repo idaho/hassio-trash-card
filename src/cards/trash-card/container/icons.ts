@@ -43,7 +43,7 @@ class Icons extends LitElement implements BaseContainerElement {
 
     const cssStyleMap = styleMap({
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      'grid-template-columns': `repeat(${itemsPerRow}, calc(calc(100% - calc(${(itemsPerRow - 1) * 5} * var(--grid-card-gap, 2px))) / ${itemsPerRow}))`
+      'grid-template-columns': `repeat(${itemsPerRow}, calc(calc(100% - calc(${itemsPerRow - 1} * var(--ha-section-grid-column-gap, 8px))) / ${itemsPerRow}))`
     });
 
     return html`
@@ -66,8 +66,7 @@ class Icons extends LitElement implements BaseContainerElement {
       css`
         .icons-container {
           display: grid;
-          grid-auto-rows: 1fr;
-          grid-gap: var(--grid-card-gap, 2px);
+          grid-gap: var(--ha-section-grid-column-gap, 8px);
         }
         trash-card-icon-card {
           grid-row: auto / span 1;

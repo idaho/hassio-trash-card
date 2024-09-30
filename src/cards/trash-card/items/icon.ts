@@ -1,4 +1,3 @@
-import { computeRTL } from 'lovelace-mushroom/src/ha';
 import { css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -19,10 +18,10 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
     // eslint-disable-next-line prefer-destructuring
     const item = this.item;
 
-    const rtl = computeRTL(this.hass);
-
     const style = {
-      ...getColoredStyle([ 'icon', 'background' ], item, this.hass.themes.darkMode, false),
+      ...getColoredStyle([ 'icon', 'badge' ], item, this.hass.themes.darkMode, false),
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      '--mdc-icon-size': `${this.config.icon_size ?? 40}px`,
       // eslint-disable-next-line @typescript-eslint/naming-convention
       '--trash-card-icon-size': `${this.config.icon_size ?? 40}px`
     };
@@ -43,13 +42,16 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
 
     return html`
       <ha-card style=${styleMap(style)} class=${classMap(cssClasses)}>
-        <mushroom-card .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
-          <mushroom-state-item .appearance=${{ layout: 'vertical' }} ?rtl=${rtl}>
-            <div slot="icon">
-              ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
-            </div>
-          </mushroom-state-item>
-        </mushroom-card>
+          <div class="container">
+          <div class="content">
+          <div class="icon-container">
+          ${pictureUrl ?
+    this.renderPicture(pictureUrl) :
+    html`<ha-icon .icon=${this.item.icon} .hass=${this.hass}></ha-icon>`
+}
+              </div>
+          </div>
+        </div>
         <span class="badge" >${daysTillToday}</span>
       </ha-card>
     `;
@@ -58,27 +60,22 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
   public static get styles () {
     return [
       defaultHaCardStyle,
-      ...BaseItemElement.styles,
       css`
         :host {
           --ha-card-border-width: 0px;
           --ha-card-background: transparent;
         }
         ha-card {
-          height: 100%;
-          grid-row: auto / span 1;
           display: grid;
-          grid-template-columns: 1fr;
-          grid-template-rows: 1fr auto;
-          --mdc-icon-size: var(--trash-card-icon-size, 40px);
         }
-        mushroom-card {
-          align-self: center;
+        .icon-container {
+          margin-bottom: 5px;
+          display: block;
         }
         .badge {
           display: inline-grid;
           border-radius: 15px;
-          background-color: var(--trash-card-background);
+          background-color: var(--badge-color);
           color: var(--primary-text-color);
           overflow: hidden;
           font-size: 80%;
