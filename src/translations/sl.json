@@ -11,6 +11,7 @@
                 "values": {
                     "default": "Datum",
                     "counter": "dni dno",
+                    "weekday": "dan v tednu",
                     "custom": "Oblika datuma po meri"
                 }
             },

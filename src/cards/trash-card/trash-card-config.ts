@@ -7,6 +7,7 @@ import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 const DAYSTYLES = [
   'default',
   'counter',
+  'weekday',
   'custom'
 ] as const;
 
@@ -68,7 +69,7 @@ const entityCardConfigStruct = assign(
     refresh_rate: optional(integer()),
     drop_todayevents_from: optional(string()),
     event_grouping: optional(boolean()),
-    day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]), literal(DAYSTYLES[2]) ])),
+    day_style: optional(union([ literal(DAYSTYLES[0]), literal(DAYSTYLES[1]), literal(DAYSTYLES[2]), literal(DAYSTYLES[3]) ])),
     day_style_format: optional(string()),
     card_style: optional(union([ literal(CARDSTYLES[0]), literal(CARDSTYLES[1]), literal(CARDSTYLES[2]) ])),
     alignment_style: optional(union([ literal(ALIGNMENTSTYLES[0]), literal(ALIGNMENTSTYLES[1]), literal(ALIGNMENTSTYLES[2]), literal(ALIGNMENTSTYLES[3]) ])),

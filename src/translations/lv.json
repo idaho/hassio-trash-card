@@ -11,6 +11,7 @@
                 "values": {
                     "default": "datumu",
                     "counter": "dienas līdz",
+                    "weekday": "nedēļas diena",
                     "custom": "pielāgotu datuma formātu"
                 }
             },

@@ -11,6 +11,7 @@
                 "values": {
                     "default": "Datum",
                     "counter": "dagar till",
+                    "weekday": "veckodag",
                     "custom": "Användardefinierat datumformat"
                 }
             },

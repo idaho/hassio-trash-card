@@ -11,6 +11,7 @@
                 "values": {
                     "default": "Data",
                     "counter": "dni do",
+                    "weekday": "dzień tygodnia",
                     "custom": "Własny format daty"
                 }
             },

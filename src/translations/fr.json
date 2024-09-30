@@ -11,6 +11,7 @@
                 "values": {
                     "default": "Date",
                     "counter": "jours jusqu'à",
+                    "weekday": "our de la semaine",
                     "custom" : "Propre format de date"
                 }
             },
