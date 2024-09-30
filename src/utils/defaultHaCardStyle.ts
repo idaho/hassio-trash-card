@@ -15,7 +15,6 @@ const defaultHaCardStyle = css`
     }
     ha-card {
         box-sizing: border-box;
-        padding: var(--spacing);
         display: flex;
         flex-direction: column;
         justify-content: var(--layout-align);

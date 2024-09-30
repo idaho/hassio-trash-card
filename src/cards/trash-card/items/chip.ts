@@ -1,5 +1,4 @@
-import { computeRTL } from 'lovelace-mushroom/src/ha';
-import { css, html, nothing } from 'lit';
+import { html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { getDateString } from '../../../utils/getDateString';
 import { customElement } from 'lit/decorators.js';
@@ -19,14 +18,10 @@ class ItemChip extends BaseItemElement {
     // eslint-disable-next-line prefer-destructuring
     const item = this.item;
 
-    const rtl = computeRTL(this.hass);
-
     const { color_mode, hide_time_range, day_style, day_style_format, with_label } = this.config;
 
     const style = {
-      ...getColoredStyle(color_mode, item, this.hass.themes.darkMode),
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      ...with_label ? { '--chip-height': 'calc(36px * 1.15)' } : {}
+      ...getColoredStyle(color_mode, item, this.hass.themes.darkMode)
     };
 
     const content = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
@@ -43,48 +38,30 @@ class ItemChip extends BaseItemElement {
 
     this.withBackground = true;
 
+    const badgeConfig = {
+      ...this.config,
+      show_name: true
+    };
+
     return html`
-      <mushroom-chip
+      <ha-badge
+        .type="badge"
+        .hass=${this.hass}
+        .config=${badgeConfig}
         style=${styleMap(style)}
         class=${classMap(cssClasses)}
-        ?rtl=${rtl}
-        .avatarOnly=${false}
+        .iconOnly=${!with_label && !content}
+        .label=${with_label ? item.label : nothing}
       >
-        ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
-        <span>
-          ${with_label ? html`<span class="chip-label">${item.label}</span>` : nothing}
-          ${content ? html`<span class="chip-content">${content}</span>` : nothing}
-        </span>
-      </mushroom-chip>`;
-  }
-
-  public static get styles () {
-    return [
-      ...BaseItemElement.styles,
-      css`
-        mushroom-chip {
-          --mdc-icon-size: var(--trash-card-icon-size, 16px);
-          --chip-background: var(--trash-card-background, 
-              var(--ha-card-background, 
-                var(--card-background-color, #fff)
-              )
-            );
-          --chip-padding: 0.25em .5em 0.25em 0.25em;
-          --chip-height: calc(36px * 1.15);
-        } 
-        mushroom-chip  ha-card {
-          
-        }
-        .chip-label {
-          font-weight: 600;
-        }
-        .chip-label + .chip-content {
-          display: block;
-          font-weight: 300;
-          margin-top: 3px;
-        }
-      `
-    ];
+        ${pictureUrl ?
+    html`<img slot="icon" src=${pictureUrl} aria-hidden />` :
+    html`<ha-state-icon
+            slot="icon"
+            .hass=${this.hass}
+            .icon=${item.icon}
+          ></ha-state-icon>`}
+        ${content}
+      </ha-badge>`;
   }
 }
 

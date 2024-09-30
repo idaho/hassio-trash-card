@@ -14,18 +14,25 @@ const getColoredStyle = (modes: TrashCardConfig['color_mode'] | TrashCardConfig[
   const style = {};
   const rgbColor = getRgbColor(color);
 
-  const override = colorModes.includes('background') && ((!darkMode && color === 'black') || (darkMode && color === 'white'));
+  const override = (colorModes.includes('background') || colorModes.includes('badge')) &&
+    ((!darkMode && color === 'black') || (darkMode && color === 'white'));
 
   const overrideColor = color === 'black' ?
     `rgba(255, 255, 255, .7)` :
     `rgba(0, 0, 0, .7)`;
 
   if (colorModes.includes('icon')) {
-    style['--trash-card-icon-color'] = `rgba(${rgbColor})`;
+    style['--tile-color'] = `rgba(${rgbColor})`;
+    style['--badge-color'] = `rgba(${rgbColor})`;
   }
 
   if (colorModes.includes('background')) {
-    style['--trash-card-background'] = `rgba(${rgbColor}, .7)`;
+    style['--ha-card-background'] = `rgba(${rgbColor}, .7)`;
+  }
+
+  if (colorModes.includes('badge')) {
+    style['--icon-primary-color'] = `rgba(${rgbColor})`;
+    style['--badge-color'] = `rgba(${rgbColor})`;
   }
 
   if (override) {
@@ -33,10 +40,11 @@ const getColoredStyle = (modes: TrashCardConfig['color_mode'] | TrashCardConfig[
     style['--card-primary-color'] = overrideColor;
     style['--card-secondary-color'] = overrideColor;
     style['--primary-text-color'] = overrideColor;
+    style['--secondary-text-color'] = overrideColor;
   }
 
   if (override && overrideIconColorContrast) {
-    style['--trash-card-icon-color'] = overrideColor;
+    style['--tile-color'] = overrideColor;
   }
 
   return style;
