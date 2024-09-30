@@ -4,7 +4,9 @@ const defaultConfigStruct = object({
   index: optional(number()),
   view_index: optional(number()),
   view_layout: any(),
-  type: string()
+  type: string(),
+  layout_options: any(),
+  visibility: any()
 });
 
 export {
