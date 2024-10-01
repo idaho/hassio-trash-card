@@ -142,8 +142,6 @@ interface HomeAssistant {
   locale: FrontendLocaleData;
 }
 
-// Export type { HomeAssistant as MushHa } from 'home-assistant-frontend/src/types';
-
 export type {
   HomeAssistant,
   LocalizeFunc

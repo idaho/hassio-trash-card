@@ -3,6 +3,18 @@ import { defaultConfigStruct } from '../../utils/form/defaultConfigStruct';
 
 import type { ItemSettings } from '../../utils/itemSettings';
 
+const LAYOUTS = [
+  'default',
+  'horizontal',
+  'vertical'
+] as const;
+
+const LAYOUT_ICONS: Record<typeof LAYOUTS[number], string> = {
+  default: 'mdi:card-text-outline',
+  vertical: 'mdi:focus-field-vertical',
+  horizontal: 'mdi:focus-field-horizontal'
+};
+
 const DAYSTYLES = [
   'default',
   'counter',
@@ -62,7 +74,7 @@ const entityCardConfigStruct = assign(
   object({
     entities: optional(array(string())),
     name: optional(string()),
-    layout: optional(union([ literal('horizontal'), literal('vertical'), literal('default') ])),
+    layout: optional(union([ literal(LAYOUTS[0]), literal(LAYOUTS[1]), literal(LAYOUTS[2]) ])),
     fill_container: optional(boolean()),
     filter_events: optional(boolean()),
     full_size: optional(boolean()),
@@ -100,7 +112,9 @@ export {
   DAYSTYLES,
   COLORMODES,
   CARDSTYLES,
-  ALIGNMENTSTYLES
+  ALIGNMENTSTYLES,
+  LAYOUTS,
+  LAYOUT_ICONS
 };
 
 export type {

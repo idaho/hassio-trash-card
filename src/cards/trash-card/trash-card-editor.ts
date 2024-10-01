@@ -74,7 +74,8 @@ const configDefaults = {
   color_mode: 'background',
   items_per_row: 1,
   refresh_rate: 60,
-  with_label: true
+  with_label: true,
+  layout: 'default'
 };
 
 @customElement(TRASH_CARD_EDITOR_NAME)
@@ -302,6 +303,10 @@ class TrashCardEditor extends LitElement {
 
     if (config.card_style === 'card') {
       delete config.card_style;
+    }
+
+    if (config.layout === 'default') {
+      delete config.layout;
     }
 
     fireEvent(this, 'config-changed', { config });

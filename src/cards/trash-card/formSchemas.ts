@@ -1,4 +1,4 @@
-import { CARDSTYLES, ALIGNMENTSTYLES, COLORMODES, DAYSTYLES } from './trash-card-config';
+import { CARDSTYLES, ALIGNMENTSTYLES, COLORMODES, DAYSTYLES, LAYOUTS, LAYOUT_ICONS } from './trash-card-config';
 
 import type { LocalizeFunc } from '../../utils/ha';
 import type { TrashCardConfig } from './trash-card-config';
@@ -214,7 +214,16 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
           {
             name: 'layout',
             label: customLocalize(`editor.card.generic.layout`),
-            selector: { mush_layout: {}}
+            selector: {
+              select: {
+                options: [ ...LAYOUTS ].map(layout => ({
+                  icon: LAYOUT_ICONS[layout],
+                  value: layout,
+                  label: customLocalize(`editor.form.layout_picker.values.${layout}`)
+                })),
+                mode: 'dropdown'
+              }
+            }
           }
         ]
       },
