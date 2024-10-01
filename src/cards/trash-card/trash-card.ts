@@ -7,7 +7,6 @@ import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
 import { Debugger } from '../../utils/debugger';
 import { getCalendarData } from '../../utils/getCalendarData';
 import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
-import { migrateConfig, needsConfigToMigrate } from './utils/migration';
 
 import './container';
 
@@ -84,7 +83,7 @@ export class TrashCard extends LitElement {
   public setConfig (config: TrashCardConfig): void {
     this.config = {
       ...configDefaults,
-      ...needsConfigToMigrate(config) ? migrateConfig(config) : config
+      ...config
     };
 
     this.debugger = new Debugger();

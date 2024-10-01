@@ -14,9 +14,7 @@ const IGNORED_FILES = [
   '@material/mwc-list/mwc-list-item.js',
   '@material/mwc-menu/mwc-menu.js',
   '@material/mwc-menu/mwc-menu-surface.js',
-  '@material/mwc-icon/mwc-icon.js',
-  'lovelace-mushroom/src/shared/badge-icon.ts',
-  'lovelace-mushroom/src/shared/form/mushroom-select.ts'
+  '@material/mwc-icon/mwc-icon.js'
 ];
 
 // eslint-disable-next-line no-process-env
@@ -68,6 +66,15 @@ export default [
       if (thisAsWindowForModules.some(id_ => id.trimEnd().endsWith(id_))) {
         return 'window';
       }
+    },
+    onwarn(warning, warn) {
+      //console.debug('warning', warning);
+      if (warning.code === 'CIRCULAR_DEPENDENCY') {
+          if(warning.message.includes('/luxon/')) {
+              return;
+          }
+      }
+      warn(warning);
     }
   }
 ];

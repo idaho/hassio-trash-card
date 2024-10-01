@@ -29,7 +29,6 @@ It uses events contained within the local calendar integration to display the in
 ## Pre-Requirements
 
 TrashCard requires:
-- [Mushroom][mushroom-url] for Home Assistant.
 - The [Home Assistant calendar integration](https://www.home-assistant.io/integrations/#calendar).
 
 Once you have both of these installed, you can install TashCard either:
@@ -219,10 +218,6 @@ pattern:
 ### Using pictures instead of icons
 <img width="1032" alt="with-image" src="https://github.com/idaho/hassio-trash-card/assets/664101/212537e0-65d3-4c2c-a25c-9431d7ff04b9">
 
-## Thanks
-
-Thanks go to the team at [Mushroom][mushroom-url] for creating many beautiful cards.
-
 
 
 <!-- Badges -->
@@ -241,7 +236,6 @@ Thanks go to the team at [Mushroom][mushroom-url] for creating many beautiful ca
 
 
 <!-- References -->
-[mushroom-url]: https://github.com/piitaya/lovelace-mushroom
 [home-assistant]: https://www.home-assistant.io/
 [home-assitant-theme-docs]: https://www.home-assistant.io/integrations/frontend/#defining-themes
 [hacs]: https://hacs.xyz

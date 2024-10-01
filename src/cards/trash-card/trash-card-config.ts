@@ -2,7 +2,6 @@ import { array, assign, boolean, integer, literal, object, optional, string, uni
 import { defaultConfigStruct } from '../../utils/form/defaultConfigStruct';
 
 import type { ItemSettings } from '../../utils/itemSettings';
-import type { LovelaceCardConfig } from 'lovelace-mushroom/src/ha';
 
 const DAYSTYLES = [
   'default',
@@ -29,29 +28,34 @@ const COLORMODES = [
   'icon'
 ] as const;
 
- type TrashCardConfig = LovelaceCardConfig & {
-   entities: string[];
-   pattern?: ItemSettings[];
-   next_days?: number;
-   items_per_row?: number;
-   filter_events?: boolean;
-   full_size?: boolean;
-   drop_todayevents_from?: string;
-   use_summary?: boolean;
-   hide_time_range?: boolean;
-   event_grouping?: boolean;
-   day_style?: typeof DAYSTYLES[number];
-   day_style_format?: string;
-   card_style?: typeof CARDSTYLES[number];
-   alignment_style?: typeof ALIGNMENTSTYLES[number];
-   color_mode?: typeof COLORMODES[number] | 'badge';
-   refresh_rate?: number;
-   icon_size?: number;
-   debug?: boolean;
-   with_label?: boolean;
- };
+interface TrashCardConfig {
+  entities: string[];
+  pattern?: ItemSettings[];
+  next_days?: number;
+  items_per_row?: number;
+  filter_events?: boolean;
+  full_size?: boolean;
+  drop_todayevents_from?: string;
+  use_summary?: boolean;
+  hide_time_range?: boolean;
+  event_grouping?: boolean;
+  day_style?: typeof DAYSTYLES[number];
+  day_style_format?: string;
+  card_style?: typeof CARDSTYLES[number];
+  alignment_style?: typeof ALIGNMENTSTYLES[number];
+  color_mode?: typeof COLORMODES[number] | 'badge';
+  refresh_rate?: number;
+  icon_size?: number;
+  debug?: boolean;
+  with_label?: boolean;
+  index?: number;
+  view_index?: number;
+  view_layout?: any;
+  layout: any;
+  type: string;
+}
 
- type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'day_style_format' | 'color_mode' | 'layout' | 'icon_size' | 'with_label'>;
+ type CardStyleConfig = Pick<TrashCardConfig, 'hide_time_range' | 'day_style' | 'day_style_format' | 'layout' | 'color_mode' | 'icon_size' | 'with_label'>;
 
 const entityCardConfigStruct = assign(
   defaultConfigStruct,

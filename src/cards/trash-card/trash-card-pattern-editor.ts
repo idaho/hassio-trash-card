@@ -171,10 +171,6 @@ class TrashCardPatternEditor extends LitElement {
             display: flex;
         }
 
-        mushroom-select {
-            width: 100%;
-        }
-
         .setting .icon {
             padding-right: 8px;
             cursor: move;
