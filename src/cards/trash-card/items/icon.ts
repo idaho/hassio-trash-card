@@ -19,7 +19,7 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
     const item = this.item;
 
     const style = {
-      ...getColoredStyle([ 'icon', 'badge' ], item, this.hass.themes.darkMode, false),
+      ...getColoredStyle([ 'icon', 'badge' ], item, this.parentElement, this.hass.themes.darkMode),
       // eslint-disable-next-line @typescript-eslint/naming-convention
       '--mdc-icon-size': `${this.config.icon_size ?? 40}px`,
       // eslint-disable-next-line @typescript-eslint/naming-convention

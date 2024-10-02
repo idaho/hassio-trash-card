@@ -24,7 +24,7 @@ class ItemCard extends BaseItemElement {
     const { label } = item;
 
     const style = {
-      ...getColoredStyle(color_mode, item, this.hass.themes.darkMode)
+      ...getColoredStyle(color_mode, item, this.parentElement, this.hass.themes.darkMode)
     };
 
     const content = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
@@ -66,7 +66,6 @@ class ItemCard extends BaseItemElement {
       css`
 
         :host {
-          --tile-color: var(--state-inactive-color);
           -webkit-tap-highlight-color: transparent;
         }
         ha-card:has(.background:focus-visible) {

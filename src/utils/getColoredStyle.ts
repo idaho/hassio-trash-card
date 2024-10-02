@@ -1,4 +1,6 @@
 import { getRgbColor } from './getRgbColor';
+import Color from 'color';
+import { colors } from './defaultHaCardStyle';
 
 import type { CalendarItem } from './calendarItem';
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
@@ -6,7 +8,21 @@ import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
 const isColorModesArray = (modes: TrashCardConfig['color_mode'] | TrashCardConfig['color_mode'][]): modes is TrashCardConfig['color_mode'][] =>
   Boolean(modes && Array.isArray(modes));
 
-const getColoredStyle = (modes: TrashCardConfig['color_mode'] | TrashCardConfig['color_mode'][], item: CalendarItem, darkMode = false, overrideIconColorContrast = true) => {
+const calculateContrast = (currentColorString: string, darkMode: boolean, parentElement?: null | HTMLElement): 'text' | 'background' => {
+  const color = new Color(`rgb(${colors[currentColorString]})`);
+
+  if (parentElement) {
+    const primaryTextColor = getComputedStyle(parentElement).getPropertyValue('--primary-text-color');
+    const primaryBackgroundColor = getComputedStyle(parentElement).getPropertyValue('--primary-background-color');
+    const primaryConstrast = color.contrast(new Color(primaryTextColor));
+
+    return primaryConstrast > color.contrast(new Color(primaryBackgroundColor)) ? 'text' : 'background';
+  }
+
+  return color.contrast(new Color(darkMode ? 'white' : 'black')) ? 'text' : 'text';
+};
+
+const getColoredStyle = (modes: TrashCardConfig['color_mode'] | TrashCardConfig['color_mode'][], item: CalendarItem, parentElement?: null | HTMLElement, darkMode = false) => {
   const color = item.color ?? 'disabled';
 
   const colorModes: TrashCardConfig['color_mode'][] = isColorModesArray(modes) ? modes : [ modes ?? 'background' ];
@@ -14,12 +30,14 @@ const getColoredStyle = (modes: TrashCardConfig['color_mode'] | TrashCardConfig[
   const style = {};
   const rgbColor = getRgbColor(color);
 
-  const override = (colorModes.includes('background') || colorModes.includes('badge')) &&
-    ((!darkMode && color === 'black') || (darkMode && color === 'white'));
+  const contrast = calculateContrast(color, darkMode, parentElement);
 
-  const overrideColor = color === 'black' ?
-    `rgba(255, 255, 255, .7)` :
-    `rgba(0, 0, 0, .7)`;
+  style['--secondary-text-color'] = `var(--primary-text-color)`;
+
+  if (contrast === 'background') {
+    style['--primary-text-color'] = `var(--primary-text-color)`;
+    style['--tile-color'] = `var(--primary-background-color)`;
+  }
 
   if (colorModes.includes('icon')) {
     style['--tile-color'] = `rgba(${rgbColor})`;
@@ -27,24 +45,12 @@ const getColoredStyle = (modes: TrashCardConfig['color_mode'] | TrashCardConfig[
   }
 
   if (colorModes.includes('background')) {
-    style['--ha-card-background'] = `rgba(${rgbColor}, .7)`;
+    style['--ha-card-background'] = `rgba(${rgbColor}, 1)`;
   }
 
   if (colorModes.includes('badge')) {
     style['--icon-primary-color'] = `rgba(${rgbColor})`;
     style['--badge-color'] = `rgba(${rgbColor})`;
-  }
-
-  if (override) {
-    style['--text-color'] = overrideColor;
-    style['--card-primary-color'] = overrideColor;
-    style['--card-secondary-color'] = overrideColor;
-    style['--primary-text-color'] = overrideColor;
-    style['--secondary-text-color'] = overrideColor;
-  }
-
-  if (override && overrideIconColorContrast) {
-    style['--tile-color'] = overrideColor;
   }
 
   return style;
