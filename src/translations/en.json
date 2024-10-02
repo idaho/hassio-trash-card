@@ -94,6 +94,8 @@
                         "color": "Color",
                         "icon": "Icon",
                         "pattern": "Detection pattern",
+                        "pattern_exact": "Use exact pattern",
+                        "pattern_exact_description": "Use pattern as search term, which must be 100% identical to the description of the calendar event. Search term is case-insensitive.",
                         "picture_url": "Picture URL",
                         "picture_url_description": "If a picture URL is specified, the corresponding picture is displayed instead of the icon. Place an image in the `/config/www` folder and use `/local/[filename]`."
                     }
