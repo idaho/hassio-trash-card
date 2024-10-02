@@ -25,7 +25,7 @@ class BaseItemElement<T = {}> extends LitElement {
   protected renderPicture (pictureUrl: string) {
     return html`
       <ha-tile-image
-        .imageStyle=${'circle'}
+        .imageStyle=${'square'}
         .imageUrl=${pictureUrl}
       ></ha-tile-image>`;
   }
