@@ -53,6 +53,7 @@ class ItemCard extends BaseItemElement {
               id="info"
               .primary=${with_label ? label : content}
               .secondary=${with_label ? content : undefined}
+              .multiline=${true}
             ></ha-tile-info>
           </div>
         </div>
