@@ -1,4 +1,4 @@
-import { html, nothing } from 'lit';
+import { css, html, nothing } from 'lit';
 import { styleMap } from 'lit/directives/style-map.js';
 import { getDateString } from '../../../utils/getDateString';
 import { customElement } from 'lit/decorators.js';
@@ -21,7 +21,7 @@ class ItemChip extends BaseItemElement {
     const { color_mode, hide_time_range, day_style, day_style_format, with_label } = this.config;
 
     const style = {
-      ...getColoredStyle(color_mode, item, this.hass.themes.darkMode)
+      ...getColoredStyle(color_mode, item, this.parentElement, this.hass.themes.darkMode)
     };
 
     const content = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
@@ -48,6 +48,7 @@ class ItemChip extends BaseItemElement {
         .type="badge"
         .hass=${this.hass}
         .config=${badgeConfig}
+        .imageStyle=${'square'}
         style=${styleMap(style)}
         class=${classMap(cssClasses)}
         .iconOnly=${!with_label && !content}
@@ -62,6 +63,15 @@ class ItemChip extends BaseItemElement {
           ></ha-state-icon>`}
         ${content}
       </ha-badge>`;
+  }
+
+  public static get styles () {
+    return [
+      css`
+        img[slot="icon"] {
+          object-fit: contain;
+        `
+    ];
   }
 }
 
