@@ -1,14 +1,79 @@
 import type { LitElement } from 'lit';
-import type { Selector as MushroomSelectors } from 'lovelace-mushroom/src/utils/form/ha-selector';
 
 interface ColorUiSelector {
   // eslint-disable-next-line @typescript-eslint/ban-types
   ui_color: {};
 }
 
+interface BooleanSelector {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  boolean: {};
+}
+interface TimeSelector {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  time: {};
+}
+interface NumberSelector {
+  number: {
+    min?: number;
+    max?: number;
+    step?: number;
+    mode?: 'box' | 'slider';
+    unit_of_measurement?: string;
+  };
+}
+
+interface StringSelector {
+  text: {
+    multiline?: boolean;
+    type?:
+    | 'number'
+    | 'text'
+    | 'search'
+    | 'tel'
+    | 'url'
+    | 'email'
+    | 'password'
+    | 'date'
+    | 'month'
+    | 'week'
+    | 'time'
+    | 'datetime-local'
+    | 'color';
+    suffix?: string;
+  };
+}
+
+interface SelectSelector {
+  select: {
+    multiple?: boolean;
+    custom_value?: boolean;
+    mode?: 'list' | 'dropdown';
+    options: string[] | {
+      value: string;
+      label: string;
+    }[];
+  };
+}
+interface EntitySelector {
+  entity: {
+    integration?: string;
+    domain?: string | string[];
+    device_class?: string;
+    multiple?: boolean;
+    include_entities?: string[];
+    exclude_entities?: string[];
+  };
+}
+
 type Selector =
-MushroomSelectors |
-ColorUiSelector;
+  EntitySelector |
+  StringSelector |
+  TimeSelector |
+  NumberSelector |
+  SelectSelector |
+  BooleanSelector |
+  ColorUiSelector;
 
 interface HaDurationData {
   hours?: number;

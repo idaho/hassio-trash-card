@@ -1,10 +1,10 @@
-import { CARDSTYLES, ALIGNMENTSTYLES, COLORMODES, DAYSTYLES } from './trash-card-config';
+import { CARDSTYLES, ALIGNMENTSTYLES, COLORMODES, DAYSTYLES, LAYOUTS, LAYOUT_ICONS } from './trash-card-config';
 
+import type { LocalizeFunc } from '../../utils/ha';
 import type { TrashCardConfig } from './trash-card-config';
 import type { HaFormSchema } from '../../utils/form/ha-form';
-import type setupCustomlocalize from '../../localize';
 
-const getPatternOthersSchema = (localize: (key: string, ...args: any) => string) => [
+const getPatternOthersSchema = (localize: LocalizeFunc) => [
   {
     name: 'icon',
     label: localize(`ui.panel.lovelace.editor.card.generic.icon`),
@@ -20,7 +20,7 @@ const getPatternOthersSchema = (localize: (key: string, ...args: any) => string)
   }
 ];
 
-const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, localize: (key: string, ...args: any) => string) => [
+const getPatternSchema = (customLocalize: LocalizeFunc, localize: LocalizeFunc) => [
   {
     label: customLocalize(`editor.card.trash.pattern.fields.label`),
     name: 'label',
@@ -47,7 +47,7 @@ const getPatternSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>
   }
 ];
 
-const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, currentValues: TrashCardConfig, localize: (key: string, ...args: any) => string) => {
+const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig, localize: LocalizeFunc) => {
   const settings: HaFormSchema[] = [
 
     {
@@ -214,7 +214,16 @@ const getSchema = (customLocalize: ReturnType<typeof setupCustomlocalize>, curre
           {
             name: 'layout',
             label: customLocalize(`editor.card.generic.layout`),
-            selector: { mush_layout: {}}
+            selector: {
+              select: {
+                options: [ ...LAYOUTS ].map(layout => ({
+                  icon: LAYOUT_ICONS[layout],
+                  value: layout,
+                  label: customLocalize(`editor.form.layout_picker.values.${layout}`)
+                })),
+                mode: 'dropdown'
+              }
+            }
           }
         ]
       },

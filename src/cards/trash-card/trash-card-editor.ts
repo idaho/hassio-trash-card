@@ -8,17 +8,19 @@ import { css, html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { entityCardConfigStruct } from './trash-card-config';
 import { getPatternOthersSchema, getPatternSchema, getSchema } from './formSchemas';
-import { migrateConfig, needsConfigToMigrate } from './utils/migration';
 import { fireEvent } from '../../utils/fireEvent';
 
 import './trash-card-pattern-editor';
 
-import type { HASSDomEvent, LovelaceCardEditor } from 'lovelace-mushroom/src/ha';
 import type { TrashCardConfig } from './trash-card-config';
 import type { CSSResultGroup, PropertyValues } from 'lit';
 import type { HomeAssistant } from '../../utils/ha';
 import type { SubElementEditorConfig } from './trash-card-pattern-editor';
 import type { HaFormSchema } from '../../utils/form/ha-form';
+
+interface DomEvent<T> extends Event {
+  detail: T;
+}
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -72,11 +74,12 @@ const configDefaults = {
   color_mode: 'background',
   items_per_row: 1,
   refresh_rate: 60,
-  with_label: true
+  with_label: true,
+  layout: 'default'
 };
 
 @customElement(TRASH_CARD_EDITOR_NAME)
-class TrashCardEditor extends LitElement implements LovelaceCardEditor {
+class TrashCardEditor extends LitElement {
   @property({ attribute: false }) public hass?: HomeAssistant;
 
   @state() private config?: TrashCardConfig;
@@ -86,15 +89,6 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
   @state() private readonly schema = memoizeOne(getSchema);
 
   public setConfig (config: Partial<TrashCardConfig>): void {
-    if (needsConfigToMigrate(config)) {
-      fireEvent(this, 'config-changed', { config: {
-        ...configDefaults,
-        ...migrateConfig(config)
-      } as TrashCardConfig });
-
-      return;
-    }
-
     assert(config, entityCardConfigStruct);
 
     this.config = {
@@ -209,7 +203,7 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
     fireEvent(this, 'config-changed', { config });
   }
 
-  private editPatternItem (ev: HASSDomEvent<{ subElementConfig: SubElementEditorConfig }>): void {
+  private editPatternItem (ev: DomEvent<{ subElementConfig: SubElementEditorConfig }>): void {
     this.subElementEditorConfig = ev.detail.subElementConfig;
   }
 
@@ -309,6 +303,10 @@ class TrashCardEditor extends LitElement implements LovelaceCardEditor {
 
     if (config.card_style === 'card') {
       delete config.card_style;
+    }
+
+    if (config.layout === 'default') {
+      delete config.layout;
     }
 
     fireEvent(this, 'config-changed', { config });

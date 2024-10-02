@@ -68,6 +68,10 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
         ha-card {
           display: grid;
         }
+        .content {
+          justify-content: space-around;
+          display: flex;
+        }
         .icon-container {
           margin-bottom: 5px;
           display: block;
@@ -83,9 +87,7 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
           width: fit-content;
           padding: 0 1em;
           justify-self: center;
-          border-width: var(--trash-card-badge-border-width, 1px);
-          border-color: var(--chip-border-color);
-          border-style: solid;
+          border: none;
           box-shadow: var(--chip-box-shadow);
           box-sizing: content-box;
         }

@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/filename-case */
 
-import type { HomeAssistant } from 'lovelace-mushroom/src/ha';
+import type { HomeAssistant } from '../../../utils/ha';
 import type { TrashCardConfig } from '../trash-card-config';
 import type { CalendarItem } from '../../../utils/calendarItem';
 
