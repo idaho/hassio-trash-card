@@ -68,12 +68,7 @@ class ItemCard extends BaseItemElement {
         :host {
           -webkit-tap-highlight-color: transparent;
         }
-        ha-card:has(.background:focus-visible) {
-          --shadow-default: var(--ha-card-box-shadow, 0 0 0 0 transparent);
-          --shadow-focus: 0 0 0 1px var(--tile-color);
-          border-color: var(--tile-color);
-          box-shadow: var(--shadow-default), var(--shadow-focus);
-        }
+
         ha-card {
           --ha-ripple-color: var(--tile-color);
           --ha-ripple-hover-opacity: 0.04;
@@ -86,15 +81,7 @@ class ItemCard extends BaseItemElement {
           flex-direction: column;
           justify-content: space-between;
         }
-        ha-card.active {
-          --tile-color: var(--state-icon-color);
-        }
-        [role="button"] {
-          cursor: pointer;
-        }
-        [role="button"]:focus {
-          outline: none;
-        }
+
         .background {
           position: absolute;
           top: 0;
@@ -160,45 +147,17 @@ class ItemCard extends BaseItemElement {
           inset-inline-end: -3px;
           inset-inline-start: initial;
         }
-        .icon-container[role="button"] {
-          pointer-events: auto;
-        }
-        .icon-container[role="button"]:focus-visible,
-        .icon-container[role="button"]:active {
-          transform: scale(1.2);
-        }
         ha-tile-info {
           position: relative;
           min-width: 0;
           transition: background-color 180ms ease-in-out;
           box-sizing: border-box;
         }
-        hui-card-features {
-          --feature-color: var(--tile-color);
+        .icon-container ha-tile-icon ha-state-icon {
+          --tile-icon-color: var(--icon-color);
         }
 
-        ha-tile-icon[data-domain="alarm_control_panel"][data-state="pending"],
-        ha-tile-icon[data-domain="alarm_control_panel"][data-state="arming"],
-        ha-tile-icon[data-domain="alarm_control_panel"][data-state="triggered"],
-        ha-tile-icon[data-domain="lock"][data-state="jammed"] {
-          animation: pulse 1s infinite;
-        }
-
-        ha-tile-badge.not-found {
-          --tile-badge-background-color: var(--red-color);
-        }
-
-        @keyframes pulse {
-          0% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
+    
       `
     ];
   }
