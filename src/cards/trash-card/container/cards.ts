@@ -36,7 +36,7 @@ class Cards extends LitElement implements BaseContainerElement {
     }
 
     if (!this.items || this.items.length === 0) {
-      return nothing;
+      return html`<trash-card-item-empty .config=${this.config} .hass=${this.hass}/>`;
     }
 
     const itemsPerRow = this.config.items_per_row ?? 1;

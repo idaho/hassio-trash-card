@@ -9,17 +9,21 @@ const isColorModesArray = (modes: TrashCardConfig['color_mode'] | TrashCardConfi
   Boolean(modes && Array.isArray(modes));
 
 const calculateContrast = (currentColorString: string, darkMode: boolean, parentElement?: null | HTMLElement): 'text' | 'background' => {
-  const color = new Color(`rgb(${colors[currentColorString]})`);
+  try {
+    const color = new Color(`rgb(${colors[currentColorString]})`);
 
-  if (parentElement) {
-    const primaryTextColor = getComputedStyle(parentElement).getPropertyValue('--primary-text-color');
-    const primaryBackgroundColor = getComputedStyle(parentElement).getPropertyValue('--primary-background-color');
-    const primaryConstrast = color.contrast(new Color(primaryTextColor));
+    if (parentElement) {
+      const primaryTextColor = getComputedStyle(parentElement).getPropertyValue('--primary-text-color');
+      const primaryBackgroundColor = getComputedStyle(parentElement).getPropertyValue('--primary-background-color');
+      const primaryConstrast = color.contrast(new Color(primaryTextColor));
 
-    return primaryConstrast > color.contrast(new Color(primaryBackgroundColor)) ? 'text' : 'background';
+      return primaryConstrast > color.contrast(new Color(primaryBackgroundColor)) ? 'text' : 'background';
+    }
+
+    return color.contrast(new Color(darkMode ? 'white' : 'black')) ? 'text' : 'text';
+  } catch {
+    return 'text';
   }
-
-  return color.contrast(new Color(darkMode ? 'white' : 'black')) ? 'text' : 'text';
 };
 
 const getColoredStyle = (modes: TrashCardConfig['color_mode'] | TrashCardConfig['color_mode'][], item: CalendarItem, parentElement?: null | HTMLElement, darkMode = false) => {
