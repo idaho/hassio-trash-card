@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.25.2",
+    "@babel/preset-env": "7.25.7",
     "@fltri/eslint-config": "1.2.5",
     "@material/mwc-ripple": "0.27.0",
     "@material/tab-bar": "14.0.0",
@@ -76,5 +77,6 @@
   },
   "overrides": {
     "lit": "3.2.0"
-  }
+  },
+  "browserslist": "> 0.25%, not dead"
 }
