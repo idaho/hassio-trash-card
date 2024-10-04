@@ -11,7 +11,7 @@ import * as sl from './translations/sl.json';
 import * as lv from './translations/lv.json';
 import * as se from './translations/se.json';
 
-import type { HomeAssistant } from './utils/ha';
+import type { HomeAssistant, LocalizeFunc } from './utils/ha';
 
 const languages: Record<string, unknown> = {
   da,
@@ -41,7 +41,7 @@ const getTranslatedString = (key: string, lang: string): string | undefined => {
   }
 };
 
-export default function setupCustomlocalize (hass?: HomeAssistant) {
+export default function setupCustomlocalize (hass?: HomeAssistant): LocalizeFunc {
   return function (key: string) {
     const lang = hass?.locale.language ?? DEFAULT_LANG;
 

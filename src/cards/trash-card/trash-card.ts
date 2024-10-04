@@ -7,14 +7,24 @@ import { TRASH_CARD_EDITOR_NAME, TRASH_CARD_NAME } from './const';
 import { Debugger } from '../../utils/debugger';
 import { getCalendarData } from '../../utils/getCalendarData';
 import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
+import { fireEvent } from '../../utils/fireEvent';
 
 import './container';
+import './items/empty';
 
 import type { PropertyValues } from 'lit';
 import type { TrashCardConfig } from './trash-card-config';
 import type { HomeAssistant } from '../../utils/ha';
 import type { CalendarItem } from '../../utils/calendarItem';
 import type { BaseContainerElement } from './container/BaseContainerElement';
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  interface HASSDomEvents {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'card-visibility-changed': { value: boolean };
+  }
+}
 
 registerCustomCard({
   type: TRASH_CARD_NAME,
@@ -63,6 +73,10 @@ export class TrashCard extends LitElement {
   @property() private endDate: Date = new Date();
 
   @property() private debugger?: Debugger;
+
+  @property({ type: Boolean }) public preview = false;
+
+  protected element?: BaseContainerElement;
 
   private lastChanged?: Date;
 
@@ -129,7 +143,9 @@ export class TrashCard extends LitElement {
   }
 
   protected shouldUpdate (changedProps: PropertyValues): boolean {
-    if (changedProps.has('currentItems')) {
+    super.updated(changedProps);
+
+    if (changedProps.has('currentItems') || changedProps.has('hass')) {
       return true;
     }
 
@@ -139,7 +155,31 @@ export class TrashCard extends LitElement {
       this.fetchCurrentTrashData();
     }
 
+    if (changedProps.has('preview')) {
+      return true;
+    }
+
     return false;
+  }
+
+  protected update (changedProps: PropertyValues) {
+    super.update(changedProps);
+
+    if (!this.preview) {
+      if (this.config && this.config.entities.length > 0 && (!this.currentItems || this.currentItems.length === 0)) {
+        this.style.display = 'none';
+        this.toggleAttribute('hidden', true);
+        fireEvent(this, 'card-visibility-changed', { value: false });
+      } else {
+        this.style.display = 'block';
+        this.toggleAttribute('hidden', false);
+        fireEvent(this, 'card-visibility-changed', { value: true });
+      }
+    } else {
+      this.style.display = 'block';
+      this.toggleAttribute('hidden', false);
+      fireEvent(this, 'card-visibility-changed', { value: true });
+    }
   }
 
   protected createBaseContainerElement (cardStyle: TrashCardConfig['card_style']) {
@@ -181,20 +221,16 @@ export class TrashCard extends LitElement {
       return nothing;
     }
 
-    if (!this.currentItems || this.currentItems.length === 0) {
-      return this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : nothing;
-    }
+    this.element = this.createBaseContainerElement(this.config.card_style);
 
-    const element = this.createBaseContainerElement(this.config.card_style);
-
-    if (!element) {
+    if (!this.element) {
       return nothing;
     }
 
-    element.setHass(this.hass);
+    this.element.setHass(this.hass);
 
     return html`
       ${this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : ``}
-      ${element}`;
+      ${this.element}`;
   }
 }

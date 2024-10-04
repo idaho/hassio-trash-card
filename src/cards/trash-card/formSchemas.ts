@@ -37,6 +37,14 @@ const getPatternSchema = (customLocalize: LocalizeFunc, localize: LocalizeFunc) 
     }
   },
   {
+    label: customLocalize(`editor.card.trash.pattern.fields.pattern_exact`),
+    helper: customLocalize(`editor.card.trash.pattern.fields.pattern_exact_description`),
+    name: 'pattern_exact',
+    selector: {
+      boolean: {}
+    }
+  },
+  {
     label: customLocalize(`editor.card.trash.pattern.fields.picture_url`),
     helper: customLocalize(`editor.card.trash.pattern.fields.picture_url_description`),
     name: 'picture',
