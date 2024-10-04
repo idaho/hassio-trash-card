@@ -100,6 +100,7 @@ const entityCardConfigStruct = assign(
         icon: optional(string()),
         label: optional(string()),
         pattern: optional(string()),
+        pattern_exact: optional(boolean()),
         picture: optional(string()),
         type: string()
       })
