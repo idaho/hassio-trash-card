@@ -8,6 +8,7 @@ import { Debugger } from '../../utils/debugger';
 import { getCalendarData } from '../../utils/getCalendarData';
 import { getTimeZoneOffset } from '../../utils/getTimeZoneOffset';
 import { fireEvent } from '../../utils/fireEvent';
+import { hasEntities } from '../../utils/hasEntities';
 
 import './container';
 import './items/empty';
@@ -111,7 +112,7 @@ export class TrashCard extends LitElement {
   }
 
   protected fetchCurrentTrashData () {
-    if (!this.hass || !this.config || !this.debugger) {
+    if (!this.hass || !this.config || !this.debugger || !hasEntities(this.config.entities)) {
       return;
     }
 
@@ -135,7 +136,9 @@ export class TrashCard extends LitElement {
       then((data: CalendarItem[]) => {
         this.currentItems = data;
         this.lastChanged = new Date();
-      });
+      }).
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      catch(() => {});
   }
 
   protected getRefreshRate (): number {
@@ -165,21 +168,17 @@ export class TrashCard extends LitElement {
   protected update (changedProps: PropertyValues) {
     super.update(changedProps);
 
-    if (!this.preview) {
-      if (this.config && this.config.entities.length > 0 && (!this.currentItems || this.currentItems.length === 0)) {
-        this.style.display = 'none';
-        this.toggleAttribute('hidden', true);
-        fireEvent(this, 'card-visibility-changed', { value: false });
-      } else {
-        this.style.display = 'block';
-        this.toggleAttribute('hidden', false);
-        fireEvent(this, 'card-visibility-changed', { value: true });
-      }
-    } else {
-      this.style.display = 'block';
-      this.toggleAttribute('hidden', false);
-      fireEvent(this, 'card-visibility-changed', { value: true });
+    if (!this.preview && hasEntities(this.config!.entities) && (!this.currentItems || this.currentItems.length === 0)) {
+      this.style.display = 'none';
+      this.toggleAttribute('hidden', true);
+      fireEvent(this, 'card-visibility-changed', { value: false });
+
+      return;
     }
+
+    this.style.display = 'block';
+    this.toggleAttribute('hidden', false);
+    fireEvent(this, 'card-visibility-changed', { value: true });
   }
 
   protected createBaseContainerElement (cardStyle: TrashCardConfig['card_style']) {
