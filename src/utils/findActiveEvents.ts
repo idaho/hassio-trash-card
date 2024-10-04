@@ -12,6 +12,7 @@ interface Config {
 
 interface Options {
   config: Config;
+  location?: string;
   now: Date;
   dropAfter: boolean;
   filterFutureEventsDay: string;
@@ -32,12 +33,16 @@ const isNotPastWholeDayEvent = (item: CalendarEvent, now: Date, dropAfter: boole
   (item.isWholeDayEvent && getDayFromDate(item.date.start) === getDayFromDate(now) && !dropAfter) ||
     (item.isWholeDayEvent && getDayFromDate(item.date.start) !== getDayFromDate(now));
 
-const findActiveEvents = (items: CalendarEvent[], { config, now, dropAfter, filterFutureEventsDay }: Options): CalendarEvent[] => {
+const findActiveEvents = (items: CalendarEvent[], { config, now, dropAfter, filterFutureEventsDay, location }: Options): CalendarEvent[] => {
   const dateString = `${filterFutureEventsDay}T00:00:00${getTimeZoneOffset()}`;
   const dateMaxStart = new Date(dateString);
 
   const activeItems = items.
     filter((item): boolean => {
+      if (location && !item.content.location?.toLowerCase().includes(location.toLowerCase())) {
+        return false;
+      }
+
       if (item.date.start > dateMaxStart) {
         return false;
       }

@@ -107,6 +107,14 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
           }
         }
       ]
+    },
+    {
+      name: 'location',
+      label: customLocalize(`editor.form.location.title`),
+      helper: customLocalize(`editor.form.location.helper`),
+      selector: {
+        text: {}
+      }
     }
   ];
 

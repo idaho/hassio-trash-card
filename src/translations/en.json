@@ -58,6 +58,10 @@
             "refresh_rate": {
                 "title": "Update interval",
                 "helper": "Check for changes in the calendar every x minutes"
+            },
+            "location": {
+                "title": "Location",
+                "helper": "Filter events by given location, if none is given all are used."
             }
         },
         "card": {
