@@ -50,6 +50,10 @@ const getCalendarData = async (
   debuggerInstance.log(`dropAfter`, dropAfter);
   debuggerInstance.log(`now`, now);
 
+  if (config.location) {
+    debuggerInstance.log(`location filtering`, config.location);
+  }
+
   const activeEvents = findActiveEvents(normalisedEvents, {
     config: {
       pattern: config.pattern!,
@@ -58,6 +62,7 @@ const getCalendarData = async (
     },
     dropAfter,
     now,
+    location: config.location,
     filterFutureEventsDay: end
   });
 

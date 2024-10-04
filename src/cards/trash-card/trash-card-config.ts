@@ -41,8 +41,9 @@ const COLORMODES = [
 ] as const;
 
 interface TrashCardConfig {
-  entities: string[];
+  entities?: string[];
   pattern?: ItemSettings[];
+  location?: string;
   next_days?: number;
   items_per_row?: number;
   filter_events?: boolean;
@@ -74,6 +75,7 @@ const entityCardConfigStruct = assign(
   object({
     entities: optional(array(string())),
     name: optional(string()),
+    location: optional(string()),
     layout: optional(union([ literal(LAYOUTS[0]), literal(LAYOUTS[1]), literal(LAYOUTS[2]) ])),
     fill_container: optional(boolean()),
     filter_events: optional(boolean()),
@@ -100,6 +102,7 @@ const entityCardConfigStruct = assign(
         icon: optional(string()),
         label: optional(string()),
         pattern: optional(string()),
+        pattern_exact: optional(boolean()),
         picture: optional(string()),
         type: string()
       })

@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 import { BaseItemElement } from './BaseItemElement';
 import setupCustomlocalize from '../../../localize';
+import { hasEntities } from '../../../utils/hasEntities';
 
 @customElement(`${TRASH_CARD_NAME}-item-empty`)
 class ItemCard extends BaseItemElement {
@@ -13,7 +14,7 @@ class ItemCard extends BaseItemElement {
 
     const customLocalize = setupCustomlocalize(this.hass);
 
-    if (this.config.entities.length === 0) {
+    if (!hasEntities(this.config.entities)) {
       return html`
       <ha-alert alert-type="error" .title="TrashCard">
         <b>${customLocalize('card.not_found.title')}</b>

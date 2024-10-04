@@ -42,6 +42,15 @@ const plugins = [
   json(),
   commonjs(),
   babel({
+    presets: [
+    [
+      '@babel/preset-env',
+      {
+        useBuiltIns: 'entry',
+        corejs: '3.22'
+      }
+    ]
+  ],
     babelHelpers: 'bundled'
   }),
   ...dev ? [ serve(serveOptions) ] : [ terser() ]

@@ -38,8 +38,13 @@ const eventToItem = (event: CalendarEvent | undefined, { pattern, useSummary }: 
       ...pat,
       idx
     })).
-    filter((pat: Pattern) =>
-      pat.pattern && summary.toLowerCase().includes(pat.pattern.toLowerCase()));
+    filter((pat: Pattern) => {
+      if (pat.pattern_exact) {
+        return pat.pattern && summary.toLowerCase() === pat.pattern.toLowerCase();
+      }
+
+      return pat.pattern && summary.toLowerCase().includes(pat.pattern.toLowerCase());
+    });
 
   if (possibleTypes.length > 0) {
     return possibleTypes.map(pat => getData(event, pat, useSummary));
