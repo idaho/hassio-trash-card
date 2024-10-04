@@ -94,7 +94,10 @@ class TrashCardPatternEditor extends LitElement {
 
             <div class="special-row">
               <div>
-                <span> ${settingsConfig.label ?? customLocalize(`editor.card.trash.pattern.type.${settingsConfig.type}`)}</span>
+                <span> ${
+
+  // @ts-expect-error 2345
+  settingsConfig.label ?? customLocalize(`editor.card.trash.pattern.type.${settingsConfig.type}`)}</span>
               </div>
             </div>
 

@@ -41,7 +41,7 @@ const COLORMODES = [
 ] as const;
 
 interface TrashCardConfig {
-  entities: string[];
+  entities?: string[];
   pattern?: ItemSettings[];
   location?: string;
   next_days?: number;
