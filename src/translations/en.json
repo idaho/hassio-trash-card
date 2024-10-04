@@ -104,7 +104,13 @@
         }
     },
     "card": {
-        "not_found": "Entity not found",
+        "not_found": {
+            "title": "No entites defined",
+            "description": "Please select at least one calendar entity to get TrashCard to work."
+        },
+        "empty": {
+            "description": "Currently no events found. This message is only available during editing."
+        },
         "trash": {
             "today": "today",
             "tomorrow": "tomorrow",

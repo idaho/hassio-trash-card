@@ -3,7 +3,7 @@ import { LitElement, html } from 'lit';
 import { state } from 'lit/decorators.js';
 import { getPicture } from '../../../utils/getPicture';
 
-import type { CardStyleConfig } from '../trash-card-config';
+import type { TrashCardConfig } from '../trash-card-config';
 import type { CalendarItem } from '../../../utils/calendarItem';
 import type { HomeAssistant } from '../../../utils/ha';
 
@@ -13,7 +13,7 @@ class BaseItemElement<T = {}> extends LitElement {
 
   @state() protected readonly hass?: HomeAssistant;
 
-  @state() protected readonly config?: CardStyleConfig;
+  @state() protected readonly config?: TrashCardConfig;
 
   protected withBackground = false;
 
