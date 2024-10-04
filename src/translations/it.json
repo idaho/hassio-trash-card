@@ -110,10 +110,10 @@
       "today_from_till": "Oggi\nda <START> a <END>",
       "tomorrow_from_till": "Domani\ntra <START> e <END>",
       "day_from_till": "<DAY>\ntra <START> e <END>",
-      "daysleft": "entro <DAYS> giorni",
-      "daysleft_more": "entro <DAYS> giorni",
-      "daysleft_from_till": "entro <DAYS> giorni\ntra <START> e <END>",
-      "daysleft_more_from_till": "entro <DAYS> giorni\ntra <START> e <END>"
+      "daysleft": "tra <DAYS> giorni",
+      "daysleft_more": "tra <DAYS> giorni",
+      "daysleft_from_till": "tra <DAYS> giorni\ntra <START> e <END>",
+      "daysleft_more_from_till": "tra <DAYS> giorni\ntra <START> e <END>"
     }
   }
 }
