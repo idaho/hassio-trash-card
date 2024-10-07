@@ -86,7 +86,7 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
           label: customLocalize(`editor.card.generic.next_days`),
           selector: {
             number: {
-              min: 1,
+              min: 0,
               max: 365,
               step: 1,
               mode: 'box'
