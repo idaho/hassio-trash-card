@@ -62,6 +62,10 @@
             "location": {
                 "title": "Location",
                 "helper": "Filter events by given location, if none is given all are used."
+            },
+            "only_all_day_events": {
+                "title": "Only all-day events",
+                "helper": "If you only want to use all-day entries, please activate this option, otherwise all entries will be used."
             }
         },
         "card": {

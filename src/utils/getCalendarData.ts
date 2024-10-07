@@ -58,7 +58,9 @@ const getCalendarData = async (
     config: {
       pattern: config.pattern!,
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      filter_events: config.filter_events
+      filter_events: config.filter_events,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      only_all_day_events: config.only_all_day_events
     },
     dropAfter,
     now,

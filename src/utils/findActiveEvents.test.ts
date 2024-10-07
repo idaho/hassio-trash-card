@@ -42,7 +42,8 @@ describe(`findActiveEvents`, () => {
     const result = findActiveEvents(data as CalendarEvent[], {
       config: {
         filter_events: false,
-        pattern: []
+        pattern: [],
+        only_all_day_events: false
       },
       dropAfter: false,
       now: new Date('2024-03-29T12:09:08.879Z'),
