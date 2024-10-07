@@ -1,4 +1,4 @@
-import { LitElement, css, html, nothing } from 'lit';
+import { LitElement, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { TRASH_CARD_NAME } from '../const';
 import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
@@ -6,16 +6,16 @@ import { defaultHaCardStyle } from '../../../utils/defaultHaCardStyle';
 import '../elements/title';
 import '../items/logrow';
 
-import type { Debugger } from '../../../utils/debugger';
+import type { DebuggerData } from '../../../utils/debugger';
 
 @customElement(`${TRASH_CARD_NAME}-debug-container`)
 class Debug extends LitElement {
-  @state() private readonly debugger?: Debugger;
+  @state() private readonly logs?: DebuggerData[];
 
   protected copyDebugLogToClipboard (ev: CustomEvent): void {
     ev.stopPropagation();
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    navigator.clipboard.writeText(JSON.stringify(this.debugger?.getLogs() ?? {})).
+    navigator.clipboard.writeText(JSON.stringify(this.logs ?? {})).
       then(() => {
         // eslint-disable-next-line no-alert
         alert('Debug data copied to clipboard');
@@ -23,10 +23,6 @@ class Debug extends LitElement {
   }
 
   public render () {
-    if (!this.debugger) {
-      return nothing;
-    }
-
     return html`<ha-card class="debug-container">
         <trash-card-title>
           <span slot="title">DEBUG LOG</span>
@@ -41,7 +37,7 @@ class Debug extends LitElement {
         </trash-card-title>
 
         <div class="content">
-          ${this.debugger.getLogs().map(item => html`
+          ${this.logs?.map(item => html`
             <trash-card-logrow
               .item=${item}
             ></trash-card-logrow>
