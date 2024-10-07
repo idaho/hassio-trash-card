@@ -1,20 +1,18 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import calendarEvents from '../../mocks/calendarData.json';
-import { getTimeZoneOffset } from './getTimeZoneOffset';
 import { normaliseEvents } from './normaliseEvents';
 
 import type { RawCalendarEvent } from './calendarEvents';
 
 describe('normaliseEvents', (): void => {
   test('normaliseEvents', async () => {
-    const timezoneOffset = getTimeZoneOffset();
-    const result = normaliseEvents(calendarEvents as RawCalendarEvent[], timezoneOffset);
+    const result = normaliseEvents(calendarEvents as RawCalendarEvent[]);
 
     const expectedResult = [
       {
         date: {
-          start: new Date(`2023-12-10T00:00:00${timezoneOffset}`),
-          end: new Date(`2023-12-11T00:00:00${timezoneOffset}`)
+          start: new Date(`2023-12-10T00:00:00`),
+          end: new Date(`2023-12-11T00:00:00`)
         },
         isWholeDayEvent: true,
         content: {

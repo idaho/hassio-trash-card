@@ -40,7 +40,7 @@ const getCalendarData = async (
   debuggerInstance.log(`timezone`, timezoneOffset);
   debuggerInstance.log(`calendar data`, rawCalendarEvents);
 
-  const normalisedEvents = normaliseEvents(rawCalendarEvents, timezoneOffset);
+  const normalisedEvents = normaliseEvents(rawCalendarEvents);
 
   normalisedEvents.sort((evtA, evtB) => evtA.date.start.getTime() - evtB.date.start.getTime());
 
