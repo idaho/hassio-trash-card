@@ -58,7 +58,7 @@
       "refresh_rate": {
         "title": "Intervallo di realizzazione",
         "helper": "Controlla le modifiche al calendario ogni x minuti."
-      }
+      },
       "location": {
          "title": "Posizione",
          "helper": "Filtra gli eventi in base a una determinata posizione; se non viene indicato nulla, vengono utilizzati tutti."
