@@ -8,6 +8,8 @@ interface Config {
   pattern: Required<TrashCardConfig>['pattern'];
   // eslint-disable-next-line @typescript-eslint/naming-convention
   filter_events: TrashCardConfig['filter_events'];
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  only_all_day_events: TrashCardConfig['only_all_day_events'];
 }
 
 interface Options {
@@ -47,9 +49,14 @@ const findActiveEvents = (items: CalendarEvent[], { config, now, dropAfter, filt
         return false;
       }
 
+      if (config.only_all_day_events && !item.isWholeDayEvent) {
+        return false;
+      }
+
       if (item.isWholeDayEvent) {
         return item.date.end > now;
       }
+
       if (item.date.end < now) {
         return false;
       }

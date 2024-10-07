@@ -115,6 +115,14 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
       selector: {
         text: {}
       }
+    },
+    {
+      name: 'only_all_day_events',
+      label: customLocalize(`editor.form.only_all_day_events.title`),
+      helper: customLocalize(`editor.form.only_all_day_events.helper`),
+      selector: {
+        boolean: {}
+      }
     }
   ];
 
