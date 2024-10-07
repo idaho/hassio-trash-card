@@ -58,6 +58,10 @@
       "refresh_rate": {
         "title": "Intervallo di realizzazione",
         "helper": "Controlla le modifiche al calendario ogni x minuti."
+      },
+      "location": {
+         "title": "Posizione",
+         "helper": "Filtra gli eventi in base a una determinata posizione; se non viene indicato nulla, vengono utilizzati tutti."
       }
     },
     "card": {
@@ -94,6 +98,8 @@
             "color": "Colore",
             "icon": "Icona",
             "pattern": "Pattern identificazione",
+            "pattern_exact": "Utilizza un pattern specifico",
+            "pattern_exact_description": "Utilizzare il pattern come termine di ricerca, che deve essere identico al 100% alla descrizione dell'evento del calendario. Il termine di ricerca non fa distinzione tra maiuscole e minuscole.",
             "picture_url": "URL immagine",
             "picture_url_description": "Se viene specificato un URL dell'immagine, al posto dell'icona viene visualizzata l'immagine corrispondente. Posizionare un'immagine nella cartella `/config/www` e utilizzare `/local/[filename]`."
           }
@@ -102,7 +108,13 @@
     }
   },
   "card": {
-    "not_found": "Entità non trovata",
+    "not_found": {
+      "title": "Entità non trovata",
+      "description": "Per far funzionare TrashCard, selezionare almeno un'entità di calendario."
+    },
+    "empty": {
+      "description": "Al momento non è stato trovato alcun evento. Questo messaggio è disponibile solo durante la modifica."
+    },
     "trash": {
       "today": "Oggi",
       "tomorrow": "Domani",
@@ -110,10 +122,10 @@
       "today_from_till": "Oggi\nda <START> a <END>",
       "tomorrow_from_till": "Domani\ntra <START> e <END>",
       "day_from_till": "<DAY>\ntra <START> e <END>",
-      "daysleft": "entro <DAYS> giorni",
-      "daysleft_more": "entro <DAYS> giorni",
-      "daysleft_from_till": "entro <DAYS> giorni\ntra <START> e <END>",
-      "daysleft_more_from_till": "entro <DAYS> giorni\ntra <START> e <END>"
+      "daysleft": "tra <DAYS> giorni",
+      "daysleft_more": "tra <DAYS> giorni",
+      "daysleft_from_till": "tra <DAYS> giorni\ntra <START> e <END>",
+      "daysleft_more_from_till": "tra <DAYS> giorni\ntra <START> e <END>"
     }
   }
 }
