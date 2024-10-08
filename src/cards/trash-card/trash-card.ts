@@ -229,7 +229,7 @@ export class TrashCard extends LitElement {
     this.element.setHass(this.hass);
 
     return html`
-      ${this.config.debug ? html`<trash-card-debug-container .debugger=${this.debugger}></trash-card-debug-card>` : ``}
+      ${this.config.debug ? html`<trash-card-debug-container .hass=${this.hass} .logs=${this.debugger?.getLogs()}></trash-card-debug-card>` : ``}
       ${this.element}`;
   }
 }
