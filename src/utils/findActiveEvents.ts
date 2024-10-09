@@ -1,5 +1,6 @@
 import { getDayFromDate } from './getDayFromDate';
 import { getTimeZoneOffset } from './getTimeZoneOffset';
+import { filterEventByPatterns } from './filterEventByPatterns';
 
 import type { CalendarEvent } from './calendarEvents';
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
@@ -26,9 +27,9 @@ const isMatchingAnyPatterns = (item: CalendarEvent, config: Config) => {
   }
 
   const trashTypes = config.pattern.filter(pat => pat.type !== 'others');
-  const patterns = trashTypes.map(pat => pat.pattern).filter(pattern => pattern !== undefined);
+  const patterns = trashTypes.filter(pattern => pattern.pattern !== undefined);
 
-  return patterns.length === 0 || patterns.some(pattern => item.content.summary.toLowerCase().includes(pattern.toLowerCase()));
+  return patterns.length === 0 || patterns.some(pat => filterEventByPatterns(pat, item));
 };
 
 const isNotPastWholeDayEvent = (item: CalendarEvent, now: Date, dropAfter: boolean): boolean =>

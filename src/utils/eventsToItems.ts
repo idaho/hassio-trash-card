@@ -1,3 +1,5 @@
+import { filterEventByPatterns } from './filterEventByPatterns';
+
 import type { CalendarEvent } from './calendarEvents';
 import type { CalendarItem } from './calendarItem';
 import type { ItemSettings } from './itemSettings';
@@ -31,20 +33,12 @@ const eventToItem = (event: CalendarEvent | undefined, { pattern, useSummary }: 
     return [];
   }
 
-  const { content: { summary }} = event;
-
   const possibleTypes = pattern.
     map((pat, idx) => ({
       ...pat,
       idx
     })).
-    filter((pat: Pattern) => {
-      if (pat.pattern_exact) {
-        return pat.pattern && summary.toLowerCase() === pat.pattern.toLowerCase();
-      }
-
-      return pat.pattern && summary.toLowerCase().includes(pat.pattern.toLowerCase());
-    });
+    filter(pat => filterEventByPatterns(pat, event));
 
   if (possibleTypes.length > 0) {
     return possibleTypes.map(pat => getData(event, pat, useSummary));
