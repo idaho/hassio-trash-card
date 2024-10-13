@@ -58,7 +58,7 @@
             "refresh_rate": {
                 "title": "Intervalle d'actualisation",
                 "helper": "Vérifier les changements dans le calendrier toutes les x minutes."
-            }
+            },
             "location": {
                 "title": "Lieu",
                 "helper": "Filtrer les événements par lieu. Laisser blanc pour voir tous les lieux."
