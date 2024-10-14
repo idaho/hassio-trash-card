@@ -1,31 +1,33 @@
+import * as cs from './translations/cs.json';
 import * as da from './translations/da.json';
 import * as de from './translations/de.json';
 import * as en from './translations/en.json';
 import * as fr from './translations/fr.json';
 import * as hu from './translations/hu.json';
 import * as it from './translations/it.json';
+import * as lv from './translations/lv.json';
 import * as nl from './translations/nl.json';
 import * as pl from './translations/pl.json';
+import * as se from './translations/se.json';
 import * as sk from './translations/sk.json';
 import * as sl from './translations/sl.json';
-import * as lv from './translations/lv.json';
-import * as se from './translations/se.json';
 
 import type { HomeAssistant, LocalizeFunc } from './utils/ha';
 
 const languages: Record<string, unknown> = {
+  cs,
   da,
   de,
   en,
   fr,
   hu,
   it,
+  lv,
   nl,
   pl,
+  se,
   sk,
-  sl,
-  lv,
-  se
+  sl
 };
 
 // eslint-disable-next-line @typescript-eslint/naming-convention

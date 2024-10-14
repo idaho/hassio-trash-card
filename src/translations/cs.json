@@ -1,0 +1,135 @@
+{
+    "editor": {
+        "form": {
+            "color_picker": {
+                "values": {
+                    "default": "Výchozí barva"
+                }
+            },
+            "day_style": {
+                "title": "Show event time as",
+                "values": {
+                    "default": "Datum",
+                    "counter": "dní do",
+                    "weekday": "Den v týdnu",
+                    "custom": "Vlastní formát data"
+                }
+            },
+            "day_style_format": {
+                "title": "Vlastní formát data",
+                "helper": "Definujte svůj vlastní formát data. (dd = den začínající 0, d = den, MM = měsíc začínající 0, M = měsíc, yy = rok krátce, yyyy = rok dlouze) Např. dd.MM.yyyy = 03.04.2024, kde d.M.yy = 3.4.24 je výsledek."
+            },
+            "card_style": {
+                "title": "Zobrazit jako",
+                "values": {
+                    "card": "Standardní karta",
+                    "chip": "Malá karta",
+                    "icon": "Ikona"
+                }
+            },
+            "alignment_style": {
+                "title": "Zarovnání",
+                "values": {
+                    "left": "doleva",
+                    "center": "na střed",
+                    "right": "doprava",
+                    "space": "Mezery"
+                }
+            },
+            "color_mode": {
+                "title": "Aplikovat barvu na",
+                "values": {
+                    "background": "Pozadí",
+                    "icon": "Ikona"
+                }
+            },
+            "layout_picker": {
+                "values": {
+                    "default": "Výchozí rozložení",
+                    "vertical": "Vertikální zarovnání ",
+                    "horizontal": "Horizontální zarovnání"
+                }
+            },
+            "tabs": {
+                "settings": "Nastavení",
+                "appearance": "Vzhled",
+                "patterns": "Vzory"
+            },
+            "refresh_rate": {
+                "title": "Interval aktualizace",
+                "helper": "Zkontrolivat změny v kalendáři každých x minut"
+            },
+            "location": {
+                "title": "Poloha",
+                "helper": "Filtrovat události podle daného umístění, pokud není zadána žádná, použijí se všechny."
+            },
+            "only_all_day_events": {
+                "title": "Pouze celodenní události",
+                "helper": "Pokud chcete používat pouze celodenní záznamy, aktivujte tuto možnost, jinak budou použity všechny záznamy."
+            }
+        },
+        "card": {
+            "generic": {
+                "icon_color": "Barva ikony",
+                "layout": "Rozložení",
+                "fill_container": "Pozadí kontejneru",
+                "next_days": "Dny v budoucnosti",
+                "filter_events": "Filtrujte události podle vzorů",
+                "drop_todayevents_from": "Od jaké doby skrýt celodenní události",
+                "full_size": "Karta bez mezer",
+                "use_summary": "Shrnutí události místo popisu",
+                "hide_time_range": "Skrýt čas",
+                "event_grouping": "Zobrazit pouze další událost dle vzoru",
+                "icon_size": "Velikost ikony",
+                "with_label": "Zobrazit popis"
+            },
+            "trash": {
+                "pattern": {
+                    "title": "Upravit vzor",
+                    "edit": "upravit",
+                    "delete": "odstranit",
+                    "create": "Vytvořit nový vzor",
+                    "new_custom_label": "Nový vzor",
+                    "type": {
+                        "organic": "Bio odpad",
+                        "paper": "Papír",
+                        "recycle": "Plasty",
+                        "waste": "Směsný odpad",
+                        "others": "Ostatní"
+                    },
+                    "fields": {
+                        "label": "Popis",
+                        "color": "Barva",
+                        "icon": "Ikona",
+                        "pattern": "Vzor",
+                        "pattern_exact": "Použít přesný vzor",
+                        "pattern_exact_description": "Jako hledaný výraz použijte vzor, ​​který musí být 100% shodný s popisem události v kalendáři. Hledaný výraz nerozlišuje malá a velká písmena.",
+                        "picture_url": "URL obrázku",
+                        "picture_url_description": "Pokud je zadána adresa URL obrázku, zobrazí se místo ikony odpovídající obrázek. Umístěte obrázek do složky `/config/www` a použijte `/local/[název souboru]`."
+                    }
+                }
+            }
+        }
+    },
+    "card": {
+        "not_found": {
+            "title": "nejsou definovány žádné entity",
+            "description": "Vyberte prosím alespoň jednu entitu kalendáře, aby TrashCard fungovala."
+        },
+        "empty": {
+            "description": "Momentálně nebyly nalezeny žádné události. Tato zpráva je dostupná pouze během úprav."
+        },
+        "trash": {
+            "today": "dnes",
+            "tomorrow": "zítra",
+            "day": "<DAY>",
+            "today_from_till": "Dnes\nod <START> do <END>",
+            "tomorrow_from_till": "Zítra\nmezi <START> and <END>",
+            "day_from_till": "<DAY>\nmezi <START> a <END>",
+            "daysleft": "za <DAY> den",
+            "daysleft_more": "za <DAY> dní",
+            "daysleft_from_till": "za <DAYS> den\nmezi <START> a <END>",
+            "daysleft_more_from_till": "za <DAYS> dní\nmezi <START> a <END>"
+        }
+    }
+}
