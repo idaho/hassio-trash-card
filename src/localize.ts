@@ -8,9 +8,9 @@ import * as it from './translations/it.json';
 import * as lv from './translations/lv.json';
 import * as nl from './translations/nl.json';
 import * as pl from './translations/pl.json';
-import * as se from './translations/se.json';
 import * as sk from './translations/sk.json';
 import * as sl from './translations/sl.json';
+import * as sv from './translations/sv.json';
 
 import type { HomeAssistant, LocalizeFunc } from './utils/ha';
 
@@ -25,9 +25,9 @@ const languages: Record<string, unknown> = {
   lv,
   nl,
   pl,
-  se,
   sk,
-  sl
+  sl,
+  sv
 };
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
