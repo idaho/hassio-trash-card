@@ -113,7 +113,10 @@
             "daysleft": "in <DAYS> Tag",
             "daysleft_more": "in <DAYS> Tagen",
             "daysleft_from_till": "in <DAYS> Tag\nvon <START> bis <END>",
-            "daysleft_more_from_till": "in <DAYS> Tagen\nvon <START> bis <END>"
-        }
+            "daysleft_more_from_till": "in <DAYS> Tagen\nvon <START> bis <END>",
+            "daysleftend": "endet in <DAYS> Tag",
+            "daysleftend_more": "endet in <DAYS> Tagen",
+            "daysleftend_from_till": "endet in <DAYS> Tag\num <END> Uhr",
+            "daysleftend_more_from_till": "endet in <DAYS> Tagen\num <END> Uhr"        }
     }
 }
