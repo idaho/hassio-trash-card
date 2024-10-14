@@ -64,9 +64,16 @@ const getDateString = (
   }
 
   if (dayStyle === 'counter') {
-    const daysLeft = daysTill(new Date(), item);
+    const daysToStart = daysTill(new Date(), item.date.start);
 
-    return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+    if (daysToStart > 0) {
+      const daysLeft = daysToStart;
+
+      return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+    }
+    const daysToEnd = daysTill(new Date(), item.date.end);
+
+    return `${customLocalize(`card.trash.daysleftend${daysToEnd > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysToEnd}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
   }
 
   if (dayStyle === 'weekday') {
