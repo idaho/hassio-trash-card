@@ -1,6 +1,6 @@
 {
   "name": "trash-card",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "TrashCard - indicates what type of trash will be picked up next based on your calendar entries 🗑️",
   "keywords": [
     "paper",
