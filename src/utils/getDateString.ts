@@ -73,7 +73,7 @@ const getDateString = (
     }
     const daysToEnd = daysTill(new Date(), item.date.end);
 
-    return `${customLocalize(`card.trash.daysleftend${daysToEnd > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysToEnd}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
+    return `${customLocalize(`card.trash.daysleftend${daysToEnd > 1 ? '_more' : ''}${startTime && !excludeTime ? '_till' : ''}`).replace('<DAYS>', `${daysToEnd}`).replace('<END>', endTime ?? '')}`;
   }
 
   if (dayStyle === 'weekday') {

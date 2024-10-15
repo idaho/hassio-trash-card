@@ -116,8 +116,8 @@
             "daysleft_more_from_till": "om <DAYS> dage\nmellem <START> og <END>",
             "daysleftend": "slutter om <DAYS> dag",
             "daysleftend_more": "slutter om <DAYS> dage",
-            "daysleftend_from_till": "slutter om <DAYS> dag\n klokken <END>",
-            "daysleftend_more_from_till": "slutter om <DAYS> dage\nklokken <END>"
+            "daysleftend_till": "slutter om <DAYS> dag\n kl <END>",
+            "daysleftend_more_till": "slutter om <DAYS> dage\nkl <END>"
         }
     }
 }

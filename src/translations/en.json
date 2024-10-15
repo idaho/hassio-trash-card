@@ -132,8 +132,8 @@
             "daysleft_more_from_till": "in <DAYS> days\nbetween <START> and <END>",
             "daysleftend": "ends in <DAYS> day",
             "daysleftend_more": "ends in <DAYS> days",
-            "daysleftend_from_till": "ends in <DAYS> day\nat <END>",
-            "daysleftend_more_from_till": "ends in <DAYS> days\nat <END>"
+            "daysleftend_till": "ends in <DAYS> day\nat <END>",
+            "daysleftend_more_till": "ends in <DAYS> days\nat <END>"
         }
     }
 }
