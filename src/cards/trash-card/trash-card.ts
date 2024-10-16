@@ -148,7 +148,7 @@ export class TrashCard extends LitElement {
   protected shouldUpdate (changedProps: PropertyValues): boolean {
     super.updated(changedProps);
 
-    if (changedProps.has('currentItems') || changedProps.has('hass')) {
+    if (changedProps.has('currentItems')) {
       return true;
     }
 
@@ -158,7 +158,7 @@ export class TrashCard extends LitElement {
       this.fetchCurrentTrashData();
     }
 
-    if (changedProps.has('preview')) {
+    if (changedProps.has('preview') || changedProps.has('hass') || changedProps.has('_hass')) {
       return true;
     }
 
