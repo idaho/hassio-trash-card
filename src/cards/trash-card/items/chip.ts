@@ -26,7 +26,7 @@ class ItemChip extends BaseItemElement {
 
     const content = getDateString(item, hide_time_range ?? false, day_style, day_style_format, this.hass);
 
-    const daysTillToday = daysTill(new Date(), item);
+    const daysTillToday = Math.abs(daysTill(new Date(), item.date.start));
 
     const cssClasses = {
       today: daysTillToday === 0,
