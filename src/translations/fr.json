@@ -10,30 +10,30 @@
                 "title": "Afficher l'heure de l'événement en tant que",
                 "values": {
                     "default": "Date",
-                    "counter": "jours jusqu'à",
-                    "weekday": "our de la semaine",
+                    "counter": "Jours jusqu'à",
+                    "weekday": "Jour de la semaine",
                     "custom" : "Propre format de date"
                 }
             },
             "day_style_format": {
                 "title": "Propre format de date",
-                "helper": "Définir un format de date personnalisé. (dd = jour avec 0 en tête, d = jour, MM = mois avec 0 en tête, M = mois, yy = année courte, yyyy = année longue) Par exemple, dd.MM.yyyy = 03.04.2024, où d.M.yy = 3.4.24 donnerait"
+                "helper": "Définir un format de date personnalisé. (dd = jour avec 0 en tête, d = jour, MM = mois avec 0 en tête, M = mois, yy = année courte, yyyy = année longue) Par exemple, dd.MM.yyyy = 03.04.2024, où d.M.yy = 3.4.24"
             },
             "card_style": {
                 "title": "Représenter comme",
                 "values": {
-                    "card": "carte standard",
-                    "chip": "carte à puce",
+                    "card": "Carte standard",
+                    "chip": "Carte à puce",
                     "icon": "Icône"
                 }
             },
             "alignment_style": {
                 "title": "Alignement",
                 "values": {
-                    "left": "gauche",
-                    "center": "centré",
-                    "right": "droit",
-                    "space": "espacé"
+                    "left": "Gauche",
+                    "center": "Centré",
+                    "right": "Droit",
+                    "space": "Espacé"
                 }
             },
             "color_mode": {
@@ -80,7 +80,7 @@
                 "use_summary": "Résumé de l'événement au lieu de l'étiquette",
                 "hide_time_range": "Cacher le temps",
                 "event_grouping": "Afficher uniquement l'événement suivant par motif",
-                "icon_size": "taille de l'icône",
+                "icon_size": "Taille de l'icône",
                 "with_label": "Afficher l'étiquette"
             },
             "trash": {
@@ -129,7 +129,11 @@
             "daysleft": "Dans <DAYS> jour",
             "daysleft_more": "Dans <DAYS> jours",
             "daysleft_from_till": "Dans <DAYS> jour\nentre <START> et <END>",
-            "daysleft_more_from_till": "Dans <DAYS> jours\nentre <START> et <END>"
+            "daysleft_more_from_till": "Dans <DAYS> jours\nentre <START> et <END>",
+            "daysleftend": "Fini dans <DAYS> jour",
+            "daysleftend_more": "Fini dans <DAYS> jours",
+            "daysleftend_till": "Fini dans <DAYS> jour\nà <END>",
+            "daysleftend_more_till": "Fini dans <DAYS> jours\nà <END>"
         }
     }
 }
