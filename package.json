@@ -1,6 +1,6 @@
 {
   "name": "trash-card",
-  "version": "2.4.1",
+  "version": "2.4.3",
   "description": "TrashCard - indicates what type of trash will be picked up next based on your calendar entries 🗑️",
   "keywords": [
     "paper",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.25.7",
-    "@babel/preset-env": "7.25.7",
+    "@babel/preset-env": "7.25.8",
     "@fltri/eslint-config": "1.2.5",
     "@material/mwc-ripple": "0.27.0",
     "@material/tab-bar": "14.0.0",
@@ -56,7 +56,7 @@
     "@rollup/plugin-terser": "0.4.4",
     "@rollup/plugin-typescript": "12.1.0",
     "@types/color": "3.0.6",
-    "@types/hammerjs": "2.0.45",
+    "@types/hammerjs": "2.0.46",
     "@types/jest": "29.5.13",
     "@types/luxon": "3.4.2",
     "@typescript-eslint/eslint-plugin": "7.17.0",
