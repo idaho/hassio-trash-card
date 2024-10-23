@@ -26,7 +26,7 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
       '--trash-card-icon-size': `${this.config.icon_size ?? 40}px`
     };
 
-    const daysTillToday = daysTill(new Date(), item);
+    const daysTillToday = Math.abs(daysTill(new Date(), item.date.start));
 
     const cssClasses = {
       today: daysTillToday === 0,
