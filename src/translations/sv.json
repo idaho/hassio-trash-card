@@ -113,7 +113,10 @@
             "daysleft": "om <DAYS> dag",
             "daysleft_more": "om <DAYS> dagar",
             "daysleft_from_till": "om <DAYS> dag\nmellan <START> och <END>",
-            "daysleft_more_from_till": "om <DAYS> dagar\nmellan <START> och <END>"
-        }
+            "daysleft_more_from_till": "om <DAYS> dagar\nmellan <START> och <END>",
+            "daysleftend": "slutar om <DAYS> dag",
+            "daysleftend_more": "slutar om <DAYS> dagar",
+            "daysleftend_till": "slutar om <DAYS> dag\nkl <END>",
+            "daysleftend_more_till": "slutar om <DAYS> dagar\nkl <END>"        }
     }
 }
