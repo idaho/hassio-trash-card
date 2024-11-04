@@ -104,8 +104,8 @@
     "card": {
         "not_found": "Entitet ikke fundet",
         "trash": {
-            "today": "I dag",
-            "tomorrow": "I morgen",
+            "today": "i dag",
+            "tomorrow": "i morgen",
             "day": "<DAY>",
             "today_from_till": "I dag\nfra <START> til <END>",
             "tomorrow_from_till": "I morgen\nmellem <START> og <END>",
