@@ -104,8 +104,8 @@
     "card": {
         "not_found": "Entitet ikke fundet",
         "trash": {
-            "today": "i dag",
-            "tomorrow": "i morgen",
+            "today": "I dag",
+            "tomorrow": "I morgen",
             "day": "<DAY>",
             "today_from_till": "I dag\nfra <START> til <END>",
             "tomorrow_from_till": "I morgen\nmellem <START> og <END>",
@@ -117,7 +117,10 @@
             "daysleftend": "slutter om <DAYS> dag",
             "daysleftend_more": "slutter om <DAYS> dage",
             "daysleftend_till": "slutter om <DAYS> dag\nkl <END>",
-            "daysleftend_more_till": "slutter om <DAYS> dage\nkl <END>"
+            "daysleftend_more_till": "slutter om <DAYS> dage\nkl <END>",
+            "from_till": "fra <START> til <END>",
+            "from": "fra <START>",
+            "till": "til <END>"
         }
     }
 }
