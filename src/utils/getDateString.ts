@@ -4,19 +4,14 @@ import { daysTill } from './daysTill';
 import { DateTime } from 'luxon';
 
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
-import type { HomeAssistant, LocalizeKeys } from './ha';
+import type { HomeAssistant, LocalizeFunc, LocalizeKeys } from './ha';
 import type { CalendarItem } from './calendarItem';
 
 const format = (date: Date, dateStyleFormat: string, language: string) =>
   DateTime.fromJSDate(date).setLocale(language).toFormat(dateStyleFormat);
 
-const getTimeString = (customLocalize, offset: string, day?: string, startTime?: string, endTime?: string, excludeTime?: boolean) => {
-  const fromTill = startTime && !excludeTime ? '_from_till' : '';
-  let translateKey: LocalizeKeys = `card.trash.day${fromTill}`;
-
-  if (offset === 'today' || offset === 'tomorrow') {
-    translateKey = `card.trash.${offset}${fromTill}`;
-  }
+const getTimeString = (customLocalize: LocalizeFunc, offset: 'day' | 'tomorrow' | 'today', day?: string, startTime?: string, endTime?: string, excludeTime?: boolean) => {
+  const translateKey: LocalizeKeys = `card.trash.${offset}${startTime && !excludeTime ? '_from_till' : ''}`;
 
   return customLocalize(translateKey, {
     DAY: day,
