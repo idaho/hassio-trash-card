@@ -117,10 +117,7 @@
             "daysleftend": "slutter om <DAYS> dag",
             "daysleftend_more": "slutter om <DAYS> dage",
             "daysleftend_till": "slutter om <DAYS> dag\nkl <END>",
-            "daysleftend_more_till": "slutter om <DAYS> dage\nkl <END>",
-            "from_till": "fra <START> til <END>",
-            "from": "fra <START>",
-            "till": "til <END>"
+            "daysleftend_more_till": "slutter om <DAYS> dage\nkl <END>"
         }
     }
 }
