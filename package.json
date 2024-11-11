@@ -55,7 +55,7 @@
     "@rollup/plugin-node-resolve": "15.3.0",
     "@rollup/plugin-terser": "0.4.4",
     "@rollup/plugin-typescript": "12.1.1",
-    "@types/color": "3.0.6",
+    "@types/color": "4.2.0",
     "@types/hammerjs": "2.0.46",
     "@types/jest": "29.5.14",
     "@types/luxon": "3.4.2",
