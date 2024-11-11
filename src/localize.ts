@@ -6,6 +6,7 @@ import * as fr from './translations/fr.json';
 import * as hu from './translations/hu.json';
 import * as it from './translations/it.json';
 import * as lv from './translations/lv.json';
+import * as nb from './translations/nb.json';
 import * as nl from './translations/nl.json';
 import * as pl from './translations/pl.json';
 import * as ptBr from './translations/pt-br.json';
@@ -24,6 +25,7 @@ const languages: Record<string, unknown> = {
   hu,
   it,
   lv,
+  nb,
   nl,
   pl,
   // eslint-disable-next-line @typescript-eslint/naming-convention
