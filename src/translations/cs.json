@@ -122,12 +122,12 @@
         "trash": {
             "today": "dnes",
             "tomorrow": "zítra",
-            "day": "<DAY>",
+            "day": "<DAYS>",
             "today_from_till": "Dnes\nod <START> do <END>",
             "tomorrow_from_till": "Zítra\nmezi <START> and <END>",
-            "day_from_till": "<DAY>\nmezi <START> a <END>",
-            "daysleft": "za <DAY> den",
-            "daysleft_more": "za <DAY> dní",
+            "day_from_till": "<DAYS>\nmezi <START> a <END>",
+            "daysleft": "za <DAYS> den",
+            "daysleft_more": "za <DAYS> dní",
             "daysleft_from_till": "za <DAYS> den\nmezi <START> a <END>",
             "daysleft_more_from_till": "za <DAYS> dní\nmezi <START> a <END>"
         }
