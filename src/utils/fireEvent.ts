@@ -32,7 +32,10 @@ const fireEvent = <HassEvent extends ValidHassDomEvent>(
   });
 
   (event as any).detail = detail;
-  node.dispatchEvent(event);
+  try {
+    node.dispatchEvent(event);
+  // eslint-disable-next-line no-empty
+  } catch {}
 
   return event;
 };
