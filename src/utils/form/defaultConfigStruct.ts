@@ -6,6 +6,8 @@ const defaultConfigStruct = object({
   view_layout: any(),
   type: string(),
   layout_options: any(),
+  grid_options: any(),
+  card_mod: any(),
   visibility: any()
 });
 
