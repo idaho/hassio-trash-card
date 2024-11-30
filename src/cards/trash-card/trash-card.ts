@@ -158,8 +158,24 @@ export class TrashCard extends LitElement {
       this.fetchCurrentTrashData();
     }
 
-    if (changedProps.has('preview') || changedProps.has('hass') || changedProps.has('_hass')) {
+    if (changedProps.has('preview')) {
       return true;
+    }
+
+    if (changedProps.has('hass') || changedProps.has('_hass')) {
+      const { language, themes } = changedProps.get('_hass');
+
+      if (language !== this.hass?.language) {
+        return true;
+      }
+      if (themes.theme !== this.hass?.themes.theme) {
+        return true;
+      }
+      if (themes.darkMode !== this.hass?.themes.darkMode) {
+        return true;
+      }
+
+      return false;
     }
 
     return false;
@@ -181,55 +197,32 @@ export class TrashCard extends LitElement {
     fireEvent(this, 'card-visibility-changed', { value: true });
   }
 
-  protected createBaseContainerElement (cardStyle: TrashCardConfig['card_style']) {
-    try {
-      const tag = `trash-card-${cardStyle ?? 'card'}s-container`;
-
-      if (customElements.get(tag)) {
-        // @ts-expect-error TS2769
-        const element = document.createElement(tag, this.config) as BaseContainerElement;
-
-        element.setConfig(this.config);
-        element.setItems(this.currentItems);
-
-        return element;
-      }
-
-      const element = document.createElement(tag) as BaseContainerElement;
-
-      customElements.whenDefined(tag).
-        then(() => {
-          customElements.upgrade(element);
-          element.setConfig(this.config);
-          element.setItems(this.currentItems);
-        }).
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        catch(() => {
-        });
-
-      return element;
-    // eslint-disable-next-line no-empty
-    } catch {
-      // eslint-disable-next-line unicorn/no-useless-undefined
-      return undefined;
-    }
-  }
-
   protected render () {
     if (!this.config || !this.hass) {
       return nothing;
     }
 
-    this.element = this.createBaseContainerElement(this.config.card_style);
+    const cardStyle = this.config.card_style;
 
-    if (!this.element) {
-      return nothing;
+    if (cardStyle === 'chip') {
+      return html`<trash-card-chips-container 
+        .config=${this.config} 
+        .items=${this.currentItems} 
+        .hass=${this.hass}
+      ></trash-card-chips-container>`;
+    }
+    if (cardStyle === 'icon') {
+      return html`<trash-card-icons-container 
+        .config=${this.config} 
+        .items=${this.currentItems} 
+        .hass=${this.hass}
+      ></trash-card-icons-container>`;
     }
 
-    this.element.setHass(this.hass);
-
-    return html`
-      ${this.config.debug ? html`<trash-card-debug-container .hass=${this.hass} .logs=${this.debugger?.getLogs()}></trash-card-debug-card>` : ``}
-      ${this.element}`;
+    return html`<trash-card-cards-container 
+      .config=${this.config} 
+      .items=${this.currentItems} 
+      .hass=${this.hass}
+    ></trash-card-cards-container>`;
   }
 }
