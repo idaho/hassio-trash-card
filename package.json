@@ -62,7 +62,7 @@
     "@typescript-eslint/eslint-plugin": "7.17.0",
     "@typescript-eslint/parser": "7.18.0",
     "eslint": "8.57.0",
-    "eslint-import-resolver-typescript": "3.6.3",
+    "eslint-import-resolver-typescript": "3.8.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jest": "28.9.0",
     "eslint-plugin-simple-import-sort": "12.1.1",
