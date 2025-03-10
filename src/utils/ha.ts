@@ -144,5 +144,6 @@ interface HomeAssistant {
 
 export type {
   HomeAssistant,
-  LocalizeFunc
+  LocalizeFunc,
+  LocalizeKeys
 };
