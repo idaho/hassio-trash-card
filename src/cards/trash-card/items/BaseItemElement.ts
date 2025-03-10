@@ -24,20 +24,19 @@ class BaseItemElement<T = {}> extends LitElement {
   // eslint-disable-next-line class-methods-use-this
   protected renderPicture (pictureUrl: string) {
     return html`
-      <ha-tile-image
-        .imageStyle=${'square'}
-        .imageUrl=${pictureUrl}
-      ></ha-tile-image>`;
+    <hui-image
+      .image=${pictureUrl}
+      .hass=${this.hass}
+
+    ></hui-image>`;
   }
 
   protected renderIcon () {
     return html`
-      <ha-tile-icon>
         <ha-state-icon
           .icon=${this.item?.icon}
           .hass=${this.hass}
-        ></ha-state-icon>
-      </ha-tile-icon>`;
+        ></ha-state-icon>`;
   }
 }
 

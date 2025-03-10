@@ -134,12 +134,19 @@ class ItemCard extends BaseItemElement {
           transition: transform 180ms ease-in-out;
         }
         .icon-container ha-tile-icon,
-        .icon-container ha-tile-image {
+        .icon-container hui-image {
           --tile-icon-color: var(--tile-color);
           user-select: none;
           -ms-user-select: none;
           -webkit-user-select: none;
           -moz-user-select: none;
+        }
+        .icon-container hui-image {
+          width: 24px;
+          height: 24px
+        }
+        .icon-container hui-image img {
+          object-fit: cover;
         }
         .icon-container ha-tile-badge {
           position: absolute;
