@@ -91,6 +91,9 @@ class IconCard extends BaseItemElement<{ nextEvent: boolean }> {
           box-shadow: var(--chip-box-shadow);
           box-sizing: content-box;
         }
+        hui-image {
+          height: var(--trash-card-icon-size);
+        }
       `
     ];
   }
