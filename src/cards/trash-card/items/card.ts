@@ -46,9 +46,7 @@ class ItemCard extends BaseItemElement {
         <div class="background" aria-labelledby="info" ></div>
         <div class="container">
           <div class="content ${classMap(contentClasses)}" >
-            <div class="icon-container">
               ${pictureUrl ? this.renderPicture(pictureUrl) : this.renderIcon()}
-            </div>
             <ha-tile-info
               id="info"
               .primary=${with_label ? label : content}
@@ -106,66 +104,62 @@ class ItemCard extends BaseItemElement {
           align-items: center;
           padding: 10px;
           flex: 1;
+          min-width: 0;
           box-sizing: border-box;
           pointer-events: none;
+          gap: 10px;
         }
         .vertical {
           flex-direction: column;
           text-align: center;
           justify-content: center;
         }
-        .vertical .icon-container {
-          margin-bottom: 10px;
-          margin-right: 0;
-          margin-inline-start: initial;
-          margin-inline-end: initial;
-        }
+
         .vertical ha-tile-info {
           width: 100%;
-          flex: none;
+          flex: 0 0 auto;
         }
-        .icon-container {
-          position: relative;
-          flex: none;
-          margin-right: 10px;
-          margin-inline-start: initial;
-          margin-inline-end: 10px;
-          direction: var(--direction);
-          transition: transform 180ms ease-in-out;
-        }
-        .icon-container ha-tile-icon,
-        .icon-container hui-image {
+
+        ha-tile-icon,
+        hui-image {
           --tile-icon-color: var(--tile-color);
           user-select: none;
           -ms-user-select: none;
           -webkit-user-select: none;
           -moz-user-select: none;
+          position: relative;
+          padding: 6px;
+          margin: -6px;
         }
-        .icon-container hui-image {
+
+        hui-image {
           width: 24px;
-          height: 24px
+          height: 24px;
+          margin: -12px 0px;
         }
-        .icon-container hui-image img {
+
+        hui-image img {
           object-fit: cover;
         }
-        .icon-container ha-tile-badge {
+
+        ha-tile-badge {
           position: absolute;
           top: -3px;
           right: -3px;
           inset-inline-end: -3px;
           inset-inline-start: initial;
         }
+
         ha-tile-info {
           position: relative;
           min-width: 0;
           transition: background-color 180ms ease-in-out;
           box-sizing: border-box;
         }
-        .icon-container ha-tile-icon ha-state-icon {
+
+        ha-state-icon {
           --tile-icon-color: var(--icon-color);
         }
-
-    
       `
     ];
   }
