@@ -33,10 +33,13 @@ class BaseItemElement<T = {}> extends LitElement {
 
   protected renderIcon () {
     return html`
+      <ha-tile-icon>
         <ha-state-icon
+          slot="icon"
           .icon=${this.item?.icon}
           .hass=${this.hass}
-        ></ha-state-icon>`;
+        ></ha-state-icon>
+      </ha-tile-icon>`;
   }
 }
 
