@@ -40,7 +40,7 @@
     "lit": "3.2.0",
     "luxon": "3.5.0",
     "memoize-one": "6.0.0",
-    "sortablejs": "1.15.4",
+    "sortablejs": "1.15.6",
     "superstruct": "2.0.2"
   },
   "devDependencies": {
