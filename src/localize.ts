@@ -5,6 +5,7 @@ import * as en from './translations/en.json';
 import * as fr from './translations/fr.json';
 import * as hu from './translations/hu.json';
 import * as it from './translations/it.json';
+import * as lt from './translations/lt.json';
 import * as lv from './translations/lv.json';
 import * as nb from './translations/nb.json';
 import * as nl from './translations/nl.json';

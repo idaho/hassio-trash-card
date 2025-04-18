@@ -1,0 +1,119 @@
+{
+  "editor": {
+    "form": {
+      "color_picker": {
+        "values": {
+          "default": "Numatytoji spalva"
+        }
+      },
+      "day_style": {
+        "title": "Rodyti įvykio laiką kaip",
+        "values": {
+          "default": "datą",
+          "counter": "dienas iki",
+          "weekday": "savaitės dieną",
+          "custom": "pasirinktinį datos formatą"
+        }
+      },
+      "day_style_format": {
+        "title": "Pasirinktinis datos formatas",
+        "helper": "Apibrėžkite savo datos formatą. (dd = diena su nuliu priekyje, d = diena, MM = mėnuo su nuliu priekyje, M = mėnuo, yy = metai trumpinti, yyyy = metai pilni) Pvz. dd.MM.yyyy = 03.04.2024, d.M.yy = 3.4.24"
+      },
+      "card_style": {
+        "title": "Rodyti kaip",
+        "values": {
+          "card": "Standartinę kortelę",
+          "chip": "Žetoninę kortelę",
+          "icon": "Piktogramą"
+        }
+      },
+      "alignment_style": {
+        "title": "Lygiuotė",
+        "values": {
+          "left": "kairėje",
+          "center": "centre",
+          "right": "dešinėje",
+          "space": "išdėstytas"
+        }
+      },
+      "color_mode": {
+        "title": "Taikyti spalvą",
+        "values": {
+          "background": "fonui",
+          "icon": "piktogramai"
+        }
+      },
+      "layout_picker": {
+        "values": {
+          "default": "Numatytasis išdėstymas",
+          "vertical": "Vertikalus išdėstymas",
+          "horizontal": "Horizontalus išdėstymas"
+        }
+      },
+      "tabs": {
+        "settings": "Nustatymai",
+        "appearance": "Išvaizda",
+        "patterns": "Filtrai"
+      },
+      "refresh_rate": {
+        "title": "Atnaujinimo dažnumas",
+        "helper": "Tikrinti kalendoriaus pakeitimus kas x minučių"
+      }
+    },
+    "card": {
+      "generic": {
+        "icon_color": "Piktogramos spalva",
+        "layout": "Išdėstymas",
+        "fill_container": "Užpildyti konteinerį",
+        "next_days": "Dienos į priekį",
+        "filter_events": "Filtruoti įvykius",
+        "drop_todayevents_from": "Slėpti visus šiandienos įvykius nuo",
+        "full_size": "Kortelė be rėmelio",
+        "use_summary": "Įvykio santrauka, o ne etiketė",
+        "hide_time_range": "Slėpti laiką",
+        "event_grouping": "Rodyti tik artimiausią įvykį kiekvienam filtrui",
+        "icon_size": "Piktogramos dydis",
+        "with_label": "Rodyti etiketę"
+      },
+      "trash": {
+        "pattern": {
+          "title": "Redaguoti filtrą",
+          "edit": "redaguoti",
+          "delete": "ištrinti",
+          "create": "Pridėti filtrą",
+          "new_custom_label": "Naujas filtras",
+          "type": {
+            "organic": "Organinės",
+            "paper": "Pakuotės",
+            "recycle": "Stiklas",
+            "waste": "Atliekos",
+            "others": "Kiti"
+          },
+          "fields": {
+            "label": "Etiketė",
+            "color": "Spalva",
+            "icon": "Piktograma",
+            "pattern": "Įvykio filtras",
+            "picture_url": "Paveikslėlio URL",
+            "picture_url_description": "Jei nurodytas paveikslėlio URL, piktograma bus pakeista atitinkamu paveikslėliu. Įkelkite paveikslėlį į aplanką `/config/www` ir naudokite `/local/[failo pavadinimas]`."
+          }
+        }
+      }
+    }
+  },
+  "card": {
+    "not_found": "Elementas nerastas",
+    "trash": {
+      "today": "šiandien",
+      "tomorrow": "rytoj",
+      "day": "<DAY>",
+      "today_from_till": "Šiandien\nnuo <START> iki <END>",
+      "tomorrow_from_till": "Rytoj\nnuo <START> iki <END>",
+      "day_from_till": "<DAY>\nnuo <START> iki <END>",
+      "daysleft": "po <DAYS> dienos",
+      "daysleft_more": "po <DAYS> dienų",
+      "daysleft_from_till": "po <DAYS> dienos\nnuo <START> iki <END>",
+      "daysleft_more_from_till": "po <DAYS> dienų\nnuo <START> iki <END>"
+    }
+  }
+}
