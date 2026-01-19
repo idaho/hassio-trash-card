@@ -129,6 +129,14 @@
       "only_all_day_events": {
         "title": "Somente eventos durante todo o dia",
         "helper": "Se você quiser usar apenas entradas para o dia inteiro, ative essa opção; caso contrário, todas as entradas serão usadas."
+      },
+      "use_item_count": {
+        "title": "Limitar contagem de eventos",
+        "helper": "Limita a quantidade de eventos exibidos"
+      },
+      "item_count": {
+        "title": "Contagem de eventos",
+        "helper": "Apenas os primeiros N eventos serão exibidos"
       }
     }
   }

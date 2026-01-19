@@ -255,7 +255,6 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
         type: 'grid',
         name: '',
         schema: [
-
           {
             name: 'full_size',
             label: customLocalize(`editor.card.generic.full_size`),
@@ -294,7 +293,29 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
           }
         ]
       }] as HaFormSchema[] :
-      []
+      [],
+    {
+      type: 'grid',
+      name: '',
+      schema: [
+        {
+          name: 'use_item_count',
+          label: customLocalize(`editor.form.use_item_count.title`),
+          helper: customLocalize(`editor.form.use_item_count.helper`),
+          selector: { boolean: { default: false }}
+        },
+        {
+          name: 'item_count',
+          label: customLocalize(`editor.form.item_count.title`),
+          helper: customLocalize(`editor.form.item_count.helper`),
+          selector: { number: {
+            min: 1,
+            step: 1,
+            mode: 'box'
+          }}
+        }
+      ]
+    }
   ];
 
   const schema: HaFormSchema[] = [

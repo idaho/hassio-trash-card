@@ -58,6 +58,14 @@
       "refresh_rate": {
         "title": "Aktualizálási időintervallum",
         "helper": "A naptár változásainak ellenőrzése x percenként."
+      },
+      "use_item_count": {
+        "title": "Eseményszám korlátozása",
+        "helper": "Korlátozza a megjelenített események számát"
+      },
+      "item_count": {
+        "title": "Események száma",
+        "helper": "Csak az első N esemény jelenik meg"
       }
     },
     "card": {

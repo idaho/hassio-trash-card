@@ -58,6 +58,14 @@
             "refresh_rate": {
                 "title": "Interval realizácie",
                 "helper": "Kontrola zmien v kalendári každých x minút."
+            },
+            "use_item_count": {
+                "title": "Obmedziť počet udalostí",
+                "helper": "Obmedzuje zobrazený počet udalostí"
+            },
+            "item_count": {
+                "title": "Počet udalostí",
+                "helper": "Zobrazí sa iba prvých N udalostí"
             }
         },
         "card": {

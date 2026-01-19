@@ -62,6 +62,14 @@
       "location": {
          "title": "Posizione",
          "helper": "Filtra gli eventi in base a una determinata posizione; se non viene indicato nulla, vengono utilizzati tutti."
+      },
+      "use_item_count": {
+        "title": "Limita il numero di eventi",
+        "helper": "Limita il numero di eventi visualizzati"
+      },
+      "item_count": {
+        "title": "Numero di eventi",
+        "helper": "Verranno visualizzati solo i primi N eventi"
       }
     },
     "card": {

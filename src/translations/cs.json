@@ -66,6 +66,14 @@
             "only_all_day_events": {
                 "title": "Pouze celodenní události",
                 "helper": "Pokud chcete používat pouze celodenní záznamy, aktivujte tuto možnost, jinak budou použity všechny záznamy."
+            },
+            "use_item_count": {
+                "title": "Omezit počet událostí",
+                "helper": "Omezuje zobrazený počet událostí"
+            },
+            "item_count": {
+                "title": "Počet událostí",
+                "helper": "Zobrazí se pouze prvních N událostí"
             }
         },
         "card": {
