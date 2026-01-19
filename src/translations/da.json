@@ -58,6 +58,14 @@
             "refresh_rate": {
                 "title": "Opdateringsinterval",
                 "helper": "Tjek ændringer i kalenderen hvert x minut"
+            },
+            "use_item_count": {
+                "title": "Begræns antal begivenheder",
+                "helper": "Begrænser antallet af viste begivenheder"
+            },
+            "item_count": {
+                "title": "Antal begivenheder",
+                "helper": "Kun de første N begivenheder vises"
             }
         },
         "card": {

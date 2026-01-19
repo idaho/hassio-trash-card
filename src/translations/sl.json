@@ -58,6 +58,14 @@
             "refresh_rate": {
                 "title": "Interval posodabljanja",
                 "helper": "Preverite spremembe v koledarju vsakih x minut"
+            },
+            "use_item_count": {
+                "title": "Omeji število dogodkov",
+                "helper": "Omejuje prikazano število dogodkov"
+            },
+            "item_count": {
+                "title": "Število dogodkov",
+                "helper": "Prikazalo se bo le prvih N dogodkov"
             }
         },
         "card": {

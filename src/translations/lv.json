@@ -58,6 +58,14 @@
             "refresh_rate": {
                 "title": "Atjaunināšanas intervāls",
                 "helper": "Pārbaudīt izmaiņas kalendārā ik pēc x minūtēm"
+            },
+            "use_item_count": {
+                "title": "Notikumu skaita ierobežošana",
+                "helper": "Ierobežo redzamā notikumu skaitu"
+            },
+            "item_count": {
+                "title": "Notikumu skaits",
+                "helper": "Tiks parādīti tikai pirmie N notikumi"
             }
         },
         "card": {

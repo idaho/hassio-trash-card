@@ -58,6 +58,14 @@
             "refresh_rate": {
                 "title": "Interwał aktualizacji",
                 "helper": "Sprawdzanie zmian w kalendarzu co x minut."
+            },
+            "use_item_count": {
+                "title": "Ogranicz liczbę zdarzeń",
+                "helper": "Ogranicza wyświetlaną liczbę zdarzeń"
+            },
+            "item_count": {
+                "title": "Liczba zdarzeń",
+                "helper": "Wyświetlone zostaną tylko pierwsze N zdarzeń"
             }
         },
         "card": {

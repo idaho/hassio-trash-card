@@ -58,6 +58,14 @@
             "refresh_rate": {
                 "title": "Uppdateringsintervall",
                 "helper": "Kolla ändringar i kalendern var x minut"
+            },
+            "use_item_count": {
+                "title": "Begränsa antal händelser",
+                "helper": "Begränsar antalet visade händelser"
+            },
+            "item_count": {
+                "title": "Antal händelser",
+                "helper": "Endast de första N händelserna kommer att visas"
             }
         },
         "card": {

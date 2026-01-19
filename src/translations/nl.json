@@ -58,6 +58,14 @@
             "refresh_rate": {
                 "title": "Verversingsinterval",
                 "helper": "Controleert elke x minuten op wijzigingen in de kalenderactiviteiten."
+            },
+            "use_item_count": {
+                "title": "Beperk aantal gebeurtenissen",
+                "helper": "Beperkt het aantal weergegeven gebeurtenissen"
+            },
+            "item_count": {
+                "title": "Aantal gebeurtenissen",
+                "helper": "Alleen de eerste N gebeurtenissen worden weergegeven"
             }
         },
         "card": {
