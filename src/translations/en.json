@@ -66,6 +66,14 @@
             "only_all_day_events": {
                 "title": "Only all-day events",
                 "helper": "If you only want to use all-day entries, please activate this option, otherwise all entries will be used."
+            },
+            "use_item_count": {
+                "title": "Limit event count",
+                "helper": "Limits the displayed event count"
+            },
+            "item_count": {
+                "title": "Event count",
+                "helper": "Only the first N events will be displayed"
             }
         },
         "card": {

@@ -75,7 +75,8 @@ const configDefaults = {
   items_per_row: 1,
   refresh_rate: 60,
   with_label: true,
-  layout: 'default'
+  layout: 'default',
+  item_count: 1
 };
 
 @customElement(TRASH_CARD_EDITOR_NAME)
