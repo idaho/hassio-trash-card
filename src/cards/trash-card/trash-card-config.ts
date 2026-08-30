@@ -45,6 +45,7 @@ interface TrashCardConfig {
   pattern?: ItemSettings[];
   location?: string;
   next_days?: number;
+  max_items?: number;
   items_per_row?: number;
   filter_events?: boolean;
   full_size?: boolean;
@@ -84,6 +85,7 @@ const entityCardConfigStruct = assign(
     use_summary: optional(boolean()),
     hide_time_range: optional(boolean()),
     next_days: optional(integer()),
+    max_items: optional(integer()),
     items_per_row: optional(integer()),
     refresh_rate: optional(integer()),
     drop_todayevents_from: optional(string()),

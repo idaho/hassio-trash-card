@@ -94,6 +94,19 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
           }
         },
         {
+          name: 'max_items',
+          label: customLocalize(`editor.form.max_items.title`),
+          helper: customLocalize(`editor.form.max_items.helper`),
+          selector: {
+            number: {
+              min: 0,
+              max: 100,
+              step: 1,
+              mode: 'box'
+            }
+          }
+        },
+        {
           name: 'refresh_rate',
           label: customLocalize(`editor.form.refresh_rate.title`),
           helper: customLocalize(`editor.form.refresh_rate.helper`),
