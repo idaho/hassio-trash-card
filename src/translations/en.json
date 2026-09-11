@@ -17,7 +17,7 @@
             },
             "day_style_format": {
                 "title": "Custom date format",
-                "helper": "Define your own date format. (dd = day with leading 0, d = day, MM = month with leading 0, M = month, yy = year short, yyyy = year long) E.g. dd.MM.yyyy = 03.04.2024, where d.M.yy = 3.4.24 would result."
+                "helper": "Define your own date format. Supported placeholder: `{{counter}}`. (dd = day with leading 0, d = day, MM = month with leading 0, M = month, yy = year short, yyyy = year long, ccc = day short, cccc = day long) E.g. dd.MM.yyyy = 03.04.2024, d.M.yy = 3.4.24, `{{counter}} 'on' d.M.yy` = in 2 days on 3.4.24"
             },
             "card_style": {
                 "title": "Display as",

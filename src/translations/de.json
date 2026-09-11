@@ -17,7 +17,7 @@
             },
             "day_style_format": {
                 "title": "Eigenes Datumsformat",
-                "helper": "Definiere ein eigenes Datumsformat. (dd = Tag mit führender 0, d = Tag, MM = Monat mit führender 0, M = Monat, yy = Jahr kurz, yyyy = Jahr lang) | z.B. ergibt dd.MM.yyyy = 03.04.2024, wobei d.M.yy = 3.4.24 ergeben würde."
+                "helper": "Definiere ein eigenes Datumsformat. Unterstützte Platzhalter: `{{counter}}`. (dd = Tag mit führender 0, d = Tag, MM = Monat mit führender 0, M = Monat, yy = Jahr kurz, yyyy = Jahr lang, ccc = Tag kurz, cccc = Tag lang) | z.B. ergibt dd.MM.yyyy = 03.04.2024, d.M.yy = 3.4.24 und `{{counter}} 'am' dd.MM.yy` = in 2 Tagen am 03.04.24."
             },
             "card_style": {
                 "title": "Darstellung",

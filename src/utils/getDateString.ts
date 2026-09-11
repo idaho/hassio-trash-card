@@ -1,6 +1,7 @@
 import setupCustomlocalize from '../localize';
 import { getDayFromDate } from './getDayFromDate';
 import { daysTill } from './daysTill';
+import { counterString } from './counterString';
 import { DateTime } from 'luxon';
 
 import type { TrashCardConfig } from '../cards/trash-card/trash-card-config';
@@ -9,6 +10,54 @@ import type { CalendarItem } from './calendarItem';
 
 const format = (date: Date, dateStyleFormat: string, language: string) =>
   DateTime.fromJSDate(date).setLocale(language).toFormat(dateStyleFormat);
+
+const PLACEHOLDER_PATTERN = /\{\{(?<name>[^{}]+)\}\}/gu;
+const MARKER_PATTERN = /\uE000(?<index>\d+)\uE001/gu;
+
+type PlaceholderResolvers = Partial<Record<string, () => string>>;
+
+const formatWithPlaceholders = (
+  date: Date,
+  dateStyleFormat: string,
+  language: string,
+  resolvers: PlaceholderResolvers
+): string => {
+  // Normal custom-date formats keep the existing, direct Luxon path.
+  if (!dateStyleFormat.includes('{{')) {
+    return format(date, dateStyleFormat, language);
+  }
+
+  const values: string[] = [];
+  const resolved = new Map<string, string>();
+
+  const luxonFormat = dateStyleFormat.replace(
+    PLACEHOLDER_PATTERN,
+    (rawPlaceholder, name: string) => {
+      let value = rawPlaceholder;
+      const resolver = resolvers[name];
+
+      if (resolver) {
+        if (!resolved.has(name)) {
+          resolved.set(name, resolver());
+        }
+
+        value = resolved.get(name) ?? rawPlaceholder;
+      }
+
+      const marker = `\uE000${values.length}\uE001`;
+
+      values.push(value);
+
+      // Quoted so Luxon must treat the internal marker as literal content.
+      return `'${marker}'`;
+    }
+  );
+
+  return format(date, luxonFormat, language).replace(
+    MARKER_PATTERN,
+    (marker, index: string) => values[Number(index)] ?? marker
+  );
+};
 
 const getTimeString = (customLocalize, offset: string, day?: string, startTime?: string, endTime?: string, excludeTime?: boolean, short?: boolean) => {
   if (offset === 'today' || offset === 'tomorrow') {
@@ -64,16 +113,13 @@ const getDateString = (
   }
 
   if (dayStyle === 'counter') {
-    const daysToStart = daysTill(new Date(), item.date.start);
-
-    if (daysToStart > 0) {
-      const daysLeft = daysToStart;
-
-      return `${customLocalize(`card.trash.daysleft${daysLeft > 1 ? '_more' : ''}${startTime && !excludeTime ? '_from_till' : ''}`).replace('<DAYS>', `${daysLeft}`).replace('<START>', startTime ?? '').replace('<END>', endTime ?? '')}`;
-    }
-    const daysToEnd = daysTill(new Date(), item.date.end);
-
-    return `${customLocalize(`card.trash.daysleftend${daysToEnd > 1 ? '_more' : ''}${startTime && !excludeTime ? '_till' : ''}`).replace('<DAYS>', `${daysToEnd}`).replace('<END>', endTime ?? '')}`;
+    return counterString(
+      item,
+      excludeTime,
+      startTime,
+      endTime,
+      customLocalize
+    );
   }
 
   if (dayStyle === 'weekday') {
@@ -89,7 +135,24 @@ const getDateString = (
       month: 'long',
       day: 'numeric'
     }) :
-    format(item.date.start, dayStyleFormat ?? 'dd.mm.YYYY', hass.language);
+    (() => {
+      const customDateFormat = dayStyleFormat ?? 'dd.mm.YYYY';
+
+      const dateForCustomFormat =
+        customDateFormat.includes('{{') &&
+        daysTill(today, item.date.start) <= 0 ?
+          item.date.end :
+          item.date.start;
+
+      return formatWithPlaceholders(
+        dateForCustomFormat,
+        customDateFormat,
+        hass.language,
+        {
+          counter: () => counterString(item, true, startTime, endTime, customLocalize)
+        }
+      );
+    })();
 
   return getTimeString(customLocalize, 'day', day, startTime, endTime, excludeTime, false);
 };

@@ -110,7 +110,8 @@ All the options listed below are available in the lovelace editor, but configuri
 | `hide_time_range`         | boolean                                             | `false`     | Option to hide the time on events that aren't full day events. |
 | `event_grouping`         | boolean                                             | `true`     | Only display the next event per pattern, otherwise all events during the selected time will be displayed.  |
 | `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event. |
-| `day_style`            | `default` or `counter` | `default`   | Option for how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining before the event.       |
+| `day_style` | `default`, `counter`, `weekday` or `custom` | `default` | Determines how the event date is displayed. `default` shows the localized date, `counter` shows the number of days until the event starts or ends, `weekday` shows the weekday name, and `custom` combines Luxon formatting with supported placeholders such as `{{counter}}`. Today and Tomorrow always use their existing localized display. |
+| `day_style_format`      | string    |  `yyyy.MM.dd`   | only available for `day_style: custom`. Format string using Luxon format syntax. Supports defined placeholder `{{counter}}`. Unknown complete placeholders are displayed unchanged. Example: `day_style_format: "{{counter}} 'on' dd.MM.yyyy"` shows `in 2 days on 10.01.2025`   |
 | `card_style`            | `card`, `chip` or `icon` | `card`   | Switch between the events style `Standard card`, `Chip card` or a new `Icon` predefined layout. |
 | `alignment_style`            | `left`, `center`, `right` or `space` | `left`   | Switch between alignments on `Chip card` card_style. |
 | `color_mode`            | `background` or `icon` | `background`   | Select whether the color settings should be applied to the background or to the icon. |
@@ -120,6 +121,30 @@ All the options listed below are available in the lovelace editor, but configuri
 | `with_label`            | boolean | `true` | Option to display the label in the card or chip style. |
 | `pattern`          | array of [Pattern](#pattern)                               | Required    | Pattern to detect the kind of trash and how to display it.|
 
+#### Custom date formats
+
+With `day_style: custom`, the `{{counter}}` placeholder can be combined with Luxon date-format tokens.
+
+```yaml
+day_style: custom
+day_style_format: "{{counter}} 'on' dd.MM.yyyy"
+```
+Example output:
+```text
+in 2 days on 10.01.2025
+````
+
+A weekday can be included with the Luxon `cccc` token:
+```yaml
+
+day_style: custom
+day_style_format: "{{counter}} (cccc)"
+```
+Example output:
+```text
+in 2 days (Friday)
+```
+Unknown complete placeholders remain visible and unchanged. For example, `{{not_supported}} dd.MM.yyyy` is rendered with `{{not_supported}}` intact. Events scheduled for Today or Tomorrow use their existing localized display instead of the custom composite format.
 
 #### Pattern
 
