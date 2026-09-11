@@ -2,6 +2,7 @@ import { eventsToItems } from './eventsToItems';
 import { findActiveEvents } from './findActiveEvents';
 import { normaliseEvents } from './normaliseEvents';
 import { filterDuplicatedItems } from './filterDuplicatedItems';
+import { convertTimedEventsToAllDay } from './convertTimedEventsToAllDay';
 
 import type { Debugger } from './debugger';
 import type { HomeAssistant } from './ha';
@@ -40,7 +41,11 @@ const getCalendarData = async (
   debuggerInstance.log(`timezone`, timezoneOffset);
   debuggerInstance.log(`calendar data`, rawCalendarEvents);
 
-  const normalisedEvents = normaliseEvents(rawCalendarEvents);
+  const events = config.ignore_time ?
+    convertTimedEventsToAllDay(rawCalendarEvents, hass.config.time_zone) :
+    rawCalendarEvents;
+
+  const normalisedEvents = normaliseEvents(events);
 
   normalisedEvents.sort((evtA, evtB) => evtA.date.start.getTime() - evtB.date.start.getTime());
 

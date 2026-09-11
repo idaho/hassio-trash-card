@@ -140,6 +140,9 @@ interface HomeAssistant {
   };
   localize: LocalizeFunc;
   locale: FrontendLocaleData;
+  config: {
+    time_zone: string;
+  };
 }
 
 export type {

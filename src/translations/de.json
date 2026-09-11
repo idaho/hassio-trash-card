@@ -58,6 +58,10 @@
             "refresh_rate": {
                 "title": "Aktualisierungsintervall",
                 "helper": "Prüfung aller x Minuten auf Änderungen im Kalender."
+            },
+            "ignore_time": {
+                "title": "Uhrzeiten ignorieren",
+                "helper": "Ignoriert die Uhrzeiten und behandelt alle Ereignisse als Ganztagsereignisse."
             }
         },
         "card": {

@@ -117,6 +117,14 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
       }
     },
     {
+      name: 'ignore_time',
+      label: customLocalize(`editor.form.ignore_time.title`),
+      helper: customLocalize(`editor.form.ignore_time.helper`),
+      selector: {
+        boolean: {}
+      }
+    },
+    {
       name: 'only_all_day_events',
       label: customLocalize(`editor.form.only_all_day_events.title`),
       helper: customLocalize(`editor.form.only_all_day_events.helper`),

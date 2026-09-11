@@ -80,7 +80,7 @@ Creating a dedicated “Garbage collection” calendar for this purpose is a goo
 ![image](https://github.com/user-attachments/assets/576d7446-c759-494b-996e-e60afd9210c7)
 
 **Note:**
-- When adding the dates, the events must be set to “Full day”.
+- By default, events should be set to "Full day". If `ignore_time` is enabled, events containing timestamps are treated as full-day events.
 - The event name (in the “summary” field) must be the same name as the type of collection event.
 - Up to five different types of collection events are supported (Garbage, recycling, organic waste etc.).
 - Repeating events are supported.
@@ -108,6 +108,7 @@ All the options listed below are available in the lovelace editor, but configuri
 | `drop_todayevents_from`         | time                                             | `10:00:00`     | From what time to hide all-day event (Format `hh:mm:ss`). |
 | `use_summary`         | boolean                                             | `false`     | Shows the event summary instead of matched label. |
 | `hide_time_range`         | boolean                                             | `false`     | Option to hide the time on events that aren't full day events. |
+| `ignore_time`     | boolean                                               | `false`         | Option to ignore timestamps and treat timed calendar events as full-day events. |
 | `event_grouping`         | boolean                                             | `true`     | Only display the next event per pattern, otherwise all events during the selected time will be displayed.  |
 | `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event. |
 | `day_style`            | `default` or `counter` | `default`   | Option for how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining before the event.       |
