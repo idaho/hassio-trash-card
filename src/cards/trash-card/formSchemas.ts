@@ -94,9 +94,9 @@ const getSchema = (customLocalize: LocalizeFunc, currentValues: TrashCardConfig,
           }
         },
         {
-          name: 'max_items',
-          label: customLocalize(`editor.form.max_items.title`),
-          helper: customLocalize(`editor.form.max_items.helper`),
+          name: 'max_events',
+          label: customLocalize(`editor.form.max_events.title`),
+          helper: customLocalize(`editor.form.max_events.helper`),
           selector: {
             number: {
               min: 0,

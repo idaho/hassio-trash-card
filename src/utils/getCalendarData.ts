@@ -82,7 +82,7 @@ const getCalendarData = async (
     eventItems :
     filterDuplicatedItems(eventItems);
 
-  const limitedItems = limitItems(groupedItems, config.max_items);
+  const limitedItems = limitItems(groupedItems, config.max_events);
 
   debuggerInstance.log(`limitItems`, limitedItems);
 

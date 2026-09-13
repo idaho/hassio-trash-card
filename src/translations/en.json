@@ -55,7 +55,7 @@
                 "appearance": "Appearance",
                 "patterns": "Patterns"
             },
-            "max_items": {
+            "max_events": {
                 "title": "Maximum number of entries",
                 "helper": "Limit how many events are displayed, e.g. 4 to always show the next 4 pickups. 0 or empty shows all of them."
             },
