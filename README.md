@@ -110,6 +110,7 @@ All the options listed below are available in the lovelace editor, but configuri
 | `hide_time_range`         | boolean                                             | `false`     | Option to hide the time on events that aren't full day events. |
 | `event_grouping`         | boolean                                             | `true`     | Only display the next event per pattern, otherwise all events during the selected time will be displayed.  |
 | `next_days`         | number                                              | 2           | How many times the card will look into the future to find the next event. |
+| `max_events`         | number                                              | Optional    | Limits the number of displayed events, e.g. `4` to always show the next 4 pickups for a stable dashboard layout. `0` or unset shows all of them. Applied after `event_grouping`, so with grouping enabled it limits the number of trash types shown. |
 | `day_style`            | `default` or `counter` | `default`   | Option for how the date of an event should be displayed. `default` shows the date in date format and `counter` shows the number of days remaining before the event.       |
 | `card_style`            | `card`, `chip` or `icon` | `card`   | Switch between the events style `Standard card`, `Chip card` or a new `Icon` predefined layout. |
 | `alignment_style`            | `left`, `center`, `right` or `space` | `left`   | Switch between alignments on `Chip card` card_style. |
@@ -164,6 +165,7 @@ layout: vertical
 event_grouping: true
 drop_todayevents_from: '10:00:00'
 next_days: 300
+max_events: 4
 day_style: counter
 card_style: card
 color_mode: background

@@ -55,6 +55,10 @@
                 "appearance": "Darstellung",
                 "patterns": "Vorlagen"
             },
+            "max_events": {
+                "title": "Maximale Anzahl an Einträgen",
+                "helper": "Begrenzt die Anzahl der angezeigten Ereignisse, z.B. 4 um immer die nächsten 4 Abholtermine anzuzeigen. 0 oder leer zeigt alle an."
+            },
             "refresh_rate": {
                 "title": "Aktualisierungsintervall",
                 "helper": "Prüfung aller x Minuten auf Änderungen im Kalender."

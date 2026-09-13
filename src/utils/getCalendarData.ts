@@ -2,6 +2,7 @@ import { eventsToItems } from './eventsToItems';
 import { findActiveEvents } from './findActiveEvents';
 import { normaliseEvents } from './normaliseEvents';
 import { filterDuplicatedItems } from './filterDuplicatedItems';
+import { limitItems } from './limitItems';
 
 import type { Debugger } from './debugger';
 import type { HomeAssistant } from './ha';
@@ -77,9 +78,15 @@ const getCalendarData = async (
 
   debuggerInstance.log(`eventsToItems`, eventItems);
 
-  return !config.event_grouping ?
+  const groupedItems = !config.event_grouping ?
     eventItems :
     filterDuplicatedItems(eventItems);
+
+  const limitedItems = limitItems(groupedItems, config.max_events);
+
+  debuggerInstance.log(`limitItems`, limitedItems);
+
+  return limitedItems;
 };
 
 export {
