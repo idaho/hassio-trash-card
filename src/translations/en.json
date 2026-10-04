@@ -120,8 +120,8 @@
             "description": "Currently no events found. This message is only available during editing."
         },
         "trash": {
-            "today": "today",
-            "tomorrow": "tomorrow",
+            "today": "Today",
+            "tomorrow": "Tomorrow",
             "day": "<DAY>",
             "today_from_till": "Today\nfrom <START> to <END>",
             "tomorrow_from_till": "Tomorrow\nbetween <START> and <END>",
